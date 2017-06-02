@@ -1731,24 +1731,24 @@ $field_value = '';
         <ul class="order_details">
             <li class="mp_amount">
                 <?php _e('Amount:', 'marketpay');?>
-                <strong><?php echo $ref->PaymentDetails->DeclaredDebitedFunds->Amount / 100; ?></strong>
-                <strong><?php echo $ref->PaymentDetails->DeclaredDebitedFunds->Currency; ?></strong>
+                <strong><?php echo $ref->getDebitedFunds()->getAmount() / 100; ?></strong>
+                <strong><?php echo $ref->getDebitedFunds()->getCurrency(); ?></strong>
             </li>
             <li class="mp_owner">
                 <?php _e('Bank account owner:', 'marketpay');?>
-                <strong><?php echo $ref->PaymentDetails->BankAccount->OwnerName; ?></strong>
+                <strong><?php echo $ref->getBankAccount()->getOwnerName(); ?></strong>
             </li>
             <li class="mp_iban">
                 <?php _e('IBAN:', 'marketpay');?>
-                <strong><?php echo $ref->PaymentDetails->BankAccount->Details->IBAN; ?></strong>
+                <strong><?php echo $ref->getBankAccount()->getIban(); ?></strong>
             </li>
             <li class="mp_bic">
                 <?php _e('BIC:', 'marketpay');?>
-                <strong><?php echo $ref->PaymentDetails->BankAccount->Details->BIC; ?></strong>
+                <strong><?php echo $ref->getBankAccount()->getBic(); ?></strong>
             </li>
             <li class="mp_wire_ref">
                 <?php _e('Wire reference:', 'marketpay');?>
-                <strong><?php echo $ref->PaymentDetails->WireReference; ?></strong>
+                <strong><?php echo $ref->getWireReference(); ?></strong>
             </li>
         </ul>
         <?php

@@ -1,0 +1,15 @@
+{
+    "name": "marketpay/php-sdk-v2",
+    "description": "SDK PHP for Marketpay api V2",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4.0",
+        "ext-curl": "*",
+        "ext-openssl": "*"
+    },    
+    "autoload": {
+        "psr-4": { "MarketPay\\": "" },
+        "files": ["MarketPay/Autoloader.php"]
+    }
+}

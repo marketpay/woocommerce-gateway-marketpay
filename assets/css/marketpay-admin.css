@@ -1,0 +1,20 @@
+/**
+ * Marketpay wp-admin CSS
+ *
+ */
+
+/** Status display **/
+div.marketpay-status {
+	width: 100%;
+}
+span.mp_checklist_status {
+	float: right;
+	width: 30%;
+	font-weight: bold;
+}
+span.mp_checklist_status.success {
+  	color: green;
+}
+span.mp_checklist_status.failure {
+  	color: red;
+}

@@ -1,0 +1,37 @@
+[
+    {
+        "name": "marketpay/sdk-php",
+        "version": "v2.0.3",
+        "version_normalized": "2.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/marketpay/sdk-php.git",
+            "reference": "6fd3895669204dd1e0cd65563e686e6bf6f3cf13"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/marketpay/sdk-php/zipball/6fd3895669204dd1e0cd65563e686e6bf6f3cf13",
+            "reference": "6fd3895669204dd1e0cd65563e686e6bf6f3cf13",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "ext-mbstring": "*",
+            "php": ">=5.4"
+        },
+        "time": "2017-06-01 08:16:05",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Swagger\\Client\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "SDK PHP for MarketPay api V2"
+    }
+]

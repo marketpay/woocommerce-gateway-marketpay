@@ -1160,22 +1160,7 @@ class mpAccess
             ])
         ]);
 
-        echo "<pre>";
-        print_r($reference);
-        echo "</pre>";
-
-        try
-        {
-            return $this->marketPayApi->BankwirePayIns->payInsBankwireBankwirePaymentByDirect($reference);
-        }
-        catch(\Swagger\Client\ApiException $e)
-        {
-
-            echo "<pre>";
-            print_r($e->getResponseBody());
-            echo "</pre>";
-
-        }
+        return $this->marketPayApi->BankwirePayIns->payInsBankwireBankwirePaymentByDirect($reference);
     }
 
     /**

@@ -484,7 +484,7 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
             return;
         }
 
-        $transaction_id = $ref->Id;
+        $transaction_id = $ref->getId();
 
         update_post_meta($order_id, 'marketpay_payment_type', 'bank_wire');
         update_post_meta($order_id, 'marketpay_payment_ref', $ref);

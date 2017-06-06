@@ -29,8 +29,6 @@ class marketpayWCHooks
 
         /** Trigger event when user registers (front & back-office) **/
         add_action('user_register', array($marketpayWCMain, 'on_user_register'), 10, 1); //<- not working for front-end reg
-        /** Front-end registration; previous action on same hook hereunder **/
-        //add_action( 'woocommerce_created_customer',        array( $marketpayWCMain, 'on_user_register' ), 11, 1 );
 
         /** Passphrase encryption **/
         add_filter('pre_update_option_' . marketpayWCConfig::OPTION_KEY, array($marketpayWCMain, 'encrypt_passphrase'), 10, 2);
@@ -71,13 +69,12 @@ class marketpayWCHooks
          */
 
         /** Add required fields to the user registration form **/
-        add_action('woocommerce_register_form_start', array($marketpayWCMain, 'wooc_extra_register_fields'));
+        add_action('woocommerce_register_form_start', array($marketpayWCMain, 'wooc_extra_register_fields'), 10, 0);
         add_action('woocommerce_register_post', array($marketpayWCMain, 'wooc_validate_extra_register_fields'), 10, 3);
         add_action('woocommerce_created_customer', array($marketpayWCMain, 'wooc_save_extra_register_fields'), 10, 1);
 
         /** Add required fields on edit-account form **/
         add_action('woocommerce_edit_account_form', array($marketpayWCMain, 'wooc_extra_register_fields'));
-        //add_action( 'user_profile_update_errors',        array( $marketpayWCMain, 'wooc_validate_extra_register_fields_user' ), 10, 3 );
         add_filter('woocommerce_save_account_details_required_fields', array($marketpayWCMain, 'wooc_account_details_required'));
         add_action('woocommerce_save_account_details', array($marketpayWCMain, 'wooc_save_extra_register_fields'), 10, 1);
         //for edit front
@@ -88,9 +85,6 @@ class marketpayWCHooks
         add_action('woocommerce_checkout_process', array($marketpayWCMain, 'wooc_validate_extra_register_fields_checkout'));
         add_action('woocommerce_after_order_notes', array($marketpayWCMain, 'after_checkout_fields'));
         add_action('woocommerce_checkout_update_user_meta', array($marketpayWCMain, 'wooc_save_extra_register_fields'));
-
-        /** Show MP wallets list on my-account page **/
-        //add_action( 'woocommerce_before_my_account',     array( $marketpayWCMain, 'before_my_account' ) );
 
         /** Process order status after order payment completed **/
         add_action('template_redirect', array($marketpayWCMain, 'order_redirect'), 1, 1);
@@ -110,9 +104,7 @@ class marketpayWCHooks
 
         /** Bank account fields on the shop settings **/
         add_action('wcvendors_settings_after_paypal', array($marketpayWCMain, 'bank_account_form'));
-        //add_action( 'wcvendors_shop_settings_saved', array( $marketpayWCMain, 'save_account_form' ) );
         add_action('wcvendors_shop_settings_saved', array($marketpayWCMain, 'shop_settings_saved'), 10, 1);
-        //add_action( 'wcv_pro_store_settings_saved', array( $marketpayWCMain, 'save_account_form' ) );    // Support for WV Pro version's front-end store dashboard
         add_action('wcv_pro_store_settings_saved', array($marketpayWCMain, 'shop_settings_saved'), 10, 1);
 
         //@see: https://github.com/wcvendors/wcvendors/blob/8443c27704e59fd222ba8d65a6438e0251820910/classes/admin/class-admin-users.php#L382

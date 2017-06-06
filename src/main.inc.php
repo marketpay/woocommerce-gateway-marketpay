@@ -37,13 +37,15 @@ class marketpayWCMain
         $this->load_config();
 
         /** Switch PHP debug mode on/off **/
-        if (marketpayWCConfig::DEBUG) {
+        if (marketpayWCConfig::DEBUG)
+        {
             error_reporting(-1); // to enable all errors
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
         }
 
-        if (preg_match('#shop_settings#', $_SERVER['REQUEST_URI'])) {
+        if (preg_match('#shop_settings#', $_SERVER['REQUEST_URI']))
+        {
             add_action('wp_enqueue_scripts', array($this, 'enqueue_market_scripts'));
         }
 
@@ -52,12 +54,14 @@ class marketpayWCMain
 
         /** Get stored plugin settings **/
         $this->defaults['plugin_version'] = $version;
-        $this->options                    = $this->decrypt_passphrase(get_option(marketpayWCConfig::OPTION_KEY, $this->defaults));
+        $this->options = $this->decrypt_passphrase(get_option(marketpayWCConfig::OPTION_KEY, $this->defaults));
 
         /** Set the Marketpay environment ( production or sandbox + login and passphrase ) **/
         //TODO: move details of this logic outside the constructor
-        if (isset($this->options['prod_or_sandbox'])) {
-            if ('prod' == $this->options['prod_or_sandbox']) {
+        if (isset($this->options['prod_or_sandbox']))
+        {
+            if ('prod' == $this->options['prod_or_sandbox'])
+            {
                 $this->mp->setEnv(
                     'prod',
                     $this->options['prod_client_id'],
@@ -67,7 +71,9 @@ class marketpayWCMain
                     $this->options['default_business_type'],
                     marketpayWCConfig::DEBUG
                 );
-            } else {
+            }
+            else
+            {
                 $this->mp->setEnv(
                     'sandbox',
                     $this->options['sand_client_id'],
@@ -82,7 +88,9 @@ class marketpayWCMain
 
         /** Get WV instapay option status **/
         $wv_options = get_option(marketpayWCConfig::WV_OPTION_KEY);
-        if (isset($wv_options['instapay']) && $wv_options['instapay']) {
+
+        if (isset($wv_options['instapay']) && $wv_options['instapay'])
+        {
             $this->instapay = true;
         }
 
@@ -93,13 +101,10 @@ class marketpayWCMain
         $this->marketpayWCValidation = new marketpayWCValidation($this);
 
         /** Instantiate admin interface class if necessary **/
-        $marketpayWCAdmin = null;
-        if (is_admin()) {
-            $marketpayWCAdmin = new marketpayWCAdmin($this);
-        }
+        $marketpayWCAdmin = is_admin() ? new marketpayWCAdmin($this) : null;
 
         /** Instantiate incoming webhooks class if necessary **/
-        if (!is_admin()) {
+        if ( ! is_admin()) {
             $marketpayWCWebHooks = new marketpayWCWebHooks($this);
         }
 
@@ -107,9 +112,12 @@ class marketpayWCMain
         marketpayWCHooks::set_hooks($this, $marketpayWCAdmin);
 
         /** Manage plugin upgrades **/
-        if (empty($this->options['plugin_version'])) {
+        if (empty($this->options['plugin_version']))
+        {
             marketpayWCPlugin::upgrade_plugin('0.2.2', $version, $this->options);
-        } elseif ($this->options['plugin_version'] != $version) {
+        }
+        elseif ($this->options['plugin_version'] != $version)
+        {
             marketpayWCPlugin::upgrade_plugin($this->options['plugin_version'], $version, $this->options);
         }
     }
@@ -174,6 +182,7 @@ class marketpayWCMain
             array(),
             '1.8'
         );
+
         wp_enqueue_style('jquery-ui');
 
         $suffix               = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
@@ -187,6 +196,7 @@ class marketpayWCMain
             WC_VERSION,
             true
         );
+
         wp_enqueue_script(
             'wc-user-type',
             plugins_url('/js/front-type-user.js', dirname(__FILE__)),
@@ -195,9 +205,8 @@ class marketpayWCMain
 
         /** Initialize our front-end script with third-party plugin independent data **/
         $vendor_role     = apply_filters('marketpay_vendor_role', 'vendor');
-        $translate_array = array(
-            'vendor_role' => $vendor_role,
-        );
+        $translate_array = array('vendor_role' => $vendor_role);
+
         wp_localize_script('wc-user-type', 'translate_object', $translate_array);
 
         /**
@@ -214,17 +223,17 @@ class marketpayWCMain
             <p class="form-row form-row-first">
                 <label for="reg_billing_first_name"><?php _e('First name', 'woocommerce');?> <span class="required">*</span></label>
                 <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" value="<?php if (!empty($_POST['billing_first_name'])) {
-            esc_attr_e($_POST['billing_first_name']);
-        }
-        ?>" />
+                    esc_attr_e($_POST['billing_first_name']);
+                }
+                ?>" />
             </p>
 
             <p class="form-row form-row-last">
                 <label for="reg_billing_last_name"><?php _e('Last name', 'woocommerce');?> <span class="required">*</span></label>
                 <input type="text" class="input-text" name="billing_last_name" id="reg_billing_last_name" value="<?php if (!empty($_POST['billing_last_name'])) {
-            esc_attr_e($_POST['billing_last_name']);
-        }
-        ?>" />
+                    esc_attr_e($_POST['billing_last_name']);
+                }
+                ?>" />
             </p>
 
         <?php endif;?>
@@ -300,6 +309,7 @@ class marketpayWCMain
                 <option value='business' <?php selected('business', $user_mp_status_form);?>><?php _e('Business user', 'marketpay');?></option>
             </select>
         </p>
+
         <p class="form-row form-row-wide hide_business_type" id="block_user_business_type" style="display:none;">
             <label for="reg_user_business_type"><?php _e('Business type', 'marketpay');?> <span class="required">*</span></label>
             <input type="hidden" id="actual_default_business_type" value="<?php echo $this->options['default_business_type']; ?>" />
@@ -332,9 +342,10 @@ class marketpayWCMain
 
     public function wooc_account_details_required($required)
     {
-        $required['user_birthday'] = __('Birthday', 'marketpay');
-        //$required['user_nationality']    = __( 'Nationality', 'marketpay' );
-        $required['billing_country'] = __('Country of residence', 'marketpay');
+        $required['user_birthday']    = __('Birthday', 'marketpay');
+        // $required['user_nationality'] = __( 'Nationality', 'marketpay' );
+        $required['billing_country']  = __('Country of residence', 'marketpay');
+
         return $required;
     }
 
@@ -362,7 +373,8 @@ class marketpayWCMain
             'user_business_type' => 'businesstype',
         );
 
-        foreach ($list_post_keys as $key => $value) {
+        foreach ($list_post_keys as $key => $value)
+        {
             $function_name                = 'validate_' . $value;
             $data_to_send                 = array();
             $data_to_send['data_post']    = $data_post;
@@ -370,9 +382,9 @@ class marketpayWCMain
             $data_to_send['wp_error']     = $validation_errors;
             $data_to_send['main_options'] = $this->options;
             $data_to_send['caller_func']  = 'wooc_validate_extra_register_fields_user';
+
             $this->marketpayWCValidation->$function_name($data_to_send);
         }
-
     }
 
     public function wooc_validate_extra_register_fields_userfront($validation_errors, $user)
@@ -387,17 +399,18 @@ class marketpayWCMain
             'user_business_type' => 'businesstype',
         );
 
-        foreach ($list_post_keys as $key => $value) {
+        foreach ($list_post_keys as $key => $value)
+        {
             $function_name                = 'validate_' . $value;
             $data_to_send                 = array();
             $data_to_send['data_post']    = $data_post;
             $data_to_send['key_field']    = $key;
             $data_to_send['main_options'] = $this->options;
-            //$data_to_send['double_test'] = array('user_birthday'=>1);
-            $data_to_send['caller_func'] = 'wooc_validate_extra_register_fields_userfront';
+            // $data_to_send['double_test'] = array('user_birthday'=>1);
+            $data_to_send['caller_func']  = 'wooc_validate_extra_register_fields_userfront';
+
             $this->marketpayWCValidation->$function_name($data_to_send);
         }
-
     }
 
     /**
@@ -426,7 +439,8 @@ class marketpayWCMain
             'user_business_type' => 'businesstype',
         );
 
-        foreach ($list_post_keys as $key => $value) {
+        foreach ($list_post_keys as $key => $value)
+        {
             $function_name                = 'validate_' . $value;
             $data_to_send                 = array();
             $data_to_send['data_post']    = $data_post;
@@ -435,10 +449,11 @@ class marketpayWCMain
             $data_to_send['main_options'] = $this->options;
             $data_to_send['double_test']  = array('user_birthday' => 1);
             $data_to_send['caller_func']  = 'wooc_validate_extra_register_fields';
+
             $this->marketpayWCValidation->$function_name($data_to_send);
         }
-
     }
+
     /**
      * Validate the extra register fields.
      * We need this to enforce mandatory/required fields that we need for createMarketUser
@@ -460,16 +475,17 @@ class marketpayWCMain
             'user_business_type' => 'businesstype',
         );
 
-        foreach ($list_post_keys as $key => $value) {
+        foreach ($list_post_keys as $key => $value)
+        {
             $function_name                = 'validate_' . $value;
             $data_to_send                 = array();
             $data_to_send['data_post']    = $data_post;
             $data_to_send['key_field']    = $key;
             $data_to_send['main_options'] = $this->options;
             $data_to_send['caller_func']  = 'wooc_validate_extra_register_fields_checkout';
+
             $this->marketpayWCValidation->$function_name($data_to_send);
         }
-
     }
 
     /**
@@ -484,23 +500,24 @@ class marketpayWCMain
      */
     public function wooc_save_extra_register_fields($customer_id)
     {
-        if (isset($_POST['billing_first_name'])) {
+        if (isset($_POST['billing_first_name']))
+        {
             // WordPress default first name field.
             update_user_meta($customer_id, 'first_name', sanitize_text_field($_POST['billing_first_name']));
-
             // WooCommerce billing first name.
             update_user_meta($customer_id, 'billing_first_name', sanitize_text_field($_POST['billing_first_name']));
         }
 
-        if (isset($_POST['billing_last_name'])) {
+        if (isset($_POST['billing_last_name']))
+        {
             // WordPress default last name field.
             update_user_meta($customer_id, 'last_name', sanitize_text_field($_POST['billing_last_name']));
-
             // WooCommerce billing last name.
             update_user_meta($customer_id, 'billing_last_name', sanitize_text_field($_POST['billing_last_name']));
         }
 
-        if (isset($_POST['user_birthday'])) {
+        if (isset($_POST['user_birthday']))
+        {
             // New custom user meta field
             update_user_meta(
                 $customer_id,
@@ -509,32 +526,38 @@ class marketpayWCMain
             );
         }
 
-        if (isset($_POST['user_nationality'])) {
+        if (isset($_POST['user_nationality']))
+        {
             // New custom user meta field
             update_user_meta($customer_id, 'user_nationality', sanitize_text_field($_POST['user_nationality']));
         }
 
-        if (isset($_POST['billing_country'])) {
+        if (isset($_POST['billing_country']))
+        {
             // WooCommerce billing country.
             update_user_meta($customer_id, 'billing_country', sanitize_text_field($_POST['billing_country']));
         }
 
-        if (isset($_POST['billing_state'])) {
+        if (isset($_POST['billing_state']))
+        {
             // WooCommerce billing state.
             update_user_meta($customer_id, 'billing_state', sanitize_text_field($_POST['billing_state']));
         }
 
-        if (isset($_POST['user_mp_status'])) {
+        if (isset($_POST['user_mp_status']))
+        {
             // New custom user meta field
             update_user_meta($customer_id, 'user_mp_status', sanitize_text_field($_POST['user_mp_status']));
         }
 
-        if (isset($_POST['user_business_type'])) {
+        if (isset($_POST['user_business_type']))
+        {
             // New custom user meta field
             update_user_meta($customer_id, 'user_business_type', sanitize_text_field($_POST['user_business_type']));
         }
 
         $mp_user_id = $this->mp->set_mp_user($customer_id);
+
         $this->mp->set_mp_wallet($mp_user_id);
 
         /** Update MP user account **/
@@ -1649,9 +1672,13 @@ $field_value = '';
             return false;
         }
 
+        if ( ! $mp_payment_type = $order->get_meta('marketpay_payment_type')) {
+            return false;
+        }
+
         $transaction_id = $order->get_meta('mp_transaction_id');
 
-        if ( ! $mp_transaction = $this->mp->get_payin($transaction_id)) {
+        if ( ! $mp_transaction = $this->mp->get_payin($transaction_id, $mp_payment_type)) {
             return false;
         }
 
@@ -1667,15 +1694,17 @@ $field_value = '';
             return false;
         }
 
-        if (marketpayWCConfig::DEBUG) {
+        if (marketpayWCConfig::DEBUG)
+        {
             $tr_href = $this->mp->getDBUserUrl('') . 'PayIn/' . $transaction_id;
             $tr_link = '<a target="_mp_db" href="' . $tr_href . '">';
+
             echo '<p>' . __('Marketpay transaction Id:', 'marketpay') . ' ' . $tr_link . $transaction_id . '</a></p>';
             echo '<p>' . __('Marketpay transaction status:', 'marketpay') . ' ' . $mp_status . '</p>';
             echo '<p>' . __('Marketpay transaction total amount:', 'marketpay') . ' ' . $mp_amount . '</p>';
             echo '<p>' . __('Marketpay transaction currency:', 'marketpay') . ' ' . $mp_currency . '</p>';
-            echo '<p>' . __('Order total:', 'marketpay') . ' ' . $order->order_total . '</p>'; //Debug
-            echo '<p>' . __('Order currency:', 'marketpay') . ' ' . $order->order_currency . '</p>'; //Debug
+            echo '<p>' . __('Order total:', 'marketpay') . ' ' . $order->get_order() . '</p>'; //Debug
+            echo '<p>' . __('Order currency:', 'marketpay') . ' ' . $order->get_currency() . '</p>'; //Debug
         }
 
         if ('SUCCEEDED' != $mp_status) {

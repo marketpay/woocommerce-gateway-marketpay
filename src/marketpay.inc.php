@@ -1318,8 +1318,13 @@ class mpAccess
      * @param int $transaction_id
      *
      */
-    public function get_payin($transaction_id)
+    public function get_payin($transaction_id, $mp_payment_type = 'card')
     {
+        if ($mp_payment_type == 'bank_wire')
+        {
+            return $this->marketPayApi->BankwirePayIns->payInsBankwireBankwireGetPayment($transaction_id);
+        }
+
         return $this->marketPayApi->RedsysPayIns->payInsRedsysRedsysGetPayment($transaction_id);
     }
 

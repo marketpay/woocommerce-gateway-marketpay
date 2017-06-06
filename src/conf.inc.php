@@ -34,7 +34,8 @@ class marketpayWCConfig
 
     /** Supported currencies **/
     public static $allowed_currencies = array(
-        'EUR'
+        'EUR',
+        'GBP'
     );
 
     /**

@@ -23,6 +23,7 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
 
     private $allowed_currencies = array(
         'EUR',
+        'GBP'
     );
 
     private $available_card_types = array(
@@ -173,10 +174,13 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
 
         if ( ! $value) return $value;
 
-        if ($page = get_post($value)) {
-            if (!preg_match('/[marketpay_payform]/', $page->post_content)) {
+        if ($page = get_post($value))
+        {
+            if ( ! preg_match('/[marketpay_payform]/', $page->post_content))
+            {
                 /** Add the shortcode **/
                 $page->post_content = $page->post_content . '[marketpay_payform]';
+
                 wp_update_post($page);
             }
         }
@@ -259,37 +263,37 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
      */
     public function admin_options()
     {
-        parent::admin_options();
-        ?>
+        parent::admin_options(); ?>
+
         <script>
-        (function($) {
-            $(document).ready(function() {
-                if( $('#woocommerce_marketpay_enabled').is(':checked') ){
-                    //enable checkboxes
-                    checkboxSwitch( true );
-                } else {
-                    //disable checkboxes
-                    checkboxSwitch( false );
-                }
-                $('#woocommerce_marketpay_enabled').on( 'change', function( e ){
-                    checkboxSwitch($(this).is(':checked'));
+            (function($) {
+                $(document).ready(function() {
+                    if ($('#woocommerce_marketpay_enabled').is(':checked')) {
+                        //enable checkboxes
+                        checkboxSwitch( true );
+                    } else {
+                        //disable checkboxes
+                        checkboxSwitch( false );
+                    }
+
+                    $('#woocommerce_marketpay_enabled').on('change', function(e) {
+                        checkboxSwitch($(this).is(':checked'));
+                    });
+
+                    $('.mp_payment_method.readonly').live('click', function(e) {
+                        e.preventDefault();
+                        //console.log('clicked');
+                    });
                 });
-                $('.mp_payment_method.readonly').live('click', function( e ) {
-                    e.preventDefault();
-                    //console.log('clicked');
-                });
-            });
-            function checkboxSwitch( current ) {
-                //console.log( current );
-                if( current ) {
-                    //console.log( 'yes' );
-                    $('.mp_payment_method').removeAttr('readonly').removeClass('readonly');
-                } else {
-                    //console.log( 'no' );
-                    $('.mp_payment_method').attr('readonly', true).addClass('readonly');
+
+                function checkboxSwitch( current ) {
+                    if (current) {
+                        $('.mp_payment_method').removeAttr('readonly').removeClass('readonly');
+                    } else {
+                        $('.mp_payment_method').attr('readonly', true).addClass('readonly');
+                    }
                 }
-            }
-        })( jQuery );
+            })( jQuery );
         </script>
         <?php
     }
@@ -313,6 +317,7 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
                 $selected = $post_data['mp_card_type'];
             }
         }
+
         ?>
 
         <div class="mp_payment_fields">
@@ -410,8 +415,8 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
         $return = mpAccess::getInstance()->card_payin_url(
             $order_id, // Used to fill-in the "Tag" optional info
             $wp_user_id, // WP User ID
-            ($order->order_total * 100), // Amount
-            $order->order_currency, // Currency
+            ($order->get_total() * 100), // Amount
+            $order->get_currency(), // Currency
             0, // Fees
             $return_url, // Return URL
             $locale, // For "Culture" attribute
@@ -470,9 +475,9 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
         $ref = mpAccess::getInstance()->bankwire_payin_ref(
             $order_id, // Used to fill-in the "Tag" optional info
             $wp_user_id, // WP User ID
-            ($order->order_total * 100), // Amount
-            $order->order_currency, // Currency
-            0// Fees
+            ($order->get_total() * 100), // Amount
+            $order->get_currency(), // Currency
+            0 // Fees
         );
 
         if ( ! $ref)

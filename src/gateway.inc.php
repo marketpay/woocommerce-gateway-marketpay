@@ -317,8 +317,10 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
                 $selected = $post_data['mp_card_type'];
             }
         }
-
-        ?>
+        else
+        {
+            $selected = '';
+        } ?>
 
         <div class="mp_payment_fields">
             <?php if ('yes' == $this->get_option('enabled_BANK_WIRE')): ?>

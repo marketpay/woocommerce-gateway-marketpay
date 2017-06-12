@@ -199,7 +199,7 @@ class marketpayWCMain
 
         wp_enqueue_script(
             'wc-user-type',
-            plugins_url('/js/front-type-user.js', dirname(__FILE__)),
+            plugins_url('/assets/js/front-type-user.js', dirname(__FILE__)),
             array('jquery')
         );
 
@@ -988,8 +988,6 @@ if ($wallets && is_array($wallets)) {
             $screen = get_current_screen();
         }
 
-        //var_dump( $screen ); //debug
-
         if (!$wp_user_id && (
             !is_admin() ||
             preg_match('/wcv-vendor-shopsettings/', $screen->id)
@@ -1404,20 +1402,22 @@ $field_value = '';
 
     public function shop_settings_saved($wp_user_id)
     {
-
         /** Update bank account data if set && valid **/
         $errors = new WP_Error;
+
         $this->validate_bank_account_data($errors, null, $wp_user_id);
-        $e = $errors->get_error_code();
-        if (empty($e)) {
+
+        if (empty($errors->get_error_code()))
+        {
             $this->save_account_form($wp_user_id);
+
             return true;
         }
 
-        foreach ($errors->errors as $error) {
+        foreach ($errors->errors as $error)
+        {
             wc_add_notice($error[0], 'error');
         }
-
     }
 
     /**
@@ -1460,7 +1460,6 @@ $field_value = '';
      */
     public function validate_bank_account_data(&$errors, $update, $user)
     {
-
         $required = array(
             'vendor_account_name'     => __('Account holder&apos;s name', 'marketpay'),
             'vendor_account_address1' => __('Account holder&apos;s address', 'marketpay'),

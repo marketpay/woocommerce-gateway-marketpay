@@ -207,33 +207,37 @@ class mpAccess
 
         $this->legacyApi = new MarketPay\MarketPayApi();
 
-        $this->legacyApi->Config->ClientId        = $this->mp_client_id;
-        $this->legacyApi->Config->ClientPassword  = $this->mp_passphrase;
+        $mp_client_id  = $this->mp_client_id;
+        $mp_passphrase = $this->mp_passphrase;
+        $mp_base_url   = $this->mp_production ? self::PROD_API_URL : self::SANDBOX_API_URL;
+
+        $this->legacyApi->Config->ClientId        = $mp_client_id;
+        $this->legacyApi->Config->ClientPassword  = $mp_passphrase;
+        $this->legacyApi->Config->BaseUrl         = $mp_base_url;
         $this->legacyApi->Config->TemporaryFolder = $tmp_path . '/';
+
         $this->legacyApi->OAuthTokenManager->RegisterCustomStorageStrategy(new \MarketPay\WPPlugin\MockStorageStrategy());
-        $this->legacyApi->Config->BaseUrl = $this->mp_production ? self::PROD_API_URL : self::SANDBOX_API_URL;
 
-        /** Use Legacy API to get response token **/
-        $autenticationKey = md5(
-            $this->legacyApi->Config->BaseUrl.
-            $this->legacyApi->Config->ClientId.
-            $this->legacyApi->Config->ClientPassword
-        );
+        if ($mp_base_url && $mp_client_id && $mp_passphrase)
+        {
+            /** Use Legacy API to get response token **/
+            $token = $this->legacyApi->OAuthTokenManager->getToken(
+                md5($mp_base_url . $mp_client_id . $mp_passphrase)
+            );
 
-        $token = $this->legacyApi->OAuthTokenManager->getToken($autenticationKey);
+            /** MarketPay API configuration **/
+            $config = new Swagger\Client\Configuration;
 
-        /** MarketPay API configuration **/
-        $config = new Swagger\Client\Configuration;
+            $config->setHost($mp_base_url);
+            $config->setApiKey($mp_client_id, $mp_passphrase);
+            $config->setDebug(self::DEBUG);
+            $config->setAccessToken($token->access_token);
 
-        $config->setHost($this->legacyApi->Config->BaseUrl);
-        $config->setApiKey($this->legacyApi->Config->ClientId, $this->legacyApi->Config->ClientPassword);
-        $config->setDebug(self::DEBUG);
-        $config->setAccessToken($token->access_token);
+            $this->marketPayApi = new Swagger\Client\ApiClient($config);
 
-        $this->marketPayApi = new Swagger\Client\ApiClient($config);
-
-        $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
-        $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
+            $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
+            $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
+        }
 
         return true;
     }

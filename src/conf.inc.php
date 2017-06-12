@@ -26,7 +26,7 @@ class marketpayWCConfig
         'prod_passphrase'         => '',
         'default_buyer_status'    => 'individuals',
         'default_vendor_status'   => 'either',
-        'default_business_status' => 'either',
+        'default_business_type'   => 'either',
         'per_item_wf'             => '',
         'webhook_key'             => '',
         'plugin_version'          => '0.2.2',

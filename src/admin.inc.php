@@ -72,7 +72,7 @@ class marketpayWCAdmin
 
         wp_enqueue_script(
             'wc-admin-scripts',
-            plugins_url('js/admin-type-user.js', dirname(__FILE__)),
+            plugins_url('/assets/js/admin-type-user.js', dirname(__FILE__)),
             array('jquery')
         );
 

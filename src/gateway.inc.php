@@ -90,13 +90,6 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
 
         foreach ($this->available_card_types as $type => $label)
         {
-            $default = 'no';
-
-            if ('RedsysPayByWebPost' == $type)
-            {
-                $default = 'yes';
-            }
-
             $star = '<span class="note star" title="' . __('Needs activation', 'marketpay') . '">*</span>';
 
             if (in_array($type, $this->default_card_types))
@@ -115,7 +108,7 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
                 'title'   => $title,
                 'type'    => 'checkbox',
                 'label'   => sprintf(__('Enable %s payment', 'marketpay'), __($label, 'marketpay')) . $star,
-                'default' => $default,
+                'default' => 'no',
                 'class'   => 'mp_payment_method',
             );
 
@@ -135,6 +128,13 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
             $prefix             = str_repeat('&nbsp;', count(get_post_ancestors($page)) * 3);
             $options[$page->ID] = $prefix . $page->post_title;
         }
+
+        $form_fields['skip_default_checkout'] = array(
+            'title'   => __('Skip Add to Cart', 'marketpay'),
+            'type'    => 'checkbox',
+            'label'   => __('Direct access to fill in billing details from the product\'s page.', 'marketpay'),
+            'default' => false
+        );
 
         $form_fields['custom_template_page_id'] = array(
             'title'             => __('Use this page for payment template', 'marketpay'),
@@ -296,6 +296,13 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
             })( jQuery );
         </script>
         <?php
+    }
+
+    public function wooc_skip_default_checkout()
+    {
+        echo "<pre>";
+        print_r(1);
+        echo "</pre>";
     }
 
     /**

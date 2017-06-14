@@ -60,6 +60,9 @@ class marketpayWCHooks
          *
          */
 
+        /** Redirect to checkout page on instant checkout */
+        add_action('template_redirect', array($marketpayWCMain, 'wooc_skip_default_checkout'));
+
         /** Payline form template shortcode **/
         add_shortcode('marketpay_payform', array($marketpayWCMain, 'payform_shortcode'));
 

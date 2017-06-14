@@ -162,6 +162,62 @@ class marketpayWCMain
     }
 
     /**
+     * Check the marketpay gateway settings to automatically add a product into the cart and
+     * redirect the user to the checkout page avoiding the add to cart + checkout steps
+     *
+     * @return void
+     */
+    public function wooc_skip_default_checkout()
+    {
+        if (function_exists('is_product') && is_product())
+        {
+            $gateways = WC()->payment_gateways()->payment_gateways();
+
+            if (isset($gateways['marketpay']) && $gateway = $gateways['marketpay'])
+            {
+                $skip_default_checkout = $gateway->get_option('skip_default_checkout', 'no');
+
+                if ($skip_default_checkout == 'yes')
+                {
+                    global $post;
+
+                    $this->add_to_cart($post->ID);
+
+                    wp_redirect(get_permalink(get_option('woocommerce_checkout_page_id')));
+
+                    exit;
+                }
+            }
+        }
+    }
+
+    /**
+     * Add a new product to cart. Previously checks if the current product exists on the cart
+     * to avoid adding one more
+     * @see https://docs.woocommerce.com/document/automatically-add-product-to-cart-on-visit/
+     *
+     * @return void
+     */
+    private function add_to_cart($product_id)
+    {
+        if ( sizeof( WC()->cart->get_cart() ) > 0 )
+        {
+            foreach ( WC()->cart->get_cart() as $cart_item_key => $values )
+            {
+                if ( $values['data']->get_id() ==  $product_id) $found = true;
+            }
+
+            // if product not found, add it
+            if ( ! $found ) WC()->cart->add_to_cart( $product_id );
+        }
+        else
+        {
+            // if no products in cart, add it
+            WC()->cart->add_to_cart( $product_id );
+        }
+    }
+
+    /**
      * Add new register fields for WooCommerce registration.
      * We need this to enforce mandatory/required fields that we need for createMarketUser
      * @see: https://support.woothemes.com/hc/en-us/articles/203182373-How-to-add-custom-fields-in-user-registration-on-the-My-Account-page

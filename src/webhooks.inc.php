@@ -46,11 +46,14 @@ class marketpayWCWebHooks
     {
         add_rewrite_rule('^' . self::WEBHOOK_PREFIX . '(/.*)?$', 'index.php?__mpwcwh=1', 'top');
     }
+
     public function addQueryVars($vars)
     {
         $vars[] = '__mpwcwh';
+
         return $vars;
     }
+
     public function parseRequests()
     {
         global $wp;
@@ -61,13 +64,12 @@ class marketpayWCWebHooks
             $this->handleRequest();
         }
     }
+
     public function flush_rules()
     {
         $rules = get_option('rewrite_rules');
-        if (!isset($rules['^' . self::WEBHOOK_PREFIX . '(/.*)?$'])) {
-            flush_rewrite_rules();
-        }
 
+        if ( ! isset($rules['^' . self::WEBHOOK_PREFIX . '(/.*)?$'])) flush_rewrite_rules();
     }
 
     /**
@@ -76,47 +78,48 @@ class marketpayWCWebHooks
      */
     private function handleRequest()
     {
-
         $this->error_log("\n\nHandling webhook-type URL received at: " . current_time('Y-m-d H:i:s', 0));
 
         $this->event_type = $this->get_webhook_suffix();
         $this->payload    = $this->get_webhook_content();
         $this->headers    = $this->get_request_headers();
 
-        if (!$this->is_authentic()) {
-            $this->exit_with_404();
-        }
+        if ( ! $this->is_authentic()) $this->exit_with_404();
 
         $this->error_log('Webhook is authentic Ok.');
 
         /** When setting up the link from MP dashboard RessourceId is empty **/
-        if ('' == $this->payload['RessourceId']) {
-            $this->reply_to_dashboard_setup();
-        }
+        if ('' == $this->payload['RessourceId']) $this->reply_to_dashboard_setup();
 
-        try {
+        try
+        {
             $payin = $this->mp->get_payin($this->payload['RessourceId']);
-        } catch (Exception $e) {
-            $error_message = 'Error:' .
-            ' ' . $e->getMessage();
+        }
+        catch (Exception $e)
+        {
+            $error_message = 'Error:' . ' ' . $e->getMessage();
 
             $this->error_log(
                 'webhook get_payin debug error @' . current_time('Y-m-d H:i:s', 0) . ': ' .
                 $error_message . ' for RessourceId: ' . $this->payload['RessourceId'] . "\n"
             );
+
             $this->warn_owner(sprintf(
                 __('Marketpay Payin API error for Resource ID: %1$s', 'marketpay') . ' ' .
                 __('It could be that the Marketpay environment (sandbox or production) has changed since this payment was issued.', 'marketpay'),
                 $this->payload['RessourceId']
             ));
+
             $this->exit_with_404();
         }
 
-        if (!$payin) {
+        if ( ! $payin)
+        {
             $this->warn_owner(sprintf(
                 __('Marketpay Payin not found for Resource ID: %1$s', 'marketpay'),
                 $this->payload['RessourceId']
             ));
+
             $this->exit_with_404();
         }
 
@@ -128,16 +131,12 @@ class marketpayWCWebHooks
             //'$_SERVER: ' . print_r( $_SERVER, true )
         );
 
-        if (mpAccess::PAYIN_SUCCESS_HK == $this->event_type) {
-            $this->handlePayinSuccess($payin);
-        }
-
-        if (mpAccess::PAYIN_FAILED_HK == $this->event_type) {
-            $this->handlePayinFailure($payin);
-        }
+        if (mpAccess::PAYIN_SUCCESS_HK == $this->event_type) $this->handlePayinSuccess($payin);
+        if (mpAccess::PAYIN_FAILED_HK == $this->event_type)  $this->handlePayinFailure($payin);
 
         // Sends out our http response
         echo '200 (OK)';
+
         exit;
     }
 
@@ -147,9 +146,8 @@ class marketpayWCWebHooks
      */
     private function handlePayinSuccess($payin)
     {
-
-        if ($order_id = $this->verify_payment($payin)) {
-
+        if ($order_id = $this->verify_payment($payin))
+        {
             /**
              * Save the MP transaction ID in the WC order metas
              * this needs to be done before calling payment->complete()
@@ -157,6 +155,7 @@ class marketpayWCWebHooks
              *
              */
             $transaction_id = $payin->Id;
+
             update_post_meta($order_id, 'mp_transaction_id', $transaction_id);
             update_post_meta($order_id, 'mp_success_transaction_id', $transaction_id);
 
@@ -166,17 +165,20 @@ class marketpayWCWebHooks
                 is_array($transaction_ids)
             ) {
                 $transaction_ids[] = $transaction_id;
-            } else {
+            }
+            else
+            {
                 $transaction_ids = array($transaction_id);
             }
+
             update_post_meta($order_id, 'mp_transaction_ids', $transaction_ids);
 
             /** at last, validate this order **/
             $this->validate_order($order_id);
-
-        } else {
+        }
+        else
+        {
             $this->error_log("Invalid order $order_id");
-
         }
     }
 
@@ -186,9 +188,8 @@ class marketpayWCWebHooks
      */
     private function handlePayinFailure($payin)
     {
-
-        if ($order_id = $this->verify_payment($payin)) {
-
+        if ($order_id = $this->verify_payment($payin))
+        {
             /**
              * Save the MP transaction ID in the WC order metas
              * this needs to be done before calling payment->complete()
@@ -196,6 +197,7 @@ class marketpayWCWebHooks
              *
              */
             $transaction_id = $payin->Id;
+
             update_post_meta($order_id, 'mp_transaction_id', $transaction_id);
             update_post_meta($order_id, 'mp_success_transaction_id', $transaction_id);
 
@@ -208,14 +210,15 @@ class marketpayWCWebHooks
             } else {
                 $transaction_ids = array($transaction_id);
             }
+
             update_post_meta($order_id, 'mp_transaction_ids', $transaction_ids);
 
             /** at last, validate this order **/
             $this->validate_order($order_id);
-
-        } else {
+        }
+        else
+        {
             $this->error_log("Invalid order $order_id");
-
         }
     }
 
@@ -229,11 +232,10 @@ class marketpayWCWebHooks
     {
         $endpoint_suffix = preg_replace('/\?.*$/', '', basename($_SERVER['REQUEST_URI']));
 
-        if (self::WEBHOOK_PREFIX == $endpoint_suffix) {
-            $endpoint_suffix = '';
-        }
+        if (self::WEBHOOK_PREFIX == $endpoint_suffix) $endpoint_suffix = '';
 
-        if ($this->marketpayWCMain->options['webhook_key'] == $endpoint_suffix) {
+        if ($this->marketpayWCMain->options['webhook_key'] == $endpoint_suffix)
+        {
             $endpoint_suffix = '';
         }
 
@@ -247,18 +249,6 @@ class marketpayWCWebHooks
      */
     private function get_webhook_content()
     {
-        /*
-        if( $webhook = fopen('php://input' , 'rb') ) {
-        $webhookContent = '';
-        while (!feof($webhook)) {
-        $webhookContent .= fread($webhook, 4096);
-        }
-        fclose($webhook);
-        return $webhookContent;
-        } else {
-        return false;
-        }
-         */
         return $_REQUEST;
     }
 
@@ -271,13 +261,15 @@ class marketpayWCWebHooks
     private function get_request_headers()
     {
         $headers = array();
-        foreach ($_SERVER as $key => $value) {
-            if (substr($key, 0, 5) != 'HTTP_') {
-                continue;
-            }
+
+        foreach ($_SERVER as $key => $value)
+        {
+            if (substr($key, 0, 5) != 'HTTP_') continue;
+
             $header           = str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))));
             $headers[$header] = $value;
         }
+
         return $headers;
     }
 
@@ -287,30 +279,29 @@ class marketpayWCWebHooks
      */
     private function is_authentic()
     {
-
         /** Check webhook key **/
-        if (!$this->check_webhook_key()) {
+        if ( ! $this->check_webhook_key())
+        {
             $this->error_log('Webhook key is invalid Nok.');
+
             return false;
         }
+
         $this->error_log('Webhook key is checked Ok.');
 
         /** Check that event_type is present in URL **/
-        if (!$this->event_type) {
-            return false;
-        }
+        if ( ! $this->event_type) return false;
 
         $this->error_log('Has event_type in URL Ok. ' . $this->event_type);
 
         /** Check that payload is present **/
-        if (!$this->payload || !is_array($this->payload)) {
-            return false;
-        }
+        if ( ! $this->payload || ! is_array($this->payload)) return false;
 
         $this->error_log('Has payload Ok.');
 
         /** Check that EventType is present in payload **/
-        if (!isset($this->payload['EventType']) || !$this->payload['EventType']) {
+        if ( ! isset($this->payload['EventType']) || ! $this->payload['EventType'])
+        {
             return false;
         }
 
@@ -337,9 +328,7 @@ class marketpayWCWebHooks
         $this->error_log('Date Ok.');
 
         /** Check that URL and payload event types match **/
-        if ($this->event_type != $this->payload['EventType']) {
-            return false;
-        }
+        if ($this->event_type != $this->payload['EventType']) return false;
 
         $this->error_log('Event_type matches Ok.');
 
@@ -354,35 +343,42 @@ class marketpayWCWebHooks
      */
     private function verify_payment($payin)
     {
-
         /** We check for the Order ID first because we need it to warn the right vendor of possible failures **/
-        if (!preg_match('/^WC Order #(\d+)$/', $payin->Tag, $matches)) {
+        if ( ! preg_match('/^WC Order #(\d+)$/', $payin->Tag, $matches))
+        {
             $this->warn_owner(sprintf(
                 __('Marketpay Payin does not contain a WooCommerce Order ID reference for Resource ID: %1$s', 'marketpay'),
                 $this->payload['RessourceId']
             ));
+
             return false;
         }
+
         $order_id = $matches[1];
         $this->error_log('MP Payin WC Order tag verified Ok.');
 
         /** Card payments get a special treatment **/
         $card_payment = false;
-        if (get_post_meta($order_id, 'marketpay_payment_type', true) == 'card') {
+
+        if (get_post_meta($order_id, 'marketpay_payment_type', true) == 'card')
+        {
             $card_payment = true;
         }
 
-        if (!$card_payment) {
-
+        if ( ! $card_payment)
+        {
             /** Check that this order was paid by bankwire **/
-            if (get_post_meta($order_id, 'marketpay_payment_type', true) != 'bank_wire') {
+            if (get_post_meta($order_id, 'marketpay_payment_type', true) != 'bank_wire')
+            {
                 $this->warn_owner(sprintf(
                     __('Marketpay Payin Resource ID: %1$s references WooCommerce Order ID: %2$s which was not paid by bank wire', 'marketpay'),
                     $this->payload['RessourceId'],
                     $order_id
                 ), $order_id);
+
                 return false;
             }
+
             $this->error_log('MP Payin WC order exists and is bank_wire verified Ok.');
 
             /** Check that the payin ID matches at least one of the transaction_ids of this order **/
@@ -392,30 +388,37 @@ class marketpayWCWebHooks
                 is_array($transaction_ids)
             ) {
                 $transaction_ids[] = $mp_transaction_id;
-            } else {
+            }
+            else
+            {
                 $transaction_ids = array($mp_transaction_id);
             }
-            if ($order_payment_ref = get_post_meta($order_id, 'marketpay_payment_ref', true)) {
+
+            if ($order_payment_ref = get_post_meta($order_id, 'marketpay_payment_ref', true))
+            {
                 $transaction_ids[] = $order_payment_ref->Id;
             }
 
-            if (!in_array($payin->Id, $transaction_ids)) {
+            if ( ! in_array($payin->Id, $transaction_ids))
+            {
                 $this->error_log('Bankwire Payin WC order payin Id matches failed.');
                 $this->warn_owner(sprintf(
                     __('Marketpay Payin Resource ID: %1$s references wrong WooCommerce Order ID: %2$s', 'marketpay'),
                     $this->payload['RessourceId'],
                     $order_id
                 ), $order_id);
+
                 return false;
             }
+
             $this->error_log('MP Payin WC order payin Id matches verified Ok.');
+        }
 
-        } //!$card_payment
-
-        if ($card_payment) {
-
+        if ($card_payment)
+        {
             /** Check that the payin ID matches at least one of the transaction_ids of this order **/
             $mp_transaction_id = get_post_meta($order_id, 'mp_transaction_id', true);
+
             if (
                 ($transaction_ids = get_post_meta($order_id, 'mp_transaction_ids', true)) &&
                 is_array($transaction_ids)
@@ -423,12 +426,15 @@ class marketpayWCWebHooks
                 $this->error_log('debug case 1');
                 $this->error_log('transaction_ids: ' . print_r($transaction_ids, true));
                 $transaction_ids[] = $mp_transaction_id;
-            } else {
+            }
+            else
+            {
                 $this->error_log('debug case 2');
                 $transaction_ids = array($mp_transaction_id);
             }
 
-            if (!in_array($payin->Id, $transaction_ids)) {
+            if ( ! in_array($payin->Id, $transaction_ids))
+            {
                 $this->error_log('Card MP Payin WC order payin Id matches failed.');
                 $this->error_log('order_id: ' . print_r($order_id, true));
                 $this->error_log('mp_transaction_id: ' . print_r($mp_transaction_id, true));
@@ -439,22 +445,27 @@ class marketpayWCWebHooks
                     $this->payload['RessourceId'],
                     $order_id
                 ), $order_id);
+
                 return false;
             }
-            $this->error_log('Card MP Payin WC order payin Id matches verified Ok.');
 
+            $this->error_log('Card MP Payin WC order payin Id matches verified Ok.');
         }
 
         /** Check that payin status is SUCCEEDED **/
-        if ('SUCCEEDED' != $payin->Status) {
+        if ('SUCCEEDED' != $payin->Status)
+        {
             $this->error_log("MP Payin status is not 'SUCCEEDED' Nok. " . $payin->ResultMessage);
             $message = __('Marketpay Payin did not succeed for Resource ID: %1$s concerning WooCommerce Order ID: %2$s', 'marketpay');
-            if (isset($payin->ResultMessage)) {
+
+            if (isset($payin->ResultMessage))
+            {
                 $message .= "\n" . $payin->ResultMessage;
             }
 
             /** Send an e-mail warning for failed bankwire payins only **/
-            if ($card_payment) {
+            if ($card_payment)
+            {
                 /** For card payments we just add an order note **/
                 if (
                     ($order = wc_get_order($order_id)) &&
@@ -462,8 +473,9 @@ class marketpayWCWebHooks
                 ) {
                     $order->add_order_note(__('Hook note: ', 'marketpay') . $payin->ResultMessage);
                 }
-
-            } else {
+            }
+            else
+            {
                 $this->warn_owner(sprintf(
                     $message,
                     $this->payload['RessourceId'],
@@ -473,28 +485,35 @@ class marketpayWCWebHooks
 
             return false;
         }
+
         $this->error_log("MP Payin 'SUCCEEDED' verified Ok.");
 
         /** Check that declared/debited funds match **/
-        if (!$card_payment && $payin->DebitedFunds != $payin->PaymentDetails->DeclaredDebitedFunds) {
+        if ( ! $card_payment && $payin->DebitedFunds != $payin->PaymentDetails->DeclaredDebitedFunds)
+        {
             $this->warn_owner(sprintf(
                 __('Marketpay Payin debited funds do not match declared for Resource ID: %1$s', 'marketpay'),
                 $this->payload['RessourceId'],
                 $order_id
             ), $order_id);
+
             return false;
         }
+
         $this->error_log('MP Payin DebitedFunds == DeclaredDebitedFunds verified Ok.');
 
         /** Check that declared/fees match **/
-        if (!$card_payment && $payin->Fees != $payin->PaymentDetails->DeclaredFees) {
+        if ( ! $card_payment && $payin->Fees != $payin->PaymentDetails->DeclaredFees)
+        {
             $this->warn_owner(sprintf(
                 __('Marketpay Payin fees do not match declared for Resource ID: %1$s', 'marketpay'),
                 $this->payload['RessourceId'],
                 $order_id
             ), $order_id);
+
             return false;
         }
+
         $this->error_log('MP Payin Fees == DeclaredFees verified Ok.');
 
         /** Success! **/
@@ -507,7 +526,6 @@ class marketpayWCWebHooks
      */
     private function validate_order($order_id)
     {
-
         $note       = sprintf(__('Received valid Marketpay %1$s webhook', 'marketpay'), $this->event_type);
         $order      = wc_get_order($order_id);
         $old_status = $order->get_status();
@@ -519,12 +537,14 @@ class marketpayWCWebHooks
 
         $this->error_log('Trying order->payment_complete()...');
 
-        try {
+        try
+        {
             $order->payment_complete($order_id);
+        }
+        catch (Exception $e)
+        {
+            $error_message = 'Error:' . ' ' . $e->getMessage();
 
-        } catch (Exception $e) {
-            $error_message = 'Error:' .
-            ' ' . $e->getMessage();
             $this->error_log(
                 'payment_complete debug error @' . current_time('Y-m-d H:i:s', 0) . ': ' .
                 $error_message . "\n"
@@ -604,25 +624,27 @@ class marketpayWCWebHooks
      */
     private function warn_owner($message, $order_id = null)
     {
-
         $recipients   = array();
         $recipients[] = get_option('admin_email');
 
-        if ($order_id) {
-
-            if ($order = wc_get_order($order_id)) {
-
-                if (self::WARN_VENDORS) {
+        if ($order_id)
+        {
+            if ($order = wc_get_order($order_id))
+            {
+                if (self::WARN_VENDORS)
+                {
                     // usually turned off
                     /** get e-mail of all vendors concerned by this order **/
                     $items = $order->get_items();
-                    foreach ($items as $item) {
+                    foreach ($items as $item)
+                    {
                         $vendor_id    = get_post_field('post_author', $item['product_id']);
                         $vendor_email = get_the_author_meta('email', $vendor_id);
-                        if (!in_array($vendor_email, $recipients)) {
+
+                        if ( ! in_array($vendor_email, $recipients))
+                        {
                             $recipients[] = $vendor_email;
                         }
-
                     }
                 }
 
@@ -633,8 +655,8 @@ class marketpayWCWebHooks
 
         $this->error_log('Sending warning e-mail to recipients:' . print_r($recipients, true));
         $this->error_log('e-mail message: ' . $message);
-        return
-        wp_mail(
+
+        return wp_mail(
             $recipients,
             __('Marketpay Bank Wire webhook warning', 'marketpay'),
             $message
@@ -648,9 +670,9 @@ class marketpayWCWebHooks
      */
     private function error_log($msg)
     {
-        if (self::LOGGING) {
+        if (self::LOGGING)
+        {
             error_log($msg . "\n", 3, $this->logFilePath);
         }
-
     }
 }

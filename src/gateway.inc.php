@@ -298,13 +298,6 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
         <?php
     }
 
-    public function wooc_skip_default_checkout()
-    {
-        echo "<pre>";
-        print_r(1);
-        echo "</pre>";
-    }
-
     /**
      * Display our payment-related fields
      *

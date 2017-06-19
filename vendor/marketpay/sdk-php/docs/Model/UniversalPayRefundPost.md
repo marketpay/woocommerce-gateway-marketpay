@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tag** | **string** | Custom data that you can add to this item | [optional] 
-**debited_funds** | [**\Swagger\Client\Model\Money**](Money.md) | Information about the funds that are being debited | [optional] 
+**debited_funds** | [**\Swagger\Client\Model\Money**](Money.md) | Information about the funds that are being debited | 
 **fees** | [**\Swagger\Client\Model\Money**](Money.md) | Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client&#39;s platform wallet) | [optional] 
 **statement_description** | **string** |  | [optional] 
 

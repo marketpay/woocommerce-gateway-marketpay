@@ -135,14 +135,17 @@ class UniversalPayTokenRequestPost implements ArrayAccess
     const SECURE_MODE_DEFAULT = 'DEFAULT';
     const SECURE_MODE_FORCE = 'FORCE';
     const LANGUAGE_NOT_SPECIFIED = 'NotSpecified';
+    const LANGUAGE_CA = 'CA';
     const LANGUAGE_DE = 'DE';
     const LANGUAGE_EN = 'EN';
     const LANGUAGE_DA = 'DA';
     const LANGUAGE_ES = 'ES';
     const LANGUAGE_ET = 'ET';
+    const LANGUAGE_GL = 'GL';
     const LANGUAGE_FI = 'FI';
     const LANGUAGE_FR = 'FR';
     const LANGUAGE_EL = 'EL';
+    const LANGUAGE_EU = 'EU';
     const LANGUAGE_HU = 'HU';
     const LANGUAGE_IT = 'IT';
     const LANGUAGE_NL = 'NL';
@@ -176,14 +179,17 @@ class UniversalPayTokenRequestPost implements ArrayAccess
     {
         return [
             self::LANGUAGE_NOT_SPECIFIED,
+            self::LANGUAGE_CA,
             self::LANGUAGE_DE,
             self::LANGUAGE_EN,
             self::LANGUAGE_DA,
             self::LANGUAGE_ES,
             self::LANGUAGE_ET,
+            self::LANGUAGE_GL,
             self::LANGUAGE_FI,
             self::LANGUAGE_FR,
             self::LANGUAGE_EL,
+            self::LANGUAGE_EU,
             self::LANGUAGE_HU,
             self::LANGUAGE_IT,
             self::LANGUAGE_NL,
@@ -236,9 +242,9 @@ class UniversalPayTokenRequestPost implements ArrayAccess
             $invalid_properties[] = "invalid value for 'secure_mode', must be one of 'NotSpecified', 'DEFAULT', 'FORCE'.";
         }
 
-        $allowed_values = ["NotSpecified", "DE", "EN", "DA", "ES", "ET", "FI", "FR", "EL", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
         if (!in_array($this->container['language'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'language', must be one of 'NotSpecified', 'DE', 'EN', 'DA', 'ES', 'ET', 'FI', 'FR', 'EL', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'.";
+            $invalid_properties[] = "invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'.";
         }
 
         if ($this->container['customer'] === null) {
@@ -263,7 +269,7 @@ class UniversalPayTokenRequestPost implements ArrayAccess
         if (!in_array($this->container['secure_mode'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "DE", "EN", "DA", "ES", "ET", "FI", "FR", "EL", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
         if (!in_array($this->container['language'], $allowed_values)) {
             return false;
         }
@@ -420,9 +426,9 @@ class UniversalPayTokenRequestPost implements ArrayAccess
      */
     public function setLanguage($language)
     {
-        $allowed_values = array('NotSpecified', 'DE', 'EN', 'DA', 'ES', 'ET', 'FI', 'FR', 'EL', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS');
+        $allowed_values = array('NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS');
         if (!is_null($language) && (!in_array($language, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'language', must be one of 'NotSpecified', 'DE', 'EN', 'DA', 'ES', 'ET', 'FI', 'FR', 'EL', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'");
+            throw new \InvalidArgumentException("Invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'");
         }
         $this->container['language'] = $language;
 

@@ -162,4 +162,12 @@ class RedsysPreauthorizeByWebPostTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Test attribute "language"
+     */
+    public function testPropertyLanguage()
+    {
+
+    }
+
 }

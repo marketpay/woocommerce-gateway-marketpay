@@ -1,6 +1,6 @@
 <?php
 /**
- * PayOutsApiTest
+ * PayOutsBankwireApiTest
  * PHP version 5
  *
  * @category Class
@@ -34,14 +34,14 @@ use \Swagger\Client\ApiException;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * PayOutsApiTest Class Doc Comment
+ * PayOutsBankwireApiTest Class Doc Comment
  *
  * @category Class
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PayOutsApiTest extends \PHPUnit_Framework_TestCase
+class PayOutsBankwireApiTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -77,23 +77,45 @@ class PayOutsApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test case for payOutsGet
+     * Test case for payOutsBankwireGet
      *
-     * SwaggerDocSummary.
+     * .
      *
      */
-    public function testPayOutsGet()
+    public function testPayOutsBankwireGet()
     {
 
     }
 
     /**
-     * Test case for payOutsPost
+     * Test case for payOutsBankwireGet_0
      *
-     * SwaggerDocSummary.
+     * .
      *
      */
-    public function testPayOutsPost()
+    public function testPayOutsBankwireGet0()
+    {
+
+    }
+
+    /**
+     * Test case for payOutsBankwirePost
+     *
+     * .
+     *
+     */
+    public function testPayOutsBankwirePost()
+    {
+
+    }
+
+    /**
+     * Test case for payOutsBankwirePost_0
+     *
+     * .
+     *
+     */
+    public function testPayOutsBankwirePost0()
     {
 
     }

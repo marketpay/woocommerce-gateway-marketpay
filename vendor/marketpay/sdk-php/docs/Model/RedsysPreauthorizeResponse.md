@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **statement_descriptor** | **string** | A custom description to appear on the user&#39;s bank statement. It can be up to 10 characters long, and can only include alphanumeric characters or spaces | [optional] 
 **author_id** | **string** | A user&#39;s ID | [optional] 
 **pay_in_id** | **string** | The Id of the associated PayIn | [optional] 
+**language** | **string** |  | [optional] 
 **provider** | [**\Swagger\Client\Model\PreauthorizationRedsysData**](PreauthorizationRedsysData.md) | Redsys related data | [optional] 
 **id** | **string** |  | [optional] 
 **creation_date** | **int** |  | [optional] 

@@ -1066,7 +1066,8 @@ class mpAccess
         $return_url,
         $locale,
         $mp_card_type = 'REDSYS',
-        $mp_template_url = ''
+        $mp_template_url = '',
+        $language = 'ES'
     ) {
 
         /** Get mp_user_id and mp_wallet_id from wp_user_id **/
@@ -1101,7 +1102,8 @@ class mpAccess
             'fees' => new Swagger\Client\Model\Money([
                 'currency' => $currency,
                 'amount' => $fees
-            ])
+            ]),
+            'language' => strtoupper(substr($language, 0, 2))
         ]);
 
         $result = $this->marketPayApi->RedsysPayIns->payInsRedsysRedsysPostPaymentByWeb($reference);

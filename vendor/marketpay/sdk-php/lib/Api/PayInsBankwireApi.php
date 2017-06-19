@@ -94,7 +94,7 @@ class PayInsBankwireApi
      *
      * @param int $pay_in_id  (required)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return \Swagger\Client\Model\BankwirePayInPayInResponse
+     * @return \Swagger\Client\Model\PayInBankwireResponse
      */
     public function payInsBankwireBankwireGetPayment($pay_in_id)
     {
@@ -109,7 +109,7 @@ class PayInsBankwireApi
      *
      * @param int $pay_in_id  (required)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return array of \Swagger\Client\Model\BankwirePayInPayInResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\PayInBankwireResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function payInsBankwireBankwireGetPaymentWithHttpInfo($pay_in_id)
     {
@@ -159,15 +159,15 @@ class PayInsBankwireApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\BankwirePayInPayInResponse',
+                '\Swagger\Client\Model\PayInBankwireResponse',
                 '/v2.01/PayInsBankwire/payments/{PayInId}'
             );
 
-            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankwirePayInPayInResponse', $httpHeader), $statusCode, $httpHeader];
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\PayInBankwireResponse', $httpHeader), $statusCode, $httpHeader];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankwirePayInPayInResponse', $e->getResponseHeaders());
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\PayInBankwireResponse', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:
@@ -185,9 +185,9 @@ class PayInsBankwireApi
      *
      * 
      *
-     * @param \Swagger\Client\Model\BankwirePayInPayInPost $bankwire_pay_in  (optional)
+     * @param \Swagger\Client\Model\PayInBankwirePost $bankwire_pay_in  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return \Swagger\Client\Model\BankwirePayInPayInResponse
+     * @return \Swagger\Client\Model\PayInBankwireResponse
      */
     public function payInsBankwireBankwirePaymentByDirect($bankwire_pay_in = null)
     {
@@ -200,9 +200,9 @@ class PayInsBankwireApi
      *
      * 
      *
-     * @param \Swagger\Client\Model\BankwirePayInPayInPost $bankwire_pay_in  (optional)
+     * @param \Swagger\Client\Model\PayInBankwirePost $bankwire_pay_in  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return array of \Swagger\Client\Model\BankwirePayInPayInResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\PayInBankwireResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function payInsBankwireBankwirePaymentByDirectWithHttpInfo($bankwire_pay_in = null)
     {
@@ -245,15 +245,15 @@ class PayInsBankwireApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\BankwirePayInPayInResponse',
+                '\Swagger\Client\Model\PayInBankwireResponse',
                 '/v2.01/PayInsBankwire/payments/direct'
             );
 
-            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankwirePayInPayInResponse', $httpHeader), $statusCode, $httpHeader];
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\PayInBankwireResponse', $httpHeader), $statusCode, $httpHeader];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankwirePayInPayInResponse', $e->getResponseHeaders());
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\PayInBankwireResponse', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:

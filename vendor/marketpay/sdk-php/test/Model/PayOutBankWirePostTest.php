@@ -1,6 +1,6 @@
 <?php
 /**
- * PayOutBankWirePostTest
+ * PayOutBankwirePostTest
  *
  * PHP version 5
  *
@@ -30,16 +30,16 @@
 namespace Swagger\Client;
 
 /**
- * PayOutBankWirePostTest Class Doc Comment
+ * PayOutBankwirePostTest Class Doc Comment
  *
  * @category    Class */
-// * @description PayOutBankWirePost
+// * @description PayOutBankwirePost
 /**
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class PayOutBankWirePostTest extends \PHPUnit_Framework_TestCase
+class PayOutBankwirePostTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -75,9 +75,9 @@ class PayOutBankWirePostTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "PayOutBankWirePost"
+     * Test "PayOutBankwirePost"
      */
-    public function testPayOutBankWirePost()
+    public function testPayOutBankwirePost()
     {
 
     }

@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **payInsBankwireBankwireGetPayment**
-> \Swagger\Client\Model\BankwirePayInPayInResponse payInsBankwireBankwireGetPayment($pay_in_id)
+> \Swagger\Client\Model\PayInBankwireResponse payInsBankwireBankwireGetPayment($pay_in_id)
 
 
 
@@ -41,7 +41,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\BankwirePayInPayInResponse**](../Model/BankwirePayInPayInResponse.md)
+[**\Swagger\Client\Model\PayInBankwireResponse**](../Model/PayInBankwireResponse.md)
 
 ### Authorization
 
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **payInsBankwireBankwirePaymentByDirect**
-> \Swagger\Client\Model\BankwirePayInPayInResponse payInsBankwireBankwirePaymentByDirect($bankwire_pay_in)
+> \Swagger\Client\Model\PayInBankwireResponse payInsBankwireBankwirePaymentByDirect($bankwire_pay_in)
 
 
 
@@ -68,7 +68,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 $api_instance = new Swagger\Client\Api\PayInsBankwireApi();
-$bankwire_pay_in = new \Swagger\Client\Model\BankwirePayInPayInPost(); // \Swagger\Client\Model\BankwirePayInPayInPost | 
+$bankwire_pay_in = new \Swagger\Client\Model\PayInBankwirePost(); // \Swagger\Client\Model\PayInBankwirePost | 
 
 try {
     $result = $api_instance->payInsBankwireBankwirePaymentByDirect($bankwire_pay_in);
@@ -83,11 +83,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bankwire_pay_in** | [**\Swagger\Client\Model\BankwirePayInPayInPost**](../Model/\Swagger\Client\Model\BankwirePayInPayInPost.md)|  | [optional]
+ **bankwire_pay_in** | [**\Swagger\Client\Model\PayInBankwirePost**](../Model/\Swagger\Client\Model\PayInBankwirePost.md)|  | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\BankwirePayInPayInResponse**](../Model/BankwirePayInPayInResponse.md)
+[**\Swagger\Client\Model\PayInBankwireResponse**](../Model/PayInBankwireResponse.md)
 
 ### Authorization
 

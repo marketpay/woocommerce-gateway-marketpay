@@ -92,8 +92,10 @@ Class | Method | HTTP request | Description
 *PayInsUniversalPayApi* | [**payInsUniversalPayUniversalPayPostPaymentByWeb**](docs/Api/PayInsUniversalPayApi.md#payinsuniversalpayuniversalpaypostpaymentbyweb) | **POST** /v2.01/PayInsUniversalPay/payments/web | Create a UniversalPay PayIn Request
 *PayInsUniversalPayApi* | [**payInsUniversalPayUniversalPayPostRefund**](docs/Api/PayInsUniversalPayApi.md#payinsuniversalpayuniversalpaypostrefund) | **POST** /v2.01/PayInsUniversalPay/payments/{PayInId}/refunds | Create a UniversalPay Payment Refund
 *PayInsUniversalPayApi* | [**payInsUniversalPayUniversalPaySaveCard**](docs/Api/PayInsUniversalPayApi.md#payinsuniversalpayuniversalpaysavecard) | **POST** /v2.01/PayInsUniversalPay/token/web | 
-*PayOutsApi* | [**payOutsGet**](docs/Api/PayOutsApi.md#payoutsget) | **GET** /v2.01/PayOuts/bankwire/{id} | SwaggerDocSummary
-*PayOutsApi* | [**payOutsPost**](docs/Api/PayOutsApi.md#payoutspost) | **POST** /v2.01/PayOuts/bankwire | SwaggerDocSummary
+*PayOutsBankwireApi* | [**payOutsBankwireGet**](docs/Api/PayOutsBankwireApi.md#payoutsbankwireget) | **GET** /v2.01/PayOutsBankwire/bankwire/{PayOutId} | 
+*PayOutsBankwireApi* | [**payOutsBankwireGet_0**](docs/Api/PayOutsBankwireApi.md#payoutsbankwireget_0) | **GET** /v2.01/PayOutsBankwire/payments/{PayOutId} | 
+*PayOutsBankwireApi* | [**payOutsBankwirePost**](docs/Api/PayOutsBankwireApi.md#payoutsbankwirepost) | **POST** /v2.01/PayOutsBankwire/bankwire | 
+*PayOutsBankwireApi* | [**payOutsBankwirePost_0**](docs/Api/PayOutsBankwireApi.md#payoutsbankwirepost_0) | **POST** /v2.01/PayOutsBankwire/payments/direct | 
 *RefundsApi* | [**refundsRefundGet**](docs/Api/RefundsApi.md#refundsrefundget) | **GET** /v2.01/Refunds/{RefundId} | View a Refund
 *ShipmentSeurApi* | [**shipmentSeurSeurCancelShipment**](docs/Api/ShipmentSeurApi.md#shipmentseurseurcancelshipment) | **POST** /v2.01/ShipmentSeur/shipments/{ShipmentId}/cancellation | Cancels a shipment
 *ShipmentSeurApi* | [**shipmentSeurSeurCreateShipment**](docs/Api/ShipmentSeurApi.md#shipmentseurseurcreateshipment) | **POST** /v2.01/ShipmentSeur/shipments | Creates a shipment
@@ -148,8 +150,6 @@ Class | Method | HTTP request | Description
  - [BankAccountResponseUs](docs/Model/BankAccountResponseUs.md)
  - [BankAccountType](docs/Model/BankAccountType.md)
  - [BankAccountUsPost](docs/Model/BankAccountUsPost.md)
- - [BankwirePayInPayInPost](docs/Model/BankwirePayInPayInPost.md)
- - [BankwirePayInPayInResponse](docs/Model/BankwirePayInPayInResponse.md)
  - [CardPut](docs/Model/CardPut.md)
  - [CardResponse](docs/Model/CardResponse.md)
  - [CustomApiErrorResponse](docs/Model/CustomApiErrorResponse.md)
@@ -157,8 +157,10 @@ Class | Method | HTTP request | Description
  - [CustomerDetail](docs/Model/CustomerDetail.md)
  - [ExampleUserNaturalPost](docs/Model/ExampleUserNaturalPost.md)
  - [Money](docs/Model/Money.md)
- - [PayOutBankWirePost](docs/Model/PayOutBankWirePost.md)
- - [PayOutBankWireResponse](docs/Model/PayOutBankWireResponse.md)
+ - [PayInBankwirePost](docs/Model/PayInBankwirePost.md)
+ - [PayInBankwireResponse](docs/Model/PayInBankwireResponse.md)
+ - [PayOutBankwirePost](docs/Model/PayOutBankwirePost.md)
+ - [PayOutBankwireResponse](docs/Model/PayOutBankwireResponse.md)
  - [PaymentRedsysData](docs/Model/PaymentRedsysData.md)
  - [PaymentUniversalPayData](docs/Model/PaymentUniversalPayData.md)
  - [PreauthorizationRedsysData](docs/Model/PreauthorizationRedsysData.md)
@@ -218,7 +220,7 @@ Class | Method | HTTP request | Description
 
 - **Type**: OAuth
 - **Flow**: implicit
-- **Authorization URL**: https://identity-sandbox.marketpay.io:443/connect/authorize
+- **Authorization URL**: https://identity.marketpay.io:443/connect/authorize
 - **Scopes**: 
  - **dashboard**: dashboard scope
 

@@ -64,7 +64,8 @@ class RedsysPayByWebPost implements ArrayAccess
         'cancel_url' => 'string',
         'url_ko' => 'string',
         'debited_funds' => '\Swagger\Client\Model\Money',
-        'fees' => '\Swagger\Client\Model\Money'
+        'fees' => '\Swagger\Client\Model\Money',
+        'language' => 'string'
     ];
 
     public static function swaggerTypes()
@@ -87,7 +88,8 @@ class RedsysPayByWebPost implements ArrayAccess
         'cancel_url' => 'CancelUrl',
         'url_ko' => 'UrlKo',
         'debited_funds' => 'DebitedFunds',
-        'fees' => 'Fees'
+        'fees' => 'Fees',
+        'language' => 'Language'
     ];
 
 
@@ -106,7 +108,8 @@ class RedsysPayByWebPost implements ArrayAccess
         'cancel_url' => 'setCancelUrl',
         'url_ko' => 'setUrlKo',
         'debited_funds' => 'setDebitedFunds',
-        'fees' => 'setFees'
+        'fees' => 'setFees',
+        'language' => 'setLanguage'
     ];
 
 
@@ -125,7 +128,8 @@ class RedsysPayByWebPost implements ArrayAccess
         'cancel_url' => 'getCancelUrl',
         'url_ko' => 'getUrlKo',
         'debited_funds' => 'getDebitedFunds',
-        'fees' => 'getFees'
+        'fees' => 'getFees',
+        'language' => 'getLanguage'
     ];
 
     public static function attributeMap()
@@ -143,8 +147,60 @@ class RedsysPayByWebPost implements ArrayAccess
         return self::$getters;
     }
 
+    const LANGUAGE_NOT_SPECIFIED = 'NotSpecified';
+    const LANGUAGE_CA = 'CA';
+    const LANGUAGE_DE = 'DE';
+    const LANGUAGE_EN = 'EN';
+    const LANGUAGE_DA = 'DA';
+    const LANGUAGE_ES = 'ES';
+    const LANGUAGE_ET = 'ET';
+    const LANGUAGE_GL = 'GL';
+    const LANGUAGE_FI = 'FI';
+    const LANGUAGE_FR = 'FR';
+    const LANGUAGE_EL = 'EL';
+    const LANGUAGE_EU = 'EU';
+    const LANGUAGE_HU = 'HU';
+    const LANGUAGE_IT = 'IT';
+    const LANGUAGE_NL = 'NL';
+    const LANGUAGE_NO = 'NO';
+    const LANGUAGE_PL = 'PL';
+    const LANGUAGE_PT = 'PT';
+    const LANGUAGE_SK = 'SK';
+    const LANGUAGE_SV = 'SV';
+    const LANGUAGE_CS = 'CS';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public function getLanguageAllowableValues()
+    {
+        return [
+            self::LANGUAGE_NOT_SPECIFIED,
+            self::LANGUAGE_CA,
+            self::LANGUAGE_DE,
+            self::LANGUAGE_EN,
+            self::LANGUAGE_DA,
+            self::LANGUAGE_ES,
+            self::LANGUAGE_ET,
+            self::LANGUAGE_GL,
+            self::LANGUAGE_FI,
+            self::LANGUAGE_FR,
+            self::LANGUAGE_EL,
+            self::LANGUAGE_EU,
+            self::LANGUAGE_HU,
+            self::LANGUAGE_IT,
+            self::LANGUAGE_NL,
+            self::LANGUAGE_NO,
+            self::LANGUAGE_PL,
+            self::LANGUAGE_PT,
+            self::LANGUAGE_SK,
+            self::LANGUAGE_SV,
+            self::LANGUAGE_CS,
+        ];
+    }
     
 
     /**
@@ -170,6 +226,7 @@ class RedsysPayByWebPost implements ArrayAccess
         $this->container['url_ko'] = isset($data['url_ko']) ? $data['url_ko'] : null;
         $this->container['debited_funds'] = isset($data['debited_funds']) ? $data['debited_funds'] : null;
         $this->container['fees'] = isset($data['fees']) ? $data['fees'] : null;
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
     }
 
     /**
@@ -196,6 +253,11 @@ class RedsysPayByWebPost implements ArrayAccess
         if ($this->container['fees'] === null) {
             $invalid_properties[] = "'fees' can't be null";
         }
+        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        if (!in_array($this->container['language'], $allowed_values)) {
+            $invalid_properties[] = "invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'.";
+        }
+
         return $invalid_properties;
     }
 
@@ -221,6 +283,10 @@ class RedsysPayByWebPost implements ArrayAccess
             return false;
         }
         if ($this->container['fees'] === null) {
+            return false;
+        }
+        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        if (!in_array($this->container['language'], $allowed_values)) {
             return false;
         }
         return true;
@@ -454,6 +520,31 @@ class RedsysPayByWebPost implements ArrayAccess
     public function setFees($fees)
     {
         $this->container['fees'] = $fees;
+
+        return $this;
+    }
+
+    /**
+     * Gets language
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     * @param string $language
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $allowed_values = array('NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS');
+        if (!is_null($language) && (!in_array($language, $allowed_values))) {
+            throw new \InvalidArgumentException("Invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'");
+        }
+        $this->container['language'] = $language;
 
         return $this;
     }

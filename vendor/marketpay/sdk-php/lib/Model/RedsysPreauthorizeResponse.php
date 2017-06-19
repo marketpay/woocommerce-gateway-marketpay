@@ -65,6 +65,7 @@ class RedsysPreauthorizeResponse implements ArrayAccess
         'statement_descriptor' => 'string',
         'author_id' => 'string',
         'pay_in_id' => 'string',
+        'language' => 'string',
         'provider' => '\Swagger\Client\Model\PreauthorizationRedsysData',
         'id' => 'string',
         'creation_date' => 'int',
@@ -92,6 +93,7 @@ class RedsysPreauthorizeResponse implements ArrayAccess
         'statement_descriptor' => 'StatementDescriptor',
         'author_id' => 'AuthorId',
         'pay_in_id' => 'PayInId',
+        'language' => 'Language',
         'provider' => 'Provider',
         'id' => 'Id',
         'creation_date' => 'CreationDate',
@@ -115,6 +117,7 @@ class RedsysPreauthorizeResponse implements ArrayAccess
         'statement_descriptor' => 'setStatementDescriptor',
         'author_id' => 'setAuthorId',
         'pay_in_id' => 'setPayInId',
+        'language' => 'setLanguage',
         'provider' => 'setProvider',
         'id' => 'setId',
         'creation_date' => 'setCreationDate',
@@ -138,6 +141,7 @@ class RedsysPreauthorizeResponse implements ArrayAccess
         'statement_descriptor' => 'getStatementDescriptor',
         'author_id' => 'getAuthorId',
         'pay_in_id' => 'getPayInId',
+        'language' => 'getLanguage',
         'provider' => 'getProvider',
         'id' => 'getId',
         'creation_date' => 'getCreationDate',
@@ -170,6 +174,27 @@ class RedsysPreauthorizeResponse implements ArrayAccess
     const EXECUTION_TYPE_NOT_SPECIFIED = 'NotSpecified';
     const EXECUTION_TYPE_WEB = 'WEB';
     const EXECUTION_TYPE_DIRECT = 'DIRECT';
+    const LANGUAGE_NOT_SPECIFIED = 'NotSpecified';
+    const LANGUAGE_CA = 'CA';
+    const LANGUAGE_DE = 'DE';
+    const LANGUAGE_EN = 'EN';
+    const LANGUAGE_DA = 'DA';
+    const LANGUAGE_ES = 'ES';
+    const LANGUAGE_ET = 'ET';
+    const LANGUAGE_GL = 'GL';
+    const LANGUAGE_FI = 'FI';
+    const LANGUAGE_FR = 'FR';
+    const LANGUAGE_EL = 'EL';
+    const LANGUAGE_EU = 'EU';
+    const LANGUAGE_HU = 'HU';
+    const LANGUAGE_IT = 'IT';
+    const LANGUAGE_NL = 'NL';
+    const LANGUAGE_NO = 'NO';
+    const LANGUAGE_PL = 'PL';
+    const LANGUAGE_PT = 'PT';
+    const LANGUAGE_SK = 'SK';
+    const LANGUAGE_SV = 'SV';
+    const LANGUAGE_CS = 'CS';
     
 
     
@@ -214,6 +239,37 @@ class RedsysPreauthorizeResponse implements ArrayAccess
         ];
     }
     
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public function getLanguageAllowableValues()
+    {
+        return [
+            self::LANGUAGE_NOT_SPECIFIED,
+            self::LANGUAGE_CA,
+            self::LANGUAGE_DE,
+            self::LANGUAGE_EN,
+            self::LANGUAGE_DA,
+            self::LANGUAGE_ES,
+            self::LANGUAGE_ET,
+            self::LANGUAGE_GL,
+            self::LANGUAGE_FI,
+            self::LANGUAGE_FR,
+            self::LANGUAGE_EL,
+            self::LANGUAGE_EU,
+            self::LANGUAGE_HU,
+            self::LANGUAGE_IT,
+            self::LANGUAGE_NL,
+            self::LANGUAGE_NO,
+            self::LANGUAGE_PL,
+            self::LANGUAGE_PT,
+            self::LANGUAGE_SK,
+            self::LANGUAGE_SV,
+            self::LANGUAGE_CS,
+        ];
+    }
+    
 
     /**
      * Associative array for storing property values
@@ -238,6 +294,7 @@ class RedsysPreauthorizeResponse implements ArrayAccess
         $this->container['statement_descriptor'] = isset($data['statement_descriptor']) ? $data['statement_descriptor'] : null;
         $this->container['author_id'] = isset($data['author_id']) ? $data['author_id'] : null;
         $this->container['pay_in_id'] = isset($data['pay_in_id']) ? $data['pay_in_id'] : null;
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         $this->container['provider'] = isset($data['provider']) ? $data['provider'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['creation_date'] = isset($data['creation_date']) ? $data['creation_date'] : null;
@@ -268,6 +325,11 @@ class RedsysPreauthorizeResponse implements ArrayAccess
             $invalid_properties[] = "invalid value for 'execution_type', must be one of 'NotSpecified', 'WEB', 'DIRECT'.";
         }
 
+        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        if (!in_array($this->container['language'], $allowed_values)) {
+            $invalid_properties[] = "invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'.";
+        }
+
         return $invalid_properties;
     }
 
@@ -290,6 +352,10 @@ class RedsysPreauthorizeResponse implements ArrayAccess
         }
         $allowed_values = ["NotSpecified", "WEB", "DIRECT"];
         if (!in_array($this->container['execution_type'], $allowed_values)) {
+            return false;
+        }
+        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        if (!in_array($this->container['language'], $allowed_values)) {
             return false;
         }
         return true;
@@ -535,6 +601,31 @@ class RedsysPreauthorizeResponse implements ArrayAccess
     public function setPayInId($pay_in_id)
     {
         $this->container['pay_in_id'] = $pay_in_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets language
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     * @param string $language
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $allowed_values = array('NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS');
+        if (!is_null($language) && (!in_array($language, $allowed_values))) {
+            throw new \InvalidArgumentException("Invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'");
+        }
+        $this->container['language'] = $language;
 
         return $this;
     }

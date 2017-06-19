@@ -60,7 +60,8 @@ class SeurShipmentPost implements ArrayAccess
         'receiver' => '\Swagger\Client\Model\ShipmentActor',
         'sender_user_id' => 'string',
         'receiver_user_id' => 'string',
-        'product' => '\Swagger\Client\Model\Product'
+        'product' => '\Swagger\Client\Model\Product',
+        'observations' => 'string'
     ];
 
     public static function swaggerTypes()
@@ -79,7 +80,8 @@ class SeurShipmentPost implements ArrayAccess
         'receiver' => 'Receiver',
         'sender_user_id' => 'SenderUserId',
         'receiver_user_id' => 'ReceiverUserId',
-        'product' => 'Product'
+        'product' => 'Product',
+        'observations' => 'Observations'
     ];
 
 
@@ -94,7 +96,8 @@ class SeurShipmentPost implements ArrayAccess
         'receiver' => 'setReceiver',
         'sender_user_id' => 'setSenderUserId',
         'receiver_user_id' => 'setReceiverUserId',
-        'product' => 'setProduct'
+        'product' => 'setProduct',
+        'observations' => 'setObservations'
     ];
 
 
@@ -109,7 +112,8 @@ class SeurShipmentPost implements ArrayAccess
         'receiver' => 'getReceiver',
         'sender_user_id' => 'getSenderUserId',
         'receiver_user_id' => 'getReceiverUserId',
-        'product' => 'getProduct'
+        'product' => 'getProduct',
+        'observations' => 'getObservations'
     ];
 
     public static function attributeMap()
@@ -150,6 +154,7 @@ class SeurShipmentPost implements ArrayAccess
         $this->container['sender_user_id'] = isset($data['sender_user_id']) ? $data['sender_user_id'] : null;
         $this->container['receiver_user_id'] = isset($data['receiver_user_id']) ? $data['receiver_user_id'] : null;
         $this->container['product'] = isset($data['product']) ? $data['product'] : null;
+        $this->container['observations'] = isset($data['observations']) ? $data['observations'] : null;
     }
 
     /**
@@ -320,6 +325,27 @@ class SeurShipmentPost implements ArrayAccess
     public function setProduct($product)
     {
         $this->container['product'] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Gets observations
+     * @return string
+     */
+    public function getObservations()
+    {
+        return $this->container['observations'];
+    }
+
+    /**
+     * Sets observations
+     * @param string $observations
+     * @return $this
+     */
+    public function setObservations($observations)
+    {
+        $this->container['observations'] = $observations;
 
         return $this;
     }

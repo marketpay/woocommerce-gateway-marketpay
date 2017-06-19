@@ -146,6 +146,9 @@ class UniversalPayRefundPost implements ArrayAccess
     {
         $invalid_properties = [];
 
+        if ($this->container['debited_funds'] === null) {
+            $invalid_properties[] = "'debited_funds' can't be null";
+        }
         return $invalid_properties;
     }
 
@@ -158,6 +161,9 @@ class UniversalPayRefundPost implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['debited_funds'] === null) {
+            return false;
+        }
         return true;
     }
 

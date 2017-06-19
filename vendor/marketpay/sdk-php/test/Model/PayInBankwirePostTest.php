@@ -1,6 +1,6 @@
 <?php
 /**
- * BankwirePayInPayInPostTest
+ * PayInBankwirePostTest
  *
  * PHP version 5
  *
@@ -30,16 +30,16 @@
 namespace Swagger\Client;
 
 /**
- * BankwirePayInPayInPostTest Class Doc Comment
+ * PayInBankwirePostTest Class Doc Comment
  *
  * @category    Class */
-// * @description BankwirePayInPayInPost
+// * @description PayInBankwirePost
 /**
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class BankwirePayInPayInPostTest extends \PHPUnit_Framework_TestCase
+class PayInBankwirePostTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -75,9 +75,9 @@ class BankwirePayInPayInPostTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "BankwirePayInPayInPost"
+     * Test "PayInBankwirePost"
      */
-    public function testBankwirePayInPayInPost()
+    public function testPayInBankwirePost()
     {
 
     }

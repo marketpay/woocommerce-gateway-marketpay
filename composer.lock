@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "26b79399b593b5d8610bdd03f4482100",
-    "content-hash": "e625f703e1c4c7a20e81af26e6b0c35d",
+    "hash": "50991965d2816fe3a77e314536e4ad01",
+    "content-hash": "6da87a49447f295bd9df07ee9490f426",
     "packages": [
         {
             "name": "marketpay/sdk-php",
-            "version": "v2.0.3",
+            "version": "v2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/marketpay/sdk-php.git",
-                "reference": "6fd3895669204dd1e0cd65563e686e6bf6f3cf13"
+                "reference": "77ba132848b8390258a09ea1ac4a10b4efb9fcb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marketpay/sdk-php/zipball/6fd3895669204dd1e0cd65563e686e6bf6f3cf13",
-                "reference": "6fd3895669204dd1e0cd65563e686e6bf6f3cf13",
+                "url": "https://api.github.com/repos/marketpay/sdk-php/zipball/77ba132848b8390258a09ea1ac4a10b4efb9fcb3",
+                "reference": "77ba132848b8390258a09ea1ac4a10b4efb9fcb3",
                 "shasum": ""
             },
             "require": {
@@ -38,7 +38,7 @@
                 "MIT"
             ],
             "description": "SDK PHP for MarketPay api V2",
-            "time": "2017-06-01 08:16:05"
+            "time": "2017-06-19 08:54:28"
         }
     ],
     "packages-dev": [],

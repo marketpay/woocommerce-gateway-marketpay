@@ -1,4 +1,4 @@
-# BankwirePayInPayInResponse
+# PayInBankwireResponse
 
 ## Properties
 Name | Type | Description | Notes

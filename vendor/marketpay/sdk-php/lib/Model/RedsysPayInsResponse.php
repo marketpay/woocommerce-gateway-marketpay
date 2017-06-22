@@ -812,6 +812,7 @@ class RedsysPayInsResponse implements ArrayAccess
     public function setLanguage($language)
     {
         $allowed_values = array('NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS');
+        if (is_numeric($language)) $language = $allowed_values[$language];
         if (!is_null($language) && (!in_array($language, $allowed_values))) {
             throw new \InvalidArgumentException("Invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'");
         }

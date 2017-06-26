@@ -423,8 +423,7 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
             $return_url, // Return URL
             $locale, // For "Culture" attribute
             $mp_card_type, // CardType
-            $mp_template_url, // Optional template URL
-            get_bloginfo('language') // Default site language
+            $mp_template_url // Optional template URL
         );
 
         if (false === $return)

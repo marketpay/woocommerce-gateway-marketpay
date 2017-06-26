@@ -1066,8 +1066,7 @@ class mpAccess
         $return_url,
         $locale,
         $mp_card_type = 'REDSYS',
-        $mp_template_url = '',
-        $language = 'ES'
+        $mp_template_url = ''
     ) {
 
         /** Get mp_user_id and mp_wallet_id from wp_user_id **/
@@ -1103,7 +1102,7 @@ class mpAccess
                 'currency' => $currency,
                 'amount' => $fees
             ]),
-            'language' => strtoupper(substr($language, 0, 2))
+            'language' => $locale
         ]);
 
         $result = $this->marketPayApi->RedsysPayIns->payInsRedsysRedsysPostPaymentByWeb($reference);

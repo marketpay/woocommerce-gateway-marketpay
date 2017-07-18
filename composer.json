@@ -4,7 +4,8 @@
     "license": "MIT",
     "require": {
         "php": ">=5.6",
-        "marketpay/sdk-php": "2.0.5"
+        "marketpay/sdk-php": "2.0.5",
+        "symfony/var-dumper": "^3.3"
     },
     "config": {
         "preferred-install": "dist"

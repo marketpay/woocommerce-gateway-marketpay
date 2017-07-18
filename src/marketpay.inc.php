@@ -12,6 +12,9 @@
  * DB = Marketpay dashboard
  *
  */
+
+use Swagger\Client\ApiException;
+
 class mpAccess
 {
     /** Class constants **/
@@ -1068,7 +1071,6 @@ class mpAccess
         $mp_card_type = 'REDSYS',
         $mp_template_url = ''
     ) {
-
         /** Get mp_user_id and mp_wallet_id from wp_user_id **/
         $mp_user_id = $this->set_mp_user($wp_user_id);
         $wallets    = $this->set_mp_wallet($mp_user_id);
@@ -1105,20 +1107,27 @@ class mpAccess
             'language' => $locale
         ]);
 
-        $result = $this->marketPayApi->RedsysPayIns->payInsRedsysRedsysPostPaymentByWeb($reference);
+        try
+        {
+            $result = $this->marketPayApi->RedsysPayIns->payInsRedsysRedsysPostPaymentByWeb($reference);
 
-        $mp_template_url .= '?' . http_build_query(array(
-            'url' => urlencode($result->getUrl()),
-            'Ds_SignatureVersion' => urlencode($result->getDsSignatureVersion()),
-            'Ds_MerchantParameters' => urlencode($result->getDsMerchantParameters()),
-            'Ds_Signature' => urlencode($result->getDsSignature())
-        ));
+            $mp_template_url .= '?' . http_build_query(array(
+                'url' => urlencode($result->getUrl()),
+                'Ds_SignatureVersion' => urlencode($result->getDsSignatureVersion()),
+                'Ds_MerchantParameters' => urlencode($result->getDsMerchantParameters()),
+                'Ds_Signature' => urlencode($result->getDsSignature())
+            ));
 
-        /** Return the RedirectUrl and the transaction_id **/
-        return array(
-            'redirect_url'   => $mp_template_url,
-            'transaction_id' => $result->getPayInId(),
-        );
+            /** Return the RedirectUrl and the transaction_id **/
+            return array(
+                'redirect_url'   => $mp_template_url,
+                'transaction_id' => $result->getPayInId(),
+            );
+        }
+        catch (ApiException $e)
+        {
+            return false;
+        }
     }
 
     /**
@@ -1152,20 +1161,27 @@ class mpAccess
         /** If no wallet abort **/
         if ( ! isset($mp_wallet_id) || !$mp_wallet_id) return false;
 
-        $reference = new \Swagger\Client\Model\BankwirePayInPayInPost([
-            'tag' => 'WC Order #' . $order_id,
-            'credited_wallet_id' => $mp_wallet_id,
-            'debited_funds' => new Swagger\Client\Model\Money([
-                'amount' => $amount,
-                'currency' => $currency
-            ]),
-            'fees' => new Swagger\Client\Model\Money([
-                'amount' => $fees,
-                'currency' => $currency
-            ])
-        ]);
+        try
+        {
+            $reference = new \Swagger\Client\Model\PayInBankwirePost([
+                'tag' => 'WC Order #' . $order_id,
+                'credited_wallet_id' => $mp_wallet_id,
+                'debited_funds' => new Swagger\Client\Model\Money([
+                    'amount' => $amount,
+                    'currency' => $currency
+                ]),
+                'fees' => new Swagger\Client\Model\Money([
+                    'amount' => $fees,
+                    'currency' => $currency
+                ])
+            ]);
 
-        return $this->marketPayApi->BankwirePayIns->payInsBankwireBankwirePaymentByDirect($reference);
+            return $this->marketPayApi->BankwirePayIns->payInsBankwireBankwirePaymentByDirect($reference);
+        }
+        catch (ApiException $e)
+        {
+            return false;
+        }
     }
 
     /**

@@ -1762,7 +1762,7 @@ $field_value = '';
             echo '<p>' . __('Order currency:', 'marketpay') . ' ' . $order->get_currency() . '</p>'; //Debug
         }
 
-        if ('SUCCEEDED' != $mp_status) {
+        if ('CREATED' != $mp_status) {
             echo '<p>' . __('Error: Marketpay transaction did not succeed.', 'marketpay') . '</p>';
             return false;
         }

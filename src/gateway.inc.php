@@ -304,6 +304,9 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
      */
     public function payment_fields()
     {
+        $selected = '';
+        $enabled_card_types = array();
+
         if ( ! empty($_POST['mp_card_type']))
         {
             $selected = $_POST['mp_card_type'];
@@ -317,44 +320,44 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
                 $selected = $post_data['mp_card_type'];
             }
         }
-        else
+
+        foreach ($this->available_card_types as $type => $label)
         {
-            $selected = '';
+            if ('BANK_WIRE' == $type) continue;
+            if ('yes' == $this->get_option('enabled_' . $type))
+            {
+                $enabled_card_types[$type] = $label;
+            }
         } ?>
 
         <div class="mp_payment_fields">
-            <?php if ('yes' == $this->get_option('enabled_BANK_WIRE')): ?>
-                <div class="mp_pay_method_wrap">
+            <div class="mp_pay_method_wrap">
+                <?php if (count($enabled_card_types)): ?>
                     <div class="mp_card_dropdown_wrap">
-                        <input type="radio" name="mp_payment_type" class="mp_payment_type card" value="card" checked="checked" />
+                        <input type="radio" name="mp_payment_type" class="mp_payment_type card" value="card" checked="checked" id="mp_payment_type" />
                         <label for="mp_payment_type"><?php _e('Online payment', 'marketpay');?>&nbsp;</label>
-            <?php endif;?>
-
-            <?php if (count($this->available_card_types) > 1): ?>
-                <select name="mp_card_type" id="mp_card_type">
-                    <?php foreach ($this->available_card_types as $type => $label): ?>
-                        <?php if ('yes' == $this->get_option('enabled_' . $type)): ?>
-                            <?php if ('BANK_WIRE' == $type) continue; ?>
-                            <option value="<?php echo $type; ?>" <?php selected($type, $selected);?>>
-                                <?php _e($label, 'marketpay');?>
-                            </option>
+                        <?php if (count($enabled_card_types) > 1): ?>
+                            <select name="mp_card_type" id="mp_card_type">
+                                <?php foreach ($enabled_card_types as $type => $label): ?>
+                                    <option value="<?php echo $type; ?>" <?php selected($type, $selected);?>>
+                                        <?php _e($label, 'marketpay');?>
+                                    </option>
+                                <?php endforeach;?>
+                            </select>
+                        <?php else: ?>
+                            <input type="hidden" name="mp_card_type" value="<?php echo array_keys($enabled_card_types)[0]; ?>" checked="checked">
                         <?php endif; ?>
-                    <?php endforeach;?>
-                </select>
-            <?php else: ?>
-                <input type="hidden" name="mp_card_type" value="<?php echo array_keys($this->available_card_types)[0]; ?>">
-            <?php endif; ?>
-
-            <?php if ('yes' == $this->get_option('enabled_BANK_WIRE')): ?>
                     </div>
                     <div class="mp_spacer">&nbsp;</div>
+                <?php endif; ?>
+
+                <?php if ('yes' == $this->get_option('enabled_BANK_WIRE')): ?>
                     <div class="mp_direct_dropdown_wrap">
-                        <input type="radio" name="mp_payment_type" value="bank_wire" />
+                        <input type="radio" name="mp_payment_type" value="bank_wire" id="mp_payment_type" />
                         <label for="mp_payment_type"><?php _e('Use a direct bank wire', 'marketpay');?></label>
                     </div>
-                </div>
-            <?php endif;?>
-
+                <?php endif; ?>
+            </div>
             <script>
                 (function($) {
                     $(document).ready(function() {

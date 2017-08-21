@@ -334,7 +334,7 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
             <div class="mp_pay_method_wrap">
                 <?php if (count($enabled_card_types)): ?>
                     <div class="mp_card_dropdown_wrap">
-                        <input type="radio" name="mp_payment_type" class="mp_payment_type card" value="card" checked="checked" id="mp_payment_type" />
+                        <input type="radio" name="mp_payment_type" class="mp_payment_type card" value="card" id="mp_payment_type" />
                         <label for="mp_payment_type"><?php _e('Online payment', 'marketpay');?>&nbsp;</label>
                         <?php if (count($enabled_card_types) > 1): ?>
                             <select name="mp_card_type" id="mp_card_type">
@@ -494,10 +494,10 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
             return;
         }
 
-        $transaction_id = $ref->getId();
+        $transaction_id = $ref->Id;
 
         update_post_meta($order_id, 'marketpay_payment_type', 'bank_wire');
-        update_post_meta($order_id, 'marketpay_payment_ref', $ref);
+        update_post_meta($order_id, 'marketpay_payment_ref', json_encode($ref));
         update_post_meta($order_id, 'mp_transaction_id', $transaction_id);
 
         /** update the history of transaction ids for this order **/

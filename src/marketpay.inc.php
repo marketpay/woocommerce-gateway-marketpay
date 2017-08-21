@@ -1176,7 +1176,9 @@ class mpAccess
                 ])
             ]);
 
-            return $this->marketPayApi->BankwirePayIns->payInsBankwireBankwirePaymentByDirect($reference);
+            $return = $this->marketPayApi->BankwirePayIns->payInsBankwireBankwirePaymentByDirect($reference);
+
+            return json_decode($return->__toString());
         }
         catch (ApiException $e)
         {

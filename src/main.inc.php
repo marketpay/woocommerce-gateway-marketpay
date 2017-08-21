@@ -1801,7 +1801,7 @@ $field_value = '';
 
         if (
             get_post_meta($order_id, 'marketpay_payment_type', true) != 'bank_wire' ||
-            !$ref = get_post_meta($order_id, 'marketpay_payment_ref', true)
+            !$ref = json_decode(get_post_meta($order_id, 'marketpay_payment_ref', true))
         ) {
             return $order_id;
         }
@@ -1815,24 +1815,24 @@ $field_value = '';
         <ul class="order_details">
             <li class="mp_amount">
                 <?php _e('Amount:', 'marketpay');?>
-                <strong><?php echo $ref->getDebitedFunds()->getAmount() / 100; ?></strong>
-                <strong><?php echo $ref->getDebitedFunds()->getCurrency(); ?></strong>
+                <strong><?php echo $ref->DebitedFunds->Amount / 100; ?></strong>
+                <strong><?php echo $ref->DebitedFunds->Currency; ?></strong>
             </li>
             <li class="mp_owner">
                 <?php _e('Bank account owner:', 'marketpay');?>
-                <strong><?php echo $ref->getBankAccount()->getOwnerName(); ?></strong>
+                <strong><?php echo $ref->BankAccount->OwnerName; ?></strong>
             </li>
             <li class="mp_iban">
                 <?php _e('IBAN:', 'marketpay');?>
-                <strong><?php echo $ref->getBankAccount()->getIban(); ?></strong>
+                <strong><?php echo $ref->BankAccount->IBAN; ?></strong>
             </li>
             <li class="mp_bic">
                 <?php _e('BIC:', 'marketpay');?>
-                <strong><?php echo $ref->getBankAccount()->getBic(); ?></strong>
+                <strong><?php echo $ref->BankAccount->BIC; ?></strong>
             </li>
             <li class="mp_wire_ref">
                 <?php _e('Wire reference:', 'marketpay');?>
-                <strong><?php echo $ref->getWireReference(); ?></strong>
+                <strong><?php echo $ref->WireReference; ?></strong>
             </li>
         </ul>
         <?php

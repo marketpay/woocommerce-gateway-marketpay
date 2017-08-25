@@ -218,6 +218,7 @@ class mpAccess
         $this->legacyApi->Config->ClientPassword  = $mp_passphrase;
         $this->legacyApi->Config->BaseUrl         = $mp_base_url;
         $this->legacyApi->Config->TemporaryFolder = $tmp_path . '/';
+        $this->legacyApi->Config->Debug           = self::DEBUG;
 
         $this->legacyApi->OAuthTokenManager->RegisterCustomStorageStrategy(new \MarketPay\WPPlugin\MockStorageStrategy());
 
@@ -1126,6 +1127,12 @@ class mpAccess
         }
         catch (ApiException $e)
         {
+            if (self::DEBUG)
+            {
+                echo __('Error: ApiException on create_payin_url', 'marketpay') . '<br/>';
+                echo $e->getMessage() . "<br/>";
+            }
+
             return false;
         }
     }

@@ -1414,13 +1414,12 @@ $business_edit = 0;
                     <?php $this->marketpayWCMain->marketpay_wallet_table();?>
                 <?php endif;?>
             <?php endif;?>
-
           </table>
           <script>
             (function($) {
                 $(document).ready(function() {
                     $('label[for=first_name],label[for=last_name],label[for=billing_country]').append(' <span class="description required"><?php _e('(required)', 'marketpay');?></span>');
-                    $('input.calendar').datepicker(datepickerL10n);
+                    $('input.calendar').datepicker();
 
                     if( 'business'==$('#user_mp_status').val() )
                         $('.hide_business_type').show();

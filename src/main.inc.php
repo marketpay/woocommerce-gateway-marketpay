@@ -1762,7 +1762,10 @@ $field_value = '';
             echo '<p>' . __('Order currency:', 'marketpay') . ' ' . $order->get_currency() . '</p>'; //Debug
         }
 
-        if ('CREATED' != $mp_status) {
+        if ('BANK_WIRE' == $mp_transaction->getPaymentType() && 'CREATED' != $mp_status) {
+            echo '<p>' . __('Error: Marketpay transaction did not succeed.', 'marketpay') . '</p>';
+            return false;
+        } else if ('BANK_WIRE' != $mp_transaction->getPaymentType() && 'SUCCEEDED' != $mp_status) {
             echo '<p>' . __('Error: Marketpay transaction did not succeed.', 'marketpay') . '</p>';
             return false;
         }

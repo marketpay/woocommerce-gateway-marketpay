@@ -297,18 +297,15 @@ class marketpayWCMain
         <div class="clear"></div>
 
         <?php
-        $value = '';
-        if (!empty($_POST['user_birthday'])) {
-            $value = esc_attr($_POST['user_birthday']);
-        }
+            $value = '';
 
-        if (
-            is_wc_endpoint_url('edit-account') &&
-            ($wp_user_id = get_current_user_id())
-        ) {
-            $value = date_i18n($this->supported_format(get_option('date_format')), strtotime(get_user_meta($wp_user_id, 'user_birthday', true)));
-        }
+            if (!empty($_POST['user_birthday'])) {
+                $value = esc_attr($_POST['user_birthday']);
+            }
 
+            if (is_wc_endpoint_url('edit-account') && ($wp_user_id = get_current_user_id())) {
+                $value = date_i18n($this->supported_format(get_option('date_format')), strtotime(get_user_meta($wp_user_id, 'user_birthday', true)));
+            }
         ?>
         <p class="form-row form-row-wide">
             <label for="reg_user_birthday"><?php _e('Birthday', 'marketpay');?> <span class="required">*</span></label>
@@ -316,18 +313,15 @@ class marketpayWCMain
         </p>
 
         <?php
-        $cur_value = '';
-        if (!empty($_POST['user_nationality'])) {
-            $cur_value = esc_attr($_POST['user_nationality']);
-        }
+            $cur_value = '';
 
-        if (
-            is_wc_endpoint_url('edit-account') &&
-            ($wp_user_id = get_current_user_id())
-        ) {
-            $cur_value = get_user_meta($wp_user_id, 'user_nationality', true);
-        }
+            if (!empty($_POST['user_nationality'])) {
+                $cur_value = esc_attr($_POST['user_nationality']);
+            }
 
+            if (is_wc_endpoint_url('edit-account') && ($wp_user_id = get_current_user_id())) {
+                $cur_value = get_user_meta($wp_user_id, 'user_nationality', true);
+            }
         ?>
 
         <p class="form-row form-row-wide">
@@ -341,7 +335,26 @@ class marketpayWCMain
         </p>
 
         <?php
+            $value = '';
+
+            if (!empty($_POST['kyc_id_document'])) {
+                $value = esc_attr($_POST['kyc_id_document']);
+            }
+
+            if (is_wc_endpoint_url('edit-account') && ($wp_user_id = get_current_user_id())) {
+                $value = get_user_meta($wp_user_id, 'kyc_id_document', true);
+            }
+        ?>
+        <p class="form-row form-row-wide">
+            <label for="reg_kyc_id_document"><?php _e('ID Document', 'marketpay');?> <span class="required">*</span></label>
+            <input type="text" class="input-text" name="kyc_id_document" id="reg_kyc_id_document" value="<?php echo $value; ?>" />
+        </p>
+
+
+        <?php
+
         $allfields = WC()->checkout->checkout_fields;
+
         woocommerce_form_field('billing_country', $allfields['billing']['billing_country'], WC()->checkout->get_value('billing_country'));
         woocommerce_form_field('billing_state', $allfields['billing']['billing_state'], WC()->checkout->get_value('billing_state'));
         ?>
@@ -399,7 +412,8 @@ class marketpayWCMain
     public function wooc_account_details_required($required)
     {
         $required['user_birthday']    = __('Birthday', 'marketpay');
-        // $required['user_nationality'] = __( 'Nationality', 'marketpay' );
+        $required['user_nationality'] = __( 'Nationality', 'marketpay' );
+        $required['kyc_id_document'] = __('ID Document', 'marketpay');
         $required['billing_country']  = __('Country of residence', 'marketpay');
 
         return $required;
@@ -424,6 +438,7 @@ class marketpayWCMain
         $list_post_keys = array(
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
+            'kyc_id_document'    => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
@@ -450,6 +465,7 @@ class marketpayWCMain
         $list_post_keys = array(
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
+            'kyc_id_document'    => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
@@ -490,6 +506,7 @@ class marketpayWCMain
             'billing_last_name'  => 'single',
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
+            'kyc_id_document'    => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
@@ -526,6 +543,7 @@ class marketpayWCMain
             //'billing_last_name'=>'single',
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
+            'kyc_id_document'    => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
@@ -586,6 +604,12 @@ class marketpayWCMain
         {
             // New custom user meta field
             update_user_meta($customer_id, 'user_nationality', sanitize_text_field($_POST['user_nationality']));
+        }
+
+        if (isset($_POST['kyc_id_document']))
+        {
+            // New custom user meta field
+            update_user_meta($customer_id, 'kyc_id_document', sanitize_text_field($_POST['kyc_id_document']));
         }
 
         if (isset($_POST['billing_country']))
@@ -654,6 +678,11 @@ class marketpayWCMain
             $fields = $this->add_usernationality_field($fields);
         }
 
+        if ( ! get_user_meta(get_current_user_id(), 'kyc_id_document', true))
+        {
+            $fields = $this->add_kyciddocument_field($fields);
+        }
+
         if ( ! get_user_meta(get_current_user_id(), 'user_birthday', true))
         {
             $fields = $this->add_userbirthday_field($fields);
@@ -695,6 +724,17 @@ class marketpayWCMain
             'type'     => 'select',
             'label'    => __('Nationality', 'marketpay'),
             'options'  => $countries,
+            'required' => true,
+            'class'    => array('form-row-wide')
+        );
+
+        return $fields;
+    }
+
+    public function add_kyciddocument_field($fields)
+    {
+        $fields['kyc_id_document'] = array(
+            'label'    => __('ID Document', 'marketpay'),
             'required' => true,
             'class'    => array('form-row-wide')
         );
@@ -878,6 +918,7 @@ class marketpayWCMain
 
         $usermeta['user_birthday']    = get_user_meta($wp_user_id, 'user_birthday', true);
         $usermeta['user_nationality'] = get_user_meta($wp_user_id, 'user_nationality', true);
+        $usermeta['kyc_id_document']  = get_user_meta($wp_user_id, 'kyc_id_document', true);
 
         $usermeta['user_mp_status']     = get_user_meta($wp_user_id, 'user_mp_status', true);
         $usermeta['user_business_type'] = get_user_meta($wp_user_id, 'user_business_type', true);

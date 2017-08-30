@@ -220,8 +220,6 @@ class mpAccess
         $this->legacyApi->Config->TemporaryFolder = $tmp_path . '/';
         $this->legacyApi->Config->Debug           = self::DEBUG;
 
-        $this->legacyApi->OAuthTokenManager->RegisterCustomStorageStrategy(new \MarketPay\WPPlugin\MockStorageStrategy());
-
         if ($mp_base_url && $mp_client_id && $mp_passphrase)
         {
             /** Use Legacy API to get response token **/
@@ -437,15 +435,16 @@ class mpAccess
             }
 
             /** Required fields **/
-            $b_date = strtotime(get_user_meta($wp_user_id, 'user_birthday', true)); //Custom usermeta
+            $b_date = strtotime(get_user_meta($wp_user_id, 'user_birthday', true)); // Custom usermeta
             if ($offset = get_option('gmt_offset')) {
                 $b_date += ($offset * 60 * 60);
             }
 
-            $natio = get_user_meta($wp_user_id, 'user_nationality', true); //Custom usermeta
-            $ctry  = get_user_meta($wp_user_id, 'billing_country', true); //WP usermeta
+            $natio = get_user_meta($wp_user_id, 'user_nationality', true); // Custom usermeta
+            $iddoc = get_user_meta($wp_user_id, 'kyc_id_document', true); // Custom usermeta
+            $ctry  = get_user_meta($wp_user_id, 'billing_country', true); // WP usermeta
 
-            if (!$vendor_name = get_user_meta($wp_user_id, 'pv_shop_name', true)) //WC-Vendor plugin usermeta
+            if (!$vendor_name = get_user_meta($wp_user_id, 'pv_shop_name', true)) // WC-Vendor plugin usermeta
             {
                 $vendor_name = $wp_userdata->nickname;
             }
@@ -460,7 +459,8 @@ class mpAccess
                 $ctry,
                 $wp_userdata->user_email,
                 $vendor_name,
-                $wp_user_id
+                $wp_user_id,
+                $iddoc
             )) {
                 $mp_user_id = $marketUser->Id;
 
@@ -704,13 +704,14 @@ class mpAccess
         $ctry,
         $email,
         $vendor_name = null,
-        $wp_user_id
+        $wp_user_id,
+        $kyc_id_doc
     ) {
         global $creation_mp_on;
         $creation_mp_on = true;
 
         /** All fields are required **/
-        if (!$p_type || !$f_name || !$l_name || !$b_date || !$natio || !$ctry || !$email)
+        if (!$p_type || !$f_name || !$l_name || !$b_date || !$natio || !$ctry || !$email || !$kyc_id_doc)
         {
             if (self::DEBUG)
             {
@@ -885,6 +886,15 @@ class mpAccess
             ) {
                 $marketUser->Nationality = $usermeta['user_nationality'];
                 $needs_updating          = true;
+            }
+
+            if (
+                isset($usermeta['kyc_id_document']) &&
+                $usermeta['kyc_id_document'] &&
+                $marketUser->IdDocument != $usermeta['kyc_id_document']
+            ) {
+                $marketUser->IdDocument = $usermeta['kyc_id_document'];
+                $needs_updating         = true;
             }
 
             if (

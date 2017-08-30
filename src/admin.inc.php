@@ -1226,6 +1226,11 @@ class marketpayWCAdmin
                 $user_nationality = $_POST['user_nationality'];
             }
 
+            $kyc_id_document = '';
+            if (!empty($_POST['kyc_id_document'])) {
+                $id_document = $_POST['kyc_id_document'];
+            }
+
             $billing_country = '';
             if (!empty($_POST['billing_country'])) {
                 $billing_country = $_POST['billing_country'];
@@ -1258,6 +1263,7 @@ class marketpayWCAdmin
             $user_birthday = date_i18n($this->marketpayWCMain->supported_format(get_option('date_format')), strtotime($user_birthday));
 
             $user_nationality = get_the_author_meta('user_nationality', $user->ID);
+            $kyc_id_document = get_the_author_meta('kyc_id_document', $user->ID);
 
             $user_mp_status = get_the_author_meta('user_mp_status', $user->ID);
 
@@ -1288,23 +1294,27 @@ class marketpayWCAdmin
             <tr>
               <th><label for="user_birthday"><?php _e('Birthday', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
               <td>
-                <input type="text" name="user_birthday" id="user_birthday" class="regular-text calendar"
-                    value="<?php echo $user_birthday; ?>" /><br />
+                <input type="text" name="user_birthday" id="user_birthday" class="regular-text calendar" value="<?php echo $user_birthday; ?>" /><br />
                 <span class="description"></span>
-            </td>
+              </td>
             </tr>
             <tr>
               <th><label for="user_nationality"><?php _e('Nationality', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
               <td>
                 <select class="nationality_select" name="user_nationality" id="user_nationality">
-                <option value=""><?php _e('Select a country...', 'marketpay');?></option>
-                <?php foreach ($countries as $key => $value):
-            $selected = ($key == $user_nationality ? 'selected="selected"' : '');
-            ?>
-                            <option value="<?php echo $key ?>" <?php echo $selected; ?>><?php echo $value ?></option>
-                            <?php endforeach;?>
+                    <option value=""><?php _e('Select a country...', 'marketpay');?></option>
+                    <?php foreach ($countries as $key => $value): $selected = ($key == $user_nationality ? 'selected="selected"' : ''); ?>
+                        <option value="<?php echo $key ?>" <?php echo $selected; ?>><?php echo $value ?></option>
+                    <?php endforeach;?>
                 </select>
               </td>
+            </tr>
+            <tr>
+                <th><label for="kyc_id_document"><?php _e('ID Document', 'marketpay'); ?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
+                <td>
+                  <input type="text" name="kyc_id_document" id="kyc_id_document" class="regular-text" value="<?php echo $kyc_id_document; ?>" /><br />
+                  <span class="description"></span>
+                </td>
             </tr>
 
             <?php if ($screen->id == 'user' && $screen->action == 'add'):
@@ -1446,6 +1456,7 @@ $business_edit = 0;
 
             update_user_meta($user_id, 'user_birthday', $birthday);
             update_user_meta($user_id, 'user_nationality', sanitize_text_field($_POST['user_nationality']));
+            update_user_meta($user_id, 'kyc_id_document', sanitize_text_field($_POST['kyc_id_document']));
 
             if (isset($_POST['billing_country'])) {
                 update_user_meta($user_id, 'billing_country', sanitize_text_field($_POST['billing_country']));
@@ -1496,6 +1507,7 @@ $business_edit = 0;
             'last_name'          => 'single',
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
+            'kyc_id_document'    => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',

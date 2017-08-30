@@ -26,6 +26,7 @@ class marketpayWCValidation
         'billing_country'    => array('type' => 'country', 'text' => 'Country'),
         'user_mp_status'     => array('type' => 'status', 'text' => 'User status'),
         'user_business_type' => array('type' => 'businesstype', 'text' => 'Business type'),
+        'kyc_id_document'    => array('type' => 'single', 'text' => 'ID Document')
     );
 
     public function __construct($marketpayWCMain = null)

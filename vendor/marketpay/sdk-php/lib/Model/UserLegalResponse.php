@@ -75,9 +75,40 @@ class UserLegalResponse implements ArrayAccess
         'tag' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'headquarters_address' => null,
+        'legal_person_type' => null,
+        'name' => null,
+        'legal_representative_address' => null,
+        'legal_representative_birthday' => 'int64',
+        'legal_representative_country_of_residence' => null,
+        'legal_representative_nationality' => null,
+        'legal_representative_email' => null,
+        'legal_representative_first_name' => null,
+        'legal_representative_last_name' => null,
+        'legal_representative_proof_of_identity' => null,
+        'statute' => null,
+        'shareholder_declaration' => null,
+        'proof_of_registration' => null,
+        'person_type' => null,
+        'kyc_level' => null,
+        'id' => null,
+        'creation_date' => 'int64',
+        'tag' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -189,7 +220,7 @@ class UserLegalResponse implements ArrayAccess
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AO = 'AO';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AQ = 'AQ';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AR = 'AR';
-    const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AS = 'AS';
+    const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE__AS = 'AS';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AT = 'AT';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AU = 'AU';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AW = 'AW';
@@ -239,7 +270,7 @@ class UserLegalResponse implements ArrayAccess
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DJ = 'DJ';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DK = 'DK';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DM = 'DM';
-    const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DO = 'DO';
+    const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE__DO = 'DO';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DZ = 'DZ';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_EC = 'EC';
     const LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_EE = 'EE';
@@ -439,7 +470,7 @@ class UserLegalResponse implements ArrayAccess
     const LEGAL_REPRESENTATIVE_NATIONALITY_AO = 'AO';
     const LEGAL_REPRESENTATIVE_NATIONALITY_AQ = 'AQ';
     const LEGAL_REPRESENTATIVE_NATIONALITY_AR = 'AR';
-    const LEGAL_REPRESENTATIVE_NATIONALITY_AS = 'AS';
+    const LEGAL_REPRESENTATIVE_NATIONALITY__AS = 'AS';
     const LEGAL_REPRESENTATIVE_NATIONALITY_AT = 'AT';
     const LEGAL_REPRESENTATIVE_NATIONALITY_AU = 'AU';
     const LEGAL_REPRESENTATIVE_NATIONALITY_AW = 'AW';
@@ -489,7 +520,7 @@ class UserLegalResponse implements ArrayAccess
     const LEGAL_REPRESENTATIVE_NATIONALITY_DJ = 'DJ';
     const LEGAL_REPRESENTATIVE_NATIONALITY_DK = 'DK';
     const LEGAL_REPRESENTATIVE_NATIONALITY_DM = 'DM';
-    const LEGAL_REPRESENTATIVE_NATIONALITY_DO = 'DO';
+    const LEGAL_REPRESENTATIVE_NATIONALITY__DO = 'DO';
     const LEGAL_REPRESENTATIVE_NATIONALITY_DZ = 'DZ';
     const LEGAL_REPRESENTATIVE_NATIONALITY_EC = 'EC';
     const LEGAL_REPRESENTATIVE_NATIONALITY_EE = 'EE';
@@ -718,7 +749,7 @@ class UserLegalResponse implements ArrayAccess
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AO,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AQ,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AR,
-            self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AS,
+            self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE__AS,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AT,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AU,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_AW,
@@ -768,7 +799,7 @@ class UserLegalResponse implements ArrayAccess
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DJ,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DK,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DM,
-            self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DO,
+            self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE__DO,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_DZ,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_EC,
             self::LEGAL_REPRESENTATIVE_COUNTRY_OF_RESIDENCE_EE,
@@ -978,7 +1009,7 @@ class UserLegalResponse implements ArrayAccess
             self::LEGAL_REPRESENTATIVE_NATIONALITY_AO,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_AQ,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_AR,
-            self::LEGAL_REPRESENTATIVE_NATIONALITY_AS,
+            self::LEGAL_REPRESENTATIVE_NATIONALITY__AS,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_AT,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_AU,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_AW,
@@ -1028,7 +1059,7 @@ class UserLegalResponse implements ArrayAccess
             self::LEGAL_REPRESENTATIVE_NATIONALITY_DJ,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_DK,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_DM,
-            self::LEGAL_REPRESENTATIVE_NATIONALITY_DO,
+            self::LEGAL_REPRESENTATIVE_NATIONALITY__DO,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_DZ,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_EC,
             self::LEGAL_REPRESENTATIVE_NATIONALITY_EE,
@@ -1289,29 +1320,44 @@ class UserLegalResponse implements ArrayAccess
     {
         $invalid_properties = [];
 
-        $allowed_values = ["BUSINESS", "ORGANIZATION", "SOLETRADER"];
+        $allowed_values = $this->getLegalPersonTypeAllowableValues();
         if (!in_array($this->container['legal_person_type'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'legal_person_type', must be one of 'BUSINESS', 'ORGANIZATION', 'SOLETRADER'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'legal_person_type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"];
+        $allowed_values = $this->getLegalRepresentativeCountryOfResidenceAllowableValues();
         if (!in_array($this->container['legal_representative_country_of_residence'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'legal_representative_country_of_residence', must be one of 'NotSpecified', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'legal_representative_country_of_residence', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"];
+        $allowed_values = $this->getLegalRepresentativeNationalityAllowableValues();
         if (!in_array($this->container['legal_representative_nationality'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'legal_representative_nationality', must be one of 'NotSpecified', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'legal_representative_nationality', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["Natural", "Legal", "Fees"];
+        $allowed_values = $this->getPersonTypeAllowableValues();
         if (!in_array($this->container['person_type'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'person_type', must be one of 'Natural', 'Legal', 'Fees'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'person_type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "LIGHT", "REGULAR"];
+        $allowed_values = $this->getKycLevelAllowableValues();
         if (!in_array($this->container['kyc_level'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'kyc_level', must be one of 'NotSpecified', 'LIGHT', 'REGULAR'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'kyc_level', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -1326,23 +1372,23 @@ class UserLegalResponse implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = ["BUSINESS", "ORGANIZATION", "SOLETRADER"];
+        $allowed_values = $this->getLegalPersonTypeAllowableValues();
         if (!in_array($this->container['legal_person_type'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"];
+        $allowed_values = $this->getLegalRepresentativeCountryOfResidenceAllowableValues();
         if (!in_array($this->container['legal_representative_country_of_residence'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"];
+        $allowed_values = $this->getLegalRepresentativeNationalityAllowableValues();
         if (!in_array($this->container['legal_representative_nationality'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["Natural", "Legal", "Fees"];
+        $allowed_values = $this->getPersonTypeAllowableValues();
         if (!in_array($this->container['person_type'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "LIGHT", "REGULAR"];
+        $allowed_values = $this->getKycLevelAllowableValues();
         if (!in_array($this->container['kyc_level'], $allowed_values)) {
             return false;
         }
@@ -1387,9 +1433,14 @@ class UserLegalResponse implements ArrayAccess
      */
     public function setLegalPersonType($legal_person_type)
     {
-        $allowed_values = array('BUSINESS', 'ORGANIZATION', 'SOLETRADER');
-        if (!is_null($legal_person_type) && (!in_array($legal_person_type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'legal_person_type', must be one of 'BUSINESS', 'ORGANIZATION', 'SOLETRADER'");
+        $allowed_values = $this->getLegalPersonTypeAllowableValues();
+        if (!is_null($legal_person_type) && !in_array($legal_person_type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'legal_person_type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['legal_person_type'] = $legal_person_type;
 
@@ -1475,9 +1526,14 @@ class UserLegalResponse implements ArrayAccess
      */
     public function setLegalRepresentativeCountryOfResidence($legal_representative_country_of_residence)
     {
-        $allowed_values = array('NotSpecified', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW');
-        if (!is_null($legal_representative_country_of_residence) && (!in_array($legal_representative_country_of_residence, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'legal_representative_country_of_residence', must be one of 'NotSpecified', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW'");
+        $allowed_values = $this->getLegalRepresentativeCountryOfResidenceAllowableValues();
+        if (!is_null($legal_representative_country_of_residence) && !in_array($legal_representative_country_of_residence, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'legal_representative_country_of_residence', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['legal_representative_country_of_residence'] = $legal_representative_country_of_residence;
 
@@ -1500,9 +1556,14 @@ class UserLegalResponse implements ArrayAccess
      */
     public function setLegalRepresentativeNationality($legal_representative_nationality)
     {
-        $allowed_values = array('NotSpecified', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW');
-        if (!is_null($legal_representative_nationality) && (!in_array($legal_representative_nationality, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'legal_representative_nationality', must be one of 'NotSpecified', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'ZA', 'ZM', 'ZW'");
+        $allowed_values = $this->getLegalRepresentativeNationalityAllowableValues();
+        if (!is_null($legal_representative_nationality) && !in_array($legal_representative_nationality, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'legal_representative_nationality', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['legal_representative_nationality'] = $legal_representative_nationality;
 
@@ -1672,9 +1733,14 @@ class UserLegalResponse implements ArrayAccess
      */
     public function setPersonType($person_type)
     {
-        $allowed_values = array('Natural', 'Legal', 'Fees');
-        if (!is_null($person_type) && (!in_array($person_type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'person_type', must be one of 'Natural', 'Legal', 'Fees'");
+        $allowed_values = $this->getPersonTypeAllowableValues();
+        if (!is_null($person_type) && !in_array($person_type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'person_type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['person_type'] = $person_type;
 
@@ -1697,9 +1763,14 @@ class UserLegalResponse implements ArrayAccess
      */
     public function setKycLevel($kyc_level)
     {
-        $allowed_values = array('NotSpecified', 'LIGHT', 'REGULAR');
-        if (!is_null($kyc_level) && (!in_array($kyc_level, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'kyc_level', must be one of 'NotSpecified', 'LIGHT', 'REGULAR'");
+        $allowed_values = $this->getKycLevelAllowableValues();
+        if (!is_null($kyc_level) && !in_array($kyc_level, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'kyc_level', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['kyc_level'] = $kyc_level;
 
@@ -1717,7 +1788,7 @@ class UserLegalResponse implements ArrayAccess
 
     /**
      * Sets id
-     * @param string $id
+     * @param string $id The item's ID
      * @return $this
      */
     public function setId($id)
@@ -1738,7 +1809,7 @@ class UserLegalResponse implements ArrayAccess
 
     /**
      * Sets creation_date
-     * @param int $creation_date
+     * @param int $creation_date When the item was created
      * @return $this
      */
     public function setCreationDate($creation_date)
@@ -1759,7 +1830,7 @@ class UserLegalResponse implements ArrayAccess
 
     /**
      * Sets tag
-     * @param string $tag
+     * @param string $tag Custom data that you can add to this item
      * @return $this
      */
     public function setTag($tag)

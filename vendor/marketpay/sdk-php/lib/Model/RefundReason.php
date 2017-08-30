@@ -58,9 +58,23 @@ class RefundReason implements ArrayAccess
         'message' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'type' => null,
+        'message' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -160,9 +174,12 @@ class RefundReason implements ArrayAccess
     {
         $invalid_properties = [];
 
-        $allowed_values = ["NotSpecified", "BANKACCOUNT_INCORRECT", "BANKACCOUNT_HAS_BEEN_CLOSED", "OWNER_DOT_NOT_MATCH_BANKACCOUNT", "WITHDRAWAL_IMPOSSIBLE_ON_SAVINGS_ACCOUNTS", "INITIALIZED_BY_CLIENT", "OTHER"];
+        $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'type', must be one of 'NotSpecified', 'BANKACCOUNT_INCORRECT', 'BANKACCOUNT_HAS_BEEN_CLOSED', 'OWNER_DOT_NOT_MATCH_BANKACCOUNT', 'WITHDRAWAL_IMPOSSIBLE_ON_SAVINGS_ACCOUNTS', 'INITIALIZED_BY_CLIENT', 'OTHER'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -177,7 +194,7 @@ class RefundReason implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = ["NotSpecified", "BANKACCOUNT_INCORRECT", "BANKACCOUNT_HAS_BEEN_CLOSED", "OWNER_DOT_NOT_MATCH_BANKACCOUNT", "WITHDRAWAL_IMPOSSIBLE_ON_SAVINGS_ACCOUNTS", "INITIALIZED_BY_CLIENT", "OTHER"];
+        $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
             return false;
         }
@@ -201,9 +218,14 @@ class RefundReason implements ArrayAccess
      */
     public function setType($type)
     {
-        $allowed_values = array('NotSpecified', 'BANKACCOUNT_INCORRECT', 'BANKACCOUNT_HAS_BEEN_CLOSED', 'OWNER_DOT_NOT_MATCH_BANKACCOUNT', 'WITHDRAWAL_IMPOSSIBLE_ON_SAVINGS_ACCOUNTS', 'INITIALIZED_BY_CLIENT', 'OTHER');
-        if (!is_null($type) && (!in_array($type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'NotSpecified', 'BANKACCOUNT_INCORRECT', 'BANKACCOUNT_HAS_BEEN_CLOSED', 'OWNER_DOT_NOT_MATCH_BANKACCOUNT', 'WITHDRAWAL_IMPOSSIBLE_ON_SAVINGS_ACCOUNTS', 'INITIALIZED_BY_CLIENT', 'OTHER'");
+        $allowed_values = $this->getTypeAllowableValues();
+        if (!is_null($type) && !in_array($type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['type'] = $type;
 

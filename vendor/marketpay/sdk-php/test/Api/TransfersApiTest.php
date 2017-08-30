@@ -49,7 +49,6 @@ class TransfersApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -57,7 +56,6 @@ class TransfersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -65,7 +63,6 @@ class TransfersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -73,7 +70,6 @@ class TransfersApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -84,18 +80,16 @@ class TransfersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testTransfersGet()
     {
-
     }
 
     /**
      * Test case for transfersGetList
      *
-     * .
+     * View a Transfer.
      *
      */
     public function testTransfersGetList()
     {
-
     }
 
     /**
@@ -106,7 +100,5 @@ class TransfersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testTransfersPost()
     {
-
     }
-
 }

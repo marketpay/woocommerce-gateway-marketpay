@@ -60,9 +60,25 @@ class UniversalPayRefundPost implements ArrayAccess
         'statement_description' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'tag' => null,
+        'debited_funds' => null,
+        'fees' => null,
+        'statement_description' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**

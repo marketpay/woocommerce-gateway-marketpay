@@ -47,7 +47,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testUserNaturalResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyEmail()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyFirstName()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLastName()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAddress()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyBirthday()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyNationality()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCountryOfResidence()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyOccupation()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyIncomeRange()
     {
-
     }
 
     /**
@@ -159,7 +145,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyProofOfIdentity()
     {
-
     }
 
     /**
@@ -167,7 +152,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyProofOfAddress()
     {
-
     }
 
     /**
@@ -175,7 +159,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyPersonType()
     {
-
     }
 
     /**
@@ -183,7 +166,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyKycLevel()
     {
-
     }
 
     /**
@@ -191,7 +173,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyId()
     {
-
     }
 
     /**
@@ -199,7 +180,6 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreationDate()
     {
-
     }
 
     /**
@@ -207,7 +187,5 @@ class UserNaturalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

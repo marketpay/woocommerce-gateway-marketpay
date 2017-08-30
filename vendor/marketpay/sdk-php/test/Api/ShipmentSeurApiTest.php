@@ -49,7 +49,6 @@ class ShipmentSeurApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -57,7 +56,6 @@ class ShipmentSeurApiTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -65,7 +63,6 @@ class ShipmentSeurApiTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -73,7 +70,6 @@ class ShipmentSeurApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -84,7 +80,6 @@ class ShipmentSeurApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testShipmentSeurSeurCancelShipment()
     {
-
     }
 
     /**
@@ -95,7 +90,6 @@ class ShipmentSeurApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testShipmentSeurSeurCreateShipment()
     {
-
     }
 
     /**
@@ -106,7 +100,5 @@ class ShipmentSeurApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testShipmentSeurSeurGetShipment()
     {
-
     }
-
 }

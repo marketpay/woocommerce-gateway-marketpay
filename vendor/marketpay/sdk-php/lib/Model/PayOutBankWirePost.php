@@ -62,9 +62,27 @@ class PayOutBankwirePost implements ArrayAccess
         'bank_wire_ref' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'tag' => null,
+        'debited_funds' => null,
+        'fees' => null,
+        'bank_account_id' => null,
+        'debited_wallet_id' => null,
+        'bank_wire_ref' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**

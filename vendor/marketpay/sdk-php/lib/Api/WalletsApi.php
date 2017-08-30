@@ -137,10 +137,7 @@ class WalletsApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -183,8 +180,6 @@ class WalletsApi
     /**
      * Operation walletsGetList
      *
-     * 
-     *
      * @param int $page  (optional)
      * @param int $per_page  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
@@ -198,8 +193,6 @@ class WalletsApi
 
     /**
      * Operation walletsGetListWithHttpInfo
-     *
-     * 
      *
      * @param int $page  (optional)
      * @param int $per_page  (optional)
@@ -228,10 +221,7 @@ class WalletsApi
         if ($per_page !== null) {
             $queryParams['Per_Page'] = $this->apiClient->getSerializer()->toQueryValue($per_page);
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -333,10 +323,7 @@ class WalletsApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -413,9 +400,6 @@ class WalletsApi
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
-
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         // body params
         $_tempBody = null;
@@ -514,9 +498,6 @@ class WalletsApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
-
         // body params
         $_tempBody = null;
         if (isset($wallet)) {

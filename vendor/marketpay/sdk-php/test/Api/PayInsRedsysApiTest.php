@@ -49,7 +49,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -57,7 +56,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -65,7 +63,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -73,7 +70,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -84,7 +80,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsRedsysRedsysGetPayment()
     {
-
     }
 
     /**
@@ -95,7 +90,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsRedsysRedsysGetPreauthorization()
     {
-
     }
 
     /**
@@ -106,7 +100,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsRedsysRedsysPostPaymentByWeb()
     {
-
     }
 
     /**
@@ -117,7 +110,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsRedsysRedsysPostPreauthorizationByWeb()
     {
-
     }
 
     /**
@@ -128,7 +120,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsRedsysRedsysPostPreauthorizationCancellation()
     {
-
     }
 
     /**
@@ -139,7 +130,6 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsRedsysRedsysPostPreauthorizationConfirmation()
     {
-
     }
 
     /**
@@ -150,7 +140,5 @@ class PayInsRedsysApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsRedsysRedsysPostRefund()
     {
-
     }
-
 }

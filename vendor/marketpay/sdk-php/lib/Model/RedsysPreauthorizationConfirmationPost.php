@@ -60,9 +60,25 @@ class RedsysPreauthorizationConfirmationPost implements ArrayAccess
         'fees' => '\Swagger\Client\Model\Money'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'tag' => null,
+        'credited_wallet_id' => null,
+        'debited_funds' => null,
+        'fees' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**

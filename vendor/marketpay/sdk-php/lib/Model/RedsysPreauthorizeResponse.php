@@ -72,9 +72,37 @@ class RedsysPreauthorizeResponse implements ArrayAccess
         'tag' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'debited_funds' => null,
+        'status' => null,
+        'payment_status' => null,
+        'execution_date' => 'int64',
+        'result_code' => null,
+        'result_message' => null,
+        'execution_type' => null,
+        'card_id' => null,
+        'statement_descriptor' => null,
+        'author_id' => null,
+        'pay_in_id' => null,
+        'language' => null,
+        'provider' => null,
+        'id' => null,
+        'creation_date' => 'int64',
+        'tag' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -310,24 +338,36 @@ class RedsysPreauthorizeResponse implements ArrayAccess
     {
         $invalid_properties = [];
 
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'status', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "WAITING", "CANCELED", "EXPIRED", "VALIDATED"];
+        $allowed_values = $this->getPaymentStatusAllowableValues();
         if (!in_array($this->container['payment_status'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'payment_status', must be one of 'NotSpecified', 'WAITING', 'CANCELED', 'EXPIRED', 'VALIDATED'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'payment_status', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "WEB", "DIRECT"];
+        $allowed_values = $this->getExecutionTypeAllowableValues();
         if (!in_array($this->container['execution_type'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'execution_type', must be one of 'NotSpecified', 'WEB', 'DIRECT'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'execution_type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = $this->getLanguageAllowableValues();
         if (!in_array($this->container['language'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'language', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -342,19 +382,19 @@ class RedsysPreauthorizeResponse implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "WAITING", "CANCELED", "EXPIRED", "VALIDATED"];
+        $allowed_values = $this->getPaymentStatusAllowableValues();
         if (!in_array($this->container['payment_status'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "WEB", "DIRECT"];
+        $allowed_values = $this->getExecutionTypeAllowableValues();
         if (!in_array($this->container['execution_type'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = $this->getLanguageAllowableValues();
         if (!in_array($this->container['language'], $allowed_values)) {
             return false;
         }
@@ -399,9 +439,14 @@ class RedsysPreauthorizeResponse implements ArrayAccess
      */
     public function setStatus($status)
     {
-        $allowed_values = array('CREATED', 'SUCCEEDED', 'FAILED');
-        if (!is_null($status) && (!in_array($status, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED'");
+        $allowed_values = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['status'] = $status;
 
@@ -424,9 +469,14 @@ class RedsysPreauthorizeResponse implements ArrayAccess
      */
     public function setPaymentStatus($payment_status)
     {
-        $allowed_values = array('NotSpecified', 'WAITING', 'CANCELED', 'EXPIRED', 'VALIDATED');
-        if (!is_null($payment_status) && (!in_array($payment_status, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'payment_status', must be one of 'NotSpecified', 'WAITING', 'CANCELED', 'EXPIRED', 'VALIDATED'");
+        $allowed_values = $this->getPaymentStatusAllowableValues();
+        if (!is_null($payment_status) && !in_array($payment_status, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'payment_status', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['payment_status'] = $payment_status;
 
@@ -512,9 +562,14 @@ class RedsysPreauthorizeResponse implements ArrayAccess
      */
     public function setExecutionType($execution_type)
     {
-        $allowed_values = array('NotSpecified', 'WEB', 'DIRECT');
-        if (!is_null($execution_type) && (!in_array($execution_type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'execution_type', must be one of 'NotSpecified', 'WEB', 'DIRECT'");
+        $allowed_values = $this->getExecutionTypeAllowableValues();
+        if (!is_null($execution_type) && !in_array($execution_type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'execution_type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['execution_type'] = $execution_type;
 
@@ -616,14 +671,19 @@ class RedsysPreauthorizeResponse implements ArrayAccess
 
     /**
      * Sets language
-     * @param string $language
+     * @param string $language Valid values are ES, EN, CA, FR, DE, NL, IT, SV, PT, PL, GL and EU
      * @return $this
      */
     public function setLanguage($language)
     {
-        $allowed_values = array('NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS');
-        if (!is_null($language) && (!in_array($language, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'");
+        $allowed_values = $this->getLanguageAllowableValues();
+        if (!is_null($language) && !in_array($language, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'language', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['language'] = $language;
 
@@ -662,7 +722,7 @@ class RedsysPreauthorizeResponse implements ArrayAccess
 
     /**
      * Sets id
-     * @param string $id
+     * @param string $id The item's ID
      * @return $this
      */
     public function setId($id)
@@ -683,7 +743,7 @@ class RedsysPreauthorizeResponse implements ArrayAccess
 
     /**
      * Sets creation_date
-     * @param int $creation_date
+     * @param int $creation_date When the item was created
      * @return $this
      */
     public function setCreationDate($creation_date)
@@ -704,7 +764,7 @@ class RedsysPreauthorizeResponse implements ArrayAccess
 
     /**
      * Sets tag
-     * @param string $tag
+     * @param string $tag Custom data that you can add to this item
      * @return $this
      */
     public function setTag($tag)

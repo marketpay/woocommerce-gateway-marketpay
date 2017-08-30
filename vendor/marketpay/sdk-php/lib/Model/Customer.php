@@ -61,9 +61,26 @@ class Customer implements ArrayAccess
         'address' => '\Swagger\Client\Model\Address'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'email' => null,
+        'first_name' => null,
+        'last_name' => null,
+        'telephone' => null,
+        'address' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**

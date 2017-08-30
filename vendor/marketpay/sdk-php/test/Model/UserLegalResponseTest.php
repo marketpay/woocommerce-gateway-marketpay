@@ -47,7 +47,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testUserLegalResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyHeadquartersAddress()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalPersonType()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyName()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeAddress()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeBirthday()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeCountryOfResidence()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeNationality()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeEmail()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeFirstName()
     {
-
     }
 
     /**
@@ -159,7 +145,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeLastName()
     {
-
     }
 
     /**
@@ -167,7 +152,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeProofOfIdentity()
     {
-
     }
 
     /**
@@ -175,7 +159,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyStatute()
     {
-
     }
 
     /**
@@ -183,7 +166,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyShareholderDeclaration()
     {
-
     }
 
     /**
@@ -191,7 +173,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyProofOfRegistration()
     {
-
     }
 
     /**
@@ -199,7 +180,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyPersonType()
     {
-
     }
 
     /**
@@ -207,7 +187,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyKycLevel()
     {
-
     }
 
     /**
@@ -215,7 +194,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyId()
     {
-
     }
 
     /**
@@ -223,7 +201,6 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreationDate()
     {
-
     }
 
     /**
@@ -231,7 +208,5 @@ class UserLegalResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

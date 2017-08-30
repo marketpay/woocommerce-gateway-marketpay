@@ -47,7 +47,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayOutBankwireResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAuthorId()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedUserId()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDebitedFunds()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedFunds()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyFees()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyStatus()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyResultCode()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyResultMessage()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyExecutionDate()
     {
-
     }
 
     /**
@@ -159,7 +145,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyType()
     {
-
     }
 
     /**
@@ -167,7 +152,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyNature()
     {
-
     }
 
     /**
@@ -175,7 +159,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDebitedWalletId()
     {
-
     }
 
     /**
@@ -183,7 +166,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedWalletId()
     {
-
     }
 
     /**
@@ -191,7 +173,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyPaymentType()
     {
-
     }
 
     /**
@@ -199,7 +180,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyBankAccountId()
     {
-
     }
 
     /**
@@ -207,7 +187,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyBankWireRef()
     {
-
     }
 
     /**
@@ -215,7 +194,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyId()
     {
-
     }
 
     /**
@@ -223,7 +201,6 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreationDate()
     {
-
     }
 
     /**
@@ -231,7 +208,5 @@ class PayOutBankwireResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

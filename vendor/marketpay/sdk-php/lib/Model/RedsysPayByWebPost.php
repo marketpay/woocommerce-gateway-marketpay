@@ -60,17 +60,37 @@ class RedsysPayByWebPost implements ArrayAccess
         'credited_wallet_id' => 'string',
         'statement_descriptor' => 'string',
         'success_url' => 'string',
-        'url_ok' => 'string',
         'cancel_url' => 'string',
-        'url_ko' => 'string',
         'debited_funds' => '\Swagger\Client\Model\Money',
         'fees' => '\Swagger\Client\Model\Money',
         'language' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'tag' => null,
+        'save_card' => null,
+        'card_id' => null,
+        'credited_wallet_id' => null,
+        'statement_descriptor' => null,
+        'success_url' => null,
+        'cancel_url' => null,
+        'debited_funds' => null,
+        'fees' => null,
+        'language' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -84,9 +104,7 @@ class RedsysPayByWebPost implements ArrayAccess
         'credited_wallet_id' => 'CreditedWalletId',
         'statement_descriptor' => 'StatementDescriptor',
         'success_url' => 'SuccessUrl',
-        'url_ok' => 'UrlOk',
         'cancel_url' => 'CancelUrl',
-        'url_ko' => 'UrlKo',
         'debited_funds' => 'DebitedFunds',
         'fees' => 'Fees',
         'language' => 'Language'
@@ -104,9 +122,7 @@ class RedsysPayByWebPost implements ArrayAccess
         'credited_wallet_id' => 'setCreditedWalletId',
         'statement_descriptor' => 'setStatementDescriptor',
         'success_url' => 'setSuccessUrl',
-        'url_ok' => 'setUrlOk',
         'cancel_url' => 'setCancelUrl',
-        'url_ko' => 'setUrlKo',
         'debited_funds' => 'setDebitedFunds',
         'fees' => 'setFees',
         'language' => 'setLanguage'
@@ -124,9 +140,7 @@ class RedsysPayByWebPost implements ArrayAccess
         'credited_wallet_id' => 'getCreditedWalletId',
         'statement_descriptor' => 'getStatementDescriptor',
         'success_url' => 'getSuccessUrl',
-        'url_ok' => 'getUrlOk',
         'cancel_url' => 'getCancelUrl',
-        'url_ko' => 'getUrlKo',
         'debited_funds' => 'getDebitedFunds',
         'fees' => 'getFees',
         'language' => 'getLanguage'
@@ -221,9 +235,7 @@ class RedsysPayByWebPost implements ArrayAccess
         $this->container['credited_wallet_id'] = isset($data['credited_wallet_id']) ? $data['credited_wallet_id'] : null;
         $this->container['statement_descriptor'] = isset($data['statement_descriptor']) ? $data['statement_descriptor'] : null;
         $this->container['success_url'] = isset($data['success_url']) ? $data['success_url'] : null;
-        $this->container['url_ok'] = isset($data['url_ok']) ? $data['url_ok'] : null;
         $this->container['cancel_url'] = isset($data['cancel_url']) ? $data['cancel_url'] : null;
-        $this->container['url_ko'] = isset($data['url_ko']) ? $data['url_ko'] : null;
         $this->container['debited_funds'] = isset($data['debited_funds']) ? $data['debited_funds'] : null;
         $this->container['fees'] = isset($data['fees']) ? $data['fees'] : null;
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
@@ -253,9 +265,12 @@ class RedsysPayByWebPost implements ArrayAccess
         if ($this->container['fees'] === null) {
             $invalid_properties[] = "'fees' can't be null";
         }
-        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = $this->getLanguageAllowableValues();
         if (!in_array($this->container['language'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'language', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -285,7 +300,7 @@ class RedsysPayByWebPost implements ArrayAccess
         if ($this->container['fees'] === null) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = $this->getLanguageAllowableValues();
         if (!in_array($this->container['language'], $allowed_values)) {
             return false;
         }
@@ -420,27 +435,6 @@ class RedsysPayByWebPost implements ArrayAccess
     }
 
     /**
-     * Gets url_ok
-     * @return string
-     */
-    public function getUrlOk()
-    {
-        return $this->container['url_ok'];
-    }
-
-    /**
-     * Sets url_ok
-     * @param string $url_ok Url to redirect the browser in case the payment is completed successfully
-     * @return $this
-     */
-    public function setUrlOk($url_ok)
-    {
-        $this->container['url_ok'] = $url_ok;
-
-        return $this;
-    }
-
-    /**
      * Gets cancel_url
      * @return string
      */
@@ -457,27 +451,6 @@ class RedsysPayByWebPost implements ArrayAccess
     public function setCancelUrl($cancel_url)
     {
         $this->container['cancel_url'] = $cancel_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets url_ko
-     * @return string
-     */
-    public function getUrlKo()
-    {
-        return $this->container['url_ko'];
-    }
-
-    /**
-     * Sets url_ko
-     * @param string $url_ko Url to redirect the browser in case the payment is not completed successfully
-     * @return $this
-     */
-    public function setUrlKo($url_ko)
-    {
-        $this->container['url_ko'] = $url_ko;
 
         return $this;
     }
@@ -535,14 +508,19 @@ class RedsysPayByWebPost implements ArrayAccess
 
     /**
      * Sets language
-     * @param string $language
+     * @param string $language Valid values are ES, EN, CA, FR, DE, NL, IT, SV, PT, PL, GL and EU
      * @return $this
      */
     public function setLanguage($language)
     {
-        $allowed_values = array('NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS');
-        if (!is_null($language) && (!in_array($language, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'");
+        $allowed_values = $this->getLanguageAllowableValues();
+        if (!is_null($language) && !in_array($language, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'language', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['language'] = $language;
 

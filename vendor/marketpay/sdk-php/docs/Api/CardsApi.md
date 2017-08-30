@@ -1,6 +1,6 @@
 # Swagger\Client\CardsApi
 
-All URIs are relative to *https://localhost/*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -138,7 +138,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **card_id** | **int**| The Id of a card |
- **card** | [**\Swagger\Client\Model\CardPut**](../Model/\Swagger\Client\Model\CardPut.md)| Card Object params | [optional]
+ **card** | [**\Swagger\Client\Model\CardPut**](../Model/CardPut.md)| Card Object params | [optional]
 
 ### Return type
 

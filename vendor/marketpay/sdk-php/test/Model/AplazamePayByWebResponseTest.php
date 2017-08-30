@@ -47,7 +47,6 @@ class AplazamePayByWebResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class AplazamePayByWebResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class AplazamePayByWebResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class AplazamePayByWebResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class AplazamePayByWebResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testAplazamePayByWebResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class AplazamePayByWebResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyPayInId()
     {
-
     }
 
     /**
@@ -95,7 +89,5 @@ class AplazamePayByWebResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCheckoutData()
     {
-
     }
-
 }

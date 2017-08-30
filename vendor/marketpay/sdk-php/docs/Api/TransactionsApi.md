@@ -1,16 +1,18 @@
 # Swagger\Client\TransactionsApi
 
-All URIs are relative to *https://localhost/*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**transactionsGetList**](TransactionsApi.md#transactionsGetList) | **GET** /v2.01/Transactions | 
+[**transactionsGetList**](TransactionsApi.md#transactionsGetList) | **GET** /v2.01/Transactions | View a Transaction
 
 
 # **transactionsGetList**
-> \Swagger\Client\Model\ResponseListTransactionResponse transactionsGetList($page, $per_page)
+> \Swagger\Client\Model\ResponseListTransactionResponse transactionsGetList($page, $per_page, $before_date, $after_date)
 
+View a Transaction
 
+A Transaction is any movement of money
 
 ### Example
 ```php
@@ -23,9 +25,11 @@ Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_AC
 $api_instance = new Swagger\Client\Api\TransactionsApi();
 $page = 56; // int | 
 $per_page = 56; // int | 
+$before_date = 789; // int | 
+$after_date = 789; // int | 
 
 try {
-    $result = $api_instance->transactionsGetList($page, $per_page);
+    $result = $api_instance->transactionsGetList($page, $per_page, $before_date, $after_date);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TransactionsApi->transactionsGetList: ', $e->getMessage(), PHP_EOL;
@@ -39,6 +43,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int**|  | [optional]
  **per_page** | **int**|  | [optional]
+ **before_date** | **int**|  | [optional]
+ **after_date** | **int**|  | [optional]
 
 ### Return type
 

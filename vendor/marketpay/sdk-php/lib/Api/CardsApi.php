@@ -137,10 +137,7 @@ class CardsApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -183,8 +180,6 @@ class CardsApi
     /**
      * Operation cardsGetList
      *
-     * 
-     *
      * @param int $page  (optional)
      * @param int $per_page  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
@@ -198,8 +193,6 @@ class CardsApi
 
     /**
      * Operation cardsGetListWithHttpInfo
-     *
-     * 
      *
      * @param int $page  (optional)
      * @param int $per_page  (optional)
@@ -228,10 +221,7 @@ class CardsApi
         if ($per_page !== null) {
             $queryParams['Per_Page'] = $this->apiClient->getSerializer()->toQueryValue($per_page);
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -323,9 +313,6 @@ class CardsApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
-
         // body params
         $_tempBody = null;
         if (isset($card)) {

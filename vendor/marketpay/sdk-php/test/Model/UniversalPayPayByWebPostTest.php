@@ -47,7 +47,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testUniversalPayPayByWebPost()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDebitedFunds()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyFees()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCardId()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertySaveCard()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyStatementDescriptor()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedWalletId()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertySecureMode()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertySuccessUrl()
     {
-
     }
 
     /**
@@ -159,7 +145,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCancelUrl()
     {
-
     }
 
     /**
@@ -167,7 +152,6 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLanguage()
     {
-
     }
 
     /**
@@ -175,7 +159,5 @@ class UniversalPayPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCustomer()
     {
-
     }
-
 }

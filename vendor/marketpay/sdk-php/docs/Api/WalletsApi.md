@@ -1,6 +1,6 @@
 # Swagger\Client\WalletsApi
 
-All URIs are relative to *https://localhost/*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -190,7 +190,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **wallet** | [**\Swagger\Client\Model\WalletPost**](../Model/\Swagger\Client\Model\WalletPost.md)| Wallet Object params | [optional]
+ **wallet** | [**\Swagger\Client\Model\WalletPost**](../Model/WalletPost.md)| Wallet Object params | [optional]
 
 ### Return type
 
@@ -240,7 +240,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **wallet_id** | **int**| The Id of a wallet |
- **wallet** | [**\Swagger\Client\Model\WalletPut**](../Model/\Swagger\Client\Model\WalletPut.md)| Wallet Object params | [optional]
+ **wallet** | [**\Swagger\Client\Model\WalletPut**](../Model/WalletPut.md)| Wallet Object params | [optional]
 
 ### Return type
 

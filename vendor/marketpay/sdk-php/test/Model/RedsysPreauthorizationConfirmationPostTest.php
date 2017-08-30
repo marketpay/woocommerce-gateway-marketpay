@@ -47,7 +47,6 @@ class RedsysPreauthorizationConfirmationPostTest extends \PHPUnit_Framework_Test
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class RedsysPreauthorizationConfirmationPostTest extends \PHPUnit_Framework_Test
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class RedsysPreauthorizationConfirmationPostTest extends \PHPUnit_Framework_Test
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class RedsysPreauthorizationConfirmationPostTest extends \PHPUnit_Framework_Test
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class RedsysPreauthorizationConfirmationPostTest extends \PHPUnit_Framework_Test
      */
     public function testRedsysPreauthorizationConfirmationPost()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class RedsysPreauthorizationConfirmationPostTest extends \PHPUnit_Framework_Test
      */
     public function testPropertyTag()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class RedsysPreauthorizationConfirmationPostTest extends \PHPUnit_Framework_Test
      */
     public function testPropertyCreditedWalletId()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class RedsysPreauthorizationConfirmationPostTest extends \PHPUnit_Framework_Test
      */
     public function testPropertyDebitedFunds()
     {
-
     }
 
     /**
@@ -111,7 +103,5 @@ class RedsysPreauthorizationConfirmationPostTest extends \PHPUnit_Framework_Test
      */
     public function testPropertyFees()
     {
-
     }
-
 }

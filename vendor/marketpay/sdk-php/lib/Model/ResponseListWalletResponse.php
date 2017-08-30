@@ -58,9 +58,23 @@ class ResponseListWalletResponse implements ArrayAccess
         'total' => 'int'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'values' => null,
+        'total' => 'int64'
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -68,8 +82,8 @@ class ResponseListWalletResponse implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'values' => 'values',
-        'total' => 'total'
+        'values' => 'Values',
+        'total' => 'Total'
     ];
 
 

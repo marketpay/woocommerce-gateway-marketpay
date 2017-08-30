@@ -58,9 +58,23 @@ class UniversalPayTokenizeByWebResponse implements ArrayAccess
         'url' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'token_id' => null,
+        'url' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -163,7 +177,7 @@ class UniversalPayTokenizeByWebResponse implements ArrayAccess
 
     /**
      * Sets token_id
-     * @param string $token_id
+     * @param string $token_id Id of the payment
      * @return $this
      */
     public function setTokenId($token_id)

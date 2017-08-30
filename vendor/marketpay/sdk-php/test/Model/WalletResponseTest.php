@@ -47,7 +47,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testWalletResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyOwners()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyBalance()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyFundsType()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDescription()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCurrency()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyId()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreationDate()
     {
-
     }
 
     /**
@@ -143,7 +131,5 @@ class WalletResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

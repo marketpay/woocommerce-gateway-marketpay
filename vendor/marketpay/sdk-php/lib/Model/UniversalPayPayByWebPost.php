@@ -68,9 +68,33 @@ class UniversalPayPayByWebPost implements ArrayAccess
         'customer' => '\Swagger\Client\Model\CustomerDetail'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'debited_funds' => null,
+        'fees' => null,
+        'card_id' => null,
+        'save_card' => null,
+        'statement_descriptor' => null,
+        'tag' => null,
+        'credited_wallet_id' => null,
+        'secure_mode' => null,
+        'success_url' => null,
+        'cancel_url' => null,
+        'language' => null,
+        'customer' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -148,7 +172,7 @@ class UniversalPayPayByWebPost implements ArrayAccess
     }
 
     const SECURE_MODE_NOT_SPECIFIED = 'NotSpecified';
-    const SECURE_MODE_DEFAULT = 'DEFAULT';
+    const SECURE_MODE__DEFAULT = 'DEFAULT';
     const SECURE_MODE_FORCE = 'FORCE';
     const LANGUAGE_NOT_SPECIFIED = 'NotSpecified';
     const LANGUAGE_CA = 'CA';
@@ -182,7 +206,7 @@ class UniversalPayPayByWebPost implements ArrayAccess
     {
         return [
             self::SECURE_MODE_NOT_SPECIFIED,
-            self::SECURE_MODE_DEFAULT,
+            self::SECURE_MODE__DEFAULT,
             self::SECURE_MODE_FORCE,
         ];
     }
@@ -266,14 +290,20 @@ class UniversalPayPayByWebPost implements ArrayAccess
         if ($this->container['credited_wallet_id'] === null) {
             $invalid_properties[] = "'credited_wallet_id' can't be null";
         }
-        $allowed_values = ["NotSpecified", "DEFAULT", "FORCE"];
+        $allowed_values = $this->getSecureModeAllowableValues();
         if (!in_array($this->container['secure_mode'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'secure_mode', must be one of 'NotSpecified', 'DEFAULT', 'FORCE'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'secure_mode', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = $this->getLanguageAllowableValues();
         if (!in_array($this->container['language'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'language', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         if ($this->container['customer'] === null) {
@@ -303,11 +333,11 @@ class UniversalPayPayByWebPost implements ArrayAccess
         if ($this->container['credited_wallet_id'] === null) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "DEFAULT", "FORCE"];
+        $allowed_values = $this->getSecureModeAllowableValues();
         if (!in_array($this->container['secure_mode'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = $this->getLanguageAllowableValues();
         if (!in_array($this->container['language'], $allowed_values)) {
             return false;
         }
@@ -371,7 +401,7 @@ class UniversalPayPayByWebPost implements ArrayAccess
 
     /**
      * Sets card_id
-     * @param string $card_id
+     * @param string $card_id The id of a previous saved card. SaveCard and CardId are mutually exclusive
      * @return $this
      */
     public function setCardId($card_id)
@@ -392,7 +422,7 @@ class UniversalPayPayByWebPost implements ArrayAccess
 
     /**
      * Sets save_card
-     * @param bool $save_card
+     * @param bool $save_card Whether to save or not the card for future use. SaveCard and CardId are mutually exclusive
      * @return $this
      */
     public function setSaveCard($save_card)
@@ -481,9 +511,14 @@ class UniversalPayPayByWebPost implements ArrayAccess
      */
     public function setSecureMode($secure_mode)
     {
-        $allowed_values = array('NotSpecified', 'DEFAULT', 'FORCE');
-        if (!is_null($secure_mode) && (!in_array($secure_mode, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'secure_mode', must be one of 'NotSpecified', 'DEFAULT', 'FORCE'");
+        $allowed_values = $this->getSecureModeAllowableValues();
+        if (!is_null($secure_mode) && !in_array($secure_mode, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'secure_mode', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['secure_mode'] = $secure_mode;
 
@@ -548,9 +583,14 @@ class UniversalPayPayByWebPost implements ArrayAccess
      */
     public function setLanguage($language)
     {
-        $allowed_values = array('NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS');
-        if (!is_null($language) && (!in_array($language, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'");
+        $allowed_values = $this->getLanguageAllowableValues();
+        if (!is_null($language) && !in_array($language, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'language', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['language'] = $language;
 

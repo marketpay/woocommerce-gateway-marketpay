@@ -61,9 +61,26 @@ class UserResponse implements ArrayAccess
         'tag' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'person_type' => null,
+        'kyc_level' => null,
+        'id' => null,
+        'creation_date' => 'int64',
+        'tag' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -183,14 +200,20 @@ class UserResponse implements ArrayAccess
     {
         $invalid_properties = [];
 
-        $allowed_values = ["Natural", "Legal", "Fees"];
+        $allowed_values = $this->getPersonTypeAllowableValues();
         if (!in_array($this->container['person_type'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'person_type', must be one of 'Natural', 'Legal', 'Fees'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'person_type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "LIGHT", "REGULAR"];
+        $allowed_values = $this->getKycLevelAllowableValues();
         if (!in_array($this->container['kyc_level'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'kyc_level', must be one of 'NotSpecified', 'LIGHT', 'REGULAR'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'kyc_level', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -205,11 +228,11 @@ class UserResponse implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = ["Natural", "Legal", "Fees"];
+        $allowed_values = $this->getPersonTypeAllowableValues();
         if (!in_array($this->container['person_type'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "LIGHT", "REGULAR"];
+        $allowed_values = $this->getKycLevelAllowableValues();
         if (!in_array($this->container['kyc_level'], $allowed_values)) {
             return false;
         }
@@ -233,9 +256,14 @@ class UserResponse implements ArrayAccess
      */
     public function setPersonType($person_type)
     {
-        $allowed_values = array('Natural', 'Legal', 'Fees');
-        if (!is_null($person_type) && (!in_array($person_type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'person_type', must be one of 'Natural', 'Legal', 'Fees'");
+        $allowed_values = $this->getPersonTypeAllowableValues();
+        if (!is_null($person_type) && !in_array($person_type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'person_type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['person_type'] = $person_type;
 
@@ -258,9 +286,14 @@ class UserResponse implements ArrayAccess
      */
     public function setKycLevel($kyc_level)
     {
-        $allowed_values = array('NotSpecified', 'LIGHT', 'REGULAR');
-        if (!is_null($kyc_level) && (!in_array($kyc_level, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'kyc_level', must be one of 'NotSpecified', 'LIGHT', 'REGULAR'");
+        $allowed_values = $this->getKycLevelAllowableValues();
+        if (!is_null($kyc_level) && !in_array($kyc_level, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'kyc_level', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['kyc_level'] = $kyc_level;
 
@@ -278,7 +311,7 @@ class UserResponse implements ArrayAccess
 
     /**
      * Sets id
-     * @param string $id
+     * @param string $id The item's ID
      * @return $this
      */
     public function setId($id)
@@ -299,7 +332,7 @@ class UserResponse implements ArrayAccess
 
     /**
      * Sets creation_date
-     * @param int $creation_date
+     * @param int $creation_date When the item was created
      * @return $this
      */
     public function setCreationDate($creation_date)
@@ -320,7 +353,7 @@ class UserResponse implements ArrayAccess
 
     /**
      * Sets tag
-     * @param string $tag
+     * @param string $tag Custom data that you can add to this item
      * @return $this
      */
     public function setTag($tag)

@@ -47,7 +47,6 @@ class RedsysPreauthorizationConfirmationResponseTest extends \PHPUnit_Framework_
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class RedsysPreauthorizationConfirmationResponseTest extends \PHPUnit_Framework_
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class RedsysPreauthorizationConfirmationResponseTest extends \PHPUnit_Framework_
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class RedsysPreauthorizationConfirmationResponseTest extends \PHPUnit_Framework_
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class RedsysPreauthorizationConfirmationResponseTest extends \PHPUnit_Framework_
      */
     public function testRedsysPreauthorizationConfirmationResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,5 @@ class RedsysPreauthorizationConfirmationResponseTest extends \PHPUnit_Framework_
      */
     public function testPropertyPayInId()
     {
-
     }
-
 }

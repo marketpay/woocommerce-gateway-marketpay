@@ -47,7 +47,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testUserLegalPost()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyHeadquartersAddress()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalPersonType()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyName()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeAddress()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeBirthday()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeCountryOfResidence()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeNationality()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeEmail()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeFirstName()
     {
-
     }
 
     /**
@@ -159,7 +145,6 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLegalRepresentativeLastName()
     {
-
     }
 
     /**
@@ -167,7 +152,5 @@ class UserLegalPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

@@ -1,6 +1,6 @@
 # Swagger\Client\UsersApi
 
-All URIs are relative to *https://localhost/*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -509,7 +509,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **int**| The Id of a user |
- **bank_account_ca** | [**\Swagger\Client\Model\BankAccountCaPost**](../Model/\Swagger\Client\Model\BankAccountCaPost.md)| BankAccountCA Object params | [optional]
+ **bank_account_ca** | [**\Swagger\Client\Model\BankAccountCaPost**](../Model/BankAccountCaPost.md)| BankAccountCA Object params | [optional]
 
 ### Return type
 
@@ -559,7 +559,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **int**| The Id of a user |
- **bank_account_gb** | [**\Swagger\Client\Model\BankAccountGbPost**](../Model/\Swagger\Client\Model\BankAccountGbPost.md)|  | [optional]
+ **bank_account_gb** | [**\Swagger\Client\Model\BankAccountGbPost**](../Model/BankAccountGbPost.md)|  | [optional]
 
 ### Return type
 
@@ -609,7 +609,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **int**| The Id of a user |
- **bank_account_iban** | [**\Swagger\Client\Model\BankAccountIbanPost**](../Model/\Swagger\Client\Model\BankAccountIbanPost.md)| BankAccountIBAN Object params | [optional]
+ **bank_account_iban** | [**\Swagger\Client\Model\BankAccountIbanPost**](../Model/BankAccountIbanPost.md)| BankAccountIBAN Object params | [optional]
 
 ### Return type
 
@@ -659,7 +659,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **int**| The Id of a user |
- **bank_account_other** | [**\Swagger\Client\Model\BankAccountOtherPost**](../Model/\Swagger\Client\Model\BankAccountOtherPost.md)|  | [optional]
+ **bank_account_other** | [**\Swagger\Client\Model\BankAccountOtherPost**](../Model/BankAccountOtherPost.md)|  | [optional]
 
 ### Return type
 
@@ -709,7 +709,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **int**| The Id of a user |
- **bank_account_us** | [**\Swagger\Client\Model\BankAccountUsPost**](../Model/\Swagger\Client\Model\BankAccountUsPost.md)| BankAccountUS Object params | [optional]
+ **bank_account_us** | [**\Swagger\Client\Model\BankAccountUsPost**](../Model/BankAccountUsPost.md)| BankAccountUS Object params | [optional]
 
 ### Return type
 
@@ -757,7 +757,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_legal** | [**\Swagger\Client\Model\UserLegalPost**](../Model/\Swagger\Client\Model\UserLegalPost.md)| UserLegal Object params | [optional]
+ **user_legal** | [**\Swagger\Client\Model\UserLegalPost**](../Model/UserLegalPost.md)| UserLegal Object params | [optional]
 
 ### Return type
 
@@ -805,7 +805,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_natural** | [**\Swagger\Client\Model\UserNaturalPost**](../Model/\Swagger\Client\Model\UserNaturalPost.md)| UserNatural Object params | [optional]
+ **user_natural** | [**\Swagger\Client\Model\UserNaturalPost**](../Model/UserNaturalPost.md)| UserNatural Object params | [optional]
 
 ### Return type
 
@@ -855,7 +855,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **int**| The Id of a user |
- **user_legal** | [**\Swagger\Client\Model\UserLegalPut**](../Model/\Swagger\Client\Model\UserLegalPut.md)| UserLegal Object params | [optional]
+ **user_legal** | [**\Swagger\Client\Model\UserLegalPut**](../Model/UserLegalPut.md)| UserLegal Object params | [optional]
 
 ### Return type
 
@@ -905,7 +905,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **int**| The Id of a user |
- **user_natural** | [**\Swagger\Client\Model\UserNaturalPut**](../Model/\Swagger\Client\Model\UserNaturalPut.md)| UserNatural Object params | [optional]
+ **user_natural** | [**\Swagger\Client\Model\UserNaturalPut**](../Model/UserNaturalPut.md)| UserNatural Object params | [optional]
 
 ### Return type
 

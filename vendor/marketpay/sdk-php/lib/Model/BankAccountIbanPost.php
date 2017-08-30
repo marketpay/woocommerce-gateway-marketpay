@@ -61,9 +61,26 @@ class BankAccountIbanPost implements ArrayAccess
         'owner_name' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'iban' => null,
+        'bic' => null,
+        'tag' => null,
+        'owner_address' => null,
+        'owner_name' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**

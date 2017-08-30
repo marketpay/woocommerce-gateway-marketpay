@@ -66,9 +66,31 @@ class UniversalPayTokenizationResponse implements ArrayAccess
         'card_id' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'credited_wallet_id' => null,
+        'status' => null,
+        'execution_date' => 'int64',
+        'result_code' => null,
+        'result_message' => null,
+        'execution_type' => null,
+        'author_id' => null,
+        'credited_user_id' => null,
+        'provider' => null,
+        'card_id' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -208,14 +230,20 @@ class UniversalPayTokenizationResponse implements ArrayAccess
     {
         $invalid_properties = [];
 
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'status', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "WEB", "DIRECT"];
+        $allowed_values = $this->getExecutionTypeAllowableValues();
         if (!in_array($this->container['execution_type'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'execution_type', must be one of 'NotSpecified', 'WEB', 'DIRECT'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'execution_type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -230,11 +258,11 @@ class UniversalPayTokenizationResponse implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "WEB", "DIRECT"];
+        $allowed_values = $this->getExecutionTypeAllowableValues();
         if (!in_array($this->container['execution_type'], $allowed_values)) {
             return false;
         }
@@ -253,7 +281,7 @@ class UniversalPayTokenizationResponse implements ArrayAccess
 
     /**
      * Sets credited_wallet_id
-     * @param string $credited_wallet_id
+     * @param string $credited_wallet_id The ID of the wallet where money will be credited
      * @return $this
      */
     public function setCreditedWalletId($credited_wallet_id)
@@ -274,14 +302,19 @@ class UniversalPayTokenizationResponse implements ArrayAccess
 
     /**
      * Sets status
-     * @param string $status
+     * @param string $status The status of the transaction
      * @return $this
      */
     public function setStatus($status)
     {
-        $allowed_values = array('CREATED', 'SUCCEEDED', 'FAILED');
-        if (!is_null($status) && (!in_array($status, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED'");
+        $allowed_values = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['status'] = $status;
 
@@ -299,7 +332,7 @@ class UniversalPayTokenizationResponse implements ArrayAccess
 
     /**
      * Sets execution_date
-     * @param int $execution_date
+     * @param int $execution_date When the transaction happened
      * @return $this
      */
     public function setExecutionDate($execution_date)
@@ -320,7 +353,7 @@ class UniversalPayTokenizationResponse implements ArrayAccess
 
     /**
      * Sets result_code
-     * @param string $result_code
+     * @param string $result_code The result code
      * @return $this
      */
     public function setResultCode($result_code)
@@ -341,7 +374,7 @@ class UniversalPayTokenizationResponse implements ArrayAccess
 
     /**
      * Sets result_message
-     * @param string $result_message
+     * @param string $result_message A verbal explanation of the ResultCode
      * @return $this
      */
     public function setResultMessage($result_message)
@@ -362,14 +395,19 @@ class UniversalPayTokenizationResponse implements ArrayAccess
 
     /**
      * Sets execution_type
-     * @param string $execution_type
+     * @param string $execution_type The type of execution for the payin
      * @return $this
      */
     public function setExecutionType($execution_type)
     {
-        $allowed_values = array('NotSpecified', 'WEB', 'DIRECT');
-        if (!is_null($execution_type) && (!in_array($execution_type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'execution_type', must be one of 'NotSpecified', 'WEB', 'DIRECT'");
+        $allowed_values = $this->getExecutionTypeAllowableValues();
+        if (!is_null($execution_type) && !in_array($execution_type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'execution_type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['execution_type'] = $execution_type;
 
@@ -387,7 +425,7 @@ class UniversalPayTokenizationResponse implements ArrayAccess
 
     /**
      * Sets author_id
-     * @param string $author_id
+     * @param string $author_id A user's ID
      * @return $this
      */
     public function setAuthorId($author_id)
@@ -408,7 +446,7 @@ class UniversalPayTokenizationResponse implements ArrayAccess
 
     /**
      * Sets credited_user_id
-     * @param string $credited_user_id
+     * @param string $credited_user_id The user ID who was credited
      * @return $this
      */
     public function setCreditedUserId($credited_user_id)

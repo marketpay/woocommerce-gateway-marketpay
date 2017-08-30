@@ -47,7 +47,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testUniversalPayTokenRequestPost()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAuthorizationFunds()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedWalletId()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertySecureMode()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertySuccessUrl()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCancelUrl()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLanguage()
     {
-
     }
 
     /**
@@ -143,7 +131,5 @@ class UniversalPayTokenRequestPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCustomer()
     {
-
     }
-
 }

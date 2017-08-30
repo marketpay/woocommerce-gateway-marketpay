@@ -1,11 +1,11 @@
 # Swagger\Client\TransfersApi
 
-All URIs are relative to *https://localhost/*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**transfersGet**](TransfersApi.md#transfersGet) | **GET** /v2.01/Transfers/{TransferId} | View a Transfer
-[**transfersGetList**](TransfersApi.md#transfersGetList) | **GET** /v2.01/Transfers | 
+[**transfersGetList**](TransfersApi.md#transfersGetList) | **GET** /v2.01/Transfers | View a Transfer
 [**transfersPost**](TransfersApi.md#transfersPost) | **POST** /v2.01/Transfers | Create a Transfer
 
 
@@ -58,9 +58,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **transfersGetList**
-> \Swagger\Client\Model\ResponseListTransferResponse transfersGetList($page, $per_page)
+> \Swagger\Client\Model\ResponseListTransferResponse transfersGetList($page, $per_page, $before_date, $after_date)
 
+View a Transfer
 
+A Transfer is a request to relocate e-money from one wallet to another wallet.
 
 ### Example
 ```php
@@ -73,9 +75,11 @@ Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_AC
 $api_instance = new Swagger\Client\Api\TransfersApi();
 $page = 56; // int | 
 $per_page = 56; // int | 
+$before_date = 789; // int | 
+$after_date = 789; // int | 
 
 try {
-    $result = $api_instance->transfersGetList($page, $per_page);
+    $result = $api_instance->transfersGetList($page, $per_page, $before_date, $after_date);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TransfersApi->transfersGetList: ', $e->getMessage(), PHP_EOL;
@@ -89,6 +93,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int**|  | [optional]
  **per_page** | **int**|  | [optional]
+ **before_date** | **int**|  | [optional]
+ **after_date** | **int**|  | [optional]
 
 ### Return type
 
@@ -136,7 +142,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **transfer** | [**\Swagger\Client\Model\TransferPost**](../Model/\Swagger\Client\Model\TransferPost.md)| Transfer Object params | [optional]
+ **transfer** | [**\Swagger\Client\Model\TransferPost**](../Model/TransferPost.md)| Transfer Object params | [optional]
 
 ### Return type
 

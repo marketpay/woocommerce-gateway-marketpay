@@ -47,7 +47,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testCardResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyUserId()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyExpirationDate()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAlias()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCardProvider()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCardType()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCountry()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyProduct()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyBankCode()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyActive()
     {
-
     }
 
     /**
@@ -159,7 +145,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCurrency()
     {
-
     }
 
     /**
@@ -167,7 +152,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyValidity()
     {
-
     }
 
     /**
@@ -175,7 +159,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyId()
     {
-
     }
 
     /**
@@ -183,7 +166,6 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreationDate()
     {
-
     }
 
     /**
@@ -191,7 +173,5 @@ class CardResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

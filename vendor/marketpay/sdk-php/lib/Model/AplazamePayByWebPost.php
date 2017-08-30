@@ -67,9 +67,32 @@ class AplazamePayByWebPost implements ArrayAccess
         'customer' => '\Swagger\Client\Model\Customer'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'tag' => null,
+        'user_id' => 'int64',
+        'credited_wallet_id' => null,
+        'debited_funds' => null,
+        'fees' => null,
+        'shipping' => null,
+        'cancel_url' => null,
+        'success_url' => null,
+        'checkout_url' => null,
+        'order_items' => null,
+        'customer' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -448,7 +471,7 @@ class AplazamePayByWebPost implements ArrayAccess
 
     /**
      * Sets customer
-     * @param \Swagger\Client\Model\Customer $customer Customer data.  Optional user info. If it is not set, Marketpay will try to use the data it does currently have about the user, but it will fail if existing data is not enough.
+     * @param \Swagger\Client\Model\Customer $customer Customer data.
      * @return $this
      */
     public function setCustomer($customer)

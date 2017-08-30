@@ -47,7 +47,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testBankAccountResponseCa()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyBranchCode()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyInstitutionNumber()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAccountNumber()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyBankName()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyType()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyOwnerAddress()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyOwnerName()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyUserId()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyActive()
     {
-
     }
 
     /**
@@ -159,7 +145,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyId()
     {
-
     }
 
     /**
@@ -167,7 +152,6 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreationDate()
     {
-
     }
 
     /**
@@ -175,7 +159,5 @@ class BankAccountResponseCaTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

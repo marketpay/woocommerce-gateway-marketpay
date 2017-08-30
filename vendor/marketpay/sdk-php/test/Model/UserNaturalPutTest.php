@@ -47,7 +47,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testUserNaturalPut()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyEmail()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyFirstName()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLastName()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAddress()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyBirthday()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyNationality()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCountryOfResidence()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyOccupation()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyIncomeRange()
     {
-
     }
 
     /**
@@ -159,7 +145,5 @@ class UserNaturalPutTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

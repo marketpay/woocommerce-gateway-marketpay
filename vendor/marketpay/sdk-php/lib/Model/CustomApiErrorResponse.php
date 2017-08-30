@@ -61,9 +61,26 @@ class CustomApiErrorResponse implements ArrayAccess
         'errors' => 'map[string,string]'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'message' => null,
+        'type' => null,
+        'id' => null,
+        'date' => 'int64',
+        'errors' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**

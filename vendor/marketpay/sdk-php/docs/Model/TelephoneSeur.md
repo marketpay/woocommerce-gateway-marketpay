@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**prefix** | **string** | This field is deprecated. Use CountryCode instead | [optional] 
 **country_code** | **string** |  | [optional] 
 **number** | **string** |  | [optional] 
 

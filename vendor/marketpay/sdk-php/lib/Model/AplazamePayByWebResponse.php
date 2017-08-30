@@ -58,9 +58,23 @@ class AplazamePayByWebResponse implements ArrayAccess
         'checkout_data' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'pay_in_id' => null,
+        'checkout_data' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -163,7 +177,7 @@ class AplazamePayByWebResponse implements ArrayAccess
 
     /**
      * Sets pay_in_id
-     * @param string $pay_in_id
+     * @param string $pay_in_id Id of the payment
      * @return $this
      */
     public function setPayInId($pay_in_id)

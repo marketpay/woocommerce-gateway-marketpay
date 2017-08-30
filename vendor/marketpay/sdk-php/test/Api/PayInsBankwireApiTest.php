@@ -49,7 +49,6 @@ class PayInsBankwireApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -57,7 +56,6 @@ class PayInsBankwireApiTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -65,7 +63,6 @@ class PayInsBankwireApiTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -73,29 +70,25 @@ class PayInsBankwireApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
      * Test case for payInsBankwireBankwireGetPayment
      *
-     * .
+     * View a Bankwire PayIn.
      *
      */
     public function testPayInsBankwireBankwireGetPayment()
     {
-
     }
 
     /**
      * Test case for payInsBankwireBankwirePaymentByDirect
      *
-     * .
+     * Create a Bankwire PayIn.
      *
      */
     public function testPayInsBankwireBankwirePaymentByDirect()
     {
-
     }
-
 }

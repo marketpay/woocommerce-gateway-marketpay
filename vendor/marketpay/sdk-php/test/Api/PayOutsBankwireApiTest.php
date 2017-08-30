@@ -49,7 +49,6 @@ class PayOutsBankwireApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -57,7 +56,6 @@ class PayOutsBankwireApiTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -65,7 +63,6 @@ class PayOutsBankwireApiTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -73,51 +70,25 @@ class PayOutsBankwireApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
      * Test case for payOutsBankwireGet
      *
-     * .
+     * View a Bankwire PayOut.
      *
      */
     public function testPayOutsBankwireGet()
     {
-
-    }
-
-    /**
-     * Test case for payOutsBankwireGet_0
-     *
-     * .
-     *
-     */
-    public function testPayOutsBankwireGet0()
-    {
-
     }
 
     /**
      * Test case for payOutsBankwirePost
      *
-     * .
+     * Create a Bankwire PayOut.
      *
      */
     public function testPayOutsBankwirePost()
     {
-
     }
-
-    /**
-     * Test case for payOutsBankwirePost_0
-     *
-     * .
-     *
-     */
-    public function testPayOutsBankwirePost0()
-    {
-
-    }
-
 }

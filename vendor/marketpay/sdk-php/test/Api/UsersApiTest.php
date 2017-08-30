@@ -49,7 +49,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -57,7 +56,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -65,7 +63,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -73,7 +70,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -84,7 +80,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersGet()
     {
-
     }
 
     /**
@@ -95,7 +90,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersGetBankAccount()
     {
-
     }
 
     /**
@@ -106,7 +100,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersGetBankAccountList()
     {
-
     }
 
     /**
@@ -117,7 +110,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersGetCardList()
     {
-
     }
 
     /**
@@ -128,7 +120,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersGetLegal()
     {
-
     }
 
     /**
@@ -139,7 +130,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersGetList()
     {
-
     }
 
     /**
@@ -150,7 +140,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersGetNatural()
     {
-
     }
 
     /**
@@ -161,7 +150,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersGetTransactionList()
     {
-
     }
 
     /**
@@ -172,7 +160,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersGetWalletList()
     {
-
     }
 
     /**
@@ -183,7 +170,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersPostBankAccountCa()
     {
-
     }
 
     /**
@@ -194,7 +180,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersPostBankAccountGb()
     {
-
     }
 
     /**
@@ -205,7 +190,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersPostBankAccountIban()
     {
-
     }
 
     /**
@@ -216,7 +200,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersPostBankAccountOther()
     {
-
     }
 
     /**
@@ -227,7 +210,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersPostBankAccountUs()
     {
-
     }
 
     /**
@@ -238,7 +220,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersPostLegal()
     {
-
     }
 
     /**
@@ -249,7 +230,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersPostNatural()
     {
-
     }
 
     /**
@@ -260,7 +240,6 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersPutLegal()
     {
-
     }
 
     /**
@@ -271,7 +250,5 @@ class UsersApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersPutNatural()
     {
-
     }
-
 }

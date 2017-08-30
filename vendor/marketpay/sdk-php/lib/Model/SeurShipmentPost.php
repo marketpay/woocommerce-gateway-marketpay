@@ -64,9 +64,29 @@ class SeurShipmentPost implements ArrayAccess
         'observations' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'tag' => null,
+        'pick_up_date' => 'int64',
+        'sender' => null,
+        'receiver' => null,
+        'sender_user_id' => null,
+        'receiver_user_id' => null,
+        'product' => null,
+        'observations' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -340,7 +360,7 @@ class SeurShipmentPost implements ArrayAccess
 
     /**
      * Sets observations
-     * @param string $observations
+     * @param string $observations 
      * @return $this
      */
     public function setObservations($observations)

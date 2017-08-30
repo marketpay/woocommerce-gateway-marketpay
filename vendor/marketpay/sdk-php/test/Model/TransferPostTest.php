@@ -47,7 +47,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testTransferPost()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedUserId()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDebitedFunds()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyFees()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDebitedWalletId()
     {
-
     }
 
     /**
@@ -127,7 +117,5 @@ class TransferPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedWalletId()
     {
-
     }
-
 }

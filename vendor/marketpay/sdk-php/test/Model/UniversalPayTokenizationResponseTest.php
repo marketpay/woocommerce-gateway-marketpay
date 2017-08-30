@@ -47,7 +47,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testUniversalPayTokenizationResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedWalletId()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyStatus()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyExecutionDate()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyResultCode()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyResultMessage()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyExecutionType()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAuthorId()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedUserId()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyProvider()
     {
-
     }
 
     /**
@@ -159,7 +145,5 @@ class UniversalPayTokenizationResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCardId()
     {
-
     }
-
 }

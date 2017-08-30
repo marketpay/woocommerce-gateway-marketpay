@@ -47,7 +47,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedsysPreauthorizeResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDebitedFunds()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyStatus()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyPaymentStatus()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyExecutionDate()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyResultCode()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyResultMessage()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyExecutionType()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCardId()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyStatementDescriptor()
     {
-
     }
 
     /**
@@ -159,7 +145,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAuthorId()
     {
-
     }
 
     /**
@@ -167,7 +152,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyPayInId()
     {
-
     }
 
     /**
@@ -175,7 +159,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLanguage()
     {
-
     }
 
     /**
@@ -183,7 +166,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyProvider()
     {
-
     }
 
     /**
@@ -191,7 +173,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyId()
     {
-
     }
 
     /**
@@ -199,7 +180,6 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreationDate()
     {
-
     }
 
     /**
@@ -207,7 +187,5 @@ class RedsysPreauthorizeResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

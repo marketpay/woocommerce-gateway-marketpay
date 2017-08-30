@@ -61,9 +61,26 @@ class RedsysPreauthorizeByWebResponse implements ArrayAccess
         'ds_signature' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'preauthorization_id' => null,
+        'url' => null,
+        'ds_signature_version' => null,
+        'ds_merchant_parameters' => null,
+        'ds_signature' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**

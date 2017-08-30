@@ -54,9 +54,17 @@ class TelephoneSeur implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'prefix' => 'string',
         'country_code' => 'string',
         'number' => 'string'
+    ];
+
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'country_code' => null,
+        'number' => null
     ];
 
     public static function swaggerTypes()
@@ -64,12 +72,16 @@ class TelephoneSeur implements ArrayAccess
         return self::$swaggerTypes;
     }
 
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
+
     /**
      * Array of attributes where the key is the local name, and the value is the original name
      * @var string[]
      */
     protected static $attributeMap = [
-        'prefix' => 'Prefix',
         'country_code' => 'CountryCode',
         'number' => 'Number'
     ];
@@ -80,7 +92,6 @@ class TelephoneSeur implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'prefix' => 'setPrefix',
         'country_code' => 'setCountryCode',
         'number' => 'setNumber'
     ];
@@ -91,7 +102,6 @@ class TelephoneSeur implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'prefix' => 'getPrefix',
         'country_code' => 'getCountryCode',
         'number' => 'getNumber'
     ];
@@ -127,7 +137,6 @@ class TelephoneSeur implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['prefix'] = isset($data['prefix']) ? $data['prefix'] : null;
         $this->container['country_code'] = isset($data['country_code']) ? $data['country_code'] : null;
         $this->container['number'] = isset($data['number']) ? $data['number'] : null;
     }
@@ -156,27 +165,6 @@ class TelephoneSeur implements ArrayAccess
         return true;
     }
 
-
-    /**
-     * Gets prefix
-     * @return string
-     */
-    public function getPrefix()
-    {
-        return $this->container['prefix'];
-    }
-
-    /**
-     * Sets prefix
-     * @param string $prefix This field is deprecated. Use CountryCode instead
-     * @return $this
-     */
-    public function setPrefix($prefix)
-    {
-        $this->container['prefix'] = $prefix;
-
-        return $this;
-    }
 
     /**
      * Gets country_code

@@ -47,7 +47,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddress()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAddressLine1()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAddressLine2()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCity()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyRegion()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyPostalCode()
     {
-
     }
 
     /**
@@ -127,7 +117,5 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCountry()
     {
-
     }
-
 }

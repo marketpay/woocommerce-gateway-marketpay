@@ -72,9 +72,37 @@ class TransferResponse implements ArrayAccess
         'tag' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'debited_funds' => null,
+        'credited_funds' => null,
+        'fees' => null,
+        'debited_wallet_id' => null,
+        'credited_wallet_id' => null,
+        'author_id' => null,
+        'credited_user_id' => null,
+        'nature' => null,
+        'status' => null,
+        'execution_date' => 'int64',
+        'result_code' => null,
+        'result_message' => null,
+        'type' => null,
+        'id' => null,
+        'creation_date' => 'int64',
+        'tag' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -256,19 +284,28 @@ class TransferResponse implements ArrayAccess
     {
         $invalid_properties = [];
 
-        $allowed_values = ["REGULAR", "REFUND", "REPUDIATION", "SETTLEMENT"];
+        $allowed_values = $this->getNatureAllowableValues();
         if (!in_array($this->container['nature'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'nature', must be one of 'REGULAR', 'REFUND', 'REPUDIATION', 'SETTLEMENT'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'nature', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'status', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["PAYIN", "PAYOUT", "TRANSFER"];
+        $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'type', must be one of 'PAYIN', 'PAYOUT', 'TRANSFER'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -283,15 +320,15 @@ class TransferResponse implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = ["REGULAR", "REFUND", "REPUDIATION", "SETTLEMENT"];
+        $allowed_values = $this->getNatureAllowableValues();
         if (!in_array($this->container['nature'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["PAYIN", "PAYOUT", "TRANSFER"];
+        $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
             return false;
         }
@@ -462,9 +499,14 @@ class TransferResponse implements ArrayAccess
      */
     public function setNature($nature)
     {
-        $allowed_values = array('REGULAR', 'REFUND', 'REPUDIATION', 'SETTLEMENT');
-        if (!is_null($nature) && (!in_array($nature, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'nature', must be one of 'REGULAR', 'REFUND', 'REPUDIATION', 'SETTLEMENT'");
+        $allowed_values = $this->getNatureAllowableValues();
+        if (!is_null($nature) && !in_array($nature, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'nature', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['nature'] = $nature;
 
@@ -487,9 +529,14 @@ class TransferResponse implements ArrayAccess
      */
     public function setStatus($status)
     {
-        $allowed_values = array('CREATED', 'SUCCEEDED', 'FAILED');
-        if (!is_null($status) && (!in_array($status, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED'");
+        $allowed_values = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['status'] = $status;
 
@@ -575,9 +622,14 @@ class TransferResponse implements ArrayAccess
      */
     public function setType($type)
     {
-        $allowed_values = array('PAYIN', 'PAYOUT', 'TRANSFER');
-        if (!is_null($type) && (!in_array($type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'PAYIN', 'PAYOUT', 'TRANSFER'");
+        $allowed_values = $this->getTypeAllowableValues();
+        if (!is_null($type) && !in_array($type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['type'] = $type;
 
@@ -595,7 +647,7 @@ class TransferResponse implements ArrayAccess
 
     /**
      * Sets id
-     * @param string $id
+     * @param string $id The item's ID
      * @return $this
      */
     public function setId($id)
@@ -616,7 +668,7 @@ class TransferResponse implements ArrayAccess
 
     /**
      * Sets creation_date
-     * @param int $creation_date
+     * @param int $creation_date When the item was created
      * @return $this
      */
     public function setCreationDate($creation_date)
@@ -637,7 +689,7 @@ class TransferResponse implements ArrayAccess
 
     /**
      * Sets tag
-     * @param string $tag
+     * @param string $tag Custom data that you can add to this item
      * @return $this
      */
     public function setTag($tag)

@@ -47,7 +47,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedsysPayByWebPost()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertySaveCard()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCardId()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedWalletId()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyStatementDescriptor()
     {
-
     }
 
     /**
@@ -127,15 +117,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertySuccessUrl()
     {
-
-    }
-
-    /**
-     * Test attribute "url_ok"
-     */
-    public function testPropertyUrlOk()
-    {
-
     }
 
     /**
@@ -143,15 +124,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCancelUrl()
     {
-
-    }
-
-    /**
-     * Test attribute "url_ko"
-     */
-    public function testPropertyUrlKo()
-    {
-
     }
 
     /**
@@ -159,7 +131,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDebitedFunds()
     {
-
     }
 
     /**
@@ -167,7 +138,6 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyFees()
     {
-
     }
 
     /**
@@ -175,7 +145,5 @@ class RedsysPayByWebPostTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyLanguage()
     {
-
     }
-
 }

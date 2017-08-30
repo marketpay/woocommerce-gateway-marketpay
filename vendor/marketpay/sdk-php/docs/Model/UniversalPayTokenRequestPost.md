@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**authorization_funds** | [**\Swagger\Client\Model\Money**](Money.md) |  | [optional] 
+**authorization_funds** | [**\Swagger\Client\Model\Money**](Money.md) | Amount that will be charged to authorize the card. Default value is 1 euro. Authorizations with zero amount may be rejected by the credit card issuer and are not guaranteed to succeed. | [optional] 
 **tag** | **string** | Custom data that you can add to this item | [optional] 
 **credited_wallet_id** | **string** | The ID of the wallet where money will be credited | 
 **secure_mode** | **string** |  | [optional] 

@@ -1,6 +1,6 @@
 # Swagger\Client\ShipmentSeurApi
 
-All URIs are relative to *https://localhost/*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -88,7 +88,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shipment** | [**\Swagger\Client\Model\SeurShipmentPost**](../Model/\Swagger\Client\Model\SeurShipmentPost.md)| Seur Shipment Object params | [optional]
+ **shipment** | [**\Swagger\Client\Model\SeurShipmentPost**](../Model/SeurShipmentPost.md)| Seur Shipment Object params | [optional]
 
 ### Return type
 

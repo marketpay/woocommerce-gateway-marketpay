@@ -64,9 +64,29 @@ class AplazameOrderItem implements ArrayAccess
         'tax_rate' => 'int'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'id' => null,
+        'name' => null,
+        'url' => null,
+        'image_url' => null,
+        'quantity' => 'int64',
+        'price' => 'int64',
+        'description' => null,
+        'tax_rate' => 'int64'
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**

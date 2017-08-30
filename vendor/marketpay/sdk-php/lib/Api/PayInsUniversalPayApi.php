@@ -90,9 +90,9 @@ class PayInsUniversalPayApi
     /**
      * Operation payInsUniversalPayGetUniversalPayTokenization
      *
-     * 
+     * View a UniversalPay card tokenization status
      *
-     * @param int $token_id  (required)
+     * @param int $token_id The Id of a tokenization (required)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\UniversalPayTokenizationResponse
      */
@@ -105,9 +105,9 @@ class PayInsUniversalPayApi
     /**
      * Operation payInsUniversalPayGetUniversalPayTokenizationWithHttpInfo
      *
-     * 
+     * View a UniversalPay card tokenization status
      *
-     * @param int $token_id  (required)
+     * @param int $token_id The Id of a tokenization (required)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return array of \Swagger\Client\Model\UniversalPayTokenizationResponse, HTTP status code, HTTP response headers (array of strings)
      */
@@ -137,10 +137,7 @@ class PayInsUniversalPayApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -230,10 +227,7 @@ class PayInsUniversalPayApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -310,9 +304,6 @@ class PayInsUniversalPayApi
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
-
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         // body params
         $_tempBody = null;
@@ -411,9 +402,6 @@ class PayInsUniversalPayApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
-
         // body params
         $_tempBody = null;
         if (isset($universal_pay_refund)) {
@@ -462,8 +450,6 @@ class PayInsUniversalPayApi
     /**
      * Operation payInsUniversalPayUniversalPaySaveCard
      *
-     * 
-     *
      * @param \Swagger\Client\Model\UniversalPayTokenRequestPost $universal_pay_save_card  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\UniversalPayTokenizeByWebResponse
@@ -476,8 +462,6 @@ class PayInsUniversalPayApi
 
     /**
      * Operation payInsUniversalPayUniversalPaySaveCardWithHttpInfo
-     *
-     * 
      *
      * @param \Swagger\Client\Model\UniversalPayTokenRequestPost $universal_pay_save_card  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
@@ -496,9 +480,6 @@ class PayInsUniversalPayApi
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
-
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         // body params
         $_tempBody = null;

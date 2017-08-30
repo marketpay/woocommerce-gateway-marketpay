@@ -49,7 +49,6 @@ class PayInsUniversalPayApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -57,7 +56,6 @@ class PayInsUniversalPayApiTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -65,7 +63,6 @@ class PayInsUniversalPayApiTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -73,18 +70,16 @@ class PayInsUniversalPayApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
      * Test case for payInsUniversalPayGetUniversalPayTokenization
      *
-     * .
+     * View a UniversalPay card tokenization status.
      *
      */
     public function testPayInsUniversalPayGetUniversalPayTokenization()
     {
-
     }
 
     /**
@@ -95,7 +90,6 @@ class PayInsUniversalPayApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsUniversalPayUniversalPayGetPayment()
     {
-
     }
 
     /**
@@ -106,7 +100,6 @@ class PayInsUniversalPayApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsUniversalPayUniversalPayPostPaymentByWeb()
     {
-
     }
 
     /**
@@ -117,7 +110,6 @@ class PayInsUniversalPayApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsUniversalPayUniversalPayPostRefund()
     {
-
     }
 
     /**
@@ -128,7 +120,5 @@ class PayInsUniversalPayApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testPayInsUniversalPayUniversalPaySaveCard()
     {
-
     }
-
 }

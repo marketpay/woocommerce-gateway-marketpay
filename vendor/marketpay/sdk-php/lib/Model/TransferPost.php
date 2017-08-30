@@ -62,9 +62,27 @@ class TransferPost implements ArrayAccess
         'credited_wallet_id' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'tag' => null,
+        'credited_user_id' => null,
+        'debited_funds' => null,
+        'fees' => null,
+        'debited_wallet_id' => null,
+        'credited_wallet_id' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**

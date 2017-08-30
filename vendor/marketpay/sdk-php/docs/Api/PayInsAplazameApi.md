@@ -1,6 +1,6 @@
 # Swagger\Client\PayInsAplazameApi
 
-All URIs are relative to *https://localhost/*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -88,7 +88,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **aplazame_pay_in** | [**\Swagger\Client\Model\AplazamePayByWebPost**](../Model/\Swagger\Client\Model\AplazamePayByWebPost.md)| ------------ | [optional]
+ **aplazame_pay_in** | [**\Swagger\Client\Model\AplazamePayByWebPost**](../Model/AplazamePayByWebPost.md)| ------------ | [optional]
 
 ### Return type
 
@@ -136,7 +136,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pay_in_id** | **string**|  |
- **aplazame_refund** | [**\Swagger\Client\Model\AplazameRefundPaymentPost**](../Model/\Swagger\Client\Model\AplazameRefundPaymentPost.md)|  | [optional]
+ **aplazame_refund** | [**\Swagger\Client\Model\AplazameRefundPaymentPost**](../Model/AplazameRefundPaymentPost.md)|  | [optional]
 
 ### Return type
 

@@ -64,9 +64,29 @@ class UniversalPayTokenRequestPost implements ArrayAccess
         'customer' => '\Swagger\Client\Model\CustomerDetail'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'authorization_funds' => null,
+        'tag' => null,
+        'credited_wallet_id' => null,
+        'secure_mode' => null,
+        'success_url' => null,
+        'cancel_url' => null,
+        'language' => null,
+        'customer' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -132,7 +152,7 @@ class UniversalPayTokenRequestPost implements ArrayAccess
     }
 
     const SECURE_MODE_NOT_SPECIFIED = 'NotSpecified';
-    const SECURE_MODE_DEFAULT = 'DEFAULT';
+    const SECURE_MODE__DEFAULT = 'DEFAULT';
     const SECURE_MODE_FORCE = 'FORCE';
     const LANGUAGE_NOT_SPECIFIED = 'NotSpecified';
     const LANGUAGE_CA = 'CA';
@@ -166,7 +186,7 @@ class UniversalPayTokenRequestPost implements ArrayAccess
     {
         return [
             self::SECURE_MODE_NOT_SPECIFIED,
-            self::SECURE_MODE_DEFAULT,
+            self::SECURE_MODE__DEFAULT,
             self::SECURE_MODE_FORCE,
         ];
     }
@@ -237,14 +257,20 @@ class UniversalPayTokenRequestPost implements ArrayAccess
         if ($this->container['credited_wallet_id'] === null) {
             $invalid_properties[] = "'credited_wallet_id' can't be null";
         }
-        $allowed_values = ["NotSpecified", "DEFAULT", "FORCE"];
+        $allowed_values = $this->getSecureModeAllowableValues();
         if (!in_array($this->container['secure_mode'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'secure_mode', must be one of 'NotSpecified', 'DEFAULT', 'FORCE'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'secure_mode', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = $this->getLanguageAllowableValues();
         if (!in_array($this->container['language'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'language', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         if ($this->container['customer'] === null) {
@@ -265,11 +291,11 @@ class UniversalPayTokenRequestPost implements ArrayAccess
         if ($this->container['credited_wallet_id'] === null) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "DEFAULT", "FORCE"];
+        $allowed_values = $this->getSecureModeAllowableValues();
         if (!in_array($this->container['secure_mode'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["NotSpecified", "CA", "DE", "EN", "DA", "ES", "ET", "GL", "FI", "FR", "EL", "EU", "HU", "IT", "NL", "NO", "PL", "PT", "SK", "SV", "CS"];
+        $allowed_values = $this->getLanguageAllowableValues();
         if (!in_array($this->container['language'], $allowed_values)) {
             return false;
         }
@@ -291,7 +317,7 @@ class UniversalPayTokenRequestPost implements ArrayAccess
 
     /**
      * Sets authorization_funds
-     * @param \Swagger\Client\Model\Money $authorization_funds
+     * @param \Swagger\Client\Model\Money $authorization_funds Amount that will be charged to authorize the card. Default value is 1 euro. Authorizations with zero amount may be rejected by the credit card issuer and are not guaranteed to succeed.
      * @return $this
      */
     public function setAuthorizationFunds($authorization_funds)
@@ -359,9 +385,14 @@ class UniversalPayTokenRequestPost implements ArrayAccess
      */
     public function setSecureMode($secure_mode)
     {
-        $allowed_values = array('NotSpecified', 'DEFAULT', 'FORCE');
-        if (!is_null($secure_mode) && (!in_array($secure_mode, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'secure_mode', must be one of 'NotSpecified', 'DEFAULT', 'FORCE'");
+        $allowed_values = $this->getSecureModeAllowableValues();
+        if (!is_null($secure_mode) && !in_array($secure_mode, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'secure_mode', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['secure_mode'] = $secure_mode;
 
@@ -426,9 +457,14 @@ class UniversalPayTokenRequestPost implements ArrayAccess
      */
     public function setLanguage($language)
     {
-        $allowed_values = array('NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS');
-        if (!is_null($language) && (!in_array($language, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'language', must be one of 'NotSpecified', 'CA', 'DE', 'EN', 'DA', 'ES', 'ET', 'GL', 'FI', 'FR', 'EL', 'EU', 'HU', 'IT', 'NL', 'NO', 'PL', 'PT', 'SK', 'SV', 'CS'");
+        $allowed_values = $this->getLanguageAllowableValues();
+        if (!is_null($language) && !in_array($language, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'language', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['language'] = $language;
 

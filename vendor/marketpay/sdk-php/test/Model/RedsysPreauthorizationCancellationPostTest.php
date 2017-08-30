@@ -47,7 +47,6 @@ class RedsysPreauthorizationCancellationPostTest extends \PHPUnit_Framework_Test
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class RedsysPreauthorizationCancellationPostTest extends \PHPUnit_Framework_Test
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class RedsysPreauthorizationCancellationPostTest extends \PHPUnit_Framework_Test
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class RedsysPreauthorizationCancellationPostTest extends \PHPUnit_Framework_Test
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,5 @@ class RedsysPreauthorizationCancellationPostTest extends \PHPUnit_Framework_Test
      */
     public function testRedsysPreauthorizationCancellationPost()
     {
-
     }
-
 }

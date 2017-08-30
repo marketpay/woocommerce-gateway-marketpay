@@ -90,9 +90,9 @@ class PayInsBankwireApi
     /**
      * Operation payInsBankwireBankwireGetPayment
      *
-     * 
+     * View a Bankwire PayIn
      *
-     * @param int $pay_in_id  (required)
+     * @param int $pay_in_id The Id of a payment (required)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\PayInBankwireResponse
      */
@@ -105,9 +105,9 @@ class PayInsBankwireApi
     /**
      * Operation payInsBankwireBankwireGetPaymentWithHttpInfo
      *
-     * 
+     * View a Bankwire PayIn
      *
-     * @param int $pay_in_id  (required)
+     * @param int $pay_in_id The Id of a payment (required)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return array of \Swagger\Client\Model\PayInBankwireResponse, HTTP status code, HTTP response headers (array of strings)
      */
@@ -137,10 +137,7 @@ class PayInsBankwireApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -183,9 +180,9 @@ class PayInsBankwireApi
     /**
      * Operation payInsBankwireBankwirePaymentByDirect
      *
-     * 
+     * Create a Bankwire PayIn
      *
-     * @param \Swagger\Client\Model\PayInBankwirePost $bankwire_pay_in  (optional)
+     * @param \Swagger\Client\Model\PayInBankwirePost $bankwire_pay_in Redsys PayIn Request Object params (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\PayInBankwireResponse
      */
@@ -198,9 +195,9 @@ class PayInsBankwireApi
     /**
      * Operation payInsBankwireBankwirePaymentByDirectWithHttpInfo
      *
-     * 
+     * Create a Bankwire PayIn
      *
-     * @param \Swagger\Client\Model\PayInBankwirePost $bankwire_pay_in  (optional)
+     * @param \Swagger\Client\Model\PayInBankwirePost $bankwire_pay_in Redsys PayIn Request Object params (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return array of \Swagger\Client\Model\PayInBankwireResponse, HTTP status code, HTTP response headers (array of strings)
      */
@@ -217,9 +214,6 @@ class PayInsBankwireApi
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
-
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         // body params
         $_tempBody = null;

@@ -47,7 +47,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -55,7 +54,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -63,7 +61,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -71,7 +68,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -79,7 +75,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testTransactionResponse()
     {
-
     }
 
     /**
@@ -87,7 +82,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDebitedFunds()
     {
-
     }
 
     /**
@@ -95,7 +89,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedFunds()
     {
-
     }
 
     /**
@@ -103,7 +96,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyFees()
     {
-
     }
 
     /**
@@ -111,7 +103,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyDebitedWalletId()
     {
-
     }
 
     /**
@@ -119,7 +110,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedWalletId()
     {
-
     }
 
     /**
@@ -127,7 +117,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyAuthorId()
     {
-
     }
 
     /**
@@ -135,7 +124,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreditedUserId()
     {
-
     }
 
     /**
@@ -143,7 +131,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyNature()
     {
-
     }
 
     /**
@@ -151,7 +138,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyStatus()
     {
-
     }
 
     /**
@@ -159,7 +145,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyExecutionDate()
     {
-
     }
 
     /**
@@ -167,7 +152,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyResultCode()
     {
-
     }
 
     /**
@@ -175,7 +159,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyResultMessage()
     {
-
     }
 
     /**
@@ -183,7 +166,20 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyType()
     {
+    }
 
+    /**
+     * Test attribute "transaction_source"
+     */
+    public function testPropertyTransactionSource()
+    {
+    }
+
+    /**
+     * Test attribute "transaction_destination"
+     */
+    public function testPropertyTransactionDestination()
+    {
     }
 
     /**
@@ -191,7 +187,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyId()
     {
-
     }
 
     /**
@@ -199,7 +194,6 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyCreationDate()
     {
-
     }
 
     /**
@@ -207,7 +201,5 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testPropertyTag()
     {
-
     }
-
 }

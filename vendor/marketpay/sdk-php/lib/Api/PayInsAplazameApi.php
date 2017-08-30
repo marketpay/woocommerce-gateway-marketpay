@@ -137,10 +137,7 @@ class PayInsAplazameApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -218,9 +215,6 @@ class PayInsAplazameApi
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
 
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
-
         // body params
         $_tempBody = null;
         if (isset($aplazame_pay_in)) {
@@ -269,8 +263,6 @@ class PayInsAplazameApi
     /**
      * Operation payInsAplazameRefund
      *
-     * 
-     *
      * @param string $pay_in_id  (required)
      * @param \Swagger\Client\Model\AplazameRefundPaymentPost $aplazame_refund  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
@@ -284,8 +276,6 @@ class PayInsAplazameApi
 
     /**
      * Operation payInsAplazameRefundWithHttpInfo
-     *
-     * 
      *
      * @param string $pay_in_id  (required)
      * @param \Swagger\Client\Model\AplazameRefundPaymentPost $aplazame_refund  (optional)
@@ -318,9 +308,6 @@ class PayInsAplazameApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
-
         // body params
         $_tempBody = null;
         if (isset($aplazame_refund)) {

@@ -66,9 +66,31 @@ class SeurShipmentResponse implements ArrayAccess
         'tag' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'locator_number' => null,
+        'quotation' => 'int32',
+        'status' => null,
+        'status_pick_up' => null,
+        'status_pick_up_code' => null,
+        'status_delivery' => null,
+        'status_delivery_code' => null,
+        'id' => null,
+        'creation_date' => 'int64',
+        'tag' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -230,19 +252,28 @@ class SeurShipmentResponse implements ArrayAccess
     {
         $invalid_properties = [];
 
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED", "CANCELED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED', 'CANCELED'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'status', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["Unknown", "Ready", "Started", "Failed", "Picked"];
+        $allowed_values = $this->getStatusPickUpAllowableValues();
         if (!in_array($this->container['status_pick_up'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'status_pick_up', must be one of 'Unknown', 'Ready', 'Started', 'Failed', 'Picked'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'status_pick_up', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["Unknown", "Ready", "Delivered"];
+        $allowed_values = $this->getStatusDeliveryAllowableValues();
         if (!in_array($this->container['status_delivery'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'status_delivery', must be one of 'Unknown', 'Ready', 'Delivered'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'status_delivery', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -257,15 +288,15 @@ class SeurShipmentResponse implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED", "CANCELED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["Unknown", "Ready", "Started", "Failed", "Picked"];
+        $allowed_values = $this->getStatusPickUpAllowableValues();
         if (!in_array($this->container['status_pick_up'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["Unknown", "Ready", "Delivered"];
+        $allowed_values = $this->getStatusDeliveryAllowableValues();
         if (!in_array($this->container['status_delivery'], $allowed_values)) {
             return false;
         }
@@ -331,9 +362,14 @@ class SeurShipmentResponse implements ArrayAccess
      */
     public function setStatus($status)
     {
-        $allowed_values = array('CREATED', 'SUCCEEDED', 'FAILED', 'CANCELED');
-        if (!is_null($status) && (!in_array($status, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED', 'CANCELED'");
+        $allowed_values = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['status'] = $status;
 
@@ -356,9 +392,14 @@ class SeurShipmentResponse implements ArrayAccess
      */
     public function setStatusPickUp($status_pick_up)
     {
-        $allowed_values = array('Unknown', 'Ready', 'Started', 'Failed', 'Picked');
-        if (!is_null($status_pick_up) && (!in_array($status_pick_up, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'status_pick_up', must be one of 'Unknown', 'Ready', 'Started', 'Failed', 'Picked'");
+        $allowed_values = $this->getStatusPickUpAllowableValues();
+        if (!is_null($status_pick_up) && !in_array($status_pick_up, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status_pick_up', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['status_pick_up'] = $status_pick_up;
 
@@ -402,9 +443,14 @@ class SeurShipmentResponse implements ArrayAccess
      */
     public function setStatusDelivery($status_delivery)
     {
-        $allowed_values = array('Unknown', 'Ready', 'Delivered');
-        if (!is_null($status_delivery) && (!in_array($status_delivery, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'status_delivery', must be one of 'Unknown', 'Ready', 'Delivered'");
+        $allowed_values = $this->getStatusDeliveryAllowableValues();
+        if (!is_null($status_delivery) && !in_array($status_delivery, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status_delivery', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['status_delivery'] = $status_delivery;
 
@@ -443,7 +489,7 @@ class SeurShipmentResponse implements ArrayAccess
 
     /**
      * Sets id
-     * @param string $id
+     * @param string $id The item's ID
      * @return $this
      */
     public function setId($id)
@@ -464,7 +510,7 @@ class SeurShipmentResponse implements ArrayAccess
 
     /**
      * Sets creation_date
-     * @param int $creation_date
+     * @param int $creation_date When the item was created
      * @return $this
      */
     public function setCreationDate($creation_date)
@@ -485,7 +531,7 @@ class SeurShipmentResponse implements ArrayAccess
 
     /**
      * Sets tag
-     * @param string $tag
+     * @param string $tag Custom data that you can add to this item
      * @return $this
      */
     public function setTag($tag)

@@ -1,6 +1,6 @@
 # Swagger\Client\PayInsRedsysApi
 
-All URIs are relative to *https://localhost/*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -140,7 +140,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **redsys_pay_in** | [**\Swagger\Client\Model\RedsysPayByWebPost**](../Model/\Swagger\Client\Model\RedsysPayByWebPost.md)| Redsys PayIn Request Object params | [optional]
+ **redsys_pay_in** | [**\Swagger\Client\Model\RedsysPayByWebPost**](../Model/RedsysPayByWebPost.md)| Redsys PayIn Request Object params | [optional]
 
 ### Return type
 
@@ -188,7 +188,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **redsys_preauthorization** | [**\Swagger\Client\Model\RedsysPreauthorizeByWebPost**](../Model/\Swagger\Client\Model\RedsysPreauthorizeByWebPost.md)| RedsysPreauthorization Object params | [optional]
+ **redsys_preauthorization** | [**\Swagger\Client\Model\RedsysPreauthorizeByWebPost**](../Model/RedsysPreauthorizeByWebPost.md)| RedsysPreauthorization Object params | [optional]
 
 ### Return type
 
@@ -221,7 +221,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 $api_instance = new Swagger\Client\Api\PayInsRedsysApi();
-$preauthorization_id = 789; // int | The Id of a Redsys PreauthorizationCancellation
+$preauthorization_id = 789; // int | The Id of a Redsys Preauthorization
 $redsys_preauthorization_cancellation = new \Swagger\Client\Model\RedsysPreauthorizationCancellationPost(); // \Swagger\Client\Model\RedsysPreauthorizationCancellationPost | PreauthorizationCancellation Object params
 
 try {
@@ -237,8 +237,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **preauthorization_id** | **int**| The Id of a Redsys PreauthorizationCancellation |
- **redsys_preauthorization_cancellation** | [**\Swagger\Client\Model\RedsysPreauthorizationCancellationPost**](../Model/\Swagger\Client\Model\RedsysPreauthorizationCancellationPost.md)| PreauthorizationCancellation Object params | [optional]
+ **preauthorization_id** | **int**| The Id of a Redsys Preauthorization |
+ **redsys_preauthorization_cancellation** | [**\Swagger\Client\Model\RedsysPreauthorizationCancellationPost**](../Model/RedsysPreauthorizationCancellationPost.md)| PreauthorizationCancellation Object params | [optional]
 
 ### Return type
 
@@ -271,7 +271,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 $api_instance = new Swagger\Client\Api\PayInsRedsysApi();
-$preauthorization_id = 789; // int | The Id of a Redsys PreauthorizationConfirmation
+$preauthorization_id = 789; // int | The Id of a Redsys Preauthorization
 $redsys_preauthorization_confirmation = new \Swagger\Client\Model\RedsysPreauthorizationConfirmationPost(); // \Swagger\Client\Model\RedsysPreauthorizationConfirmationPost | PreauthorizationConfirmation Object params
 
 try {
@@ -287,8 +287,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **preauthorization_id** | **int**| The Id of a Redsys PreauthorizationConfirmation |
- **redsys_preauthorization_confirmation** | [**\Swagger\Client\Model\RedsysPreauthorizationConfirmationPost**](../Model/\Swagger\Client\Model\RedsysPreauthorizationConfirmationPost.md)| PreauthorizationConfirmation Object params | [optional]
+ **preauthorization_id** | **int**| The Id of a Redsys Preauthorization |
+ **redsys_preauthorization_confirmation** | [**\Swagger\Client\Model\RedsysPreauthorizationConfirmationPost**](../Model/RedsysPreauthorizationConfirmationPost.md)| PreauthorizationConfirmation Object params | [optional]
 
 ### Return type
 
@@ -338,7 +338,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pay_in_id** | **int**| The Id of a PayIn |
- **redsys_refund** | [**\Swagger\Client\Model\RedsysRefundPost**](../Model/\Swagger\Client\Model\RedsysRefundPost.md)| Refund Object params | [optional]
+ **redsys_refund** | [**\Swagger\Client\Model\RedsysRefundPost**](../Model/RedsysRefundPost.md)| Refund Object params | [optional]
 
 ### Return type
 

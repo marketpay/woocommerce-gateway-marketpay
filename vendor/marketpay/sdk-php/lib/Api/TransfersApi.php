@@ -137,10 +137,7 @@ class TransfersApi
                 $resourcePath
             );
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -183,30 +180,34 @@ class TransfersApi
     /**
      * Operation transfersGetList
      *
-     * 
+     * View a Transfer
      *
      * @param int $page  (optional)
      * @param int $per_page  (optional)
+     * @param int $before_date  (optional)
+     * @param int $after_date  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\ResponseListTransferResponse
      */
-    public function transfersGetList($page = null, $per_page = null)
+    public function transfersGetList($page = null, $per_page = null, $before_date = null, $after_date = null)
     {
-        list($response) = $this->transfersGetListWithHttpInfo($page, $per_page);
+        list($response) = $this->transfersGetListWithHttpInfo($page, $per_page, $before_date, $after_date);
         return $response;
     }
 
     /**
      * Operation transfersGetListWithHttpInfo
      *
-     * 
+     * View a Transfer
      *
      * @param int $page  (optional)
      * @param int $per_page  (optional)
+     * @param int $before_date  (optional)
+     * @param int $after_date  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return array of \Swagger\Client\Model\ResponseListTransferResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function transfersGetListWithHttpInfo($page = null, $per_page = null)
+    public function transfersGetListWithHttpInfo($page = null, $per_page = null, $before_date = null, $after_date = null)
     {
         // parse inputs
         $resourcePath = "/v2.01/Transfers";
@@ -228,10 +229,15 @@ class TransfersApi
         if ($per_page !== null) {
             $queryParams['Per_Page'] = $this->apiClient->getSerializer()->toQueryValue($per_page);
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        // query params
+        if ($before_date !== null) {
+            $queryParams['BeforeDate'] = $this->apiClient->getSerializer()->toQueryValue($before_date);
+        }
+        // query params
+        if ($after_date !== null) {
+            $queryParams['AfterDate'] = $this->apiClient->getSerializer()->toQueryValue($after_date);
+        }
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
@@ -308,9 +314,6 @@ class TransfersApi
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
-
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         // body params
         $_tempBody = null;

@@ -49,7 +49,6 @@ class WalletsApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-
     }
 
     /**
@@ -57,7 +56,6 @@ class WalletsApiTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-
     }
 
     /**
@@ -65,7 +63,6 @@ class WalletsApiTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     /**
@@ -73,7 +70,6 @@ class WalletsApiTest extends \PHPUnit_Framework_TestCase
      */
     public static function tearDownAfterClass()
     {
-
     }
 
     /**
@@ -84,7 +80,6 @@ class WalletsApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testWalletsGet()
     {
-
     }
 
     /**
@@ -95,7 +90,6 @@ class WalletsApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testWalletsGetList()
     {
-
     }
 
     /**
@@ -106,7 +100,6 @@ class WalletsApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testWalletsGetTransactionList()
     {
-
     }
 
     /**
@@ -117,7 +110,6 @@ class WalletsApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testWalletsPost()
     {
-
     }
 
     /**
@@ -128,7 +120,5 @@ class WalletsApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testWalletsPut()
     {
-
     }
-
 }

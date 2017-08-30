@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **success_url** | **string** | Dirección (relativa a la tienda) a la que redirigirá cuando se haya completado el pago. | 
 **checkout_url** | **string** | Dirección a la que se redirigirá el usuario si escoge volver a la tienda (por omisión &#39;/&#39;). | [optional] 
 **order_items** | [**\Swagger\Client\Model\AplazameOrderItem[]**](AplazameOrderItem.md) |  | 
-**customer** | [**\Swagger\Client\Model\Customer**](Customer.md) | Customer data.  Optional user info. If it is not set, Marketpay will try to use the data it does currently have about the user, but it will fail if existing data is not enough. | 
+**customer** | [**\Swagger\Client\Model\Customer**](Customer.md) | Customer data. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -90,30 +90,34 @@ class TransactionsApi
     /**
      * Operation transactionsGetList
      *
-     * 
+     * View a Transaction
      *
      * @param int $page  (optional)
      * @param int $per_page  (optional)
+     * @param int $before_date  (optional)
+     * @param int $after_date  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\ResponseListTransactionResponse
      */
-    public function transactionsGetList($page = null, $per_page = null)
+    public function transactionsGetList($page = null, $per_page = null, $before_date = null, $after_date = null)
     {
-        list($response) = $this->transactionsGetListWithHttpInfo($page, $per_page);
+        list($response) = $this->transactionsGetListWithHttpInfo($page, $per_page, $before_date, $after_date);
         return $response;
     }
 
     /**
      * Operation transactionsGetListWithHttpInfo
      *
-     * 
+     * View a Transaction
      *
      * @param int $page  (optional)
      * @param int $per_page  (optional)
+     * @param int $before_date  (optional)
+     * @param int $after_date  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return array of \Swagger\Client\Model\ResponseListTransactionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function transactionsGetListWithHttpInfo($page = null, $per_page = null)
+    public function transactionsGetListWithHttpInfo($page = null, $per_page = null, $before_date = null, $after_date = null)
     {
         // parse inputs
         $resourcePath = "/v2.01/Transactions";
@@ -135,10 +139,15 @@ class TransactionsApi
         if ($per_page !== null) {
             $queryParams['Per_Page'] = $this->apiClient->getSerializer()->toQueryValue($per_page);
         }
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        // query params
+        if ($before_date !== null) {
+            $queryParams['BeforeDate'] = $this->apiClient->getSerializer()->toQueryValue($before_date);
+        }
+        // query params
+        if ($after_date !== null) {
+            $queryParams['AfterDate'] = $this->apiClient->getSerializer()->toQueryValue($after_date);
+        }
 
-        
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present

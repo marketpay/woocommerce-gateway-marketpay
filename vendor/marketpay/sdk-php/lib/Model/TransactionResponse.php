@@ -67,14 +67,46 @@ class TransactionResponse implements ArrayAccess
         'result_code' => 'string',
         'result_message' => 'string',
         'type' => 'string',
+        'transaction_source' => 'string',
+        'transaction_destination' => 'string',
         'id' => 'string',
         'creation_date' => 'int',
         'tag' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'debited_funds' => null,
+        'credited_funds' => null,
+        'fees' => null,
+        'debited_wallet_id' => null,
+        'credited_wallet_id' => null,
+        'author_id' => null,
+        'credited_user_id' => null,
+        'nature' => null,
+        'status' => null,
+        'execution_date' => 'int64',
+        'result_code' => null,
+        'result_message' => null,
+        'type' => null,
+        'transaction_source' => null,
+        'transaction_destination' => null,
+        'id' => null,
+        'creation_date' => 'int64',
+        'tag' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -95,6 +127,8 @@ class TransactionResponse implements ArrayAccess
         'result_code' => 'ResultCode',
         'result_message' => 'ResultMessage',
         'type' => 'Type',
+        'transaction_source' => 'TransactionSource',
+        'transaction_destination' => 'TransactionDestination',
         'id' => 'Id',
         'creation_date' => 'CreationDate',
         'tag' => 'Tag'
@@ -119,6 +153,8 @@ class TransactionResponse implements ArrayAccess
         'result_code' => 'setResultCode',
         'result_message' => 'setResultMessage',
         'type' => 'setType',
+        'transaction_source' => 'setTransactionSource',
+        'transaction_destination' => 'setTransactionDestination',
         'id' => 'setId',
         'creation_date' => 'setCreationDate',
         'tag' => 'setTag'
@@ -143,6 +179,8 @@ class TransactionResponse implements ArrayAccess
         'result_code' => 'getResultCode',
         'result_message' => 'getResultMessage',
         'type' => 'getType',
+        'transaction_source' => 'getTransactionSource',
+        'transaction_destination' => 'getTransactionDestination',
         'id' => 'getId',
         'creation_date' => 'getCreationDate',
         'tag' => 'getTag'
@@ -173,6 +211,22 @@ class TransactionResponse implements ArrayAccess
     const TYPE_PAYIN = 'PAYIN';
     const TYPE_PAYOUT = 'PAYOUT';
     const TYPE_TRANSFER = 'TRANSFER';
+    const TRANSACTION_SOURCE_WALLET = 'WALLET';
+    const TRANSACTION_SOURCE_WALLETCLIENT = 'WALLETCLIENT';
+    const TRANSACTION_SOURCE_PAYINSFEES = 'PAYINSFEES';
+    const TRANSACTION_SOURCE_PAYINSAPLAZAME = 'PAYINSAPLAZAME';
+    const TRANSACTION_SOURCE_PAYINSBANKWIRE = 'PAYINSBANKWIRE';
+    const TRANSACTION_SOURCE_PAYINSREDSYS = 'PAYINSREDSYS';
+    const TRANSACTION_SOURCE_PAYINSUNIVERSALPAY = 'PAYINSUNIVERSALPAY';
+    const TRANSACTION_SOURCE_PAYOUTSBANKWIRE = 'PAYOUTSBANKWIRE';
+    const TRANSACTION_DESTINATION_WALLET = 'WALLET';
+    const TRANSACTION_DESTINATION_WALLETCLIENT = 'WALLETCLIENT';
+    const TRANSACTION_DESTINATION_PAYINSFEES = 'PAYINSFEES';
+    const TRANSACTION_DESTINATION_PAYINSAPLAZAME = 'PAYINSAPLAZAME';
+    const TRANSACTION_DESTINATION_PAYINSBANKWIRE = 'PAYINSBANKWIRE';
+    const TRANSACTION_DESTINATION_PAYINSREDSYS = 'PAYINSREDSYS';
+    const TRANSACTION_DESTINATION_PAYINSUNIVERSALPAY = 'PAYINSUNIVERSALPAY';
+    const TRANSACTION_DESTINATION_PAYOUTSBANKWIRE = 'PAYOUTSBANKWIRE';
     
 
     
@@ -216,6 +270,42 @@ class TransactionResponse implements ArrayAccess
         ];
     }
     
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public function getTransactionSourceAllowableValues()
+    {
+        return [
+            self::TRANSACTION_SOURCE_WALLET,
+            self::TRANSACTION_SOURCE_WALLETCLIENT,
+            self::TRANSACTION_SOURCE_PAYINSFEES,
+            self::TRANSACTION_SOURCE_PAYINSAPLAZAME,
+            self::TRANSACTION_SOURCE_PAYINSBANKWIRE,
+            self::TRANSACTION_SOURCE_PAYINSREDSYS,
+            self::TRANSACTION_SOURCE_PAYINSUNIVERSALPAY,
+            self::TRANSACTION_SOURCE_PAYOUTSBANKWIRE,
+        ];
+    }
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public function getTransactionDestinationAllowableValues()
+    {
+        return [
+            self::TRANSACTION_DESTINATION_WALLET,
+            self::TRANSACTION_DESTINATION_WALLETCLIENT,
+            self::TRANSACTION_DESTINATION_PAYINSFEES,
+            self::TRANSACTION_DESTINATION_PAYINSAPLAZAME,
+            self::TRANSACTION_DESTINATION_PAYINSBANKWIRE,
+            self::TRANSACTION_DESTINATION_PAYINSREDSYS,
+            self::TRANSACTION_DESTINATION_PAYINSUNIVERSALPAY,
+            self::TRANSACTION_DESTINATION_PAYOUTSBANKWIRE,
+        ];
+    }
+    
 
     /**
      * Associative array for storing property values
@@ -242,6 +332,8 @@ class TransactionResponse implements ArrayAccess
         $this->container['result_code'] = isset($data['result_code']) ? $data['result_code'] : null;
         $this->container['result_message'] = isset($data['result_message']) ? $data['result_message'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['transaction_source'] = isset($data['transaction_source']) ? $data['transaction_source'] : null;
+        $this->container['transaction_destination'] = isset($data['transaction_destination']) ? $data['transaction_destination'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['creation_date'] = isset($data['creation_date']) ? $data['creation_date'] : null;
         $this->container['tag'] = isset($data['tag']) ? $data['tag'] : null;
@@ -256,19 +348,44 @@ class TransactionResponse implements ArrayAccess
     {
         $invalid_properties = [];
 
-        $allowed_values = ["REGULAR", "REFUND", "REPUDIATION", "SETTLEMENT"];
+        $allowed_values = $this->getNatureAllowableValues();
         if (!in_array($this->container['nature'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'nature', must be one of 'REGULAR', 'REFUND', 'REPUDIATION', 'SETTLEMENT'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'nature', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'status', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
-        $allowed_values = ["PAYIN", "PAYOUT", "TRANSFER"];
+        $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'type', must be one of 'PAYIN', 'PAYOUT', 'TRANSFER'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
+        }
+
+        $allowed_values = $this->getTransactionSourceAllowableValues();
+        if (!in_array($this->container['transaction_source'], $allowed_values)) {
+            $invalid_properties[] = sprintf(
+                "invalid value for 'transaction_source', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
+        }
+
+        $allowed_values = $this->getTransactionDestinationAllowableValues();
+        if (!in_array($this->container['transaction_destination'], $allowed_values)) {
+            $invalid_properties[] = sprintf(
+                "invalid value for 'transaction_destination', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -283,16 +400,24 @@ class TransactionResponse implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = ["REGULAR", "REFUND", "REPUDIATION", "SETTLEMENT"];
+        $allowed_values = $this->getNatureAllowableValues();
         if (!in_array($this->container['nature'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["CREATED", "SUCCEEDED", "FAILED"];
+        $allowed_values = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowed_values)) {
             return false;
         }
-        $allowed_values = ["PAYIN", "PAYOUT", "TRANSFER"];
+        $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
+            return false;
+        }
+        $allowed_values = $this->getTransactionSourceAllowableValues();
+        if (!in_array($this->container['transaction_source'], $allowed_values)) {
+            return false;
+        }
+        $allowed_values = $this->getTransactionDestinationAllowableValues();
+        if (!in_array($this->container['transaction_destination'], $allowed_values)) {
             return false;
         }
         return true;
@@ -462,9 +587,14 @@ class TransactionResponse implements ArrayAccess
      */
     public function setNature($nature)
     {
-        $allowed_values = array('REGULAR', 'REFUND', 'REPUDIATION', 'SETTLEMENT');
-        if (!is_null($nature) && (!in_array($nature, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'nature', must be one of 'REGULAR', 'REFUND', 'REPUDIATION', 'SETTLEMENT'");
+        $allowed_values = $this->getNatureAllowableValues();
+        if (!is_null($nature) && !in_array($nature, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'nature', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['nature'] = $nature;
 
@@ -487,9 +617,14 @@ class TransactionResponse implements ArrayAccess
      */
     public function setStatus($status)
     {
-        $allowed_values = array('CREATED', 'SUCCEEDED', 'FAILED');
-        if (!is_null($status) && (!in_array($status, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'status', must be one of 'CREATED', 'SUCCEEDED', 'FAILED'");
+        $allowed_values = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['status'] = $status;
 
@@ -575,11 +710,76 @@ class TransactionResponse implements ArrayAccess
      */
     public function setType($type)
     {
-        $allowed_values = array('PAYIN', 'PAYOUT', 'TRANSFER');
-        if (!is_null($type) && (!in_array($type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'PAYIN', 'PAYOUT', 'TRANSFER'");
+        $allowed_values = $this->getTypeAllowableValues();
+        if (!is_null($type) && !in_array($type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets transaction_source
+     * @return string
+     */
+    public function getTransactionSource()
+    {
+        return $this->container['transaction_source'];
+    }
+
+    /**
+     * Sets transaction_source
+     * @param string $transaction_source
+     * @return $this
+     */
+    public function setTransactionSource($transaction_source)
+    {
+        $allowed_values = $this->getTransactionSourceAllowableValues();
+        if (!is_null($transaction_source) && !in_array($transaction_source, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'transaction_source', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
+        }
+        $this->container['transaction_source'] = $transaction_source;
+
+        return $this;
+    }
+
+    /**
+     * Gets transaction_destination
+     * @return string
+     */
+    public function getTransactionDestination()
+    {
+        return $this->container['transaction_destination'];
+    }
+
+    /**
+     * Sets transaction_destination
+     * @param string $transaction_destination
+     * @return $this
+     */
+    public function setTransactionDestination($transaction_destination)
+    {
+        $allowed_values = $this->getTransactionDestinationAllowableValues();
+        if (!is_null($transaction_destination) && !in_array($transaction_destination, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'transaction_destination', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
+        }
+        $this->container['transaction_destination'] = $transaction_destination;
 
         return $this;
     }
@@ -595,7 +795,7 @@ class TransactionResponse implements ArrayAccess
 
     /**
      * Sets id
-     * @param string $id
+     * @param string $id The item's ID
      * @return $this
      */
     public function setId($id)
@@ -616,7 +816,7 @@ class TransactionResponse implements ArrayAccess
 
     /**
      * Sets creation_date
-     * @param int $creation_date
+     * @param int $creation_date When the item was created
      * @return $this
      */
     public function setCreationDate($creation_date)
@@ -637,7 +837,7 @@ class TransactionResponse implements ArrayAccess
 
     /**
      * Sets tag
-     * @param string $tag
+     * @param string $tag Custom data that you can add to this item
      * @return $this
      */
     public function setTag($tag)

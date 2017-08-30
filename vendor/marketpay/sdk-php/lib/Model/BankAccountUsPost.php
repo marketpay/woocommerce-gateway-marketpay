@@ -62,9 +62,27 @@ class BankAccountUsPost implements ArrayAccess
         'owner_name' => 'string'
     ];
 
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'account_number' => null,
+        'aba' => null,
+        'deposit_account_type' => null,
+        'tag' => null,
+        'owner_address' => null,
+        'owner_name' => null
+    ];
+
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
+    }
+
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
     }
 
     /**
@@ -172,9 +190,12 @@ class BankAccountUsPost implements ArrayAccess
     {
         $invalid_properties = [];
 
-        $allowed_values = ["NotSpecified", "CHECKING", "SAVINGS"];
+        $allowed_values = $this->getDepositAccountTypeAllowableValues();
         if (!in_array($this->container['deposit_account_type'], $allowed_values)) {
-            $invalid_properties[] = "invalid value for 'deposit_account_type', must be one of 'NotSpecified', 'CHECKING', 'SAVINGS'.";
+            $invalid_properties[] = sprintf(
+                "invalid value for 'deposit_account_type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
         }
 
         return $invalid_properties;
@@ -189,7 +210,7 @@ class BankAccountUsPost implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = ["NotSpecified", "CHECKING", "SAVINGS"];
+        $allowed_values = $this->getDepositAccountTypeAllowableValues();
         if (!in_array($this->container['deposit_account_type'], $allowed_values)) {
             return false;
         }
@@ -255,9 +276,14 @@ class BankAccountUsPost implements ArrayAccess
      */
     public function setDepositAccountType($deposit_account_type)
     {
-        $allowed_values = array('NotSpecified', 'CHECKING', 'SAVINGS');
-        if (!is_null($deposit_account_type) && (!in_array($deposit_account_type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'deposit_account_type', must be one of 'NotSpecified', 'CHECKING', 'SAVINGS'");
+        $allowed_values = $this->getDepositAccountTypeAllowableValues();
+        if (!is_null($deposit_account_type) && !in_array($deposit_account_type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'deposit_account_type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
         }
         $this->container['deposit_account_type'] = $deposit_account_type;
 

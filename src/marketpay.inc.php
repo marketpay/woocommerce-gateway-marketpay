@@ -20,9 +20,9 @@ class mpAccess
     /** Class constants **/
     const DEBUG            = false; // Turns debugging messages on or off (should be false for production)
     const TMP_DIR_NAME     = 'mp_tmp';
-    const SANDBOX_API_URL  = 'https://api-sandbox.marketpay.io';
+    const SANDBOX_API_URL  = 'https://api-development.marketpay.io';
     const PROD_API_URL     = 'https://api.marketpay.io';
-    const SANDBOX_DB_URL   = 'https://dashboard-sandbox.marketpay.io';
+    const SANDBOX_DB_URL   = 'https://dashboard-development.marketpay.io';
     const PROD_DB_URL      = 'https://dashboard.marketpay.io';
     const LOGFILENAME      = 'mp-transactions.log.php';
     const WC_PLUGIN_PATH   = 'woocommerce/woocommerce.php';
@@ -239,6 +239,7 @@ class mpAccess
 
             $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
             $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
+            $this->marketPayApi->Kyc            = new Swagger\Client\Api\KycApi($this->marketPayApi);
         }
 
         return true;
@@ -756,19 +757,61 @@ class mpAccess
         {
             $marketUser = $this->legacyApi->Users->Create($marketUser);
             $mp_user_id = $marketUser->Id;
+
+            if ('BUSINESS' == $p_type)
+            {
+                $kycUser = new Swagger\Client\Model\KycUserLegalPut([
+                    'legal_person_type'                         => $legal_p_type,
+                    'name'                                      => $vendor_name,
+                    'legal_representative_birthday'             => $b_date,
+                    'legal_representative_country_of_residence' => $ctry,
+                    'legal_representative_nationality'          => $natio,
+                    'legal_representative_email'                => $email,
+                    'legal_representative_first_name'           => $f_name,
+                    'legal_representative_last_name'            => $l_name,
+                    'tag'                                       => 'wp_user_id:' . $wp_user_id
+                ]);
+
+                try
+                {
+                    $this->marketPayApi->Kyc->kycPutLegal($mp_user_id, $kycUser);
+                }
+                catch (Exception $e)
+                {
+                    //
+                }
+            }
+            else
+            {
+                $kycUser = new Swagger\Client\Model\KycUserNaturalPut([
+                    'email'                => $email,
+                    'first_name'           => $f_name,
+                    'last_name'            => $l_name,
+                    'birthday'             => $b_date,
+                    'nationality'          => $natio,
+                    'country_of_residence' => $ctry,
+                    'id_card'              => $kyc_id_doc,
+                    'tag'                  => 'wp_user_id:' . $wp_user_id
+                ]);
+
+                try
+                {
+                    $this->marketPayApi->Kyc->kycPostNatural($mp_user_id, $kycUser);
+                }
+                catch (Exception $e)
+                {
+                    //
+                }
+            }
         }
         catch (Exception $e)
         {
             $error_message = $e->getMessage();
 
-            error_log(
-                current_time('Y-m-d H:i:s', 0) . ': ' . $error_message . "\n\n",
-                3,
-                $this->logFilePath
-            );
+            error_log(current_time('Y-m-d H:i:s', 0) . ': ' . $error_message . "\n\n", 3, $this->logFilePath);
 
-            $msg = '<div class="error"><p>' . __('Error:', 'marketpay') . ' ' .
-            __('Marketpay API returned:', 'marketpay') . ' ';
+            $msg = '<div class="error"><p>' . __('Error:', 'marketpay') . ' ';
+            $msg .= __('Marketpay API returned:', 'marketpay') . ' ';
             $msg .= '&laquo;' . $error_message . '&raquo;</p></div>';
 
             echo $msg;

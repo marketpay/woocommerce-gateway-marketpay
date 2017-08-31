@@ -854,7 +854,7 @@ class mpAccess
 
         if ('NATURAL' == $marketUser->PersonType)
         {
-            $kycUser = new $this->marketPayApi->Kyc->kycGetNatural($mp_user_id);
+            $kycUser = $this->marketPayApi->Kyc->kycGetNatural($mp_user_id);
 
             if (
                 isset($usermeta['first_name']) &&
@@ -983,7 +983,7 @@ class mpAccess
         }
         else
         {
-            $kycUser = new $this->marketPayApi->Kyc->kycGetLegal($mp_user_id);
+            $kycUser = $this->marketPayApi->Kyc->kycGetLegal($mp_user_id);
 
             /** Business / legal user **/
             if (

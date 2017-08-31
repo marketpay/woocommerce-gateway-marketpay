@@ -1,0 +1,913 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Marketpay\n"
+"POT-Creation-Date: 2017-08-31 15:20+0200\n"
+"PO-Revision-Date: 2017-08-31 15:22+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/admin.inc.php:96 src/admin.inc.php:97 src/gateway.inc.php:159
+msgid "Marketpay"
+msgstr ""
+
+#: src/admin.inc.php:124
+msgid "Marketpay API connected succesfully!"
+msgstr ""
+
+#: src/admin.inc.php:132
+msgid "Marketpay API Connection problem:"
+msgstr ""
+
+#: src/admin.inc.php:133
+msgid "the connection test returned an unexpected result"
+msgstr ""
+
+#: src/admin.inc.php:145
+msgid "Marketpay Settings &amp; Status"
+msgstr ""
+
+#: src/admin.inc.php:147
+msgid "Setup your Marketpay credentials &amp; check system configuration."
+msgstr ""
+
+#: src/admin.inc.php:166
+msgid "Marketpay status"
+msgstr ""
+
+#: src/admin.inc.php:171 src/admin.inc.php:862
+msgid "The Marketpay payment gateway needs to be configured."
+msgstr ""
+
+#: src/admin.inc.php:194
+msgid "General settings"
+msgstr ""
+
+#: src/admin.inc.php:201
+msgid "Production or sandbox"
+msgstr ""
+
+#: src/admin.inc.php:209 src/admin.inc.php:213
+msgid "Sandbox Client ID"
+msgstr ""
+
+#: src/admin.inc.php:218 src/admin.inc.php:222
+msgid "Sandbox passphrase"
+msgstr ""
+
+#: src/admin.inc.php:227 src/admin.inc.php:231
+msgid "Production Client ID"
+msgstr ""
+
+#: src/admin.inc.php:236 src/admin.inc.php:240
+msgid "Production passphrase"
+msgstr ""
+
+#: src/admin.inc.php:245 src/admin.inc.php:249
+msgid "All buyers are"
+msgstr ""
+
+#: src/admin.inc.php:254 src/admin.inc.php:258
+msgid "All vendors are"
+msgstr ""
+
+#: src/admin.inc.php:263 src/admin.inc.php:267
+msgid "All businesses are"
+msgstr ""
+
+#: src/admin.inc.php:339 src/admin.inc.php:554
+msgid "Production"
+msgstr ""
+
+#: src/admin.inc.php:342 src/admin.inc.php:556
+msgid "Sandbox"
+msgstr ""
+
+#: src/admin.inc.php:474
+msgid "Organisations"
+msgstr ""
+
+#: src/admin.inc.php:476
+msgid "Soletraders"
+msgstr ""
+
+#: src/admin.inc.php:479
+msgid "Individuals"
+msgstr ""
+
+#: src/admin.inc.php:482
+msgid "Businesses"
+msgstr ""
+
+#: src/admin.inc.php:484
+msgid "Either"
+msgstr ""
+
+#: src/admin.inc.php:551
+msgid "Current environment:"
+msgstr ""
+
+#: src/admin.inc.php:561
+msgid "Client ID:"
+msgstr ""
+
+#: src/admin.inc.php:564 src/admin.inc.php:576
+msgid "Present!"
+msgstr ""
+
+#: src/admin.inc.php:568 src/admin.inc.php:580
+msgid "Missing :("
+msgstr ""
+
+#: src/admin.inc.php:573
+msgid "Passphrase:"
+msgstr ""
+
+#: src/admin.inc.php:585
+msgid "Marketpay API Connection:"
+msgstr ""
+
+#: src/admin.inc.php:588 src/admin.inc.php:612 src/admin.inc.php:652
+#: src/admin.inc.php:675 src/admin.inc.php:725 src/admin.inc.php:755
+#: src/admin.inc.php:767 src/admin.inc.php:779 src/admin.inc.php:793
+msgid "Success!"
+msgstr ""
+
+#: src/admin.inc.php:592 src/admin.inc.php:616 src/admin.inc.php:656
+#: src/admin.inc.php:679 src/admin.inc.php:729 src/admin.inc.php:771
+#: src/admin.inc.php:783 src/admin.inc.php:797
+msgid "Failure :("
+msgstr ""
+
+#: src/admin.inc.php:597
+msgid "Marketpay-WooCommerce plugin version:"
+msgstr ""
+
+#: src/admin.inc.php:604 src/admin.inc.php:628 src/admin.inc.php:747
+msgid "Unknown"
+msgstr ""
+
+#: src/admin.inc.php:609
+msgid "Required WooCommerce plugin present &amp; activated:"
+msgstr ""
+
+#: src/admin.inc.php:621
+msgid "WooCommerce plugin version:"
+msgstr ""
+
+#: src/admin.inc.php:634
+msgid "Marketpay enabled as a WooCommerce payment gateway:"
+msgstr ""
+
+#: src/admin.inc.php:638 src/admin.inc.php:666 src/admin.inc.php:694
+msgid "Enabled"
+msgstr ""
+
+#: src/admin.inc.php:642 src/admin.inc.php:690
+msgid "Disabled"
+msgstr ""
+
+#: src/admin.inc.php:648
+msgid "At least one card type or payment method is enabled:"
+msgstr ""
+
+#: src/admin.inc.php:663
+msgid "Bankwire Direct payment is enabled:"
+msgstr ""
+
+#: src/admin.inc.php:671
+msgid "The webhook for Bankwire Direct is registered:"
+msgstr ""
+
+#: src/admin.inc.php:686 src/admin.inc.php:887
+msgid "WooCommerce guest checkout should be disabled"
+msgstr ""
+
+#: src/admin.inc.php:700
+msgid "Current WooCommerce currency is supported by Marketpay:"
+msgstr ""
+
+#: src/admin.inc.php:705
+msgid "Supported"
+msgstr ""
+
+#: src/admin.inc.php:710
+msgid "Unsupported"
+msgstr ""
+
+#: src/admin.inc.php:716
+#, php-format
+msgid "Required %1$s plugin present &amp; activated:"
+msgstr ""
+
+#: src/admin.inc.php:735
+#, php-format
+msgid "%1$s plugin version:"
+msgstr ""
+
+#: src/admin.inc.php:752
+msgid "PHP mcrypt library available:"
+msgstr ""
+
+#: src/admin.inc.php:759
+msgid ""
+"Unavailable. Your passphrase will be stored as clear text in the WordPress "
+"database."
+msgstr ""
+
+#: src/admin.inc.php:764
+msgid "Keyfile directory is writable:"
+msgstr ""
+
+#: src/admin.inc.php:776
+msgid "Temporary directory is writable:"
+msgstr ""
+
+#: src/admin.inc.php:789
+msgid "All active vendors have a Marketpay account:"
+msgstr ""
+
+#: src/admin.inc.php:864
+msgid "Please click here"
+msgstr ""
+
+#: src/admin.inc.php:886 src/admin.inc.php:897 src/admin.inc.php:913
+msgid "Marketpay warning"
+msgstr ""
+
+#: src/admin.inc.php:898
+msgid "Marketpay is disabled"
+msgstr ""
+
+#: src/admin.inc.php:914
+msgid "The current WooCommerce currency is unsupported by Marketpay"
+msgstr ""
+
+#: src/admin.inc.php:933
+msgid "Marketpay failed transactions"
+msgstr ""
+
+#: src/admin.inc.php:971
+msgid "Failed payouts"
+msgstr ""
+
+#: src/admin.inc.php:975
+msgid "No failed payout"
+msgstr ""
+
+#: src/admin.inc.php:1040 src/admin.inc.php:1130
+msgid "Ignore"
+msgstr ""
+
+#: src/admin.inc.php:1041
+msgid "Retry"
+msgstr ""
+
+#: src/admin.inc.php:1062
+msgid "Refused KYC documents"
+msgstr ""
+
+#: src/admin.inc.php:1066
+msgid "No refused KYC document"
+msgstr ""
+
+#: src/admin.inc.php:1117
+msgid "For WP user:"
+msgstr ""
+
+#: src/admin.inc.php:1125
+msgid "For MP user:"
+msgstr ""
+
+#: src/admin.inc.php:1131
+msgid "Upload another document"
+msgstr ""
+
+#: src/admin.inc.php:1292
+msgid "Extra profile information for Marketpay"
+msgstr ""
+
+#: src/admin.inc.php:1295 src/main.inc.php:311 src/main.inc.php:414
+#: src/main.inc.php:709
+msgid "Birthday"
+msgstr ""
+
+#: src/admin.inc.php:1295 src/admin.inc.php:1302 src/admin.inc.php:1313
+#: src/admin.inc.php:1431 src/main.inc.php:1144 src/main.inc.php:1195
+#: src/main.inc.php:1212 src/main.inc.php:1238 src/main.inc.php:1255
+#: src/main.inc.php:1276 src/main.inc.php:1317
+msgid "(required)"
+msgstr ""
+
+#: src/admin.inc.php:1302 src/main.inc.php:328 src/main.inc.php:415
+#: src/main.inc.php:725
+msgid "Nationality"
+msgstr ""
+
+#: src/admin.inc.php:1305 src/admin.inc.php:1331 src/main.inc.php:330
+#: src/main.inc.php:721 src/main.inc.php:1173 src/main.inc.php:1281
+msgid "Select a country..."
+msgstr ""
+
+#: src/admin.inc.php:1313 src/main.inc.php:349 src/main.inc.php:416
+#: src/main.inc.php:737
+msgid "ID Document"
+msgstr ""
+
+#: src/admin.inc.php:1328
+msgid "Country"
+msgstr ""
+
+#: src/admin.inc.php:1341
+msgid "State/County"
+msgstr ""
+
+#: src/admin.inc.php:1352 src/admin.inc.php:1394 src/admin.inc.php:1414
+#: src/main.inc.php:370 src/main.inc.php:767 src/validation.inc.php:223
+#: src/validation.inc.php:232
+msgid "User status"
+msgstr ""
+
+#: src/admin.inc.php:1361 src/admin.inc.php:1373 src/main.inc.php:376
+#: src/main.inc.php:386 src/main.inc.php:751 src/main.inc.php:769
+msgid "Select option..."
+msgstr ""
+
+#: src/admin.inc.php:1362 src/main.inc.php:377 src/main.inc.php:770
+msgid "Individual"
+msgstr ""
+
+#: src/admin.inc.php:1363 src/main.inc.php:378 src/main.inc.php:771
+msgid "Business user"
+msgstr ""
+
+#: src/admin.inc.php:1369 src/admin.inc.php:1399 src/admin.inc.php:1419
+#: src/main.inc.php:383 src/main.inc.php:749 src/validation.inc.php:274
+msgid "Business type"
+msgstr ""
+
+#: src/admin.inc.php:1374 src/main.inc.php:387 src/main.inc.php:752
+msgid "Organisation"
+msgstr ""
+
+#: src/admin.inc.php:1375 src/main.inc.php:388 src/main.inc.php:753
+msgid "Business"
+msgstr ""
+
+#: src/admin.inc.php:1376 src/main.inc.php:389 src/main.inc.php:754
+msgid "Soletrader"
+msgstr ""
+
+#: src/admin.inc.php:1405
+msgid "Bank account data"
+msgstr ""
+
+#: src/admin.inc.php:1550
+msgid "Marketpay Account"
+msgstr ""
+
+#: src/admin.inc.php:1589
+msgid "Yes"
+msgstr ""
+
+#: src/admin.inc.php:1591
+msgid "No"
+msgstr ""
+
+#: src/admin.inc.php:1644
+#, php-format
+msgid "%s Marketpay Data"
+msgstr ""
+
+#: src/admin.inc.php:1689 src/admin.inc.php:1690
+msgid "Marketpay Payout"
+msgstr ""
+
+#: src/admin.inc.php:1723
+msgid "-Error: this commission payout has already been retried:"
+msgstr ""
+
+#: src/admin.inc.php:1731
+msgid "Paying selected vendors..."
+msgstr ""
+
+#: src/admin.inc.php:1756
+msgid "-Error: bad wc-vendors commission ID:"
+msgstr ""
+
+#: src/admin.inc.php:1776
+msgid "-Commission of"
+msgstr ""
+
+#: src/admin.inc.php:1777
+msgid "on order"
+msgstr ""
+
+#: src/admin.inc.php:1778
+msgid "is already marked as"
+msgstr ""
+
+#: src/admin.inc.php:1779
+msgid "Skipping."
+msgstr ""
+
+#: src/admin.inc.php:1793
+msgid "-Warning: vendor"
+msgstr ""
+
+#: src/admin.inc.php:1796
+msgid "does not have a Marketpay bank account"
+msgstr ""
+
+#: src/admin.inc.php:1819
+msgid "-Success: commission paid to vendor"
+msgstr ""
+
+#: src/admin.inc.php:1827
+msgid "-Error: vendor"
+msgstr ""
+
+#: src/admin.inc.php:1830
+msgid "Marketpay payout transaction failed"
+msgstr ""
+
+#: src/admin.inc.php:1889
+msgid "The webhooks for Bankwire Direct payment are properly setup."
+msgstr ""
+
+#: src/admin.inc.php:1900
+msgid "Marketpay Error: invalid webhook setup for Bankwire Direct"
+msgstr ""
+
+#: src/admin.inc.php:1921
+#, php-format
+msgid ""
+"Error: the Marketpay %1$s webhook is DISABLED or INVALID - please update it "
+"via %2$s"
+msgstr ""
+
+#: src/admin.inc.php:1924 src/admin.inc.php:1951
+msgid "the Dashboard"
+msgstr ""
+
+#: src/admin.inc.php:1947
+#, php-format
+msgid ""
+"Error: the URL of the Marketpay %1$s webhook is not correct and should be "
+"%2$s - please update it via %3$s"
+msgstr ""
+
+#: src/gateway.inc.php:82
+msgid "Enable/Disable"
+msgstr ""
+
+#: src/gateway.inc.php:84
+msgid "Enable Marketpay Payment"
+msgstr ""
+
+#: src/gateway.inc.php:93
+msgid "Needs activation"
+msgstr ""
+
+#: src/gateway.inc.php:100
+msgid "Choose available credit card types:"
+msgstr ""
+
+#: src/gateway.inc.php:104
+msgid "Choose available direct payment types:"
+msgstr ""
+
+#: src/gateway.inc.php:110
+#, php-format
+msgid "Enable %s payment"
+msgstr ""
+
+#: src/gateway.inc.php:133
+msgid "Skip Add to Cart"
+msgstr ""
+
+#: src/gateway.inc.php:135
+msgid "Direct access to fill in billing details from the product's page."
+msgstr ""
+
+#: src/gateway.inc.php:140 src/gateway.inc.php:144
+msgid "Use this page for payment template"
+msgstr ""
+
+#: src/gateway.inc.php:141
+msgid "The page needs to be secured with https"
+msgstr ""
+
+#: src/gateway.inc.php:148
+msgid "Page contents:"
+msgstr ""
+
+#: src/gateway.inc.php:149 src/gateway.inc.php:152
+msgid "Select a page&hellip;"
+msgstr ""
+
+#: src/gateway.inc.php:160
+msgid "We enable escrow payments in the sharing economy"
+msgstr ""
+
+#: src/gateway.inc.php:161
+msgid "Default payment methods"
+msgstr ""
+
+#: src/gateway.inc.php:338
+msgid "Online payment"
+msgstr ""
+
+#: src/gateway.inc.php:357
+msgid "Use a direct bank wire"
+msgstr ""
+
+#: src/gateway.inc.php:434
+msgid "Could not create the Marketpay payment URL"
+msgstr ""
+
+#: src/gateway.inc.php:436 src/gateway.inc.php:492
+msgid "Payment error:"
+msgstr ""
+
+#: src/gateway.inc.php:490
+msgid "Marketpay Bankwire Direct payin failed"
+msgstr ""
+
+#: src/gateway.inc.php:538
+msgid "Refund Failed: No transaction ID"
+msgstr ""
+
+#: src/gateway.inc.php:564
+#, php-format
+msgid "Refunded %s - Refund ID: %s"
+msgstr ""
+
+#: src/gateway.inc.php:576
+#, php-format
+msgid "Refund failed: %s - %s"
+msgstr ""
+
+#: src/main.inc.php:280
+msgid "First name"
+msgstr ""
+
+#: src/main.inc.php:288
+msgid "Last name"
+msgstr ""
+
+#: src/main.inc.php:417
+msgid "Country of residence"
+msgstr ""
+
+#: src/main.inc.php:969
+msgid "Marketpay info"
+msgstr ""
+
+#: src/main.inc.php:986 src/main.inc.php:1059
+msgid ""
+"No Marketpay wallets. Please check that all required fields have been "
+"completed in the user profile."
+msgstr ""
+
+#: src/main.inc.php:996
+#, php-format
+msgid "View the user (#%s) in the Marketpay Dashboard"
+msgstr ""
+
+#: src/main.inc.php:997
+msgid "View user&apos;s Marketpay transactions"
+msgstr ""
+
+#: src/main.inc.php:1003
+msgid "Wallet #"
+msgstr ""
+
+#: src/main.inc.php:1004
+msgid "Creation Date"
+msgstr ""
+
+#: src/main.inc.php:1005
+msgid "Description"
+msgstr ""
+
+#: src/main.inc.php:1006
+msgid "Balance"
+msgstr ""
+
+#: src/main.inc.php:1007
+msgid "Wallet Options"
+msgstr ""
+
+#: src/main.inc.php:1016
+#, php-format
+msgid "See Marketpay transactions for wallet #%s"
+msgstr ""
+
+#: src/main.inc.php:1021
+#, php-format
+msgid "Do a Marketpay payout for wallet #%s"
+msgstr ""
+
+#: src/main.inc.php:1037
+msgid "View transactions"
+msgstr ""
+
+#: src/main.inc.php:1040
+msgid "Do a PayOut"
+msgstr ""
+
+#: src/main.inc.php:1105 src/main.inc.php:1113
+msgid "Bank account info"
+msgstr ""
+
+#: src/main.inc.php:1117
+msgid "Account type:"
+msgstr ""
+
+#: src/main.inc.php:1195 src/main.inc.php:1561
+msgid "Account holder&apos;s name"
+msgstr ""
+
+#: src/main.inc.php:1212 src/main.inc.php:1562
+msgid "Account holder&apos;s address"
+msgstr ""
+
+#: src/main.inc.php:1238 src/main.inc.php:1563
+msgid "Account holder&apos;s city"
+msgstr ""
+
+#: src/main.inc.php:1255 src/main.inc.php:1585 src/main.inc.php:1620
+msgid "Account holder&apos;s postal code"
+msgstr ""
+
+#: src/main.inc.php:1274 src/main.inc.php:1315 src/main.inc.php:1564
+#: src/main.inc.php:1635
+msgid "Account holder&apos;s country"
+msgstr ""
+
+#: src/main.inc.php:1296 src/main.inc.php:1339 src/main.inc.php:1570
+msgid "Account holder&apos;s region"
+msgstr ""
+
+#: src/main.inc.php:1593 src/main.inc.php:1607 src/main.inc.php:1619
+#: src/main.inc.php:1634 src/main.inc.php:1654 src/main.inc.php:1677
+#: src/marketpay.inc.php:301 src/marketpay.inc.php:813
+#: src/marketpay.inc.php:1549 src/validation.inc.php:309
+msgid "Error:"
+msgstr ""
+
+#: src/main.inc.php:1594
+msgid "not a valid bank account type"
+msgstr ""
+
+#: src/main.inc.php:1609 src/main.inc.php:1656 src/validation.inc.php:52
+#: src/validation.inc.php:87 src/validation.inc.php:140
+#: src/validation.inc.php:165 src/validation.inc.php:224
+#: src/validation.inc.php:233 src/validation.inc.php:275
+msgid "is required!"
+msgstr ""
+
+#: src/main.inc.php:1621 src/main.inc.php:1636 src/main.inc.php:1679
+msgid "is invalid!"
+msgstr ""
+
+#: src/main.inc.php:1798
+msgid "Marketpay transaction Id:"
+msgstr ""
+
+#: src/main.inc.php:1799
+msgid "Marketpay transaction status:"
+msgstr ""
+
+#: src/main.inc.php:1800
+msgid "Marketpay transaction total amount:"
+msgstr ""
+
+#: src/main.inc.php:1801
+msgid "Marketpay transaction currency:"
+msgstr ""
+
+#: src/main.inc.php:1802
+msgid "Order total:"
+msgstr ""
+
+#: src/main.inc.php:1803
+msgid "Order currency:"
+msgstr ""
+
+#: src/main.inc.php:1807 src/main.inc.php:1810
+msgid "Error: Marketpay transaction did not succeed."
+msgstr ""
+
+#: src/main.inc.php:1815
+msgid "Error: wrong currency."
+msgstr ""
+
+#: src/main.inc.php:1820
+msgid "Error: wrong payment amount."
+msgstr ""
+
+#: src/main.inc.php:1854
+msgid "Information for your bank transfer"
+msgstr ""
+
+#: src/main.inc.php:1855
+msgid ""
+"To complete your order, please do a bank transfer with the following "
+"information, including the bank wire reference."
+msgstr ""
+
+#: src/main.inc.php:1856
+msgid "We will process your order once the transfer is received."
+msgstr ""
+
+#: src/main.inc.php:1861
+msgid "Amount:"
+msgstr ""
+
+#: src/main.inc.php:1866
+msgid "Bank account owner:"
+msgstr ""
+
+#: src/main.inc.php:1870
+msgid "IBAN:"
+msgstr ""
+
+#: src/main.inc.php:1874
+msgid "BIC:"
+msgstr ""
+
+#: src/main.inc.php:1878
+msgid "Wire reference:"
+msgstr ""
+
+#: src/main.inc.php:2068
+msgid "Refuse this item"
+msgstr ""
+
+#: src/main.inc.php:2249
+msgid "Done"
+msgstr ""
+
+#: src/main.inc.php:2250
+msgid "Today"
+msgstr ""
+
+#: src/main.inc.php:2253
+msgid "Show a different month"
+msgstr ""
+
+#: src/main.inc.php:2504 src/main.inc.php:2519
+msgid "Select a country&hellip;"
+msgstr ""
+
+#: src/main.inc.php:2550
+msgid "Select a state&hellip;"
+msgstr ""
+
+#: src/main.inc.php:2581
+msgid "Choose an option"
+msgstr ""
+
+#: src/marketpay.inc.php:287 src/marketpay.inc.php:295
+#: src/marketpay.inc.php:309 src/marketpay.inc.php:814
+#: src/marketpay.inc.php:1550
+msgid "Marketpay API returned:"
+msgstr ""
+
+#: src/marketpay.inc.php:675
+msgid "back"
+msgstr ""
+
+#: src/marketpay.inc.php:676
+msgid "Error: Invalid bank account data."
+msgstr ""
+
+#: src/marketpay.inc.php:719
+msgid "Error: some required fields are missing in createMarketUser"
+msgstr ""
+
+#: src/marketpay.inc.php:1202 src/marketpay.inc.php:1278
+msgid "My Account"
+msgstr ""
+
+#: src/marketpay.inc.php:1204 src/marketpay.inc.php:1280
+#, php-format
+msgid ""
+"Your profile info needs to be completed. Please go to %s and fill-in all "
+"required fields."
+msgstr ""
+
+#: src/marketpay.inc.php:1253
+msgid "Error: ApiException on create_payin_url"
+msgstr ""
+
+#: src/validation.inc.php:94
+msgid "Invalid "
+msgstr ""
+
+#: src/validation.inc.php:95
+msgid "Please use this format: "
+msgstr ""
+
+#: src/validation.inc.php:109
+msgid "Invalid Birthday date."
+msgstr ""
+
+#: src/validation.inc.php:151
+msgid "Unknown country for Nationality"
+msgstr ""
+
+#: src/validation.inc.php:164
+msgid "State"
+msgstr ""
+
+#: src/validation.inc.php:241
+msgid "Unknown user status type"
+msgstr ""
+
+#: src/validation.inc.php:290
+msgid "Unknown business type"
+msgstr ""
+
+#: src/webhooks.inc.php:108
+#, php-format
+msgid "Marketpay Payin API error for Resource ID: %1$s"
+msgstr ""
+
+#: src/webhooks.inc.php:109
+msgid ""
+"It could be that the Marketpay environment (sandbox or production) has "
+"changed since this payment was issued."
+msgstr ""
+
+#: src/webhooks.inc.php:119
+#, php-format
+msgid "Marketpay Payin not found for Resource ID: %1$s"
+msgstr ""
+
+#: src/webhooks.inc.php:350
+#, php-format
+msgid ""
+"Marketpay Payin does not contain a WooCommerce Order ID reference for "
+"Resource ID: %1$s"
+msgstr ""
+
+#: src/webhooks.inc.php:374
+#, php-format
+msgid ""
+"Marketpay Payin Resource ID: %1$s references WooCommerce Order ID: %2$s "
+"which was not paid by bank wire"
+msgstr ""
+
+#: src/webhooks.inc.php:406 src/webhooks.inc.php:444
+#, php-format
+msgid ""
+"Marketpay Payin Resource ID: %1$s references wrong WooCommerce Order ID: %2$s"
+msgstr ""
+
+#: src/webhooks.inc.php:459
+#, php-format
+msgid ""
+"Marketpay Payin did not succeed for Resource ID: %1$s concerning WooCommerce "
+"Order ID: %2$s"
+msgstr ""
+
+#: src/webhooks.inc.php:474 src/webhooks.inc.php:535 src/webhooks.inc.php:652
+msgid "Hook note: "
+msgstr ""
+
+#: src/webhooks.inc.php:495
+#, php-format
+msgid ""
+"Marketpay Payin debited funds do not match declared for Resource ID: %1$s"
+msgstr ""
+
+#: src/webhooks.inc.php:509
+#, php-format
+msgid "Marketpay Payin fees do not match declared for Resource ID: %1$s"
+msgstr ""
+
+#: src/webhooks.inc.php:529
+#, php-format
+msgid "Received valid Marketpay %1$s webhook"
+msgstr ""
+
+#: src/webhooks.inc.php:554
+#, php-format
+msgid ""
+"Marketpay Payin webhook could not complete payment for order: %1$s. %2$s"
+msgstr ""
+
+#: src/webhooks.inc.php:661
+msgid "Marketpay Bank Wire webhook warning"
+msgstr ""

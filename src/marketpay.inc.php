@@ -239,7 +239,7 @@ class mpAccess
 
             $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
             $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
-            $this->marketPayApi->Kyc            = new Swagger\Client\Api\KycApi($this->marketPayApi);
+            $this->marketPayApi->Kyc = new Swagger\Client\Api\KycApi($this->marketPayApi);
         }
 
         return true;
@@ -854,11 +854,16 @@ class mpAccess
 
         if ('NATURAL' == $marketUser->PersonType)
         {
+            $kycUser = new $this->marketPayApi->Kyc->kycGetNatural($mp_user_id);
+
             if (
                 isset($usermeta['first_name']) &&
                 $usermeta['first_name'] &&
-                $marketUser->FirstName != $usermeta['first_name']
+                $marketUser->FirstName != $usermeta['first_name'] &&
+                $kycUser->getFirstName() != $usermeta['first_name']
             ) {
+                $kycUser->setFirstName($usermeta['first_name']);
+
                 $marketUser->FirstName = $usermeta['first_name'];
                 $needs_updating        = true;
             }
@@ -866,8 +871,11 @@ class mpAccess
             if (
                 isset($usermeta['last_name']) &&
                 $usermeta['last_name'] &&
-                $marketUser->LastName != $usermeta['last_name']
+                $marketUser->LastName != $usermeta['last_name'] &&
+                $kycUser->getLastName() != $usermeta['last_name']
             ) {
+                $kycUser->setLastName($usermeta['last_name']);
+
                 $marketUser->LastName = $usermeta['last_name'];
                 $needs_updating       = true;
             }
@@ -879,20 +887,26 @@ class mpAccess
                     $marketUser->Address->City != $usermeta['city'] ||
                     $marketUser->Address->PostalCode != $usermeta['postal_code'] ||
                     $marketUser->Address->Country != $usermeta['billing_country']
+                ) && (
+                    $kycUser->getAddress()->getAddressLine1() != $usermeta['address_1'] ||
+                    $kycUser->getAddress()->getCity() != $usermeta['city'] ||
+                    $kycUser->getAddress()->getPostalCode() != $usermeta['postal_code'] ||
+                    $kycUser->getAddress()->getCountry() != $usermeta['billing_country']
                 )
             ) {
+                $kycUser->setAddress(new Swagger\Client\Model\Address([
+                    'address_line1' => $usermeta['address_1'],
+                    'city'          => $usermeta['city'],
+                    'region'        => $usermeta['billing_state'],
+                    'postal_code'   => $usermeta['postal_code'],
+                    'country'       => $usermeta['billing_country']
+                ]));
+
                 $marketUser->Address->AddressLine1 = $usermeta['address_1'];
                 $marketUser->Address->City         = $usermeta['city'];
                 $marketUser->Address->PostalCode   = $usermeta['postal_code'];
                 $marketUser->Address->Country      = $usermeta['billing_country'];
-
-                if (
-                    'US' == $usermeta['billing_country'] ||
-                    'MX' == $usermeta['billing_country'] ||
-                    'CA' == $usermeta['billing_country']
-                ) {
-                    $marketUser->Address->Region = $usermeta['billing_state'];
-                }
+                $marketUser->Address->Region       = $usermeta['billing_state'];
 
                 $needs_updating = true;
             }
@@ -900,8 +914,11 @@ class mpAccess
             if (
                 isset($usermeta['billing_country']) &&
                 $usermeta['billing_country'] &&
-                $marketUser->CountryOfResidence != $usermeta['billing_country']
+                $marketUser->CountryOfResidence != $usermeta['billing_country'] &&
+                $kycUser->getCountryOfResidence() != $usermeta['billing_countr']
             ) {
+                $kycUser->setCountryOfResidence($usermeta['billing_country']);
+
                 $marketUser->CountryOfResidence = $usermeta['billing_country'];
                 $needs_updating                 = true;
             }
@@ -916,8 +933,11 @@ class mpAccess
             if (
                 isset($usermeta['user_birthday']) &&
                 $usermeta['user_birthday'] &&
-                $marketUser->Birthday != $timestamp
+                $marketUser->Birthday != $timestamp &&
+                $kycUser->getBirthday() != $timestamp
             ) {
+                $kyc->setBirthday($timestamp);
+
                 $marketUser->Birthday = $timestamp;
                 $needs_updating       = true;
             }
@@ -925,8 +945,11 @@ class mpAccess
             if (
                 isset($usermeta['user_nationality']) &&
                 $usermeta['user_nationality'] &&
-                $marketUser->Nationality != $usermeta['user_nationality']
+                $marketUser->Nationality != $usermeta['user_nationality'] &&
+                $kycUser->getNationality() != $usermeta['get_nationality']
             ) {
+                $kycUser->setNationality($usermeta['user_nationality']);
+
                 $marketUser->Nationality = $usermeta['user_nationality'];
                 $needs_updating          = true;
             }
@@ -934,29 +957,43 @@ class mpAccess
             if (
                 isset($usermeta['kyc_id_document']) &&
                 $usermeta['kyc_id_document'] &&
-                $marketUser->IdDocument != $usermeta['kyc_id_document']
+                $kycUser->getIdCard() != $usermeta['kyc_id_document']
             ) {
-                $marketUser->IdDocument = $usermeta['kyc_id_document'];
-                $needs_updating         = true;
+                $kycUser->setIdCard($usermeta['kyc_id_document']);
+
+                $needs_updating = true;
             }
 
             if (
                 isset($usermeta['user_email']) &&
                 $usermeta['user_email'] &&
-                $marketUser->Email != $usermeta['user_email']
+                $marketUser->Email != $usermeta['user_email'] &&
+                $kycUser->getEmail() != $usermeta['user_email']
             ) {
+                $kycUser->setEmail($usermeta['user_email']);
+
                 $marketUser->Email = $usermeta['user_email'];
                 $needs_updating    = true;
+            }
+
+            if ($needs_updating)
+            {
+                $this->marketPayApi->Kyc->kycPostNatural($mp_user_id, $kycUser);
             }
         }
         else
         {
+            $kycUser = new $this->marketPayApi->Kyc->kycGetLegal($mp_user_id);
+
             /** Business / legal user **/
             if (
                 isset($usermeta['pv_shop_name']) &&
                 $usermeta['pv_shop_name'] &&
-                $marketUser->Name != $usermeta['pv_shop_name']
+                $marketUser->Name != $usermeta['pv_shop_name'] &&
+                $kycUser->getName() != $usermeta['pv_shop_name']
             ) {
+                $kycUser->setName($usermeta['pv_shop_name']);
+
                 $marketUser->Name = $usermeta['pv_shop_name'];
                 $needs_updating   = true;
             }
@@ -964,8 +1001,11 @@ class mpAccess
             if (
                 isset($usermeta['first_name']) &&
                 $usermeta['first_name'] &&
-                $marketUser->LegalRepresentativeFirstName != $usermeta['first_name']
+                $marketUser->LegalRepresentativeFirstName != $usermeta['first_name'] &&
+                $kycUser->getLegalRepresentativeFirstName() != $usermeta['first_name']
             ) {
+                $kyc->setLegalRepresentativeFirstName($usermeta['first_name']);
+
                 $marketUser->LegalRepresentativeFirstName = $usermeta['first_name'];
                 $needs_updating                           = true;
             }
@@ -973,8 +1013,11 @@ class mpAccess
             if (
                 isset($usermeta['last_name']) &&
                 $usermeta['last_name'] &&
-                $marketUser->LegalRepresentativeLastName != $usermeta['last_name']
+                $marketUser->LegalRepresentativeLastName != $usermeta['last_name'] &&
+                $kycUser->getLegalRepresentativeLastName() != $usermeta['last_name']
             ) {
+                $kycUser->setLegalRepresentativeLastName($usermeta['last_name']);
+
                 $marketUser->LegalRepresentativeLastName = $usermeta['last_name'];
                 $needs_updating                          = true;
             }
@@ -986,20 +1029,26 @@ class mpAccess
                     $marketUser->LegalRepresentativeAddress->City != $usermeta['city'] ||
                     $marketUser->LegalRepresentativeAddress->PostalCode != $usermeta['postal_code'] ||
                     $marketUser->LegalRepresentativeAddress->Country != $usermeta['billing_country']
+                ) && (
+                    $kycUser->getLegalRepresentativeAddress()->getAddressLine1() != $usermeta['address_1'] ||
+                    $kycUser->getLegalRepresentativeAddress()->getCity() != $usermeta['city'] ||
+                    $kycUser->getLegalRepresentativeAddress()->getPostalCode() != $usermeta['postal_code'] ||
+                    $kycUser->getLegalRepresentativeAddress()->getCountry() != $usermeta['billing_country']
                 )
             ) {
+                $kycUser->setLegalRepresentativeAddress(new Swagger\Client\Model\Address([
+                    'address_line1' => $usermeta['address_1'],
+                    'city'          => $usermeta['city'],
+                    'region'        => $usermeta['billing_state'],
+                    'postal_code'   => $usermeta['postal_code'],
+                    'country'       => $usermeta['billing_country']
+                ]));
+
                 $marketUser->LegalRepresentativeAddress->AddressLine1 = $usermeta['address_1'];
                 $marketUser->LegalRepresentativeAddress->City         = $usermeta['city'];
                 $marketUser->LegalRepresentativeAddress->PostalCode   = $usermeta['postal_code'];
                 $marketUser->LegalRepresentativeAddress->Country      = $usermeta['billing_country'];
-
-                if (
-                    'US' == $usermeta['billing_country'] ||
-                    'MX' == $usermeta['billing_country'] ||
-                    'CA' == $usermeta['billing_country']
-                ) {
-                    $marketUser->LegalRepresentativeAddress->Region = $usermeta['billing_state'];
-                }
+                $marketUser->LegalRepresentativeAddress->Region       = $usermeta['billing_state'];
 
                 $needs_updating = true;
             }
@@ -1007,8 +1056,11 @@ class mpAccess
             if (
                 isset($usermeta['billing_country']) &&
                 $usermeta['billing_country'] &&
-                $marketUser->LegalRepresentativeCountryOfResidence != $usermeta['billing_country']
+                $marketUser->LegalRepresentativeCountryOfResidence != $usermeta['billing_country'] &&
+                $kycUser->getLegalRepresentativeCountryOfResidence() != $usermeta['billing_country']
             ) {
+                $kycUser->setLegalRepresentativeCountryOfResidence($usermeta['billing_country']);
+
                 $marketUser->LegalRepresentativeCountryOfResidence = $usermeta['billing_country'];
                 $needs_updating                                    = true;
             }
@@ -1023,8 +1075,11 @@ class mpAccess
             if (
                 isset($usermeta['user_birthday']) &&
                 $usermeta['user_birthday'] &&
-                $marketUser->LegalRepresentativeBirthday != $timestamp
+                $marketUser->LegalRepresentativeBirthday != $timestamp &&
+                $kycUser->getLegalRepresentativeBirthday() != $timestamp
             ) {
+                $kycUser->setLegalRepresentativeBirthday($timestamp);
+
                 $marketUser->LegalRepresentativeBirthday = $timestamp;
                 $needs_updating                          = true;
             }
@@ -1032,8 +1087,11 @@ class mpAccess
             if (
                 isset($usermeta['user_nationality']) &&
                 $usermeta['user_nationality'] &&
-                $marketUser->LegalRepresentativeNationality != $usermeta['user_nationality']
+                $marketUser->LegalRepresentativeNationality != $usermeta['user_nationality'] &&
+                $kycUser->getLegalRepresentativeNationality() != $usermeta['user_nationality']
             ) {
+                $kycUser->setLegalRepresentativeNationality($usermeta['user_nationality']);
+
                 $marketUser->LegalRepresentativeNationality = $usermeta['user_nationality'];
                 $needs_updating                             = true;
             }
@@ -1041,31 +1099,41 @@ class mpAccess
             if (
                 isset($usermeta['user_email']) &&
                 $usermeta['user_email'] &&
-                $marketUser->Email != $usermeta['user_email']
+                $marketUser->Email != $usermeta['user_email'] &&
+                $kycUser->getLegalRepresentativeEmail() != $usermeta['user_email']
             ) {
+                $kycUser->setLegalRepresentativeEmail($usermeta['user_email']);
+
                 $marketUser->Email = $usermeta['user_email'];
                 $needs_updating    = true;
             }
 
             if (isset($usermeta['user_business_type']) && $usermeta['user_business_type'] != '')
             {
-                if ('business' == $usermeta['user_business_type']
-                    || 'businesses' == $usermeta['user_business_type']) {
+                if ('business' == $usermeta['user_business_type'] || 'businesses' == $usermeta['user_business_type'])
+                {
                     $legal_p_type = 'BUSINESS';
                 }
 
-                if ('organisation' == $usermeta['user_business_type']
-                    || 'organisations' == $usermeta['user_business_type']) {
+                if ('organisation' == $usermeta['user_business_type'] || 'organisations' == $usermeta['user_business_type'])
+                {
                     $legal_p_type = 'ORGANIZATION';
                 }
 
-                if ('soletrader' == $usermeta['user_business_type']
-                    || 'soletraders' == $usermeta['user_business_type']) {
+                if ('soletrader' == $usermeta['user_business_type'] || 'soletraders' == $usermeta['user_business_type'])
+                {
                     $legal_p_type = 'SOLETRADER';
                 }
 
+                $kycUser->setLegalPersonType($legal_p_type);
+
                 $marketUser->LegalPersonType = $legal_p_type;
                 $needs_updating              = true;
+            }
+
+            if ($needs_updating)
+            {
+                $this->marketPayApi->Kyc->kycPutLegal($mp_user_id, $kycUser);
             }
         }
 

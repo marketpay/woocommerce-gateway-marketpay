@@ -393,8 +393,8 @@ class marketpayWCMain
         <script>
         (function($) {
             $(document).ready(function() {
-                if ($.fn.datepicker && datepickerL10n) {
-                    $('input.calendar').datepicker(datepickerL10n);
+                if ($.fn.datepicker) {
+                    $('input.calendar').datepicker();
                 }
 
                 if ('business' == $('#reg_user_mp_status').val()) {
@@ -829,8 +829,8 @@ class marketpayWCMain
         <script>
         (function($) {
             $(document).ready(function() {
-                if ($.fn.datepicker && datepickerL10n) {
-                    $('input.calendar, #user_birthday').datepicker(datepickerL10n);
+                if ($.fn.datepicker) {
+                    $('input.calendar, #user_birthday').datepicker();
                 }
             });
         })( jQuery );

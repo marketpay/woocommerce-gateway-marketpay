@@ -393,12 +393,17 @@ class marketpayWCMain
         <script>
         (function($) {
             $(document).ready(function() {
-                $('input.calendar').datepicker(datepickerL10n);
-                if( 'business'==$('#reg_user_mp_status').val() )
+                if ($.fn.datepicker && datepickerL10n) {
+                    $('input.calendar').datepicker(datepickerL10n);
+                }
+
+                if ('business' == $('#reg_user_mp_status').val()) {
                     $('.hide_business_type').show();
+                }
             });
-            $('#reg_user_mp_status').on('change',function(e){
-                if( 'business'==$('#reg_user_mp_status').val() ) {
+
+            $('#reg_user_mp_status').on('change', function(e) {
+                if ('business' == $('#reg_user_mp_status').val()) {
                     $('.hide_business_type').show();
                 } else {
                     $('.hide_business_type').hide();
@@ -824,7 +829,9 @@ class marketpayWCMain
         <script>
         (function($) {
             $(document).ready(function() {
-                $('input.calendar, #user_birthday').datepicker(datepickerL10n);
+                if ($.fn.datepicker && datepickerL10n) {
+                    $('input.calendar, #user_birthday').datepicker(datepickerL10n);
+                }
             });
         })( jQuery );
         </script>

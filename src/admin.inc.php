@@ -1429,13 +1429,17 @@ $business_edit = 0;
             (function($) {
                 $(document).ready(function() {
                     $('label[for=first_name],label[for=last_name],label[for=billing_country]').append(' <span class="description required"><?php _e('(required)', 'marketpay');?></span>');
-                    $('input.calendar').datepicker();
+                    if ($.fn.datepicker) {
+                        $('input.calendar').datepicker();
+                    }
 
-                    if( 'business'==$('#user_mp_status').val() )
+                    if ('business'==$('#user_mp_status').val()) {
                         $('.hide_business_type').show();
+                    }
                 });
-                $('#user_mp_status').on('change',function(e){
-                    if( 'business'==$('#user_mp_status').val() ) {
+
+                $('#user_mp_status').on('change', function(e) {
+                    if ('business'==$('#user_mp_status').val()) {
                         $('.hide_business_type').show();
                     } else {
                         $('.hide_business_type').hide();

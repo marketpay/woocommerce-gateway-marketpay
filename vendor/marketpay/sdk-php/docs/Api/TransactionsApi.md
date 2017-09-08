@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **transactionsGetList**
-> \Swagger\Client\Model\ResponseListTransactionResponse transactionsGetList($page, $per_page, $before_date, $after_date)
+> \Swagger\Client\Model\ResponseListTransactionResponse transactionsGetList($page, $per_page, $before_date, $after_date, $sort)
 
 View a Transaction
 
@@ -27,9 +27,10 @@ $page = 56; // int |
 $per_page = 56; // int | 
 $before_date = 789; // int | 
 $after_date = 789; // int | 
+$sort = "sort_example"; // string | 
 
 try {
-    $result = $api_instance->transactionsGetList($page, $per_page, $before_date, $after_date);
+    $result = $api_instance->transactionsGetList($page, $per_page, $before_date, $after_date, $sort);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TransactionsApi->transactionsGetList: ', $e->getMessage(), PHP_EOL;
@@ -45,6 +46,7 @@ Name | Type | Description  | Notes
  **per_page** | **int**|  | [optional]
  **before_date** | **int**|  | [optional]
  **after_date** | **int**|  | [optional]
+ **sort** | **string**|  | [optional]
 
 ### Return type
 

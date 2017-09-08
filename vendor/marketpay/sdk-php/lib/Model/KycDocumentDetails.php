@@ -54,7 +54,7 @@ class KycDocumentDetails implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'documet_ids' => 'int[]'
+        'document_ids' => 'int[]'
     ];
 
     /**
@@ -62,7 +62,7 @@ class KycDocumentDetails implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'documet_ids' => 'int64'
+        'document_ids' => 'int64'
     ];
 
     public static function swaggerTypes()
@@ -80,7 +80,7 @@ class KycDocumentDetails implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'documet_ids' => 'DocumetIds'
+        'document_ids' => 'DocumentIds'
     ];
 
 
@@ -89,7 +89,7 @@ class KycDocumentDetails implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'documet_ids' => 'setDocumetIds'
+        'document_ids' => 'setDocumentIds'
     ];
 
 
@@ -98,7 +98,7 @@ class KycDocumentDetails implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'documet_ids' => 'getDocumetIds'
+        'document_ids' => 'getDocumentIds'
     ];
 
     public static function attributeMap()
@@ -132,7 +132,7 @@ class KycDocumentDetails implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['documet_ids'] = isset($data['documet_ids']) ? $data['documet_ids'] : null;
+        $this->container['document_ids'] = isset($data['document_ids']) ? $data['document_ids'] : null;
     }
 
     /**
@@ -161,22 +161,22 @@ class KycDocumentDetails implements ArrayAccess
 
 
     /**
-     * Gets documet_ids
+     * Gets document_ids
      * @return int[]
      */
-    public function getDocumetIds()
+    public function getDocumentIds()
     {
-        return $this->container['documet_ids'];
+        return $this->container['document_ids'];
     }
 
     /**
-     * Sets documet_ids
-     * @param int[] $documet_ids
+     * Sets document_ids
+     * @param int[] $document_ids
      * @return $this
      */
-    public function setDocumetIds($documet_ids)
+    public function setDocumentIds($document_ids)
     {
-        $this->container['documet_ids'] = $documet_ids;
+        $this->container['document_ids'] = $document_ids;
 
         return $this;
     }

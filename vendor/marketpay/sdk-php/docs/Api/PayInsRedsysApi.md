@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **payInsRedsysRedsysPostPaymentByWeb**
-> \Swagger\Client\Model\RedsysPayByWebResponse payInsRedsysRedsysPostPaymentByWeb($redsys_pay_in)
+> \Swagger\Client\Model\RedsysPayByWebResponse payInsRedsysRedsysPostPaymentByWeb($x_webhook, $redsys_pay_in)
 
 Create a Redsys PayIn Request
 
@@ -125,10 +125,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 $api_instance = new Swagger\Client\Api\PayInsRedsysApi();
+$x_webhook = "x_webhook_example"; // string | 
 $redsys_pay_in = new \Swagger\Client\Model\RedsysPayByWebPost(); // \Swagger\Client\Model\RedsysPayByWebPost | Redsys PayIn Request Object params
 
 try {
-    $result = $api_instance->payInsRedsysRedsysPostPaymentByWeb($redsys_pay_in);
+    $result = $api_instance->payInsRedsysRedsysPostPaymentByWeb($x_webhook, $redsys_pay_in);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PayInsRedsysApi->payInsRedsysRedsysPostPaymentByWeb: ', $e->getMessage(), PHP_EOL;
@@ -140,6 +141,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **x_webhook** | **string**|  | [optional]
  **redsys_pay_in** | [**\Swagger\Client\Model\RedsysPayByWebPost**](../Model/RedsysPayByWebPost.md)| Redsys PayIn Request Object params | [optional]
 
 ### Return type

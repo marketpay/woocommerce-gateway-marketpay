@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **transfersGetList**
-> \Swagger\Client\Model\ResponseListTransferResponse transfersGetList($page, $per_page, $before_date, $after_date)
+> \Swagger\Client\Model\ResponseListTransferResponse transfersGetList($page, $per_page, $before_date, $after_date, $sort)
 
 View a Transfer
 
@@ -77,9 +77,10 @@ $page = 56; // int |
 $per_page = 56; // int | 
 $before_date = 789; // int | 
 $after_date = 789; // int | 
+$sort = "sort_example"; // string | 
 
 try {
-    $result = $api_instance->transfersGetList($page, $per_page, $before_date, $after_date);
+    $result = $api_instance->transfersGetList($page, $per_page, $before_date, $after_date, $sort);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TransfersApi->transfersGetList: ', $e->getMessage(), PHP_EOL;
@@ -95,6 +96,7 @@ Name | Type | Description  | Notes
  **per_page** | **int**|  | [optional]
  **before_date** | **int**|  | [optional]
  **after_date** | **int**|  | [optional]
+ **sort** | **string**|  | [optional]
 
 ### Return type
 

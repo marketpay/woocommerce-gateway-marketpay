@@ -62,7 +62,6 @@ class KycUserValidationLevelNaturalResponse implements ArrayAccess
         'nationality' => 'string',
         'country_of_residence' => 'string',
         'occupation' => 'string',
-        'id_document_number' => 'string',
         'telephone' => '\Swagger\Client\Model\Telephone',
         'id_card' => 'string',
         'id_card_document' => '\Swagger\Client\Model\KycDocumentDetails',
@@ -85,7 +84,6 @@ class KycUserValidationLevelNaturalResponse implements ArrayAccess
         'nationality' => null,
         'country_of_residence' => null,
         'occupation' => null,
-        'id_document_number' => null,
         'telephone' => null,
         'id_card' => null,
         'id_card_document' => null,
@@ -118,7 +116,6 @@ class KycUserValidationLevelNaturalResponse implements ArrayAccess
         'nationality' => 'Nationality',
         'country_of_residence' => 'CountryOfResidence',
         'occupation' => 'Occupation',
-        'id_document_number' => 'IdDocumentNumber',
         'telephone' => 'Telephone',
         'id_card' => 'IdCard',
         'id_card_document' => 'IdCardDocument',
@@ -142,7 +139,6 @@ class KycUserValidationLevelNaturalResponse implements ArrayAccess
         'nationality' => 'setNationality',
         'country_of_residence' => 'setCountryOfResidence',
         'occupation' => 'setOccupation',
-        'id_document_number' => 'setIdDocumentNumber',
         'telephone' => 'setTelephone',
         'id_card' => 'setIdCard',
         'id_card_document' => 'setIdCardDocument',
@@ -166,7 +162,6 @@ class KycUserValidationLevelNaturalResponse implements ArrayAccess
         'nationality' => 'getNationality',
         'country_of_residence' => 'getCountryOfResidence',
         'occupation' => 'getOccupation',
-        'id_document_number' => 'getIdDocumentNumber',
         'telephone' => 'getTelephone',
         'id_card' => 'getIdCard',
         'id_card_document' => 'getIdCardDocument',
@@ -1251,7 +1246,6 @@ class KycUserValidationLevelNaturalResponse implements ArrayAccess
         $this->container['nationality'] = isset($data['nationality']) ? $data['nationality'] : null;
         $this->container['country_of_residence'] = isset($data['country_of_residence']) ? $data['country_of_residence'] : null;
         $this->container['occupation'] = isset($data['occupation']) ? $data['occupation'] : null;
-        $this->container['id_document_number'] = isset($data['id_document_number']) ? $data['id_document_number'] : null;
         $this->container['telephone'] = isset($data['telephone']) ? $data['telephone'] : null;
         $this->container['id_card'] = isset($data['id_card']) ? $data['id_card'] : null;
         $this->container['id_card_document'] = isset($data['id_card_document']) ? $data['id_card_document'] : null;
@@ -1504,27 +1498,6 @@ class KycUserValidationLevelNaturalResponse implements ArrayAccess
     public function setOccupation($occupation)
     {
         $this->container['occupation'] = $occupation;
-
-        return $this;
-    }
-
-    /**
-     * Gets id_document_number
-     * @return string
-     */
-    public function getIdDocumentNumber()
-    {
-        return $this->container['id_document_number'];
-    }
-
-    /**
-     * Sets id_document_number
-     * @param string $id_document_number
-     * @return $this
-     */
-    public function setIdDocumentNumber($id_document_number)
-    {
-        $this->container['id_document_number'] = $id_document_number;
 
         return $this;
     }

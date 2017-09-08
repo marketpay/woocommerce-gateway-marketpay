@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **nationality** | **string** | The user’s nationality. ISO 3166-1 alpha-2 format is expected | [optional] 
 **country_of_residence** | **string** | The user’s country of residence. ISO 3166-1 alpha-2 format is expected | [optional] 
 **occupation** | **string** | User’s occupation, ie. Work | [optional] 
-**id_document_number** | **string** |  | [optional] 
 **telephone** | [**\Swagger\Client\Model\Telephone**](Telephone.md) |  | [optional] 
 **id_card** | **string** |  | [optional] 
 **id_card_document** | [**\Swagger\Client\Model\KycDocumentDetails**](KycDocumentDetails.md) |  | [optional] 

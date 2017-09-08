@@ -78,9 +78,9 @@ class KycDocumentDetailsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "documet_ids"
+     * Test attribute "document_ids"
      */
-    public function testPropertyDocumetIds()
+    public function testPropertyDocumentIds()
     {
     }
 }

@@ -134,13 +134,6 @@ class KycUserValidationLevelNaturalResponseTest extends \PHPUnit_Framework_TestC
     }
 
     /**
-     * Test attribute "id_document_number"
-     */
-    public function testPropertyIdDocumentNumber()
-    {
-    }
-
-    /**
      * Test attribute "telephone"
      */
     public function testPropertyTelephone()

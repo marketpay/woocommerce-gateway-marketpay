@@ -96,12 +96,13 @@ class TransactionsApi
      * @param int $per_page  (optional)
      * @param int $before_date  (optional)
      * @param int $after_date  (optional)
+     * @param string $sort  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\ResponseListTransactionResponse
      */
-    public function transactionsGetList($page = null, $per_page = null, $before_date = null, $after_date = null)
+    public function transactionsGetList($page = null, $per_page = null, $before_date = null, $after_date = null, $sort = null)
     {
-        list($response) = $this->transactionsGetListWithHttpInfo($page, $per_page, $before_date, $after_date);
+        list($response) = $this->transactionsGetListWithHttpInfo($page, $per_page, $before_date, $after_date, $sort);
         return $response;
     }
 
@@ -114,10 +115,11 @@ class TransactionsApi
      * @param int $per_page  (optional)
      * @param int $before_date  (optional)
      * @param int $after_date  (optional)
+     * @param string $sort  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return array of \Swagger\Client\Model\ResponseListTransactionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function transactionsGetListWithHttpInfo($page = null, $per_page = null, $before_date = null, $after_date = null)
+    public function transactionsGetListWithHttpInfo($page = null, $per_page = null, $before_date = null, $after_date = null, $sort = null)
     {
         // parse inputs
         $resourcePath = "/v2.01/Transactions";
@@ -146,6 +148,10 @@ class TransactionsApi
         // query params
         if ($after_date !== null) {
             $queryParams['AfterDate'] = $this->apiClient->getSerializer()->toQueryValue($after_date);
+        }
+        // query params
+        if ($sort !== null) {
+            $queryParams['Sort'] = $this->apiClient->getSerializer()->toQueryValue($sort);
         }
 
         // for model (json/xml)

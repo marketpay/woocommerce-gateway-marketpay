@@ -443,11 +443,19 @@ class mpAccess
 
             $natio = get_user_meta($wp_user_id, 'user_nationality', true); // Custom usermeta
             $iddoc = get_user_meta($wp_user_id, 'kyc_id_document', true); // Custom usermeta
+            $kycfi = get_user_meta($wp_user_id, 'kyc_document', true); // Custom usermeta
             $ctry  = get_user_meta($wp_user_id, 'billing_country', true); // WP usermeta
 
             if (!$vendor_name = get_user_meta($wp_user_id, 'pv_shop_name', true)) // WC-Vendor plugin usermeta
             {
                 $vendor_name = $wp_userdata->nickname;
+            }
+
+            // Get Document File
+            $docfile = null;
+            if ($kycdoc = get_user_meta($wp_user_id, 'kyc_document', true))
+            {
+                $docfile = new SplFileObject(get_attached_file($kycdoc));
             }
 
             if ($marketUser = $this->createMarketUser(
@@ -461,7 +469,8 @@ class mpAccess
                 $wp_userdata->user_email,
                 $vendor_name,
                 $wp_user_id,
-                $iddoc
+                $iddoc,
+                $kycfi
             )) {
                 $mp_user_id = $marketUser->Id;
 
@@ -706,7 +715,8 @@ class mpAccess
         $email,
         $vendor_name = null,
         $wp_user_id,
-        $kyc_id_doc
+        $kyc_id_doc,
+        $kyc_doc
     ) {
         global $creation_mp_on;
         $creation_mp_on = true;
@@ -801,6 +811,22 @@ class mpAccess
                 catch (Exception $e)
                 {
                     //
+                }
+
+                // UPLOAD DOCUMENT
+                $splFileObject = new \SplFileObject(get_attached_file($kyc_doc));
+
+                try
+                {
+                    $upload = $this->marketPayApi->Kyc->kycPostDocument(
+                        'USER_IDENTITY_PROOF',
+                        $splFileObject,
+                        $mp_user_id
+                    );
+                }
+                catch (ApiException $e)
+                {
+
                 }
             }
         }
@@ -962,6 +988,27 @@ class mpAccess
                 $kycUser->setIdCard($usermeta['kyc_id_document']);
 
                 $needs_updating = true;
+            }
+
+            if (
+                isset($usermeta['kyc_document']) &&
+                $usermeta['kyc_document'] &&
+                ! in_array($usermeta['kyc_document'], $kycUser->getIdCardDocument()->getDocumentIds())
+            ) {
+                $splFileObject = new \SplFileObject(get_attached_file($usermeta['kyc_document']));
+
+                try
+                {
+                    $upload = $this->marketPayApi->Kyc->kycPostDocument(
+                        'USER_IDENTITY_PROOF',
+                        $splFileObject,
+                        $marketUser->Id
+                    );
+                }
+                catch (ApiException $e)
+                {
+
+                }
             }
 
             if (

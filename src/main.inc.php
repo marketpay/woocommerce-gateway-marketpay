@@ -350,6 +350,21 @@ class marketpayWCMain
             <input type="text" class="input-text" name="kyc_id_document" id="reg_kyc_id_document" value="<?php echo $value; ?>" />
         </p>
 
+        <?php
+        $value = '';
+
+        if (!empty($_POST['kyc_document'])) {
+            $value = esc_attr($_POST['kyc_document']);
+        }
+
+        if (is_wc_endpoint_url('edit-account') && ($wp_user_id = get_current_user_id())) {
+            $value = get_user_meta($wp_user_id, 'kyc_document', true);
+        }
+        ?>
+        <p class="form-row form-row-wide">
+            <label for="reg_kyc_document"><?php _e('Document Attachment ID', 'marketpay');?> <span class="required">*</span></label>
+            <input type="text" class="input-text" name="kyc_document" id="reg_kyc_document" value="<?php echo $value; ?>" />
+        </p>
 
         <?php
 
@@ -419,6 +434,7 @@ class marketpayWCMain
         $required['user_birthday']    = __('Birthday', 'marketpay');
         $required['user_nationality'] = __( 'Nationality', 'marketpay' );
         $required['kyc_id_document'] = __('ID Document', 'marketpay');
+        $requires['kyc_document'] = __('Document Attachment ID', 'marketpay');
         $required['billing_country']  = __('Country of residence', 'marketpay');
 
         return $required;
@@ -444,6 +460,7 @@ class marketpayWCMain
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
             'kyc_id_document'    => 'single',
+            'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
@@ -471,6 +488,7 @@ class marketpayWCMain
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
             'kyc_id_document'    => 'single',
+            'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
@@ -512,6 +530,7 @@ class marketpayWCMain
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
             'kyc_id_document'    => 'single',
+            'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
@@ -549,6 +568,7 @@ class marketpayWCMain
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
             'kyc_id_document'    => 'single',
+            'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
@@ -615,6 +635,12 @@ class marketpayWCMain
         {
             // New custom user meta field
             update_user_meta($customer_id, 'kyc_id_document', sanitize_text_field($_POST['kyc_id_document']));
+        }
+
+        if (isset($_POST['kyc_document']))
+        {
+            // New custom user meta field
+            update_user_meta($customer_id, 'kyc_document', sanitize_text_field($_POST['kyc_document']));
         }
 
         if (isset($_POST['billing_country']))
@@ -688,6 +714,15 @@ class marketpayWCMain
             $fields = $this->add_kyciddocument_field($fields);
         }
 
+        if ( ! get_user_meta(get_current_user_id(), 'kyc_document', true))
+        {
+            $fields = $this->add_kycdocument_field($fields);
+        }
+        else
+        {
+            $fields = $this->hide_kycdocument_field($fields);
+        }
+
         if ( ! get_user_meta(get_current_user_id(), 'user_birthday', true))
         {
             $fields = $this->add_userbirthday_field($fields);
@@ -738,11 +773,29 @@ class marketpayWCMain
 
     public function add_kyciddocument_field($fields)
     {
-        $fields['kyc_id_document'] = array(
+        $fields['billing']['kyc_id_document'] = array(
             'label'    => __('ID Document', 'marketpay'),
             'required' => true,
             'class'    => array('form-row-wide')
         );
+
+        return $fields;
+    }
+
+    public function add_kycdocument_field($fields)
+    {
+        $fields['billing']['kyc_document'] = array(
+            'label'    => __('Document Attachment ID', 'marketpay'),
+            'required' => true,
+            'class'    => array('form-row-wide')
+        );
+
+        return $fields;
+    }
+
+    public function hide_kycdocument_field($fields)
+    {
+        unset($fields['add_ons']);
 
         return $fields;
     }
@@ -785,58 +838,42 @@ class marketpayWCMain
      * To enable the jQuery-ui calendar for the birthday field on the checkout form
      */
     public function after_checkout_fields()
-    {
-        /** If the user is already logged-in no birthday field is present **/
-        if (
-            is_user_logged_in() &&
-            get_user_meta(get_current_user_id(), 'user_birthday', true) &&
-            get_user_meta(get_current_user_id(), 'user_mp_status', true)
-        ) {
-            return;
-        }
-
-        ?>
+    { ?>
         <script>
-        (function($) {
-            $(document).ready(function() {
-                if( 'business'==$('#user_mp_status').val() ) {
-                    $('.hide_business_type').show();
-                } else {
-                    <?php if ('businesses' != $this->options['default_buyer_status'] || 'either' != $this->options['default_business_type']): ?>
-                    $('.hide_business_type').hide();
-                    $('#user_business_type').val('organisation');
-                    <?php endif;?>
-                }
-            });
-            $('#user_mp_status').on('change',function(e){
-                if( 'business'==$('#user_mp_status').val() ) {
-                    $('.hide_business_type').show();
-                    $('#user_business_type').val('');
-                } else {
-                    $('.hide_business_type').hide();
-                    $('#user_business_type').val('organisation');
-                }
-            });
-        })( jQuery );
-        </script>
-        <?php
+            (function($) {
+                $(document).ready(function() {
+                    if ('business' == $('#user_mp_status').val()) {
+                        $('.hide_business_type').show();
+                    } else {
+                        <?php if ('businesses' != $this->options['default_buyer_status'] || 'either' != $this->options['default_business_type']): ?>
+                            $('.hide_business_type').hide();
+                            $('#user_business_type').val('organisation');
+                        <?php endif;?>
+                    }
 
-        if (!wp_script_is('jquery-ui-datepicker', 'enqueued')) {
-            return;
-        }
+                    if ($.fn.datepicker) {
+                        $('input.calendar, #user_birthday').datepicker();
+                    }
 
-        ?>
-        <script>
-        (function($) {
-            $(document).ready(function() {
-                if ($.fn.datepicker) {
-                    $('input.calendar, #user_birthday').datepicker();
-                }
-            });
-        })( jQuery );
+                    $('#kyc_document_field').hide()
+                });
+
+                $('#user_mp_status').on('change',function(e){
+                    if( 'business'==$('#user_mp_status').val() ) {
+                        $('.hide_business_type').show();
+                        $('#user_business_type').val('');
+                    } else {
+                        $('.hide_business_type').hide();
+                        $('#user_business_type').val('organisation');
+                    }
+                });
+
+                $("input[name^='wc_checkout_add_ons_']").on('change', function() {
+                    $('#kyc_document').val($(this).val());
+                });
+            })( jQuery );
         </script>
-        <?php
-    }
+    <?php }
 
     /**
      * Fires up when user role has been changed,
@@ -926,6 +963,7 @@ class marketpayWCMain
         $usermeta['user_birthday']    = get_user_meta($wp_user_id, 'user_birthday', true);
         $usermeta['user_nationality'] = get_user_meta($wp_user_id, 'user_nationality', true);
         $usermeta['kyc_id_document']  = get_user_meta($wp_user_id, 'kyc_id_document', true);
+        $usermeta['kyc_document']     = get_user_meta($wp_user_id, 'kyc_document', true);
 
         $usermeta['user_mp_status']     = get_user_meta($wp_user_id, 'user_mp_status', true);
         $usermeta['user_business_type'] = get_user_meta($wp_user_id, 'user_business_type', true);
@@ -946,7 +984,6 @@ class marketpayWCMain
      */
     public function marketpay_wallet_table()
     {
-
         if (!current_user_can('administrator')) {
             return;
         }

@@ -1231,6 +1231,11 @@ class marketpayWCAdmin
                 $id_document = $_POST['kyc_id_document'];
             }
 
+            $kyc_document = '';
+            if (!empty($_POST['kyc_document'])) {
+                $kyc_document = $_POST['kyc_document'];
+            }
+
             $billing_country = '';
             if (!empty($_POST['billing_country'])) {
                 $billing_country = $_POST['billing_country'];
@@ -1264,6 +1269,7 @@ class marketpayWCAdmin
 
             $user_nationality = get_the_author_meta('user_nationality', $user->ID);
             $kyc_id_document = get_the_author_meta('kyc_id_document', $user->ID);
+            $kyc_document = get_the_author_meta('kyc_document', $user->ID);
 
             $user_mp_status = get_the_author_meta('user_mp_status', $user->ID);
 
@@ -1314,6 +1320,13 @@ class marketpayWCAdmin
                 <td>
                   <input type="text" name="kyc_id_document" id="kyc_id_document" class="regular-text" value="<?php echo $kyc_id_document; ?>" /><br />
                   <span class="description"></span>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="kyc_document"><?php _e('Document Attachment ID', 'marketpay'); ?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
+                <td>
+                    <input type="text" name="kyc_document" id="kyc_document" class="regular-text" value="<?php echo $kyc_document; ?>" /><br />
+                    <span class="description"></span>
                 </td>
             </tr>
 
@@ -1461,6 +1474,7 @@ $business_edit = 0;
             update_user_meta($user_id, 'user_birthday', $birthday);
             update_user_meta($user_id, 'user_nationality', sanitize_text_field($_POST['user_nationality']));
             update_user_meta($user_id, 'kyc_id_document', sanitize_text_field($_POST['kyc_id_document']));
+            update_user_meta($user_id, 'kyc_document', sanitize_text_field($_POST['kyc_document']));
 
             if (isset($_POST['billing_country'])) {
                 update_user_meta($user_id, 'billing_country', sanitize_text_field($_POST['billing_country']));
@@ -1512,6 +1526,7 @@ $business_edit = 0;
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
             'kyc_id_document'    => 'single',
+            'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',

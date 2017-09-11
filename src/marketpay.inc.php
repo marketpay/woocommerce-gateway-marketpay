@@ -814,19 +814,16 @@ class mpAccess
                 }
 
                 // UPLOAD DOCUMENT
-                $splFileObject = new \SplFileObject(get_attached_file($kyc_doc));
+                $splFileObject = new SplFileObject(get_attached_file($kyc_doc));
 
                 try
                 {
-                    $upload = $this->marketPayApi->Kyc->kycPostDocument(
-                        'USER_IDENTITY_PROOF',
-                        $splFileObject,
-                        $mp_user_id
-                    );
+                    $this->marketPayApi->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $mp_user_id);
+                    $this->marketPayApi->Kyc->kycPutRequest($mp_user_id);
                 }
                 catch (ApiException $e)
                 {
-
+                    //
                 }
             }
         }
@@ -995,19 +992,16 @@ class mpAccess
                 $usermeta['kyc_document'] &&
                 ! in_array($usermeta['kyc_document'], $kycUser->getIdCardDocument()->getDocumentIds())
             ) {
-                $splFileObject = new \SplFileObject(get_attached_file($usermeta['kyc_document']));
+                $splFileObject = new SplFileObject(get_attached_file($usermeta['kyc_document']));
 
                 try
                 {
-                    $upload = $this->marketPayApi->Kyc->kycPostDocument(
-                        'USER_IDENTITY_PROOF',
-                        $splFileObject,
-                        $marketUser->Id
-                    );
+                    $this->marketPayApi->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $marketUser->Id);
+                    $this->marketPayApi->Kyc->kycPutRequest($marketUser->Id);
                 }
                 catch (ApiException $e)
                 {
-
+                    //
                 }
             }
 

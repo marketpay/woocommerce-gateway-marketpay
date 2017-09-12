@@ -819,7 +819,7 @@ class mpAccess
                 try
                 {
                     $this->marketPayApi->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $mp_user_id);
-                    $this->marketPayApi->Kyc->kycPutRequest($mp_user_id);
+                    $this->marketPayApi->Kyc->kycPutRequest($mp_user_id, new Swagger\Client\Model\KycIdentificationRequest);
                 }
                 catch (ApiException $e)
                 {
@@ -997,7 +997,7 @@ class mpAccess
                 try
                 {
                     $this->marketPayApi->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $marketUser->Id);
-                    $this->marketPayApi->Kyc->kycPutRequest($marketUser->Id);
+                    $this->marketPayApi->Kyc->kycPutRequest($marketUser->Id, new Swagger\Client\Model\KycIdentificationRequest);
                 }
                 catch (ApiException $e)
                 {

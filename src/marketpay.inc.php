@@ -20,9 +20,9 @@ class mpAccess
     /** Class constants **/
     const DEBUG            = false; // Turns debugging messages on or off (should be false for production)
     const TMP_DIR_NAME     = 'mp_tmp';
-    const SANDBOX_API_URL  = 'https://api-development.marketpay.io';
+    const SANDBOX_API_URL  = 'https://api-sandbox.marketpay.io';
     const PROD_API_URL     = 'https://api.marketpay.io';
-    const SANDBOX_DB_URL   = 'https://dashboard-development.marketpay.io';
+    const SANDBOX_DB_URL   = 'https://dashboard-sandbox.marketpay.io';
     const PROD_DB_URL      = 'https://dashboard.marketpay.io';
     const LOGFILENAME      = 'mp-transactions.log.php';
     const WC_PLUGIN_PATH   = 'woocommerce/woocommerce.php';

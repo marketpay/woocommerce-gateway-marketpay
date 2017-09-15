@@ -1300,7 +1300,7 @@ class marketpayWCAdmin
             <tr>
               <th><label for="user_birthday"><?php _e('Birthday', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
               <td>
-                <input type="text" name="user_birthday" id="user_birthday" class="regular-text calendar" value="<?php echo $user_birthday; ?>" /><br />
+                <input type="text" placeholder="<?php echo get_option('date_format'); ?>" name="user_birthday" id="user_birthday" class="regular-text calendar" value="<?php echo $user_birthday; ?>" /><br />
                 <span class="description"></span>
               </td>
             </tr>

@@ -107,7 +107,7 @@ class marketpayWCValidation
             /** Test if date is in the future **/
             if ($input_date >= $today)
             {
-                $data['message'][] = __('Invalid Birthday date.', 'marketpay');
+                $data['message'][] = __('Birthday must be lower than today.', 'marketpay');
 
                 $this->send_message_format($data);
             }

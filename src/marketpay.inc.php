@@ -40,7 +40,7 @@ class mpAccess
     private $errorStatus   = false;
     private $errorMsg;
     private $legacyApi;
-    private $marketPayApi;
+    private $marketPayApi = null;
 
     /**
      * @var Singleton The reference to *Singleton* instance of this class
@@ -210,40 +210,44 @@ class mpAccess
 
         $this->legacyApi = new MarketPay\MarketPayApi();
 
-        $mp_client_id  = $this->mp_client_id;
-        $mp_passphrase = $this->mp_passphrase;
-        $mp_base_url   = $this->mp_production ? self::PROD_API_URL : self::SANDBOX_API_URL;
-
-        $this->legacyApi->Config->ClientId        = $mp_client_id;
-        $this->legacyApi->Config->ClientPassword  = $mp_passphrase;
-        $this->legacyApi->Config->BaseUrl         = $mp_base_url;
+        $this->legacyApi->Config->ClientId        = $this->mp_client_id;
+        $this->legacyApi->Config->ClientPassword  = $this->mp_passphrase;
+        $this->legacyApi->Config->BaseUrl         = $this->mp_production ? self::PROD_API_URL : self::SANDBOX_API_URL;
         $this->legacyApi->Config->TemporaryFolder = $tmp_path . '/';
         $this->legacyApi->Config->Debug           = self::DEBUG;
 
         $this->legacyApi->OAuthTokenManager->RegisterCustomStorageStrategy(new \MarketPay\WPPlugin\MockStorageStrategy());
 
-        if ($mp_base_url && $mp_client_id && $mp_passphrase)
-        {
-            /** Use Legacy API to get response token **/
-            $token = $this->legacyApi->OAuthTokenManager->getToken(
-                md5($mp_base_url . $mp_client_id . $mp_passphrase)
-            );
-
-            /** MarketPay API configuration **/
-            $config = new Swagger\Client\Configuration;
-
-            $config->setHost($mp_base_url);
-            $config->setApiKey($mp_client_id, $mp_passphrase);
-            $config->setDebug(self::DEBUG);
-            $config->setAccessToken($token->access_token);
-
-            $this->marketPayApi = new Swagger\Client\ApiClient($config);
-
-            $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
-            $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
-        }
-
         return true;
+    }
+
+    public function marketPayApi()
+    {
+        if ( ! is_null($this->marketPayApi)) return $this->marketPayApi;
+
+        $mp_base_url = $this->mp_production ? self::PROD_API_URL : self::SANDBOX_API_URL;
+        $mp_client_id = $this->mp_client_id;
+        $mp_pass = $this->mp_passphrase;
+
+        /** Use Legacy API to get response token **/
+        $token = $this->legacyApi->OAuthTokenManager->getToken(
+            md5($mp_base_url . $mp_client_id . $mp_passphrase)
+        );
+
+        /** MarketPay API configuration **/
+        $config = new Swagger\Client\Configuration;
+
+        $config->setHost($mp_base_url);
+        $config->setApiKey($mp_client_id, $mp_passphrase);
+        $config->setDebug(self::DEBUG);
+        $config->setAccessToken($token->access_token);
+
+        $this->marketPayApi = new Swagger\Client\ApiClient($config);
+
+        $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
+        $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
+
+        return $this->marketPayApi;
     }
 
     /**
@@ -1110,7 +1114,7 @@ class mpAccess
 
         try
         {
-            $result = $this->marketPayApi->RedsysPayIns->payInsRedsysRedsysPostPaymentByWeb($reference);
+            $result = $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysPostPaymentByWeb($reference);
 
             $mp_template_url .= '?' . http_build_query(array(
                 'url' => urlencode($result->getUrl()),
@@ -1183,7 +1187,7 @@ class mpAccess
                 ])
             ]);
 
-            $return = $this->marketPayApi->BankwirePayIns->payInsBankwireBankwirePaymentByDirect($reference);
+            $return = $this->marketPayApi()->BankwirePayIns->payInsBankwireBankwirePaymentByDirect($reference);
 
             return json_decode($return->__toString());
         }
@@ -1212,7 +1216,7 @@ class mpAccess
             ])
         ]);
 
-        $result = $this->marketPayApi->RedsysPayIns->payInsRedsysRedsysPostRefund(
+        $result = $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysPostRefund(
             $mp_transaction_id,
             $reference
         );
@@ -1241,7 +1245,7 @@ class mpAccess
         $mp_vendor_id = $this->set_mp_user($vendor_id);
 
         /** Get the user wallet that was used for the transaction **/
-        $transaction       = $this->marketPayApi->RedsysPayIns->payInsRedsysRedsysGetPayment($mp_transaction_id);
+        $transaction       = $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysGetPayment($mp_transaction_id);
         $mp_user_wallet_id = $transaction->getCreditedWalletId();
 
         /** Get the vendor wallet **/
@@ -1352,10 +1356,10 @@ class mpAccess
     {
         if ($mp_payment_type == 'bank_wire')
         {
-            return $this->marketPayApi->BankwirePayIns->payInsBankwireBankwireGetPayment($transaction_id);
+            return $this->marketPayApi()->BankwirePayIns->payInsBankwireBankwireGetPayment($transaction_id);
         }
 
-        return $this->marketPayApi->RedsysPayIns->payInsRedsysRedsysGetPayment($transaction_id);
+        return $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysGetPayment($transaction_id);
     }
 
     /**

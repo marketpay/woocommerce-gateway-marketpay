@@ -87,15 +87,6 @@ class marketpayWCValidation
                 $this->send_message_format($data);
             }
         }
-        /** If date value exists but format is wrong **/
-        elseif ($isset && ! $this->validate_date_format($this->convert_date($value)))
-        {
-            $data['message'][] = __('Invalid ' . $info['text'] . ' date.', 'marketpay');
-            $data['message'][] = __('Please use this format: ', 'marketpay');
-            $data['message'][] = $this->supported_format(get_option('date_format'));
-
-            $this->send_message_format($data);
-        }
         /** If birth date value exists verify that it is in the past **/
         elseif ($isset)
         {

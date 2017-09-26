@@ -380,10 +380,6 @@ class marketpayWCMain
         <script>
         (function($) {
             $(document).ready(function() {
-                if ($.fn.datepicker) {
-                    $('input.calendar').datepicker();
-                }
-
                 if ('business' == $('#reg_user_mp_status').val()) {
                     $('.hide_business_type').show();
                 }
@@ -784,18 +780,6 @@ class marketpayWCMain
         if (!wp_script_is('jquery-ui-datepicker', 'enqueued')) {
             return;
         }
-
-        ?>
-        <script>
-        (function($) {
-            $(document).ready(function() {
-                if ($.fn.datepicker) {
-                    $('input.calendar, #user_birthday').datepicker();
-                }
-            });
-        })( jQuery );
-        </script>
-        <?php
     }
 
     /**

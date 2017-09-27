@@ -227,7 +227,7 @@ class mpAccess
 
         $mp_base_url = $this->mp_production ? self::PROD_API_URL : self::SANDBOX_API_URL;
         $mp_client_id = $this->mp_client_id;
-        $mp_pass = $this->mp_passphrase;
+        $mp_passphrase = $this->mp_passphrase;
 
         /** Use Legacy API to get response token **/
         $token = $this->legacyApi->OAuthTokenManager->getToken(

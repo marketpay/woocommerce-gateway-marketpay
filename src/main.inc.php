@@ -1728,49 +1728,6 @@ $field_value = '';
             return false;
         }
 
-        if (!$mp_status = $mp_transaction->getStatus()) {
-            return false;
-        }
-
-        if (!$mp_amount = $mp_transaction->getCreditedFunds()->getAmount()) {
-            return false;
-        }
-
-        if (!$mp_currency = $mp_transaction->getCreditedFunds()->getCurrency()) {
-            return false;
-        }
-
-        if (marketpayWCConfig::DEBUG)
-        {
-            $tr_href = $this->mp->getDBUserUrl('') . 'PayIn/' . $transaction_id;
-            $tr_link = '<a target="_mp_db" href="' . $tr_href . '">';
-
-            echo '<p>' . __('Marketpay transaction Id:', 'marketpay') . ' ' . $tr_link . $transaction_id . '</a></p>';
-            echo '<p>' . __('Marketpay transaction status:', 'marketpay') . ' ' . $mp_status . '</p>';
-            echo '<p>' . __('Marketpay transaction total amount:', 'marketpay') . ' ' . $mp_amount . '</p>';
-            echo '<p>' . __('Marketpay transaction currency:', 'marketpay') . ' ' . $mp_currency . '</p>';
-            echo '<p>' . __('Order total:', 'marketpay') . ' ' . $order->get_order() . '</p>'; //Debug
-            echo '<p>' . __('Order currency:', 'marketpay') . ' ' . $order->get_currency() . '</p>'; //Debug
-        }
-
-        if ('BANK_WIRE' == $mp_transaction->getPaymentType() && 'CREATED' != $mp_status) {
-            echo '<p>' . __('Error: Marketpay transaction did not succeed.', 'marketpay') . '</p>';
-            return false;
-        } else if ('BANK_WIRE' != $mp_transaction->getPaymentType() && 'SUCCEEDED' != $mp_status) {
-            echo '<p>' . __('Error: Marketpay transaction did not succeed.', 'marketpay') . '</p>';
-            return false;
-        }
-
-        if ($order->get_currency() != $mp_currency) {
-            echo '<p>' . __('Error: wrong currency.', 'marketpay') . '</p>';
-            return false;
-        }
-
-        if (($order->get_total() * 100) != $mp_amount) {
-            echo '<p>' . __('Error: wrong payment amount.', 'marketpay') . '</p>';
-            return false;
-        }
-
         /**
          * Save the MP transaction ID in the WC order metas
          * this needs to be done before calling payment->complete()
@@ -1809,7 +1766,7 @@ $field_value = '';
         <ul class="order_details">
             <li class="mp_amount">
                 <?php _e('Amount:', 'marketpay');?>
-                <strong><?php echo $ref->DebitedFunds->Amount / 100; ?></strong>
+                <strong><?php echo wc_price($ref->DebitedFunds->Amount / 100); ?></strong>
                 <strong><?php echo $ref->DebitedFunds->Currency; ?></strong>
             </li>
             <li class="mp_owner">

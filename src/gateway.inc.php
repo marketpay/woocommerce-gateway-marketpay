@@ -466,7 +466,7 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
      * Process Direct Bank Wire payment types
      *
      */
-    private function process_bank_wire($order_id)
+    public function process_bank_wire($order_id)
     {
         $order = wc_get_order($order_id);
 

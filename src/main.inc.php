@@ -408,10 +408,6 @@ class marketpayWCMain
         <script>
         (function($) {
             $(document).ready(function() {
-                if ($.fn.datepicker) {
-                    $('input.calendar').datepicker();
-                }
-
                 if ('business' == $('#reg_user_mp_status').val()) {
                     $('.hide_business_type').show();
                 }
@@ -838,42 +834,46 @@ class marketpayWCMain
      * To enable the jQuery-ui calendar for the birthday field on the checkout form
      */
     public function after_checkout_fields()
-    { ?>
+    {
+        /** If the user is already logged-in no birthday field is present **/
+        if (
+            is_user_logged_in() &&
+            get_user_meta(get_current_user_id(), 'user_birthday', true) &&
+            get_user_meta(get_current_user_id(), 'user_mp_status', true)
+        ) {
+            return;
+        }
+
+        ?>
         <script>
-            (function($) {
-                $(document).ready(function() {
-                    if ('business' == $('#user_mp_status').val()) {
-                        $('.hide_business_type').show();
-                    } else {
-                        <?php if ('businesses' != $this->options['default_buyer_status'] || 'either' != $this->options['default_business_type']): ?>
-                            $('.hide_business_type').hide();
-                            $('#user_business_type').val('organisation');
-                        <?php endif;?>
-                    }
-
-                    if ($.fn.datepicker) {
-                        $('input.calendar, #user_birthday').datepicker();
-                    }
-
-                    $('#kyc_document_field').hide()
-                });
-
-                $('#user_mp_status').on('change',function(e){
-                    if( 'business'==$('#user_mp_status').val() ) {
-                        $('.hide_business_type').show();
-                        $('#user_business_type').val('');
-                    } else {
-                        $('.hide_business_type').hide();
-                        $('#user_business_type').val('organisation');
-                    }
-                });
-
-                $("input[name^='wc_checkout_add_ons_']").on('change', function() {
-                    $('#kyc_document').val($(this).val());
-                });
-            })( jQuery );
+        (function($) {
+            $(document).ready(function() {
+                if( 'business'==$('#user_mp_status').val() ) {
+                    $('.hide_business_type').show();
+                } else {
+                    <?php if ('businesses' != $this->options['default_buyer_status'] || 'either' != $this->options['default_business_type']): ?>
+                    $('.hide_business_type').hide();
+                    $('#user_business_type').val('organisation');
+                    <?php endif;?>
+                }
+            });
+            $('#user_mp_status').on('change',function(e){
+                if( 'business'==$('#user_mp_status').val() ) {
+                    $('.hide_business_type').show();
+                    $('#user_business_type').val('');
+                } else {
+                    $('.hide_business_type').hide();
+                    $('#user_business_type').val('organisation');
+                }
+            });
+        })( jQuery );
         </script>
-    <?php }
+        <?php
+
+        if (!wp_script_is('jquery-ui-datepicker', 'enqueued')) {
+            return;
+        }
+    }
 
     /**
      * Fires up when user role has been changed,
@@ -1822,49 +1822,6 @@ $field_value = '';
             return false;
         }
 
-        if (!$mp_status = $mp_transaction->getStatus()) {
-            return false;
-        }
-
-        if (!$mp_amount = $mp_transaction->getCreditedFunds()->getAmount()) {
-            return false;
-        }
-
-        if (!$mp_currency = $mp_transaction->getCreditedFunds()->getCurrency()) {
-            return false;
-        }
-
-        if (marketpayWCConfig::DEBUG)
-        {
-            $tr_href = $this->mp->getDBUserUrl('') . 'PayIn/' . $transaction_id;
-            $tr_link = '<a target="_mp_db" href="' . $tr_href . '">';
-
-            echo '<p>' . __('Marketpay transaction Id:', 'marketpay') . ' ' . $tr_link . $transaction_id . '</a></p>';
-            echo '<p>' . __('Marketpay transaction status:', 'marketpay') . ' ' . $mp_status . '</p>';
-            echo '<p>' . __('Marketpay transaction total amount:', 'marketpay') . ' ' . $mp_amount . '</p>';
-            echo '<p>' . __('Marketpay transaction currency:', 'marketpay') . ' ' . $mp_currency . '</p>';
-            echo '<p>' . __('Order total:', 'marketpay') . ' ' . $order->get_order() . '</p>'; //Debug
-            echo '<p>' . __('Order currency:', 'marketpay') . ' ' . $order->get_currency() . '</p>'; //Debug
-        }
-
-        if ('BANK_WIRE' == $mp_transaction->getPaymentType() && 'CREATED' != $mp_status) {
-            echo '<p>' . __('Error: Marketpay transaction did not succeed.', 'marketpay') . '</p>';
-            return false;
-        } else if ('BANK_WIRE' != $mp_transaction->getPaymentType() && 'SUCCEEDED' != $mp_status) {
-            echo '<p>' . __('Error: Marketpay transaction did not succeed.', 'marketpay') . '</p>';
-            return false;
-        }
-
-        if ($order->get_currency() != $mp_currency) {
-            echo '<p>' . __('Error: wrong currency.', 'marketpay') . '</p>';
-            return false;
-        }
-
-        if (($order->get_total() * 100) != $mp_amount) {
-            echo '<p>' . __('Error: wrong payment amount.', 'marketpay') . '</p>';
-            return false;
-        }
-
         /**
          * Save the MP transaction ID in the WC order metas
          * this needs to be done before calling payment->complete()
@@ -1903,7 +1860,7 @@ $field_value = '';
         <ul class="order_details">
             <li class="mp_amount">
                 <?php _e('Amount:', 'marketpay');?>
-                <strong><?php echo $ref->DebitedFunds->Amount / 100; ?></strong>
+                <strong><?php echo wc_price($ref->DebitedFunds->Amount / 100); ?></strong>
                 <strong><?php echo $ref->DebitedFunds->Currency; ?></strong>
             </li>
             <li class="mp_owner">

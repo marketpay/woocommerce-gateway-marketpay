@@ -241,11 +241,13 @@ class mpAccess
         $config->setApiKey($mp_client_id, $mp_passphrase);
         $config->setDebug(self::DEBUG);
         $config->setAccessToken($token->access_token);
+        $config->setDefaultConfiguration($config);
 
         $this->marketPayApi = new Swagger\Client\ApiClient($config);
 
         $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
         $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
+        $this->marketPayApi->Kyc            = new Swagger\Client\Api\KycApi($this->marketPayApi);
 
         return $this->marketPayApi;
     }
@@ -789,7 +791,7 @@ class mpAccess
 
                 try
                 {
-                    $this->marketPayApi->Kyc->kycPutLegal($mp_user_id, $kycUser);
+                    $this->marketPayApi()->Kyc->kycPutLegal($mp_user_id, $kycUser);
                 }
                 catch (Exception $e)
                 {
@@ -811,7 +813,7 @@ class mpAccess
 
                 try
                 {
-                    $this->marketPayApi->Kyc->kycPostNatural($mp_user_id, $kycUser);
+                    $this->marketPayApi()->Kyc->kycPostNatural($mp_user_id, $kycUser);
                 }
                 catch (Exception $e)
                 {
@@ -819,12 +821,20 @@ class mpAccess
                 }
 
                 // UPLOAD DOCUMENT
-                $splFileObject = new SplFileObject(get_attached_file($kyc_doc));
+                $splFileObject = null;
+                if ($docfile = get_attached_file($kycdoc))
+                {
+                    $splFileObject = new SplFileObject($docfile);
+                }
 
                 try
                 {
-                    $this->marketPayApi->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $mp_user_id);
-                    $this->marketPayApi->Kyc->kycPutRequest($mp_user_id, new Swagger\Client\Model\KycIdentificationRequest);
+                    if ( ! is_null($splFileObject))
+                    {
+                        $this->marketPayApi()->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $mp_user_id);
+                    }
+
+                    $this->marketPayApi()->Kyc->kycPutRequest($mp_user_id, new Swagger\Client\Model\KycIdentificationRequest);
                 }
                 catch (ApiException $e)
                 {
@@ -882,7 +892,7 @@ class mpAccess
 
         if ('NATURAL' == $marketUser->PersonType)
         {
-            $kycUser = $this->marketPayApi->Kyc->kycGetNatural($mp_user_id);
+            $kycUser = $this->marketPayApi()->Kyc->kycGetNatural($mp_user_id);
 
             if (
                 isset($usermeta['first_name']) &&
@@ -997,12 +1007,20 @@ class mpAccess
                 $usermeta['kyc_document'] &&
                 ! in_array($usermeta['kyc_document'], $kycUser->getIdCardDocument()->getDocumentIds())
             ) {
-                $splFileObject = new SplFileObject(get_attached_file($usermeta['kyc_document']));
+                $splFileObject = null;
+                if ($docfile = get_attached_file($usermeta['kyc_document']))
+                {
+                    $splFileObject = new SplFileObject($docfile);
+                }
 
                 try
                 {
-                    $this->marketPayApi->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $marketUser->Id);
-                    $this->marketPayApi->Kyc->kycPutRequest($marketUser->Id, new Swagger\Client\Model\KycIdentificationRequest);
+                    if ( ! is_null($splFileObject))
+                    {
+                        $this->marketPayApi()->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $marketUser->Id);
+                    }
+
+                    $this->marketPayApi()->Kyc->kycPutRequest($marketUser->Id, new Swagger\Client\Model\KycIdentificationRequest);
                 }
                 catch (ApiException $e)
                 {
@@ -1024,12 +1042,12 @@ class mpAccess
 
             if ($needs_updating)
             {
-                $this->marketPayApi->Kyc->kycPostNatural($mp_user_id, $kycUser);
+                $this->marketPayApi()->Kyc->kycPostNatural($mp_user_id, $kycUser);
             }
         }
         else
         {
-            $kycUser = $this->marketPayApi->Kyc->kycGetLegal($mp_user_id);
+            $kycUser = $this->marketPayApi()->Kyc->kycGetLegal($mp_user_id);
 
             /** Business / legal user **/
             if (
@@ -1179,7 +1197,7 @@ class mpAccess
 
             if ($needs_updating)
             {
-                $this->marketPayApi->Kyc->kycPutLegal($mp_user_id, $kycUser);
+                $this->marketPayApi()->Kyc->kycPutLegal($mp_user_id, $kycUser);
             }
         }
 
@@ -1277,7 +1295,7 @@ class mpAccess
 
         try
         {
-            $result = $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysPostPaymentByWeb($reference);
+            $result = $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysPostPaymentByWeb(null, $reference);
 
             $mp_template_url .= '?' . http_build_query(array(
                 'url' => urlencode($result->getUrl()),

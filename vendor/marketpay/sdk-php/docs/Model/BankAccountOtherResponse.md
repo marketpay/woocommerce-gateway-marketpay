@@ -1,10 +1,11 @@
-# BankAccountResponseIban
+# BankAccountOtherResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**iban** | **string** | The IBAN of the bank account | [optional] 
+**country** | **string** | The Country where the bank account is held | [optional] 
 **bic** | **string** | The BIC of the bank account | [optional] 
+**account_number** | **string** | The account number of the bank account. Must be numbers only. Canadian account numbers must be a maximum of 20 digits | [optional] 
 **type** | **string** | The type of bank account | [optional] 
 **owner_address** | [**\Swagger\Client\Model\Address**](Address.md) | The address of the owner of the bank account | [optional] 
 **owner_name** | **string** | The name of the owner of the bank account | [optional] 

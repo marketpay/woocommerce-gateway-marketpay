@@ -1,6 +1,6 @@
 <?php
 /**
- * BankAccountResponseGbTest
+ * BankAccountGbResponseTest
  *
  * PHP version 5
  *
@@ -30,16 +30,16 @@
 namespace Swagger\Client;
 
 /**
- * BankAccountResponseGbTest Class Doc Comment
+ * BankAccountGbResponseTest Class Doc Comment
  *
  * @category    Class */
-// * @description BankAccountResponseGb
+// * @description BankAccountGbResponse
 /**
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class BankAccountResponseGbTest extends \PHPUnit_Framework_TestCase
+class BankAccountGbResponseTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -71,9 +71,9 @@ class BankAccountResponseGbTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "BankAccountResponseGb"
+     * Test "BankAccountGbResponse"
      */
-    public function testBankAccountResponseGb()
+    public function testBankAccountGbResponse()
     {
     }
 

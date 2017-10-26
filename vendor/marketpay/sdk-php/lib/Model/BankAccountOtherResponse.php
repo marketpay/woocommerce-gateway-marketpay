@@ -1,6 +1,6 @@
 <?php
 /**
- * BankAccountResponseOther
+ * BankAccountOtherResponse
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ namespace Swagger\Client\Model;
 use \ArrayAccess;
 
 /**
- * BankAccountResponseOther Class Doc Comment
+ * BankAccountOtherResponse Class Doc Comment
  *
  * @category    Class
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class BankAccountResponseOther implements ArrayAccess
+class BankAccountOtherResponse implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class BankAccountResponseOther implements ArrayAccess
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'BankAccountResponseOther';
+    protected static $swaggerModelName = 'BankAccountOtherResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

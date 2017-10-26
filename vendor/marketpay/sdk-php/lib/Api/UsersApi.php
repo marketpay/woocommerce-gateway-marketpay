@@ -965,7 +965,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountCaPost $bank_account_ca BankAccountCA Object params (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return \Swagger\Client\Model\BankAccountResponseCa
+     * @return \Swagger\Client\Model\BankAccountCaResponse
      */
     public function usersPostBankAccountCa($user_id, $bank_account_ca = null)
     {
@@ -981,7 +981,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountCaPost $bank_account_ca BankAccountCA Object params (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return array of \Swagger\Client\Model\BankAccountResponseCa, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\BankAccountCaResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function usersPostBankAccountCaWithHttpInfo($user_id, $bank_account_ca = null)
     {
@@ -999,7 +999,7 @@ class UsersApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {
@@ -1033,15 +1033,15 @@ class UsersApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\BankAccountResponseCa',
+                '\Swagger\Client\Model\BankAccountCaResponse',
                 '/v2.01/Users/{UserId}/bankaccounts/CA'
             );
 
-            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountResponseCa', $httpHeader), $statusCode, $httpHeader];
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountCaResponse', $httpHeader), $statusCode, $httpHeader];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountResponseCa', $e->getResponseHeaders());
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountCaResponse', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:
@@ -1062,7 +1062,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountGbPost $bank_account_gb  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return \Swagger\Client\Model\BankAccountResponseGb
+     * @return \Swagger\Client\Model\BankAccountGbResponse
      */
     public function usersPostBankAccountGb($user_id, $bank_account_gb = null)
     {
@@ -1078,7 +1078,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountGbPost $bank_account_gb  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return array of \Swagger\Client\Model\BankAccountResponseGb, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\BankAccountGbResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function usersPostBankAccountGbWithHttpInfo($user_id, $bank_account_gb = null)
     {
@@ -1096,7 +1096,7 @@ class UsersApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {
@@ -1130,15 +1130,15 @@ class UsersApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\BankAccountResponseGb',
+                '\Swagger\Client\Model\BankAccountGbResponse',
                 '/v2.01/Users/{UserId}/bankaccounts/GB'
             );
 
-            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountResponseGb', $httpHeader), $statusCode, $httpHeader];
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountGbResponse', $httpHeader), $statusCode, $httpHeader];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountResponseGb', $e->getResponseHeaders());
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountGbResponse', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:
@@ -1159,7 +1159,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountIbanPost $bank_account_iban BankAccountIBAN Object params (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return \Swagger\Client\Model\BankAccountResponseIban
+     * @return \Swagger\Client\Model\BankAccountIbanResponse
      */
     public function usersPostBankAccountIban($user_id, $bank_account_iban = null)
     {
@@ -1175,7 +1175,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountIbanPost $bank_account_iban BankAccountIBAN Object params (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return array of \Swagger\Client\Model\BankAccountResponseIban, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\BankAccountIbanResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function usersPostBankAccountIbanWithHttpInfo($user_id, $bank_account_iban = null)
     {
@@ -1193,7 +1193,7 @@ class UsersApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {
@@ -1227,15 +1227,15 @@ class UsersApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\BankAccountResponseIban',
+                '\Swagger\Client\Model\BankAccountIbanResponse',
                 '/v2.01/Users/{UserId}/bankaccounts/IBAN'
             );
 
-            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountResponseIban', $httpHeader), $statusCode, $httpHeader];
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountIbanResponse', $httpHeader), $statusCode, $httpHeader];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountResponseIban', $e->getResponseHeaders());
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountIbanResponse', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:
@@ -1256,7 +1256,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountOtherPost $bank_account_other  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return \Swagger\Client\Model\BankAccountResponseOther
+     * @return \Swagger\Client\Model\BankAccountOtherResponse
      */
     public function usersPostBankAccountOther($user_id, $bank_account_other = null)
     {
@@ -1272,7 +1272,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountOtherPost $bank_account_other  (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return array of \Swagger\Client\Model\BankAccountResponseOther, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\BankAccountOtherResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function usersPostBankAccountOtherWithHttpInfo($user_id, $bank_account_other = null)
     {
@@ -1290,7 +1290,7 @@ class UsersApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {
@@ -1324,15 +1324,15 @@ class UsersApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\BankAccountResponseOther',
+                '\Swagger\Client\Model\BankAccountOtherResponse',
                 '/v2.01/Users/{UserId}/bankaccounts/OTHER'
             );
 
-            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountResponseOther', $httpHeader), $statusCode, $httpHeader];
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountOtherResponse', $httpHeader), $statusCode, $httpHeader];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountResponseOther', $e->getResponseHeaders());
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountOtherResponse', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:
@@ -1353,7 +1353,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountUsPost $bank_account_us BankAccountUS Object params (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return \Swagger\Client\Model\BankAccountResponseUs
+     * @return \Swagger\Client\Model\BankAccountUsResponse
      */
     public function usersPostBankAccountUs($user_id, $bank_account_us = null)
     {
@@ -1369,7 +1369,7 @@ class UsersApi
      * @param int $user_id The Id of a user (required)
      * @param \Swagger\Client\Model\BankAccountUsPost $bank_account_us BankAccountUS Object params (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
-     * @return array of \Swagger\Client\Model\BankAccountResponseUs, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\BankAccountUsResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function usersPostBankAccountUsWithHttpInfo($user_id, $bank_account_us = null)
     {
@@ -1387,7 +1387,7 @@ class UsersApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {
@@ -1421,15 +1421,15 @@ class UsersApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\BankAccountResponseUs',
+                '\Swagger\Client\Model\BankAccountUsResponse',
                 '/v2.01/Users/{UserId}/bankaccounts/US'
             );
 
-            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountResponseUs', $httpHeader), $statusCode, $httpHeader];
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\BankAccountUsResponse', $httpHeader), $statusCode, $httpHeader];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountResponseUs', $e->getResponseHeaders());
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\BankAccountUsResponse', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:
@@ -1478,7 +1478,7 @@ class UsersApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // body params
         $_tempBody = null;
@@ -1561,7 +1561,7 @@ class UsersApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // body params
         $_tempBody = null;
@@ -1650,7 +1650,7 @@ class UsersApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {
@@ -1747,7 +1747,7 @@ class UsersApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * BankAccountResponseCa
+ * BankAccountGbResponse
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ namespace Swagger\Client\Model;
 use \ArrayAccess;
 
 /**
- * BankAccountResponseCa Class Doc Comment
+ * BankAccountGbResponse Class Doc Comment
  *
  * @category    Class
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class BankAccountResponseCa implements ArrayAccess
+class BankAccountGbResponse implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -47,17 +47,15 @@ class BankAccountResponseCa implements ArrayAccess
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'BankAccountResponseCa';
+    protected static $swaggerModelName = 'BankAccountGbResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'branch_code' => 'string',
-        'institution_number' => 'string',
+        'sort_code' => 'string',
         'account_number' => 'string',
-        'bank_name' => 'string',
         'type' => 'string',
         'owner_address' => '\Swagger\Client\Model\Address',
         'owner_name' => 'string',
@@ -73,10 +71,8 @@ class BankAccountResponseCa implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'branch_code' => null,
-        'institution_number' => null,
+        'sort_code' => null,
         'account_number' => null,
-        'bank_name' => null,
         'type' => null,
         'owner_address' => null,
         'owner_name' => null,
@@ -102,10 +98,8 @@ class BankAccountResponseCa implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'branch_code' => 'BranchCode',
-        'institution_number' => 'InstitutionNumber',
+        'sort_code' => 'SortCode',
         'account_number' => 'AccountNumber',
-        'bank_name' => 'BankName',
         'type' => 'Type',
         'owner_address' => 'OwnerAddress',
         'owner_name' => 'OwnerName',
@@ -122,10 +116,8 @@ class BankAccountResponseCa implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'branch_code' => 'setBranchCode',
-        'institution_number' => 'setInstitutionNumber',
+        'sort_code' => 'setSortCode',
         'account_number' => 'setAccountNumber',
-        'bank_name' => 'setBankName',
         'type' => 'setType',
         'owner_address' => 'setOwnerAddress',
         'owner_name' => 'setOwnerName',
@@ -142,10 +134,8 @@ class BankAccountResponseCa implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'branch_code' => 'getBranchCode',
-        'institution_number' => 'getInstitutionNumber',
+        'sort_code' => 'getSortCode',
         'account_number' => 'getAccountNumber',
-        'bank_name' => 'getBankName',
         'type' => 'getType',
         'owner_address' => 'getOwnerAddress',
         'owner_name' => 'getOwnerName',
@@ -207,10 +197,8 @@ class BankAccountResponseCa implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['branch_code'] = isset($data['branch_code']) ? $data['branch_code'] : null;
-        $this->container['institution_number'] = isset($data['institution_number']) ? $data['institution_number'] : null;
+        $this->container['sort_code'] = isset($data['sort_code']) ? $data['sort_code'] : null;
         $this->container['account_number'] = isset($data['account_number']) ? $data['account_number'] : null;
-        $this->container['bank_name'] = isset($data['bank_name']) ? $data['bank_name'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         $this->container['owner_address'] = isset($data['owner_address']) ? $data['owner_address'] : null;
         $this->container['owner_name'] = isset($data['owner_name']) ? $data['owner_name'] : null;
@@ -259,43 +247,22 @@ class BankAccountResponseCa implements ArrayAccess
 
 
     /**
-     * Gets branch_code
+     * Gets sort_code
      * @return string
      */
-    public function getBranchCode()
+    public function getSortCode()
     {
-        return $this->container['branch_code'];
+        return $this->container['sort_code'];
     }
 
     /**
-     * Sets branch_code
-     * @param string $branch_code The branch code of the bank where the bank account. Must be numbers only, and 5 digits long
+     * Sets sort_code
+     * @param string $sort_code The sort code of the bank account. Must be numbers only, and 6 digits long
      * @return $this
      */
-    public function setBranchCode($branch_code)
+    public function setSortCode($sort_code)
     {
-        $this->container['branch_code'] = $branch_code;
-
-        return $this;
-    }
-
-    /**
-     * Gets institution_number
-     * @return string
-     */
-    public function getInstitutionNumber()
-    {
-        return $this->container['institution_number'];
-    }
-
-    /**
-     * Sets institution_number
-     * @param string $institution_number The institution number of the bank account. Must be numbers only, and 3 or 4 digits long
-     * @return $this
-     */
-    public function setInstitutionNumber($institution_number)
-    {
-        $this->container['institution_number'] = $institution_number;
+        $this->container['sort_code'] = $sort_code;
 
         return $this;
     }
@@ -311,33 +278,12 @@ class BankAccountResponseCa implements ArrayAccess
 
     /**
      * Sets account_number
-     * @param string $account_number The account number of the bank account. Must be numbers only. Canadian account numbers must be a maximum of 20 digits
+     * @param string $account_number The account number of the bank account. Must be numbers only. GB account numbers must be 8 digits long
      * @return $this
      */
     public function setAccountNumber($account_number)
     {
         $this->container['account_number'] = $account_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets bank_name
-     * @return string
-     */
-    public function getBankName()
-    {
-        return $this->container['bank_name'];
-    }
-
-    /**
-     * Sets bank_name
-     * @param string $bank_name The name of the bank where the account is held. Must be letters or numbers only and maximum 50 characters long
-     * @return $this
-     */
-    public function setBankName($bank_name)
-    {
-        $this->container['bank_name'] = $bank_name;
 
         return $this;
     }

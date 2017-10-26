@@ -356,28 +356,34 @@ class KycApi
     /**
      * Operation kycPostDocument
      *
+     * Uploads a new document and uploads a file. If the document already exists it will be replaced.
+     *
      * @param string $document_type  (required)
      * @param \SplFileObject $file  (required)
      * @param int $user_id  (required)
+     * @param string $file_content_type Mime type of the uploaded file. This parameter overrides the type associated to the file. (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\KycFileUploadResponse
      */
-    public function kycPostDocument($document_type, $file, $user_id)
+    public function kycPostDocument($document_type, $file, $user_id, $file_content_type = null)
     {
-        list($response) = $this->kycPostDocumentWithHttpInfo($document_type, $file, $user_id);
+        list($response) = $this->kycPostDocumentWithHttpInfo($document_type, $file, $user_id, $file_content_type);
         return $response;
     }
 
     /**
      * Operation kycPostDocumentWithHttpInfo
      *
+     * Uploads a new document and uploads a file. If the document already exists it will be replaced.
+     *
      * @param string $document_type  (required)
      * @param \SplFileObject $file  (required)
      * @param int $user_id  (required)
+     * @param string $file_content_type Mime type of the uploaded file. This parameter overrides the type associated to the file. (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return array of \Swagger\Client\Model\KycFileUploadResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function kycPostDocumentWithHttpInfo($document_type, $file, $user_id)
+    public function kycPostDocumentWithHttpInfo($document_type, $file, $user_id, $file_content_type = null)
     {
         // verify the required parameter 'document_type' is set
         if ($document_type === null) {
@@ -428,6 +434,10 @@ class KycApi
             } else {
                 $formParams['File'] = '@' . $this->apiClient->getSerializer()->toFormValue($file);
             }
+        }
+        // form params
+        if ($file_content_type !== null) {
+            $formParams['FileContentType'] = $this->apiClient->getSerializer()->toFormValue($file_content_type);
         }
 
         // for model (json/xml)
@@ -511,7 +521,7 @@ class KycApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {
@@ -569,28 +579,34 @@ class KycApi
     /**
      * Operation kycPutDocument
      *
+     * Adds files to a document.
+     *
      * @param string $document_type  (required)
      * @param \SplFileObject $file  (required)
      * @param int $user_id  (required)
+     * @param string $file_content_type Mime type of the uploaded file. This parameter overrides the type associated to the file. (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\KycFileUploadResponse
      */
-    public function kycPutDocument($document_type, $file, $user_id)
+    public function kycPutDocument($document_type, $file, $user_id, $file_content_type = null)
     {
-        list($response) = $this->kycPutDocumentWithHttpInfo($document_type, $file, $user_id);
+        list($response) = $this->kycPutDocumentWithHttpInfo($document_type, $file, $user_id, $file_content_type);
         return $response;
     }
 
     /**
      * Operation kycPutDocumentWithHttpInfo
      *
+     * Adds files to a document.
+     *
      * @param string $document_type  (required)
      * @param \SplFileObject $file  (required)
      * @param int $user_id  (required)
+     * @param string $file_content_type Mime type of the uploaded file. This parameter overrides the type associated to the file. (optional)
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return array of \Swagger\Client\Model\KycFileUploadResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function kycPutDocumentWithHttpInfo($document_type, $file, $user_id)
+    public function kycPutDocumentWithHttpInfo($document_type, $file, $user_id, $file_content_type = null)
     {
         // verify the required parameter 'document_type' is set
         if ($document_type === null) {
@@ -641,6 +657,10 @@ class KycApi
             } else {
                 $formParams['File'] = '@' . $this->apiClient->getSerializer()->toFormValue($file);
             }
+        }
+        // form params
+        if ($file_content_type !== null) {
+            $formParams['FileContentType'] = $this->apiClient->getSerializer()->toFormValue($file_content_type);
         }
 
         // for model (json/xml)
@@ -724,7 +744,7 @@ class KycApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {
@@ -817,7 +837,7 @@ class KycApi
         if (!is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
-        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'text/json', 'application/json-patch+json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']);
 
         // path params
         if ($user_id !== null) {

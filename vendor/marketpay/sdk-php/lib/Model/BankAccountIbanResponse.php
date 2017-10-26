@@ -1,6 +1,6 @@
 <?php
 /**
- * BankAccountResponseGb
+ * BankAccountIbanResponse
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ namespace Swagger\Client\Model;
 use \ArrayAccess;
 
 /**
- * BankAccountResponseGb Class Doc Comment
+ * BankAccountIbanResponse Class Doc Comment
  *
  * @category    Class
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class BankAccountResponseGb implements ArrayAccess
+class BankAccountIbanResponse implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -47,15 +47,15 @@ class BankAccountResponseGb implements ArrayAccess
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'BankAccountResponseGb';
+    protected static $swaggerModelName = 'BankAccountIbanResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'sort_code' => 'string',
-        'account_number' => 'string',
+        'iban' => 'string',
+        'bic' => 'string',
         'type' => 'string',
         'owner_address' => '\Swagger\Client\Model\Address',
         'owner_name' => 'string',
@@ -71,8 +71,8 @@ class BankAccountResponseGb implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'sort_code' => null,
-        'account_number' => null,
+        'iban' => null,
+        'bic' => null,
         'type' => null,
         'owner_address' => null,
         'owner_name' => null,
@@ -98,8 +98,8 @@ class BankAccountResponseGb implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'sort_code' => 'SortCode',
-        'account_number' => 'AccountNumber',
+        'iban' => 'IBAN',
+        'bic' => 'BIC',
         'type' => 'Type',
         'owner_address' => 'OwnerAddress',
         'owner_name' => 'OwnerName',
@@ -116,8 +116,8 @@ class BankAccountResponseGb implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'sort_code' => 'setSortCode',
-        'account_number' => 'setAccountNumber',
+        'iban' => 'setIban',
+        'bic' => 'setBic',
         'type' => 'setType',
         'owner_address' => 'setOwnerAddress',
         'owner_name' => 'setOwnerName',
@@ -134,8 +134,8 @@ class BankAccountResponseGb implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'sort_code' => 'getSortCode',
-        'account_number' => 'getAccountNumber',
+        'iban' => 'getIban',
+        'bic' => 'getBic',
         'type' => 'getType',
         'owner_address' => 'getOwnerAddress',
         'owner_name' => 'getOwnerName',
@@ -197,8 +197,8 @@ class BankAccountResponseGb implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['sort_code'] = isset($data['sort_code']) ? $data['sort_code'] : null;
-        $this->container['account_number'] = isset($data['account_number']) ? $data['account_number'] : null;
+        $this->container['iban'] = isset($data['iban']) ? $data['iban'] : null;
+        $this->container['bic'] = isset($data['bic']) ? $data['bic'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         $this->container['owner_address'] = isset($data['owner_address']) ? $data['owner_address'] : null;
         $this->container['owner_name'] = isset($data['owner_name']) ? $data['owner_name'] : null;
@@ -247,43 +247,43 @@ class BankAccountResponseGb implements ArrayAccess
 
 
     /**
-     * Gets sort_code
+     * Gets iban
      * @return string
      */
-    public function getSortCode()
+    public function getIban()
     {
-        return $this->container['sort_code'];
+        return $this->container['iban'];
     }
 
     /**
-     * Sets sort_code
-     * @param string $sort_code The sort code of the bank account. Must be numbers only, and 6 digits long
+     * Sets iban
+     * @param string $iban The IBAN of the bank account
      * @return $this
      */
-    public function setSortCode($sort_code)
+    public function setIban($iban)
     {
-        $this->container['sort_code'] = $sort_code;
+        $this->container['iban'] = $iban;
 
         return $this;
     }
 
     /**
-     * Gets account_number
+     * Gets bic
      * @return string
      */
-    public function getAccountNumber()
+    public function getBic()
     {
-        return $this->container['account_number'];
+        return $this->container['bic'];
     }
 
     /**
-     * Sets account_number
-     * @param string $account_number The account number of the bank account. Must be numbers only. GB account numbers must be 8 digits long
+     * Sets bic
+     * @param string $bic The BIC of the bank account
      * @return $this
      */
-    public function setAccountNumber($account_number)
+    public function setBic($bic)
     {
-        $this->container['account_number'] = $account_number;
+        $this->container['bic'] = $bic;
 
         return $this;
     }

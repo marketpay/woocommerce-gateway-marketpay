@@ -477,7 +477,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **usersPostBankAccountCa**
-> \Swagger\Client\Model\BankAccountResponseCa usersPostBankAccountCa($user_id, $bank_account_ca)
+> \Swagger\Client\Model\BankAccountCaResponse usersPostBankAccountCa($user_id, $bank_account_ca)
 
 Create a CA BankAccount
 
@@ -513,7 +513,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\BankAccountResponseCa**](../Model/BankAccountResponseCa.md)
+[**\Swagger\Client\Model\BankAccountCaResponse**](../Model/BankAccountCaResponse.md)
 
 ### Authorization
 
@@ -521,13 +521,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **usersPostBankAccountGb**
-> \Swagger\Client\Model\BankAccountResponseGb usersPostBankAccountGb($user_id, $bank_account_gb)
+> \Swagger\Client\Model\BankAccountGbResponse usersPostBankAccountGb($user_id, $bank_account_gb)
 
 Create a GB BankAccount
 
@@ -563,7 +563,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\BankAccountResponseGb**](../Model/BankAccountResponseGb.md)
+[**\Swagger\Client\Model\BankAccountGbResponse**](../Model/BankAccountGbResponse.md)
 
 ### Authorization
 
@@ -571,13 +571,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **usersPostBankAccountIban**
-> \Swagger\Client\Model\BankAccountResponseIban usersPostBankAccountIban($user_id, $bank_account_iban)
+> \Swagger\Client\Model\BankAccountIbanResponse usersPostBankAccountIban($user_id, $bank_account_iban)
 
 Create an IBAN BankAccount
 
@@ -613,7 +613,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\BankAccountResponseIban**](../Model/BankAccountResponseIban.md)
+[**\Swagger\Client\Model\BankAccountIbanResponse**](../Model/BankAccountIbanResponse.md)
 
 ### Authorization
 
@@ -621,13 +621,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **usersPostBankAccountOther**
-> \Swagger\Client\Model\BankAccountResponseOther usersPostBankAccountOther($user_id, $bank_account_other)
+> \Swagger\Client\Model\BankAccountOtherResponse usersPostBankAccountOther($user_id, $bank_account_other)
 
 Create an OTHER BankAccount
 
@@ -663,7 +663,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\BankAccountResponseOther**](../Model/BankAccountResponseOther.md)
+[**\Swagger\Client\Model\BankAccountOtherResponse**](../Model/BankAccountOtherResponse.md)
 
 ### Authorization
 
@@ -671,13 +671,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **usersPostBankAccountUs**
-> \Swagger\Client\Model\BankAccountResponseUs usersPostBankAccountUs($user_id, $bank_account_us)
+> \Swagger\Client\Model\BankAccountUsResponse usersPostBankAccountUs($user_id, $bank_account_us)
 
 Create an US BankAccount
 
@@ -713,7 +713,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\BankAccountResponseUs**](../Model/BankAccountResponseUs.md)
+[**\Swagger\Client\Model\BankAccountUsResponse**](../Model/BankAccountUsResponse.md)
 
 ### Authorization
 
@@ -721,7 +721,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -769,7 +769,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -817,7 +817,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -867,7 +867,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -917,7 +917,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

@@ -85,16 +85,16 @@ class TKycFileDetailsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "operator_comments"
+     * Test attribute "value"
      */
-    public function testPropertyOperatorComments()
+    public function testPropertyValue()
     {
     }
 
     /**
-     * Test attribute "value"
+     * Test attribute "operator_comments"
      */
-    public function testPropertyValue()
+    public function testPropertyOperatorComments()
     {
     }
 

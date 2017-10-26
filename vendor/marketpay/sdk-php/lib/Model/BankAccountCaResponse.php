@@ -1,6 +1,6 @@
 <?php
 /**
- * BankAccountResponseUs
+ * BankAccountCaResponse
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ namespace Swagger\Client\Model;
 use \ArrayAccess;
 
 /**
- * BankAccountResponseUs Class Doc Comment
+ * BankAccountCaResponse Class Doc Comment
  *
  * @category    Class
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class BankAccountResponseUs implements ArrayAccess
+class BankAccountCaResponse implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -47,16 +47,17 @@ class BankAccountResponseUs implements ArrayAccess
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'BankAccountResponseUs';
+    protected static $swaggerModelName = 'BankAccountCaResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'branch_code' => 'string',
+        'institution_number' => 'string',
         'account_number' => 'string',
-        'aba' => 'string',
-        'deposit_account_type' => 'string',
+        'bank_name' => 'string',
         'type' => 'string',
         'owner_address' => '\Swagger\Client\Model\Address',
         'owner_name' => 'string',
@@ -72,9 +73,10 @@ class BankAccountResponseUs implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'branch_code' => null,
+        'institution_number' => null,
         'account_number' => null,
-        'aba' => null,
-        'deposit_account_type' => null,
+        'bank_name' => null,
         'type' => null,
         'owner_address' => null,
         'owner_name' => null,
@@ -100,9 +102,10 @@ class BankAccountResponseUs implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'branch_code' => 'BranchCode',
+        'institution_number' => 'InstitutionNumber',
         'account_number' => 'AccountNumber',
-        'aba' => 'ABA',
-        'deposit_account_type' => 'DepositAccountType',
+        'bank_name' => 'BankName',
         'type' => 'Type',
         'owner_address' => 'OwnerAddress',
         'owner_name' => 'OwnerName',
@@ -119,9 +122,10 @@ class BankAccountResponseUs implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'branch_code' => 'setBranchCode',
+        'institution_number' => 'setInstitutionNumber',
         'account_number' => 'setAccountNumber',
-        'aba' => 'setAba',
-        'deposit_account_type' => 'setDepositAccountType',
+        'bank_name' => 'setBankName',
         'type' => 'setType',
         'owner_address' => 'setOwnerAddress',
         'owner_name' => 'setOwnerName',
@@ -138,9 +142,10 @@ class BankAccountResponseUs implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'branch_code' => 'getBranchCode',
+        'institution_number' => 'getInstitutionNumber',
         'account_number' => 'getAccountNumber',
-        'aba' => 'getAba',
-        'deposit_account_type' => 'getDepositAccountType',
+        'bank_name' => 'getBankName',
         'type' => 'getType',
         'owner_address' => 'getOwnerAddress',
         'owner_name' => 'getOwnerName',
@@ -166,9 +171,6 @@ class BankAccountResponseUs implements ArrayAccess
         return self::$getters;
     }
 
-    const DEPOSIT_ACCOUNT_TYPE_NOT_SPECIFIED = 'NotSpecified';
-    const DEPOSIT_ACCOUNT_TYPE_CHECKING = 'CHECKING';
-    const DEPOSIT_ACCOUNT_TYPE_SAVINGS = 'SAVINGS';
     const TYPE_IBAN = 'IBAN';
     const TYPE_GB = 'GB';
     const TYPE_US = 'US';
@@ -176,19 +178,6 @@ class BankAccountResponseUs implements ArrayAccess
     const TYPE_OTHER = 'OTHER';
     
 
-    
-    /**
-     * Gets allowable values of the enum
-     * @return string[]
-     */
-    public function getDepositAccountTypeAllowableValues()
-    {
-        return [
-            self::DEPOSIT_ACCOUNT_TYPE_NOT_SPECIFIED,
-            self::DEPOSIT_ACCOUNT_TYPE_CHECKING,
-            self::DEPOSIT_ACCOUNT_TYPE_SAVINGS,
-        ];
-    }
     
     /**
      * Gets allowable values of the enum
@@ -218,9 +207,10 @@ class BankAccountResponseUs implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['branch_code'] = isset($data['branch_code']) ? $data['branch_code'] : null;
+        $this->container['institution_number'] = isset($data['institution_number']) ? $data['institution_number'] : null;
         $this->container['account_number'] = isset($data['account_number']) ? $data['account_number'] : null;
-        $this->container['aba'] = isset($data['aba']) ? $data['aba'] : null;
-        $this->container['deposit_account_type'] = isset($data['deposit_account_type']) ? $data['deposit_account_type'] : null;
+        $this->container['bank_name'] = isset($data['bank_name']) ? $data['bank_name'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         $this->container['owner_address'] = isset($data['owner_address']) ? $data['owner_address'] : null;
         $this->container['owner_name'] = isset($data['owner_name']) ? $data['owner_name'] : null;
@@ -239,14 +229,6 @@ class BankAccountResponseUs implements ArrayAccess
     public function listInvalidProperties()
     {
         $invalid_properties = [];
-
-        $allowed_values = $this->getDepositAccountTypeAllowableValues();
-        if (!in_array($this->container['deposit_account_type'], $allowed_values)) {
-            $invalid_properties[] = sprintf(
-                "invalid value for 'deposit_account_type', must be one of '%s'",
-                implode("', '", $allowed_values)
-            );
-        }
 
         $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
@@ -268,10 +250,6 @@ class BankAccountResponseUs implements ArrayAccess
     public function valid()
     {
 
-        $allowed_values = $this->getDepositAccountTypeAllowableValues();
-        if (!in_array($this->container['deposit_account_type'], $allowed_values)) {
-            return false;
-        }
         $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
             return false;
@@ -279,6 +257,48 @@ class BankAccountResponseUs implements ArrayAccess
         return true;
     }
 
+
+    /**
+     * Gets branch_code
+     * @return string
+     */
+    public function getBranchCode()
+    {
+        return $this->container['branch_code'];
+    }
+
+    /**
+     * Sets branch_code
+     * @param string $branch_code The branch code of the bank where the bank account. Must be numbers only, and 5 digits long
+     * @return $this
+     */
+    public function setBranchCode($branch_code)
+    {
+        $this->container['branch_code'] = $branch_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets institution_number
+     * @return string
+     */
+    public function getInstitutionNumber()
+    {
+        return $this->container['institution_number'];
+    }
+
+    /**
+     * Sets institution_number
+     * @param string $institution_number The institution number of the bank account. Must be numbers only, and 3 or 4 digits long
+     * @return $this
+     */
+    public function setInstitutionNumber($institution_number)
+    {
+        $this->container['institution_number'] = $institution_number;
+
+        return $this;
+    }
 
     /**
      * Gets account_number
@@ -291,7 +311,7 @@ class BankAccountResponseUs implements ArrayAccess
 
     /**
      * Sets account_number
-     * @param string $account_number The account number of the bank account. US account numbers must be digits only
+     * @param string $account_number The account number of the bank account. Must be numbers only. Canadian account numbers must be a maximum of 20 digits
      * @return $this
      */
     public function setAccountNumber($account_number)
@@ -302,52 +322,22 @@ class BankAccountResponseUs implements ArrayAccess
     }
 
     /**
-     * Gets aba
+     * Gets bank_name
      * @return string
      */
-    public function getAba()
+    public function getBankName()
     {
-        return $this->container['aba'];
+        return $this->container['bank_name'];
     }
 
     /**
-     * Sets aba
-     * @param string $aba The ABA of the bank account. Must be numbers only, and 9 digits long
+     * Sets bank_name
+     * @param string $bank_name The name of the bank where the account is held. Must be letters or numbers only and maximum 50 characters long
      * @return $this
      */
-    public function setAba($aba)
+    public function setBankName($bank_name)
     {
-        $this->container['aba'] = $aba;
-
-        return $this;
-    }
-
-    /**
-     * Gets deposit_account_type
-     * @return string
-     */
-    public function getDepositAccountType()
-    {
-        return $this->container['deposit_account_type'];
-    }
-
-    /**
-     * Sets deposit_account_type
-     * @param string $deposit_account_type The type of account
-     * @return $this
-     */
-    public function setDepositAccountType($deposit_account_type)
-    {
-        $allowed_values = $this->getDepositAccountTypeAllowableValues();
-        if (!is_null($deposit_account_type) && !in_array($deposit_account_type, $allowed_values)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'deposit_account_type', must be one of '%s'",
-                    implode("', '", $allowed_values)
-                )
-            );
-        }
-        $this->container['deposit_account_type'] = $deposit_account_type;
+        $this->container['bank_name'] = $bank_name;
 
         return $this;
     }

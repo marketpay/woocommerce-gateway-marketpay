@@ -54,8 +54,8 @@ class PropertyValidationDateNullable implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'operator_comments' => 'string',
         'value' => 'int',
+        'operator_comments' => 'string',
         'status' => 'string'
     ];
 
@@ -64,8 +64,8 @@ class PropertyValidationDateNullable implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'operator_comments' => null,
         'value' => 'int64',
+        'operator_comments' => null,
         'status' => null
     ];
 
@@ -84,8 +84,8 @@ class PropertyValidationDateNullable implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'operator_comments' => 'OperatorComments',
         'value' => 'Value',
+        'operator_comments' => 'OperatorComments',
         'status' => 'Status'
     ];
 
@@ -95,8 +95,8 @@ class PropertyValidationDateNullable implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'operator_comments' => 'setOperatorComments',
         'value' => 'setValue',
+        'operator_comments' => 'setOperatorComments',
         'status' => 'setStatus'
     ];
 
@@ -106,8 +106,8 @@ class PropertyValidationDateNullable implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'operator_comments' => 'getOperatorComments',
         'value' => 'getValue',
+        'operator_comments' => 'getOperatorComments',
         'status' => 'getStatus'
     ];
 
@@ -130,8 +130,6 @@ class PropertyValidationDateNullable implements ArrayAccess
     const STATUS_NOT_VALIDATED = 'NOT_VALIDATED';
     const STATUS_ACCEPTED = 'ACCEPTED';
     const STATUS_REJECTED = 'REJECTED';
-    const STATUS_NOTNEEDED = 'NOTNEEDED';
-    const STATUS_UPDATED_BY_OPERATOR = 'UPDATED_BY_OPERATOR';
     
 
     
@@ -146,8 +144,6 @@ class PropertyValidationDateNullable implements ArrayAccess
             self::STATUS_NOT_VALIDATED,
             self::STATUS_ACCEPTED,
             self::STATUS_REJECTED,
-            self::STATUS_NOTNEEDED,
-            self::STATUS_UPDATED_BY_OPERATOR,
         ];
     }
     
@@ -164,8 +160,8 @@ class PropertyValidationDateNullable implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['operator_comments'] = isset($data['operator_comments']) ? $data['operator_comments'] : null;
         $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+        $this->container['operator_comments'] = isset($data['operator_comments']) ? $data['operator_comments'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
     }
 
@@ -207,27 +203,6 @@ class PropertyValidationDateNullable implements ArrayAccess
 
 
     /**
-     * Gets operator_comments
-     * @return string
-     */
-    public function getOperatorComments()
-    {
-        return $this->container['operator_comments'];
-    }
-
-    /**
-     * Sets operator_comments
-     * @param string $operator_comments
-     * @return $this
-     */
-    public function setOperatorComments($operator_comments)
-    {
-        $this->container['operator_comments'] = $operator_comments;
-
-        return $this;
-    }
-
-    /**
      * Gets value
      * @return int
      */
@@ -244,6 +219,27 @@ class PropertyValidationDateNullable implements ArrayAccess
     public function setValue($value)
     {
         $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets operator_comments
+     * @return string
+     */
+    public function getOperatorComments()
+    {
+        return $this->container['operator_comments'];
+    }
+
+    /**
+     * Sets operator_comments
+     * @param string $operator_comments
+     * @return $this
+     */
+    public function setOperatorComments($operator_comments)
+    {
+        $this->container['operator_comments'] = $operator_comments;
 
         return $this;
     }

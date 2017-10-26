@@ -17,14 +17,8 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
 
 ```
 {
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com//.git"
-    }
-  ],
   "require": {
-    "/": "*@dev"
+    "marketpay/sdk-php": "dev-master"
   }
 }
 ```
@@ -84,9 +78,9 @@ Class | Method | HTTP request | Description
 *KycApi* | [**kycGetLegal**](docs/Api/KycApi.md#kycgetlegal) | **GET** /v2.01/Kyc/users/legal/{UserId} | View a Legal User
 *KycApi* | [**kycGetNatural**](docs/Api/KycApi.md#kycgetnatural) | **GET** /v2.01/Kyc/users/natural/{UserId} | View a Natural User
 *KycApi* | [**kycGetValidaton**](docs/Api/KycApi.md#kycgetvalidaton) | **GET** /v2.01/Kyc/users/natural/{UserId}/validation | 
-*KycApi* | [**kycPostDocument**](docs/Api/KycApi.md#kycpostdocument) | **POST** /v2.01/Kyc/users/{UserId}/documents/new/{DocumentType} | 
+*KycApi* | [**kycPostDocument**](docs/Api/KycApi.md#kycpostdocument) | **POST** /v2.01/Kyc/users/{UserId}/documents/new/{DocumentType} | Uploads a new document and uploads a file. If the document already exists it will be replaced.
 *KycApi* | [**kycPostNatural**](docs/Api/KycApi.md#kycpostnatural) | **POST** /v2.01/Kyc/users/natural/{UserId} | Update a Natural User Kyc Data
-*KycApi* | [**kycPutDocument**](docs/Api/KycApi.md#kycputdocument) | **PUT** /v2.01/Kyc/users/{UserId}/documents/add/{DocumentType} | 
+*KycApi* | [**kycPutDocument**](docs/Api/KycApi.md#kycputdocument) | **PUT** /v2.01/Kyc/users/{UserId}/documents/add/{DocumentType} | Adds files to a document.
 *KycApi* | [**kycPutLegal**](docs/Api/KycApi.md#kycputlegal) | **POST** /v2.01/Kyc/users/legal/{UserId} | Update a Legal User
 *KycApi* | [**kycPutRequest**](docs/Api/KycApi.md#kycputrequest) | **PUT** /v2.01/Kyc/users/natural/{UserId}/requestValidation | 
 *PayInsAplazameApi* | [**payInsAplazameAplazameGetPayment**](docs/Api/PayInsAplazameApi.md#payinsaplazameaplazamegetpayment) | **GET** /v2.01/PayInsAplazame/payments/{PayInId} | -------
@@ -151,17 +145,17 @@ Class | Method | HTTP request | Description
  - [AplazameRefundPaymentPost](docs/Model/AplazameRefundPaymentPost.md)
  - [AplazameRefundResponse](docs/Model/AplazameRefundResponse.md)
  - [BankAccountCaPost](docs/Model/BankAccountCaPost.md)
+ - [BankAccountCaResponse](docs/Model/BankAccountCaResponse.md)
  - [BankAccountGbPost](docs/Model/BankAccountGbPost.md)
+ - [BankAccountGbResponse](docs/Model/BankAccountGbResponse.md)
  - [BankAccountIbanPost](docs/Model/BankAccountIbanPost.md)
+ - [BankAccountIbanResponse](docs/Model/BankAccountIbanResponse.md)
  - [BankAccountOtherPost](docs/Model/BankAccountOtherPost.md)
+ - [BankAccountOtherResponse](docs/Model/BankAccountOtherResponse.md)
  - [BankAccountResponse](docs/Model/BankAccountResponse.md)
- - [BankAccountResponseCa](docs/Model/BankAccountResponseCa.md)
- - [BankAccountResponseGb](docs/Model/BankAccountResponseGb.md)
- - [BankAccountResponseIban](docs/Model/BankAccountResponseIban.md)
- - [BankAccountResponseOther](docs/Model/BankAccountResponseOther.md)
- - [BankAccountResponseUs](docs/Model/BankAccountResponseUs.md)
  - [BankAccountType](docs/Model/BankAccountType.md)
  - [BankAccountUsPost](docs/Model/BankAccountUsPost.md)
+ - [BankAccountUsResponse](docs/Model/BankAccountUsResponse.md)
  - [CardPut](docs/Model/CardPut.md)
  - [CardResponse](docs/Model/CardResponse.md)
  - [CustomApiErrorResponse](docs/Model/CustomApiErrorResponse.md)
@@ -250,7 +244,7 @@ Class | Method | HTTP request | Description
 
 - **Type**: OAuth
 - **Flow**: implicit
-- **Authorization URL**: https://identity-development.marketpay.io:443/connect/authorize
+- **Authorization URL**: https://identity.marketpay.io:443/connect/authorize
 - **Scopes**: 
  - **dashboard**: dashboard scope
 

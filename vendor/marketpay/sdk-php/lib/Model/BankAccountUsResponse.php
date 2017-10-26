@@ -1,6 +1,6 @@
 <?php
 /**
- * BankAccountResponseIban
+ * BankAccountUsResponse
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ namespace Swagger\Client\Model;
 use \ArrayAccess;
 
 /**
- * BankAccountResponseIban Class Doc Comment
+ * BankAccountUsResponse Class Doc Comment
  *
  * @category    Class
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class BankAccountResponseIban implements ArrayAccess
+class BankAccountUsResponse implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -47,15 +47,16 @@ class BankAccountResponseIban implements ArrayAccess
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'BankAccountResponseIban';
+    protected static $swaggerModelName = 'BankAccountUsResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'iban' => 'string',
-        'bic' => 'string',
+        'account_number' => 'string',
+        'aba' => 'string',
+        'deposit_account_type' => 'string',
         'type' => 'string',
         'owner_address' => '\Swagger\Client\Model\Address',
         'owner_name' => 'string',
@@ -71,8 +72,9 @@ class BankAccountResponseIban implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'iban' => null,
-        'bic' => null,
+        'account_number' => null,
+        'aba' => null,
+        'deposit_account_type' => null,
         'type' => null,
         'owner_address' => null,
         'owner_name' => null,
@@ -98,8 +100,9 @@ class BankAccountResponseIban implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'iban' => 'IBAN',
-        'bic' => 'BIC',
+        'account_number' => 'AccountNumber',
+        'aba' => 'ABA',
+        'deposit_account_type' => 'DepositAccountType',
         'type' => 'Type',
         'owner_address' => 'OwnerAddress',
         'owner_name' => 'OwnerName',
@@ -116,8 +119,9 @@ class BankAccountResponseIban implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'iban' => 'setIban',
-        'bic' => 'setBic',
+        'account_number' => 'setAccountNumber',
+        'aba' => 'setAba',
+        'deposit_account_type' => 'setDepositAccountType',
         'type' => 'setType',
         'owner_address' => 'setOwnerAddress',
         'owner_name' => 'setOwnerName',
@@ -134,8 +138,9 @@ class BankAccountResponseIban implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'iban' => 'getIban',
-        'bic' => 'getBic',
+        'account_number' => 'getAccountNumber',
+        'aba' => 'getAba',
+        'deposit_account_type' => 'getDepositAccountType',
         'type' => 'getType',
         'owner_address' => 'getOwnerAddress',
         'owner_name' => 'getOwnerName',
@@ -161,6 +166,9 @@ class BankAccountResponseIban implements ArrayAccess
         return self::$getters;
     }
 
+    const DEPOSIT_ACCOUNT_TYPE_NOT_SPECIFIED = 'NotSpecified';
+    const DEPOSIT_ACCOUNT_TYPE_CHECKING = 'CHECKING';
+    const DEPOSIT_ACCOUNT_TYPE_SAVINGS = 'SAVINGS';
     const TYPE_IBAN = 'IBAN';
     const TYPE_GB = 'GB';
     const TYPE_US = 'US';
@@ -168,6 +176,19 @@ class BankAccountResponseIban implements ArrayAccess
     const TYPE_OTHER = 'OTHER';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public function getDepositAccountTypeAllowableValues()
+    {
+        return [
+            self::DEPOSIT_ACCOUNT_TYPE_NOT_SPECIFIED,
+            self::DEPOSIT_ACCOUNT_TYPE_CHECKING,
+            self::DEPOSIT_ACCOUNT_TYPE_SAVINGS,
+        ];
+    }
     
     /**
      * Gets allowable values of the enum
@@ -197,8 +218,9 @@ class BankAccountResponseIban implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['iban'] = isset($data['iban']) ? $data['iban'] : null;
-        $this->container['bic'] = isset($data['bic']) ? $data['bic'] : null;
+        $this->container['account_number'] = isset($data['account_number']) ? $data['account_number'] : null;
+        $this->container['aba'] = isset($data['aba']) ? $data['aba'] : null;
+        $this->container['deposit_account_type'] = isset($data['deposit_account_type']) ? $data['deposit_account_type'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         $this->container['owner_address'] = isset($data['owner_address']) ? $data['owner_address'] : null;
         $this->container['owner_name'] = isset($data['owner_name']) ? $data['owner_name'] : null;
@@ -217,6 +239,14 @@ class BankAccountResponseIban implements ArrayAccess
     public function listInvalidProperties()
     {
         $invalid_properties = [];
+
+        $allowed_values = $this->getDepositAccountTypeAllowableValues();
+        if (!in_array($this->container['deposit_account_type'], $allowed_values)) {
+            $invalid_properties[] = sprintf(
+                "invalid value for 'deposit_account_type', must be one of '%s'",
+                implode("', '", $allowed_values)
+            );
+        }
 
         $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
@@ -238,6 +268,10 @@ class BankAccountResponseIban implements ArrayAccess
     public function valid()
     {
 
+        $allowed_values = $this->getDepositAccountTypeAllowableValues();
+        if (!in_array($this->container['deposit_account_type'], $allowed_values)) {
+            return false;
+        }
         $allowed_values = $this->getTypeAllowableValues();
         if (!in_array($this->container['type'], $allowed_values)) {
             return false;
@@ -247,43 +281,73 @@ class BankAccountResponseIban implements ArrayAccess
 
 
     /**
-     * Gets iban
+     * Gets account_number
      * @return string
      */
-    public function getIban()
+    public function getAccountNumber()
     {
-        return $this->container['iban'];
+        return $this->container['account_number'];
     }
 
     /**
-     * Sets iban
-     * @param string $iban The IBAN of the bank account
+     * Sets account_number
+     * @param string $account_number The account number of the bank account. US account numbers must be digits only
      * @return $this
      */
-    public function setIban($iban)
+    public function setAccountNumber($account_number)
     {
-        $this->container['iban'] = $iban;
+        $this->container['account_number'] = $account_number;
 
         return $this;
     }
 
     /**
-     * Gets bic
+     * Gets aba
      * @return string
      */
-    public function getBic()
+    public function getAba()
     {
-        return $this->container['bic'];
+        return $this->container['aba'];
     }
 
     /**
-     * Sets bic
-     * @param string $bic The BIC of the bank account
+     * Sets aba
+     * @param string $aba The ABA of the bank account. Must be numbers only, and 9 digits long
      * @return $this
      */
-    public function setBic($bic)
+    public function setAba($aba)
     {
-        $this->container['bic'] = $bic;
+        $this->container['aba'] = $aba;
+
+        return $this;
+    }
+
+    /**
+     * Gets deposit_account_type
+     * @return string
+     */
+    public function getDepositAccountType()
+    {
+        return $this->container['deposit_account_type'];
+    }
+
+    /**
+     * Sets deposit_account_type
+     * @param string $deposit_account_type The type of account
+     * @return $this
+     */
+    public function setDepositAccountType($deposit_account_type)
+    {
+        $allowed_values = $this->getDepositAccountTypeAllowableValues();
+        if (!is_null($deposit_account_type) && !in_array($deposit_account_type, $allowed_values)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'deposit_account_type', must be one of '%s'",
+                    implode("', '", $allowed_values)
+                )
+            );
+        }
+        $this->container['deposit_account_type'] = $deposit_account_type;
 
         return $this;
     }

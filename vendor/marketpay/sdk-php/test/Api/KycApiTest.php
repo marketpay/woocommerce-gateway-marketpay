@@ -105,7 +105,7 @@ class KycApiTest extends \PHPUnit_Framework_TestCase
     /**
      * Test case for kycPostDocument
      *
-     * .
+     * Uploads a new document and uploads a file. If the document already exists it will be replaced..
      *
      */
     public function testKycPostDocument()
@@ -125,7 +125,7 @@ class KycApiTest extends \PHPUnit_Framework_TestCase
     /**
      * Test case for kycPutDocument
      *
-     * .
+     * Adds files to a document..
      *
      */
     public function testKycPutDocument()

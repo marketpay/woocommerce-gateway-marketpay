@@ -1,4 +1,4 @@
-# BankAccountResponseCa
+# BankAccountCaResponse
 
 ## Properties
 Name | Type | Description | Notes

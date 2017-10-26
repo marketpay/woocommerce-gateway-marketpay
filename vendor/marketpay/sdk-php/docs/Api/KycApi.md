@@ -7,9 +7,9 @@ Method | HTTP request | Description
 [**kycGetLegal**](KycApi.md#kycGetLegal) | **GET** /v2.01/Kyc/users/legal/{UserId} | View a Legal User
 [**kycGetNatural**](KycApi.md#kycGetNatural) | **GET** /v2.01/Kyc/users/natural/{UserId} | View a Natural User
 [**kycGetValidaton**](KycApi.md#kycGetValidaton) | **GET** /v2.01/Kyc/users/natural/{UserId}/validation | 
-[**kycPostDocument**](KycApi.md#kycPostDocument) | **POST** /v2.01/Kyc/users/{UserId}/documents/new/{DocumentType} | 
+[**kycPostDocument**](KycApi.md#kycPostDocument) | **POST** /v2.01/Kyc/users/{UserId}/documents/new/{DocumentType} | Uploads a new document and uploads a file. If the document already exists it will be replaced.
 [**kycPostNatural**](KycApi.md#kycPostNatural) | **POST** /v2.01/Kyc/users/natural/{UserId} | Update a Natural User Kyc Data
-[**kycPutDocument**](KycApi.md#kycPutDocument) | **PUT** /v2.01/Kyc/users/{UserId}/documents/add/{DocumentType} | 
+[**kycPutDocument**](KycApi.md#kycPutDocument) | **PUT** /v2.01/Kyc/users/{UserId}/documents/add/{DocumentType} | Adds files to a document.
 [**kycPutLegal**](KycApi.md#kycPutLegal) | **POST** /v2.01/Kyc/users/legal/{UserId} | Update a Legal User
 [**kycPutRequest**](KycApi.md#kycPutRequest) | **PUT** /v2.01/Kyc/users/natural/{UserId}/requestValidation | 
 
@@ -157,9 +157,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **kycPostDocument**
-> \Swagger\Client\Model\KycFileUploadResponse kycPostDocument($document_type, $file, $user_id)
+> \Swagger\Client\Model\KycFileUploadResponse kycPostDocument($document_type, $file, $user_id, $file_content_type)
 
-
+Uploads a new document and uploads a file. If the document already exists it will be replaced.
 
 ### Example
 ```php
@@ -173,9 +173,10 @@ $api_instance = new Swagger\Client\Api\KycApi();
 $document_type = "document_type_example"; // string | 
 $file = "/path/to/file.txt"; // \SplFileObject | 
 $user_id = 789; // int | 
+$file_content_type = "file_content_type_example"; // string | Mime type of the uploaded file. This parameter overrides the type associated to the file.
 
 try {
-    $result = $api_instance->kycPostDocument($document_type, $file, $user_id);
+    $result = $api_instance->kycPostDocument($document_type, $file, $user_id, $file_content_type);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling KycApi->kycPostDocument: ', $e->getMessage(), PHP_EOL;
@@ -190,6 +191,7 @@ Name | Type | Description  | Notes
  **document_type** | **string**|  |
  **file** | **\SplFileObject**|  |
  **user_id** | **int**|  |
+ **file_content_type** | **string**| Mime type of the uploaded file. This parameter overrides the type associated to the file. | [optional]
 
 ### Return type
 
@@ -251,15 +253,15 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **kycPutDocument**
-> \Swagger\Client\Model\KycFileUploadResponse kycPutDocument($document_type, $file, $user_id)
+> \Swagger\Client\Model\KycFileUploadResponse kycPutDocument($document_type, $file, $user_id, $file_content_type)
 
-
+Adds files to a document.
 
 ### Example
 ```php
@@ -273,9 +275,10 @@ $api_instance = new Swagger\Client\Api\KycApi();
 $document_type = "document_type_example"; // string | 
 $file = "/path/to/file.txt"; // \SplFileObject | 
 $user_id = 789; // int | 
+$file_content_type = "file_content_type_example"; // string | Mime type of the uploaded file. This parameter overrides the type associated to the file.
 
 try {
-    $result = $api_instance->kycPutDocument($document_type, $file, $user_id);
+    $result = $api_instance->kycPutDocument($document_type, $file, $user_id, $file_content_type);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling KycApi->kycPutDocument: ', $e->getMessage(), PHP_EOL;
@@ -290,6 +293,7 @@ Name | Type | Description  | Notes
  **document_type** | **string**|  |
  **file** | **\SplFileObject**|  |
  **user_id** | **int**|  |
+ **file_content_type** | **string**| Mime type of the uploaded file. This parameter overrides the type associated to the file. | [optional]
 
 ### Return type
 
@@ -351,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -399,7 +403,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

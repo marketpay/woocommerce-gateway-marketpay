@@ -1,11 +1,11 @@
-# BankAccountResponseOther
+# BankAccountUsResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**country** | **string** | The Country where the bank account is held | [optional] 
-**bic** | **string** | The BIC of the bank account | [optional] 
-**account_number** | **string** | The account number of the bank account. Must be numbers only. Canadian account numbers must be a maximum of 20 digits | [optional] 
+**account_number** | **string** | The account number of the bank account. US account numbers must be digits only | [optional] 
+**aba** | **string** | The ABA of the bank account. Must be numbers only, and 9 digits long | [optional] 
+**deposit_account_type** | **string** | The type of account | [optional] 
 **type** | **string** | The type of bank account | [optional] 
 **owner_address** | [**\Swagger\Client\Model\Address**](Address.md) | The address of the owner of the bank account | [optional] 
 **owner_name** | **string** | The name of the owner of the bank account | [optional] 

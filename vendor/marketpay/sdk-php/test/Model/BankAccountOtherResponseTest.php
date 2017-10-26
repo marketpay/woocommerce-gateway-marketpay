@@ -1,6 +1,6 @@
 <?php
 /**
- * BankAccountResponseUsTest
+ * BankAccountOtherResponseTest
  *
  * PHP version 5
  *
@@ -30,16 +30,16 @@
 namespace Swagger\Client;
 
 /**
- * BankAccountResponseUsTest Class Doc Comment
+ * BankAccountOtherResponseTest Class Doc Comment
  *
  * @category    Class */
-// * @description BankAccountResponseUs
+// * @description BankAccountOtherResponse
 /**
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class BankAccountResponseUsTest extends \PHPUnit_Framework_TestCase
+class BankAccountOtherResponseTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -71,9 +71,23 @@ class BankAccountResponseUsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "BankAccountResponseUs"
+     * Test "BankAccountOtherResponse"
      */
-    public function testBankAccountResponseUs()
+    public function testBankAccountOtherResponse()
+    {
+    }
+
+    /**
+     * Test attribute "country"
+     */
+    public function testPropertyCountry()
+    {
+    }
+
+    /**
+     * Test attribute "bic"
+     */
+    public function testPropertyBic()
     {
     }
 
@@ -81,20 +95,6 @@ class BankAccountResponseUsTest extends \PHPUnit_Framework_TestCase
      * Test attribute "account_number"
      */
     public function testPropertyAccountNumber()
-    {
-    }
-
-    /**
-     * Test attribute "aba"
-     */
-    public function testPropertyAba()
-    {
-    }
-
-    /**
-     * Test attribute "deposit_account_type"
-     */
-    public function testPropertyDepositAccountType()
     {
     }
 

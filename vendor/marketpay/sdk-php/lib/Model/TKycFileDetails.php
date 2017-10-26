@@ -55,8 +55,8 @@ class TKycFileDetails implements ArrayAccess
       */
     protected static $swaggerTypes = [
         'file_status' => '\Swagger\Client\Model\DocumentFileStatus[]',
-        'operator_comments' => 'string',
         'value' => 'string',
+        'operator_comments' => 'string',
         'status' => 'string'
     ];
 
@@ -66,8 +66,8 @@ class TKycFileDetails implements ArrayAccess
       */
     protected static $swaggerFormats = [
         'file_status' => null,
-        'operator_comments' => null,
         'value' => null,
+        'operator_comments' => null,
         'status' => null
     ];
 
@@ -87,8 +87,8 @@ class TKycFileDetails implements ArrayAccess
      */
     protected static $attributeMap = [
         'file_status' => 'FileStatus',
-        'operator_comments' => 'OperatorComments',
         'value' => 'Value',
+        'operator_comments' => 'OperatorComments',
         'status' => 'Status'
     ];
 
@@ -99,8 +99,8 @@ class TKycFileDetails implements ArrayAccess
      */
     protected static $setters = [
         'file_status' => 'setFileStatus',
-        'operator_comments' => 'setOperatorComments',
         'value' => 'setValue',
+        'operator_comments' => 'setOperatorComments',
         'status' => 'setStatus'
     ];
 
@@ -111,8 +111,8 @@ class TKycFileDetails implements ArrayAccess
      */
     protected static $getters = [
         'file_status' => 'getFileStatus',
-        'operator_comments' => 'getOperatorComments',
         'value' => 'getValue',
+        'operator_comments' => 'getOperatorComments',
         'status' => 'getStatus'
     ];
 
@@ -135,8 +135,6 @@ class TKycFileDetails implements ArrayAccess
     const STATUS_NOT_VALIDATED = 'NOT_VALIDATED';
     const STATUS_ACCEPTED = 'ACCEPTED';
     const STATUS_REJECTED = 'REJECTED';
-    const STATUS_NOTNEEDED = 'NOTNEEDED';
-    const STATUS_UPDATED_BY_OPERATOR = 'UPDATED_BY_OPERATOR';
     
 
     
@@ -151,8 +149,6 @@ class TKycFileDetails implements ArrayAccess
             self::STATUS_NOT_VALIDATED,
             self::STATUS_ACCEPTED,
             self::STATUS_REJECTED,
-            self::STATUS_NOTNEEDED,
-            self::STATUS_UPDATED_BY_OPERATOR,
         ];
     }
     
@@ -170,8 +166,8 @@ class TKycFileDetails implements ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['file_status'] = isset($data['file_status']) ? $data['file_status'] : null;
-        $this->container['operator_comments'] = isset($data['operator_comments']) ? $data['operator_comments'] : null;
         $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+        $this->container['operator_comments'] = isset($data['operator_comments']) ? $data['operator_comments'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
     }
 
@@ -234,27 +230,6 @@ class TKycFileDetails implements ArrayAccess
     }
 
     /**
-     * Gets operator_comments
-     * @return string
-     */
-    public function getOperatorComments()
-    {
-        return $this->container['operator_comments'];
-    }
-
-    /**
-     * Sets operator_comments
-     * @param string $operator_comments
-     * @return $this
-     */
-    public function setOperatorComments($operator_comments)
-    {
-        $this->container['operator_comments'] = $operator_comments;
-
-        return $this;
-    }
-
-    /**
      * Gets value
      * @return string
      */
@@ -271,6 +246,27 @@ class TKycFileDetails implements ArrayAccess
     public function setValue($value)
     {
         $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets operator_comments
+     * @return string
+     */
+    public function getOperatorComments()
+    {
+        return $this->container['operator_comments'];
+    }
+
+    /**
+     * Sets operator_comments
+     * @param string $operator_comments
+     * @return $this
+     */
+    public function setOperatorComments($operator_comments)
+    {
+        $this->container['operator_comments'] = $operator_comments;
 
         return $this;
     }

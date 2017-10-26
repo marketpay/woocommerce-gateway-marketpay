@@ -125,8 +125,6 @@ class DocumentFileStatus implements ArrayAccess
     const STATUS_NOT_VALIDATED = 'NOT_VALIDATED';
     const STATUS_ACCEPTED = 'ACCEPTED';
     const STATUS_REJECTED = 'REJECTED';
-    const STATUS_NOTNEEDED = 'NOTNEEDED';
-    const STATUS_UPDATED_BY_OPERATOR = 'UPDATED_BY_OPERATOR';
     
 
     
@@ -141,8 +139,6 @@ class DocumentFileStatus implements ArrayAccess
             self::STATUS_NOT_VALIDATED,
             self::STATUS_ACCEPTED,
             self::STATUS_REJECTED,
-            self::STATUS_NOTNEEDED,
-            self::STATUS_UPDATED_BY_OPERATOR,
         ];
     }
     

@@ -1808,15 +1808,13 @@ $field_value = '';
             return false;
         }
 
-        if ( ! $order->get_meta('mp_transaction_id')) {
+        if ( ! $transaction_id = $order->get_meta('mp_transaction_id')) {
             return false;
         }
 
         if ( ! $mp_payment_type = $order->get_meta('marketpay_payment_type')) {
             return false;
         }
-
-        $transaction_id = $order->get_meta('mp_transaction_id');
 
         if ( ! $mp_transaction = $this->mp->get_payin($transaction_id, $mp_payment_type)) {
             return false;
@@ -1831,7 +1829,14 @@ $field_value = '';
         update_post_meta($order_id, 'mp_transaction_id', $transaction_id);
         update_post_meta($order_id, 'mp_success_transaction_id', $transaction_id);
 
-        $order->payment_complete();
+        if ($mp_payment_type == "bank_wire")
+        {
+            $order->update_status('on-hold');
+        }
+        else
+        {
+            $order->payment_complete();
+        }
     }
 
     /**

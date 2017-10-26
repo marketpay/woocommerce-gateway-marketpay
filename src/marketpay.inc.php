@@ -237,17 +237,10 @@ class mpAccess
         /** MarketPay API configuration **/
         $config = new Swagger\Client\Configuration;
 
-<<<<<<< HEAD
-            $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
-            $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
-            $this->marketPayApi->Kyc = new Swagger\Client\Api\KycApi($this->marketPayApi);
-        }
-=======
         $config->setHost($mp_base_url);
         $config->setApiKey($mp_client_id, $mp_passphrase);
         $config->setDebug(self::DEBUG);
         $config->setAccessToken($token->access_token);
->>>>>>> master
 
         $this->marketPayApi = new Swagger\Client\ApiClient($config);
 

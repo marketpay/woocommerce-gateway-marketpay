@@ -1535,12 +1535,19 @@ class mpAccess
      */
     public function get_payin($transaction_id, $mp_payment_type = 'card')
     {
-        if ($mp_payment_type == 'bank_wire')
+        try
         {
-            return $this->marketPayApi()->BankwirePayIns->payInsBankwireBankwireGetPayment($transaction_id);
-        }
+            if ($mp_payment_type == 'bank_wire')
+            {
+                return $this->marketPayApi()->BankwirePayIns->payInsBankwireBankwireGetPayment($transaction_id);
+            }
 
-        return $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysGetPayment($transaction_id);
+            return $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysGetPayment($transaction_id);
+        }
+        catch (Exception $e)
+        {
+            return null;
+        }
     }
 
     /**

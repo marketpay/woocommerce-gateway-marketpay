@@ -928,6 +928,8 @@ class marketpayWCAdmin
         /** Only show this widget to site administrators **/
         if ( ! current_user_can('manage_options')) return;
 
+        $this->update_bankwire_widget();
+
         wp_add_dashboard_widget(
             'mp_failed_db',
             __('Marketpay failed transactions', 'marketpay'),
@@ -937,11 +939,33 @@ class marketpayWCAdmin
 
         /** Force our widget to the top **/
         global $wp_meta_boxes;
+
         $normal_dashboard  = $wp_meta_boxes['dashboard']['normal']['core'];
-        $our_widget_backup = array('mp_failed_db' => $normal_dashboard['mp_failed_db']);
+
         unset($normal_dashboard['mp_failed_db']);
-        $sorted_dashboard                             = array_merge($our_widget_backup, $normal_dashboard);
-        $wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
+
+        $wp_meta_boxes['dashboard']['normal']['core'] = array_merge(
+            array('mp_failed_db' => $normal_dashboard['mp_failed_db']),
+            $normal_dashboard
+        );
+    }
+
+    public function update_bankwire_widget()
+    {
+        $query = new WP_Query(array(
+            'post_type' => 'shop_order',
+            'post_status' => array( 'wc-on-hold' ),
+            'posts_per_page' => -1
+        ));
+
+        if ( $query->have_posts() ) :
+            while ( $query->have_posts() ) : $query->the_post();
+                $order = new WC_Order(get_the_ID());
+                $payin = $this->mp->get_payin($order->get_meta('mp_transaction_id'), 'bank_wire');
+
+                if ($payin and $payin->getStatus() == "SUCCEEDED") $order->payment_complete();
+            endwhile;
+        endif;
     }
 
     /**

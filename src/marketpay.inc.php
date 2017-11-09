@@ -892,7 +892,14 @@ class mpAccess
 
         if ('NATURAL' == $marketUser->PersonType)
         {
-            $kycUser = $this->marketPayApi()->Kyc->kycGetNatural($mp_user_id);
+            try
+            {
+                $kycUser = $this->marketPayApi()->Kyc->kycGetNatural($mp_user_id);
+            }
+            catch (ApiException $e)
+            {
+                $kycUser = new Swagger\Client\Model\KycUserValidationLevelNaturalResponse();
+            }
 
             if (
                 isset($usermeta['first_name']) &&
@@ -1047,7 +1054,14 @@ class mpAccess
         }
         else
         {
-            $kycUser = $this->marketPayApi()->Kyc->kycGetLegal($mp_user_id);
+            try
+            {
+                $kycUser = $this->marketPayApi()->Kyc->kycGetLegal($mp_user_id);
+            }
+            catch (ApiException $e)
+            {
+                $kycUser = new Swagger\Client\Model\KycUserValidationLevelLegalResponse();
+            }
 
             /** Business / legal user **/
             if (

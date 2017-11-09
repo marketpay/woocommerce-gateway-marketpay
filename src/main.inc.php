@@ -834,46 +834,38 @@ class marketpayWCMain
      * To enable the jQuery-ui calendar for the birthday field on the checkout form
      */
     public function after_checkout_fields()
-    {
-        /** If the user is already logged-in no birthday field is present **/
-        if (
-            is_user_logged_in() &&
-            get_user_meta(get_current_user_id(), 'user_birthday', true) &&
-            get_user_meta(get_current_user_id(), 'user_mp_status', true)
-        ) {
-            return;
-        }
-
-        ?>
+    { ?>
         <script>
-        (function($) {
-            $(document).ready(function() {
-                if( 'business'==$('#user_mp_status').val() ) {
-                    $('.hide_business_type').show();
-                } else {
-                    <?php if ('businesses' != $this->options['default_buyer_status'] || 'either' != $this->options['default_business_type']): ?>
-                    $('.hide_business_type').hide();
-                    $('#user_business_type').val('organisation');
-                    <?php endif;?>
-                }
-            });
-            $('#user_mp_status').on('change',function(e){
-                if( 'business'==$('#user_mp_status').val() ) {
-                    $('.hide_business_type').show();
-                    $('#user_business_type').val('');
-                } else {
-                    $('.hide_business_type').hide();
-                    $('#user_business_type').val('organisation');
-                }
-            });
-        })( jQuery );
-        </script>
-        <?php
+            (function($) {
+                $(document).ready(function() {
+                    if ('business' == $('#user_mp_status').val()) {
+                        $('.hide_business_type').show();
+                    } else {
+                        <?php if ('businesses' != $this->options['default_buyer_status'] || 'either' != $this->options['default_business_type']): ?>
+                            $('.hide_business_type').hide();
+                            $('#user_business_type').val('organisation');
+                        <?php endif;?>
+                    }
 
-        if (!wp_script_is('jquery-ui-datepicker', 'enqueued')) {
-            return;
-        }
-    }
+                    $('#kyc_document_field').hide();
+
+                    $("input[name^='wc_checkout_add_ons_']").on('change', function() {
+                        $('#kyc_document').val($(this).val());
+                    });
+                });
+
+                $('#user_mp_status').on('change', function(e) {
+                    if ('business' == $('#user_mp_status').val()) {
+                        $('.hide_business_type').show();
+                        $('#user_business_type').val('');
+                    } else {
+                        $('.hide_business_type').hide();
+                        $('#user_business_type').val('organisation');
+                    }
+                });
+            })( jQuery );
+        </script>
+    <?php }
 
     /**
      * Fires up when user role has been changed,

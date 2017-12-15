@@ -1440,8 +1440,14 @@ class mpAccess
         $mp_vendor_id = $this->set_mp_user($vendor_id);
 
         /** Get the user wallet that was used for the transaction **/
-        $transaction       = $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysGetPayment($mp_transaction_id);
-        $mp_user_wallet_id = $transaction->getCreditedWalletId();
+        if (get_post_meta($order_id, 'marketpay_payment_type', true) == 'bank_wire')
+        {
+            $mp_user_wallet_id = $this->marketPayApi()->BankwirePayIns->payInsBankwireBankwireGetPayment($mp_transaction_id)->getCreditedWalletId();
+        }
+        else
+        {
+            $mp_user_wallet_id = $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysGetPayment($mp_transaction_id)->getCreditedWalletId();
+        }
 
         /** Get the vendor wallet **/
         $wallets = $this->set_mp_wallet($mp_vendor_id);
@@ -1449,7 +1455,7 @@ class mpAccess
         /** Take first wallet with right currency **/
         foreach ($wallets as $wallet)
         {
-            if ($wallet->Currency == $mp_currency)  $mp_vendor_wallet_id = $wallet->Id;
+            if ($wallet->Currency == $mp_currency) $mp_vendor_wallet_id = $wallet->Id;
         }
 
         $Transfer                         = new MarketPay\Transfer();

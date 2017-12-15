@@ -850,7 +850,19 @@ class marketpayWCMain
                     $('#kyc_document_field').hide();
 
                     $("input[name^='wc_checkout_add_ons_']").on('change', function() {
-                        $('#kyc_document').val($(this).val());
+                        var $kycDocument = $('#kyc_document');
+                        if ($kycDocument.length) {
+                            var currentValue = $kycDocument.val();
+                            var currentArray = currentValue.split(',');
+                            // Push new value into the array
+                            currentArray.push($(this).val());
+                            // Check array for duplicates
+                            var uniqueArray = currentArray.filter(function (value, index, self) {
+                                return value && self.indexOf(value) === index;
+                            });
+                            // Set field value as an array join
+                            $kycDocument.val(uniqueArray.join(','));
+                        }
                     });
                 });
 

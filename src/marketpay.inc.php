@@ -814,21 +814,24 @@ class mpAccess
                     //
                 }
 
-                // UPLOAD DOCUMENT
-                try
+                foreach (explode(',', $kyc_doc) as $file_id)
                 {
-                    $splFileObject = ($docfile = get_attached_file($kyc_doc)) ? new SplFileObject($docfile) : null;
-
-                    if ( ! is_null($splFileObject))
+                    // UPLOAD DOCUMENT
+                    try
                     {
-                        $this->marketPayApi()->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $mp_user_id);
+                        $splFileObject = ($docfile = get_attached_file($file_id)) ? new SplFileObject($docfile) : null;
 
-                        wp_delete_attachment($kyc_doc, true);
+                        if ( ! is_null($splFileObject))
+                        {
+                            $this->marketPayApi()->Kyc->kycPutDocument('USER_IDENTITY_PROOF', $splFileObject, $mp_user_id);
+
+                            wp_delete_attachment($file_id, true);
+                        }
                     }
-                }
-                catch (ApiException $e)
-                {
-                    //
+                    catch (ApiException $e)
+                    {
+                        //
+                    }
                 }
             }
         }
@@ -999,26 +1002,26 @@ class mpAccess
                 $needs_updating = true;
             }
 
-            if (
-                isset($usermeta['kyc_document']) &&
-                $usermeta['kyc_document'] &&
-                ! in_array($usermeta['kyc_document'], $kycUser->getIdCardDocument()->getDocumentIds())
-            ) {
-                // UPLOAD DOCUMENT
-                try
+            if (isset($usermeta['kyc_document']) && $usermeta['kyc_document'])
+            {
+                foreach (explode(',', $usermeta['kyc_document']) as $file_id)
                 {
-                    $splFileObject = ($docfile = get_attached_file($usermeta['kyc_document'])) ? new SplFileObject($docfile) : null;
-
-                    if ( ! is_null($splFileObject))
+                    // UPLOAD DOCUMENT
+                    try
                     {
-                        $this->marketPayApi()->Kyc->kycPostDocument('USER_IDENTITY_PROOF', $splFileObject, $marketUser->Id);
+                        $splFileObject = ($docfile = get_attached_file($file_id)) ? new SplFileObject($docfile) : null;
 
-                        wp_delete_attachment($usermeta['kyc_document'], true);
+                        if ( ! is_null($splFileObject))
+                        {
+                            $this->marketPayApi()->Kyc->kycPutDocument('USER_IDENTITY_PROOF', $splFileObject, $marketUser->Id);
+
+                            wp_delete_attachment($file_id, true);
+                        }
                     }
-                }
-                catch (ApiException $e)
-                {
-                    //
+                    catch (ApiException $e)
+                    {
+                        //
+                    }
                 }
             }
 

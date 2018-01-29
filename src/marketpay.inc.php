@@ -248,6 +248,7 @@ class mpAccess
         $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
         $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
         $this->marketPayApi->Kyc            = new Swagger\Client\Api\KycApi($this->marketPayApi);
+        $this->marketPayApi->Users          = new Swagger\Client\Api\UsersApi($this->marketPayApi);
 
         return $this->marketPayApi;
     }
@@ -891,8 +892,24 @@ class mpAccess
             }
             catch (ApiException $e)
             {
-                $kycUser = new Swagger\Client\Model\KycUserValidationLevelNaturalResponse();
+                $result = $this->marketPayApi()->Users->usersGetNatural($mp_user_id);
+
+                $kycUser = $this->marketPayApi()->Kyc->kycPostNatural($mp_user_id, new Swagger\Client\Model\KycUserNaturalPut([
+                    'email' => $result->getEmail(),
+                    'first_name' => $result->getFirstName(),
+                    'last_name' => $result->getLastName(),
+                    'address' => $result->getAddress(),
+                    'birthday' => $result->getBirthday(),
+                    'nationality' => $result->getNationality(),
+                    'country_of_residence' => $result->getCountryOfResidence(),
+                    'occupation' => $result->getOccupation(),
+                    'income_range' => $result->getIncomeRange(),
+                    'tag' => $result->getTag()
+                ]));
             }
+
+            if (is_null($kycUser->getAddress())) $kycUser->setAddress(new Swagger\Client\Model\Address());
+            if (is_null($kycUser->getTelephone())) $kycUser->setTelephone(new Swagger\Client\Model\Telephone());
 
             if (
                 isset($usermeta['first_name']) &&

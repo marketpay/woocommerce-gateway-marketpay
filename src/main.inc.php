@@ -335,22 +335,6 @@ class marketpayWCMain
         </p>
 
         <?php
-            $value = '';
-
-            if (!empty($_POST['kyc_id_document'])) {
-                $value = esc_attr($_POST['kyc_id_document']);
-            }
-
-            if (is_wc_endpoint_url('edit-account') && ($wp_user_id = get_current_user_id())) {
-                $value = get_user_meta($wp_user_id, 'kyc_id_document', true);
-            }
-        ?>
-        <p class="form-row form-row-wide">
-            <label for="reg_kyc_id_document"><?php _e('ID Document', 'marketpay');?> <span class="required">*</span></label>
-            <input type="text" class="input-text" name="kyc_id_document" id="reg_kyc_id_document" value="<?php echo $value; ?>" />
-        </p>
-
-        <?php
         $value = '';
 
         if (!empty($_POST['kyc_document'])) {
@@ -429,8 +413,7 @@ class marketpayWCMain
     {
         $required['user_birthday']    = __('Birthday', 'marketpay');
         $required['user_nationality'] = __( 'Nationality', 'marketpay' );
-        $required['kyc_id_document'] = __('ID Document', 'marketpay');
-        $requires['kyc_document'] = __('Document Attachment ID', 'marketpay');
+        $requires['kyc_document']     = __('Document Attachment ID', 'marketpay');
         $required['billing_country']  = __('Country of residence', 'marketpay');
 
         return $required;
@@ -455,7 +438,7 @@ class marketpayWCMain
         $list_post_keys = array(
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
-            'kyc_id_document'    => 'single',
+            'document_number'    => 'single',
             'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
@@ -483,7 +466,7 @@ class marketpayWCMain
         $list_post_keys = array(
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
-            'kyc_id_document'    => 'single',
+            'document_number'    => 'single',
             'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
@@ -525,7 +508,7 @@ class marketpayWCMain
             'billing_last_name'  => 'single',
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
-            'kyc_id_document'    => 'single',
+            'document_number'    => 'single',
             'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
@@ -559,11 +542,9 @@ class marketpayWCMain
     {
         $data_post      = $_POST;
         $list_post_keys = array(
-            //'billing_first_name'=>'single',
-            //'billing_last_name'=>'single',
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
-            'kyc_id_document'    => 'single',
+            'document_number'    => 'single',
             'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
@@ -627,10 +608,10 @@ class marketpayWCMain
             update_user_meta($customer_id, 'user_nationality', sanitize_text_field($_POST['user_nationality']));
         }
 
-        if (isset($_POST['kyc_id_document']))
+        if (isset($_POST['document_number']))
         {
             // New custom user meta field
-            update_user_meta($customer_id, 'kyc_id_document', sanitize_text_field($_POST['kyc_id_document']));
+            update_user_meta($customer_id, 'kyc_id_document', sanitize_text_field($_POST['document_number']));
         }
 
         if (isset($_POST['kyc_document']))
@@ -705,11 +686,6 @@ class marketpayWCMain
             $fields = $this->add_usernationality_field($fields);
         }
 
-        if ( ! get_user_meta(get_current_user_id(), 'kyc_id_document', true))
-        {
-            $fields = $this->add_kyciddocument_field($fields);
-        }
-
         if ( ! get_user_meta(get_current_user_id(), 'kyc_document', true))
         {
             $fields = $this->add_kycdocument_field($fields);
@@ -760,17 +736,6 @@ class marketpayWCMain
             'type'     => 'select',
             'label'    => __('Nationality', 'marketpay'),
             'options'  => $countries,
-            'required' => true,
-            'class'    => array('form-row-wide')
-        );
-
-        return $fields;
-    }
-
-    public function add_kyciddocument_field($fields)
-    {
-        $fields['billing']['kyc_id_document'] = array(
-            'label'    => __('ID Document', 'marketpay'),
             'required' => true,
             'class'    => array('form-row-wide')
         );

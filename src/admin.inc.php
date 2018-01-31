@@ -1210,14 +1210,16 @@ class marketpayWCAdmin
     public function user_edit_required($user)
     {
         wp_enqueue_script('jquery-ui-datepicker');
+
         $this->marketpayWCMain->localize_datepicker();
 
         $screen = get_current_screen();
+
         if ($screen->id == 'user' && $screen->action == 'add') {
             /** We are in the WP admin User -> Add = wp-admin/user-new.php **/
-
             /** Necessary scripts and CSS for WC's nice country/state drop-downs **/
             $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+
             wp_enqueue_script(
                 'wc-users',
                 WC()->plugin_url() . '/assets/js/admin/users' . $suffix . '.js',
@@ -1225,6 +1227,7 @@ class marketpayWCAdmin
                 WC_VERSION,
                 true
             );
+
             wp_localize_script(
                 'wc-users',
                 'wc_users_params',
@@ -1233,12 +1236,12 @@ class marketpayWCAdmin
                     'i18n_select_state_text' => esc_attr__('Select an option&hellip;', 'woocommerce'),
                 )
             );
+
             wp_enqueue_style(
                 'woocommerce_admin_styles', WC()->plugin_url() . '/assets/css/admin.css',
                 array(),
                 WC_VERSION
             );
-            /** **/
 
             $user_birthday = '';
             if (!empty($_POST['user_birthday'])) {
@@ -1251,8 +1254,8 @@ class marketpayWCAdmin
             }
 
             $kyc_id_document = '';
-            if (!empty($_POST['kyc_id_document'])) {
-                $id_document = $_POST['kyc_id_document'];
+            if (!empty($_POST['document_number'])) {
+                $kyc_id_document = $_POST['document_number'];
             }
 
             $kyc_document = '';
@@ -1266,6 +1269,7 @@ class marketpayWCAdmin
             }
 
             $user_mp_status = '';
+
             /** Apply default user status where needed **/
             if (
                 isset($this->options['default_buyer_status']) &&
@@ -1338,13 +1342,6 @@ class marketpayWCAdmin
                     <?php endforeach;?>
                 </select>
               </td>
-            </tr>
-            <tr>
-                <th><label for="kyc_id_document"><?php _e('ID Document', 'marketpay'); ?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
-                <td>
-                  <input type="text" name="kyc_id_document" id="kyc_id_document" class="regular-text" value="<?php echo $kyc_id_document; ?>" /><br />
-                  <span class="description"></span>
-                </td>
             </tr>
             <tr>
                 <th><label for="kyc_document"><?php _e('Document Attachment ID', 'marketpay'); ?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
@@ -1497,7 +1494,7 @@ $business_edit = 0;
 
             update_user_meta($user_id, 'user_birthday', $birthday);
             update_user_meta($user_id, 'user_nationality', sanitize_text_field($_POST['user_nationality']));
-            update_user_meta($user_id, 'kyc_id_document', sanitize_text_field($_POST['kyc_id_document']));
+            update_user_meta($user_id, 'kyc_id_document', sanitize_text_field($_POST['document_number']));
             update_user_meta($user_id, 'kyc_document', sanitize_text_field($_POST['kyc_document']));
 
             if (isset($_POST['billing_country'])) {
@@ -1549,7 +1546,7 @@ $business_edit = 0;
             'last_name'          => 'single',
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
-            'kyc_id_document'    => 'single',
+            'document_number'    => 'single',
             'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',

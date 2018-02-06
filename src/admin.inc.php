@@ -1293,7 +1293,6 @@ class marketpayWCAdmin
             /** We are editing an existing user in the WP admin **/
 
             $user_birthday = esc_attr(get_the_author_meta('user_birthday', $user->ID));
-            $user_birthday = date_i18n($this->marketpayWCMain->supported_format(get_option('date_format')), strtotime($user_birthday));
 
             $user_nationality = get_the_author_meta('user_nationality', $user->ID);
             $kyc_id_document = get_the_author_meta('kyc_id_document', $user->ID);
@@ -1326,14 +1325,14 @@ class marketpayWCAdmin
           <h3><?php _e('Extra profile information for Marketpay', 'marketpay');?></h3>
           <table class="form-table">
             <tr>
-              <th><label for="user_birthday"><?php _e('Birthday', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
+              <th><label for="user_birthday"><?php _e('Birthday', 'marketpay');?> <span class="description"></span></label></th>
               <td>
-                <input type="text" placeholder="<?php echo get_option('date_format'); ?>" name="user_birthday" id="user_birthday" class="regular-text calendar" value="<?php echo $user_birthday; ?>" /><br />
+                <input type="text" placeholder="YYYY-mm-dd" name="user_birthday" id="user_birthday" class="regular-text " value="<?php echo $user_birthday; ?>" /><br />
                 <span class="description"></span>
               </td>
             </tr>
             <tr>
-              <th><label for="user_nationality"><?php _e('Nationality', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
+              <th><label for="user_nationality"><?php _e('Nationality', 'marketpay');?> <span class="description"></span></label></th>
               <td>
                 <select class="nationality_select" name="user_nationality" id="user_nationality">
                     <option value=""><?php _e('Select a country...', 'marketpay');?></option>
@@ -1344,7 +1343,7 @@ class marketpayWCAdmin
               </td>
             </tr>
             <tr>
-                <th><label for="kyc_document"><?php _e('Document Attachment ID', 'marketpay'); ?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label></th>
+                <th><label for="kyc_document"><?php _e('Document Attachment ID', 'marketpay'); ?> <span class="description"></span></label></th>
                 <td>
                     <input type="text" name="kyc_document" id="kyc_document" class="regular-text" value="<?php echo $kyc_document; ?>" /><br />
                     <span class="description"></span>
@@ -1359,7 +1358,7 @@ class marketpayWCAdmin
              **/
             ?>
                             <tr>
-                                <th><label for="billing_country"><?php _e('Country', 'marketpay');?> <span class="description required"></span></label></th>
+                                <th><label for="billing_country"><?php _e('Country', 'marketpay');?> <span class="description"></span></label></th>
                                 <td>
                                 <select class="billing_country_select js_field-country" name="billing_country" id="billing_country">
                                 <option value=""><?php _e('Select a country...', 'marketpay');?></option>
@@ -1372,7 +1371,7 @@ class marketpayWCAdmin
                                 </td>
                             </tr>
                             <tr class="billing_state_field">
-                                <th><label for="billing_state"><?php _e('State/County', 'woocommerce');?> <span class="description required"></span></label></th>
+                                <th><label for="billing_state"><?php _e('State/County', 'woocommerce');?> <span class="description"></span></label></th>
                                 <td>
                                 <input type="hidden" class="billing_state_select js_field-state" name="billing_state" id="billing_state" />
                                 </td>
@@ -1384,7 +1383,7 @@ class marketpayWCAdmin
                 <th>
                     <label for="user_mp_status">
                         <?php _e('User status', 'marketpay');?>
-                        <span class="description required"></span>
+                        <span class="description"></span>
                     </label>
                 </th>
                 <td>
@@ -1400,7 +1399,7 @@ class marketpayWCAdmin
                 </td>
             </tr>
             <tr class="hide_business_type" id="block_tr_user_business_type">
-                <th><label for="user_business_type"><?php _e('Business type', 'marketpay');?> <span class="description required"></span></label></th>
+                <th><label for="user_business_type"><?php _e('Business type', 'marketpay');?> <span class="description"></span></label></th>
                 <td>
                 <input type="hidden" id="actual_default_business_type" value="<?php echo $this->options['default_business_type']; ?>" />
                 <select class="mp_btype_select" name="user_business_type" id="user_business_type" disabled>
@@ -1462,7 +1461,7 @@ $business_edit = 0;
           <script>
             (function($) {
                 $(document).ready(function() {
-                    $('label[for=first_name],label[for=last_name],label[for=billing_country]').append(' <span class="description required"><?php _e('(required)', 'marketpay');?></span>');
+                    $('label[for=first_name],label[for=last_name],label[for=billing_country]').append(' <span class="description"></span>');
                     if ($.fn.datepicker) {
                         $('input.calendar').datepicker();
                     }
@@ -1490,9 +1489,7 @@ $business_edit = 0;
 
         if (current_user_can('edit_user', $user_id))
         {
-            $birthday = $this->marketpayWCMain->convertDate(sanitize_text_field($_POST['user_birthday']));
-
-            update_user_meta($user_id, 'user_birthday', $birthday);
+            update_user_meta($user_id, 'user_birthday', sanitize_text_field($_POST['user_birthday']));
             update_user_meta($user_id, 'user_nationality', sanitize_text_field($_POST['user_nationality']));
             update_user_meta($user_id, 'kyc_id_document', sanitize_text_field($_POST['document_number']));
             update_user_meta($user_id, 'kyc_document', sanitize_text_field($_POST['kyc_document']));
@@ -1552,6 +1549,8 @@ $business_edit = 0;
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
         );
+
+        if (is_admin()) $list_post_keys = array();
 
         foreach ($list_post_keys as $key => $value)
         {

@@ -1841,14 +1841,25 @@ $field_value = '';
                 <?php _e('Bank account owner:', 'marketpay');?>
                 <strong><?php echo $ref->BankAccount->OwnerName; ?></strong>
             </li>
-            <li class="mp_iban">
-                <?php _e('IBAN:', 'marketpay');?>
-                <strong><?php echo $ref->BankAccount->IBAN; ?></strong>
-            </li>
-            <li class="mp_bic">
-                <?php _e('BIC:', 'marketpay');?>
-                <strong><?php echo $ref->BankAccount->BIC; ?></strong>
-            </li>
+            <?php if ($ref->BankAccount->Type == 'IBAN'): ?>
+                <li class="mp_iban">
+                    <?php _e('IBAN:', 'marketpay');?>
+                    <strong><?php echo $ref->BankAccount->IBAN; ?></strong>
+                </li>
+                <li class="mp_bic">
+                    <?php _e('BIC:', 'marketpay');?>
+                    <strong><?php echo $ref->BankAccount->BIC; ?></strong>
+                </li>
+            <?php else: ?>
+                <li class="mp_account_number">
+                    <?php _e('Account Number:', 'marketpay');?>
+                    <strong><?php echo $ref->BankAccount->AccountNumber; ?></strong>
+                </li>
+                <li class="mp_sort_code">
+                    <?php _e('Sort Code:', 'marketpay');?>
+                    <strong><?php echo $ref->BankAccount->SortCode; ?></strong>
+                </li>
+            <?php endif; ?>
             <li class="mp_wire_ref">
                 <?php _e('Wire reference:', 'marketpay');?>
                 <strong><?php echo $ref->WireReference; ?></strong>

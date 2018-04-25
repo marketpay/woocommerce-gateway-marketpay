@@ -991,7 +991,7 @@ class mpAccess
                 $marketUser->Birthday != $timestamp &&
                 $kycUser->getBirthday() != $timestamp
             ) {
-                $kyc->setBirthday($timestamp);
+                $kycUser->setBirthday($timestamp);
 
                 $marketUser->Birthday = $timestamp;
                 $needs_updating       = true;

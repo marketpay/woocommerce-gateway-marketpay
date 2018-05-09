@@ -276,36 +276,36 @@ class marketpayWCMain
 
         <?php if (!is_wc_endpoint_url('edit-account')): ?>
 
-            <p class="form-row form-row-first">
-                <label for="reg_billing_first_name"><?php _e('First name', 'woocommerce');?> <span class="required">*</span></label>
-                <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" value="<?php if (!empty($_POST['billing_first_name'])) {
-                    esc_attr_e($_POST['billing_first_name']);
-                }
-                ?>" />
-            </p>
+        <p class="form-row form-row-first">
+            <label for="reg_billing_first_name"><?php _e('First name', 'woocommerce');?> <span class="required">*</span></label>
+            <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" value="<?php if (!empty($_POST['billing_first_name'])) {
+                esc_attr_e($_POST['billing_first_name']);
+            }
+            ?>" />
+        </p>
 
-            <p class="form-row form-row-last">
-                <label for="reg_billing_last_name"><?php _e('Last name', 'woocommerce');?> <span class="required">*</span></label>
-                <input type="text" class="input-text" name="billing_last_name" id="reg_billing_last_name" value="<?php if (!empty($_POST['billing_last_name'])) {
-                    esc_attr_e($_POST['billing_last_name']);
-                }
-                ?>" />
-            </p>
+        <p class="form-row form-row-last">
+            <label for="reg_billing_last_name"><?php _e('Last name', 'woocommerce');?> <span class="required">*</span></label>
+            <input type="text" class="input-text" name="billing_last_name" id="reg_billing_last_name" value="<?php if (!empty($_POST['billing_last_name'])) {
+                esc_attr_e($_POST['billing_last_name']);
+            }
+            ?>" />
+        </p>
 
-        <?php endif;?>
+    <?php endif;?>
 
         <div class="clear"></div>
 
         <?php
-            $value = '';
+        $value = '';
 
-            if (!empty($_POST['user_birthday'])) {
-                $value = esc_attr($_POST['user_birthday']);
-            }
+        if (!empty($_POST['user_birthday'])) {
+            $value = esc_attr($_POST['user_birthday']);
+        }
 
-            if (is_wc_endpoint_url('edit-account') && ($wp_user_id = get_current_user_id())) {
-                $value = date_i18n($this->supported_format(get_option('date_format')), strtotime(get_user_meta($wp_user_id, 'user_birthday', true)));
-            }
+        if (is_wc_endpoint_url('edit-account') && ($wp_user_id = get_current_user_id())) {
+            $value = date_i18n($this->supported_format(get_option('date_format')), strtotime(get_user_meta($wp_user_id, 'user_birthday', true)));
+        }
         ?>
         <p class="form-row form-row-wide">
             <label for="reg_user_birthday"><?php _e('Birthday', 'marketpay');?> <span class="required">*</span></label>
@@ -313,15 +313,15 @@ class marketpayWCMain
         </p>
 
         <?php
-            $cur_value = '';
+        $cur_value = '';
 
-            if (!empty($_POST['user_nationality'])) {
-                $cur_value = esc_attr($_POST['user_nationality']);
-            }
+        if (!empty($_POST['user_nationality'])) {
+            $cur_value = esc_attr($_POST['user_nationality']);
+        }
 
-            if (is_wc_endpoint_url('edit-account') && ($wp_user_id = get_current_user_id())) {
-                $cur_value = get_user_meta($wp_user_id, 'user_nationality', true);
-            }
+        if (is_wc_endpoint_url('edit-account') && ($wp_user_id = get_current_user_id())) {
+            $cur_value = get_user_meta($wp_user_id, 'user_nationality', true);
+        }
         ?>
 
         <p class="form-row form-row-wide">
@@ -390,21 +390,21 @@ class marketpayWCMain
         </p>
 
         <script>
-        (function($) {
-            $(document).ready(function() {
-                if ('business' == $('#reg_user_mp_status').val()) {
-                    $('.hide_business_type').show();
-                }
-            });
+            (function($) {
+                $(document).ready(function() {
+                    if ('business' == $('#reg_user_mp_status').val()) {
+                        $('.hide_business_type').show();
+                    }
+                });
 
-            $('#reg_user_mp_status').on('change', function(e) {
-                if ('business' == $('#reg_user_mp_status').val()) {
-                    $('.hide_business_type').show();
-                } else {
-                    $('.hide_business_type').hide();
-                }
-            });
-        })( jQuery );
+                $('#reg_user_mp_status').on('change', function(e) {
+                    if ('business' == $('#reg_user_mp_status').val()) {
+                        $('.hide_business_type').show();
+                    } else {
+                        $('.hide_business_type').hide();
+                    }
+                });
+            })( jQuery );
         </script>
         <?php
     }
@@ -544,8 +544,8 @@ class marketpayWCMain
         $list_post_keys = array(
             'user_birthday'      => 'date',
             'user_nationality'   => 'country',
-            'document_number'    => 'single',
-            'kyc_document'       => 'single',
+            //'document_number'    => 'single',
+            //'kyc_document'       => 'single',
             'billing_country'    => 'country',
             'user_mp_status'     => 'status',
             'user_business_type' => 'businesstype',
@@ -705,6 +705,11 @@ class marketpayWCMain
 
     public function add_userbirthday_field($fields)
     {
+
+        if(isset($fields['billing']['user_birthday'])) {
+            return $fields;
+        }
+
         wp_enqueue_script('jquery-ui-datepicker');
 
         $this->localize_datepicker();
@@ -723,14 +728,21 @@ class marketpayWCMain
             'class'    => array('form-row-wide', 'calendar'),
         );
 
-        return $fields;
+
     }
 
     public function add_usernationality_field($fields)
     {
+
+        if(isset($fields['billing']['user_nationality'])) {
+            return $fields;
+        }
+
         $countries_obj   = new WC_Countries();
         $countries       = $countries_obj->__get('countries');
         $countries[null] = __('Select a country...', 'marketpay');
+
+
 
         $fields['billing']['user_nationality'] = array(
             'type'     => 'select',
@@ -740,14 +752,14 @@ class marketpayWCMain
             'class'    => array('form-row-wide')
         );
 
-        return $fields;
+
     }
 
     public function add_kycdocument_field($fields)
     {
         $fields['billing']['kyc_document'] = array(
             'label'    => __('Document Attachment ID', 'marketpay'),
-            'required' => true,
+            'required' => false,
             'class'    => array('form-row-wide')
         );
 
@@ -807,8 +819,8 @@ class marketpayWCMain
                         $('.hide_business_type').show();
                     } else {
                         <?php if ('businesses' != $this->options['default_buyer_status'] || 'either' != $this->options['default_business_type']): ?>
-                            $('.hide_business_type').hide();
-                            $('#user_business_type').val('organisation');
+                        $('.hide_business_type').hide();
+                        $('#user_business_type').val('organisation');
                         <?php endif;?>
                     }
 
@@ -951,897 +963,896 @@ class marketpayWCMain
      * Public because shared with marketpayWCAdmin. TODO: refactor
      *
      */
-    public function marketpay_wallet_table()
-    {
-        if (!current_user_can('administrator')) {
-            return;
-        }
-
-        global $current_user;
-
-        $wp_user_id = $current_user->ID;
-
-        /** If we're on user_edit profile screen, add some styles and inject some html **/
-        if (is_admin()) {
-            global $profileuser;
-            $wp_user_id = $profileuser->ID;
-            ?>
-            <style>
-                .table-vendor-mp_wallets{
-                    border:1px solid #333;
-                    background:#FFF;
-                }
-                .table-vendor-mp_wallets th,
-                .table-vendor-mp_wallets td{
-                    padding: 5px 10px;
-                    text-align: left;
-
-                }
-            </style>
-            <tr>
-            <th><?php _e('Marketpay info', 'marketpay');?></th>
-            <td>
-            <?php
-}
-
-        if ($mp_user_id = $this->mp->set_mp_user($wp_user_id)) {
-
-            $dashboard_user_url  = $this->mp->getDBUserUrl($mp_user_id);
-            $dashboard_user_link = '<a target="_mp_db" href="' . $dashboard_user_url . '">';
-
-            $dashboard_trans_url  = $dashboard_user_url . '/Transactions';
-            $dashboard_trans_link = '<a target="_mp_db" href="' . $dashboard_trans_url . '">';
-
-            $wallets = $this->mp->set_mp_wallet($mp_user_id);
-
-            if (!$wallets) {
-                echo '<p>' .
-                __('No Marketpay wallets. Please check that all required fields have been completed in the user profile.', 'marketpay') .
-                    '</p>';
-            }
-
-            if (false && marketpayWCConfig::DEBUG) {
-                echo "<pre>Wallets debug:\n";
-                var_dump($wallets);
-                echo '</pre>';
-            }
-
-            echo '<p>' . $dashboard_user_link . sprintf(__('View the user (#%s) in the Marketpay Dashboard', 'marketpay'), $mp_user_id) . '</a></p>';
-            echo '<p>' . $dashboard_trans_link . __('View user&apos;s Marketpay transactions', 'marketpay') . '</a></p>';
-
-            ?>
-            <table class="table table-condensed table-vendor-mp_wallets form-table">
-                <thead>
-                <tr>
-                    <th class="mpw-id-header"><?php _e('Wallet #', 'marketpay');?></th>
-                    <th class="mpw-creation-header"><?php _e('Creation Date', 'marketpay');?></th>
-                    <th class="mpw-description-header"><?php _e('Description', 'marketpay');?></th>
-                    <th class="mpw-balance-header"><?php _e('Balance', 'marketpay');?></th>
-                    <th class="mpw-options-header"><?php _e('Wallet Options', 'marketpay');?></th>
-                </tr>
-                </thead>
-                <tbody>
-            <?php
-if ($wallets && is_array($wallets)) {
-                foreach ($wallets as $wallet) {
-
-                    $dashboard_wallet_url   = $dashboard_user_url . '/WalletTransactions/' . $wallet->Id;
-                    $dashboard_wallet_title = sprintf(__('See Marketpay transactions for wallet #%s', 'marketpay'), $wallet->Id);
-                    $dashboard_wallet_link  = '<a target="_mp_db" href="' . $dashboard_wallet_url . '" title="' . $dashboard_wallet_title . '">';
-
-                    if ($this->is_vendor($wp_user_id)) {
-                        $dashboard_payout_url   = $this->mp->getDBPayoutUrl($wallet->Id);
-                        $dashboard_payout_title = sprintf(__('Do a Marketpay payout for wallet #%s', 'marketpay'), $wallet->Id);
-                        $dashboard_payout_link  = '<a target="_mp_db" href="' . $dashboard_payout_url . '" title="' . $dashboard_payout_title . '">';
-                    }
-
-                    echo '<tr>';
-
-                    echo '<td>' . $wallet->Id . '</a></td>';
-
-                    echo '<td>' . get_date_from_gmt(date('Y-m-d H:i:s', $wallet->CreationDate), 'F j, Y H:i:s') . '</td>';
-                    //@see: http://wordpress.stackexchange.com/questions/94755/converting-timestamps-to-local-time-with-date-l18n
-
-                    echo '<td>' . $wallet->Description . '</td>';
-                    echo '<td>' . number_format_i18n($wallet->Balance->Amount / 100, 2) . ' ' . $wallet->Currency . '</td>';
-
-                    echo '<td>';
-
-                    echo $dashboard_wallet_link . __('View transactions', 'marketpay') . '</a><br>';
-
-                    if ($this->is_vendor($wp_user_id)) {
-                        echo $dashboard_payout_link . __('Do a PayOut', 'marketpay') . '</a> ';
-                    }
-
-                    echo '</td>';
-
-                    echo '</tr>';
-                }
-            } else {
-                if (marketpayWCConfig::DEBUG) {
-                    var_dump($wallets);
-                }
-
-            }
-            ?>
-                </tbody>
-            </table>
-            <?php
-} else {
-            echo '<p>' .
-            __('No Marketpay wallets. Please check that all required fields have been completed in the user profile.', 'marketpay') .
-                '</p>';
-
-            return false;
-        }
-
-        if (is_admin()) {
-            echo '</td></tr>';
-        }
+public function marketpay_wallet_table()
+{
+    if (!current_user_can('administrator')) {
+        return;
     }
 
-    /**
-     * Displays bank account form for vendors
-     * on shop settings page of the front-end vendor dashboard
-     * This is a WV action hook
-     * @see: https://www.wcvendors.com/help/topic/how-to-add-custom-field-on-vendor-shop-setting/
-     * @see: https://docs.marketpay.io/api-references/bank-accounts/
-     *
-     * Shared with marketpayWCAdmin. TODO: refactor
-     *
-     */
-    public function bank_account_form($wp_user_id)
-    {
+    global $current_user;
 
-        $screen = null;
-        if (is_admin() && function_exists('get_current_screen')) {
-            $screen = get_current_screen();
+    $wp_user_id = $current_user->ID;
+
+    /** If we're on user_edit profile screen, add some styles and inject some html **/
+if (is_admin()) {
+    global $profileuser;
+    $wp_user_id = $profileuser->ID;
+    ?>
+    <style>
+        .table-vendor-mp_wallets{
+            border:1px solid #333;
+            background:#FFF;
         }
+        .table-vendor-mp_wallets th,
+        .table-vendor-mp_wallets td{
+            padding: 5px 10px;
+            text-align: left;
 
-        if (!$wp_user_id && (
-            !is_admin() ||
-            preg_match('/wcv-vendor-shopsettings/', $screen->id)
-        )) {
-            $wp_user_id = get_current_user_id();
         }
-
-        $suffix      = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-        $assets_path = str_replace(array('http:', 'https:'), '', WC()->plugin_url()) . '/assets/';
-
-        $countries_obj = new WC_Countries();
-        $countries     = $countries_obj->__get('countries');
-
-        ?>
-        <div class="mp_merchant_bank_account_container">
-
-            <?php if (!is_admin()): ?>
-            <p><b><?php _e('Bank account info', 'marketpay');?></b></p>
-            <?php endif;?>
-
-            <table>
-
-            <thead>
-
-            <?php if (is_admin() && preg_match('/wcv-vendor-shopsettings/', $screen->id)): ?>
-                <tr><td><b><?php _e('Bank account info', 'marketpay');?></b></td><td>&nbsp;</td></tr>
-            <?php endif;?>
-            <tr>
-            <td>
-            <label for="vendor_account_type" class="required"><?php _e('Account type:', 'marketpay');?></label>
-            </td><td>
-            <select name="vendor_account_type" id="vendor_account_type">
-                <option value=""></option>
-                <?php foreach ($this->account_types as $type => $fields):
-            if (isset($_POST['vendor_account_type']) && $_POST['vendor_account_type'] == $type) {
-                $selected = 'selected="selected"';
-            } else {
-                $selected = (get_user_meta($wp_user_id, 'vendor_account_type', true) == $type) ? 'selected="selected"' : '';
+    </style>
+    <tr>
+        <th><?php _e('Marketpay info', 'marketpay');?></th>
+        <td>
+            <?php
             }
-            ?>
-                        <option <?php echo $selected; ?>><?php echo $type; ?></option>
-                    <?php endforeach;?>
-            </select>
-            </td>
-            </tr>
-            </thead>
 
-            <?php foreach ($this->account_types as $type => $fields): $hidden = (get_user_meta($wp_user_id, 'vendor_account_type', true) == $type) ? '' : 'style="display:none;"';?>
-                <tbody class="vendor_account_fields <?php echo $type; ?>_fields" <?php echo $hidden; ?>>
+            if ($mp_user_id = $this->mp->set_mp_user($wp_user_id)) {
 
-                    <?php foreach ($fields as $field => $c): list($ftype, $n) = explode(':', $c['format']);?>
-                        <tr>
-                        <td>
-                        <label for="<?php echo $field; ?>" class="<?php echo ($c['required'] ? 'required' : ''); ?>">
-                            <?php _e($c['label'], 'marketpay');?>
-                            <?php if ($c['required']): ?>
-                             <span class="description required"><?php _e('(required)', 'marketpay');?></span>
-                            <?php endif;?>
-                    </label>
-                    </td><td>
-                    <?php if ('text' == $ftype || 'number' == $ftype): ?>
-                    <?php
-    $field_value = '';
-            if (isset($_POST[$field])) {
-                $field_value = $_POST[$field];
-            } else {
-                $field_value = get_user_meta($wp_user_id, $field, true);
-            }
-            ?>
-                    <input type="text" name="<?php echo $field; ?>" id="<?php echo $field; ?>" placeholder="<?php echo $c['placeholder']; ?>" value="<?php echo $field_value; ?>" class="regular-text" />
-                    <?php elseif ('select' == $ftype): ?>
-                <select name="<?php echo $field; ?>" id="<?php echo $field; ?>">
-                    <?php
-foreach (explode(',', $n) as $option):
-            if (isset($_POST[$field]) && $_POST[$field] == $option) {
-                $selected = 'selected="selected"';
-            } else {
-                $selected = ($option == get_user_meta($wp_user_id, $field, true) ? 'selected="selected"' : '');
-            }
-            ?>
-                        <option <?php echo $selected; ?>><?php echo $option; ?></option>
-                        <?php endforeach;?>
-                </select>
-                <?php elseif ('country' == $ftype): ?>
-                <select name="<?php echo $field; ?>" id="<?php echo $field; ?>">
-                 <option value=""><?php _e('Select a country...', 'marketpay');?></option>
-                <?php foreach ($countries as $key => $value):
-            if (isset($_POST[$field]) && $_POST[$field] == $key) {
-                $selected = 'selected="selected"';
-            } else {
-                $selected = ($key == get_user_meta($wp_user_id, $field, true) ? 'selected="selected"' : '');
-            }
-            ?>
-                        <option value="<?php echo $key ?>" <?php echo $selected; ?>><?php echo $value ?></option>
-                    <?php endforeach;?>
-                </select>
-                <?php endif;?>
-                </td>
-                </tr>
-                <?php endforeach;?>
+                $dashboard_user_url  = $this->mp->getDBUserUrl($mp_user_id);
+                $dashboard_user_link = '<a target="_mp_db" href="' . $dashboard_user_url . '">';
 
-            </tbody>
-            <?php endforeach;?>
+                $dashboard_trans_url  = $dashboard_user_url . '/Transactions';
+                $dashboard_trans_link = '<a target="_mp_db" href="' . $dashboard_trans_url . '">';
 
-            <tbody class="bank_account_address">
-                <tr>
-                <td>
-                <label for="vendor_account_name"><?php _e('Account holder&apos;s name', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label>
-                </td>
-                <td>
-                <?php
-$field_value = '';
-        if (isset($_POST['vendor_account_name'])) {
-            $field_value = $_POST['vendor_account_name'];
-        } else {
-            $field_value = get_user_meta($wp_user_id, 'vendor_account_name', true);
-        }
-        ?>
-                <input type="text" name="vendor_account_name" id="vendor_account_name" value="<?php echo $field_value; ?>" class="regular-text" />
-                </td>
-                </tr>
+                $wallets = $this->mp->set_mp_wallet($mp_user_id);
 
-                <tr>
-                <td>
-                <label for="vendor_account_address1"><?php _e('Account holder&apos;s address', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label>
-                </td>
-                <td>
-                <?php
-$field_value = '';
-        if (isset($_POST['vendor_account_address1'])) {
-            $field_value = $_POST['vendor_account_address1'];
-        } else {
-            $field_value = get_user_meta($wp_user_id, 'vendor_account_address1', true);
-        }
-        ?>
-                <input type="text" name="vendor_account_address1" id="vendor_account_address1" value="<?php echo $field_value; ?>" class="regular-text" /><br/>
-                <?php
-$field_value = '';
-        if (isset($_POST['vendor_account_address2'])) {
-            $field_value = $_POST['vendor_account_address2'];
-        } else {
-            $field_value = get_user_meta($wp_user_id, 'vendor_account_address2', true);
-        }
-        ?>
-                <input type="text" name="vendor_account_address2" id="vendor_account_address2" value="<?php echo $field_value; ?>" class="regular-text" />
-                </td>
-                </tr>
-
-                <tr>
-                <td>
-                <label for="vendor_account_city"><?php _e('Account holder&apos;s city', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label>
-                </td>
-                <td>
-                <?php
-$field_value = '';
-        if (isset($_POST['vendor_account_city'])) {
-            $field_value = $_POST['vendor_account_city'];
-        } else {
-            $field_value = get_user_meta($wp_user_id, 'vendor_account_city', true);
-        }
-        ?>
-                <input type="text" name="vendor_account_city" id="vendor_account_city" value="<?php echo $field_value; ?>" class="regular-text" />
-                </td>
-                </tr>
-
-                <tr>
-                <td>
-                <label for="vendor_account_postcode"><?php _e('Account holder&apos;s postal code', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label>
-                </td>
-                <td>
-                <?php
-$field_value = '';
-        if (isset($_POST['vendor_account_postcode'])) {
-            $field_value = $_POST['vendor_account_postcode'];
-        } else {
-            $field_value = get_user_meta($wp_user_id, 'vendor_account_postcode', true);
-        }
-        ?>
-                <input type="text" name="vendor_account_postcode" id="vendor_account_postcode" value="<?php echo $field_value; ?>" class="regular-text" />
-                </td>
-                </tr>
-                <?php if (is_admin()) {
-            ?>
-                <tr>
-                    <td>
-                        <label for="vendor_account_country">
-                            <?php _e('Account holder&apos;s country', 'marketpay');?>
-                            <span class="description required">
-                                <?php _e('(required)', 'marketpay');?>
-                            </span>
-                        </label>
-                    <td>
-                    <select class="vendor_account_select js_field-country" name="vendor_account_country" id="vendor_account_country">
-                    <option value=""><?php _e('Select a country...', 'marketpay');?></option>
-                    <?php foreach ($countries as $key => $value):
-                if (isset($_POST['vendor_account_country']) && $_POST['vendor_account_country'] == $key) {
-                    $selected = 'selected="selected"';
-                } else {
-                    $selected = ($key == get_user_meta($wp_user_id, 'vendor_account_country', true) ? 'selected="selected"' : '');
+                if (!$wallets) {
+                    echo '<p>' .
+                        __('No Marketpay wallets. Please check that all required fields have been completed in the user profile.', 'marketpay') .
+                        '</p>';
                 }
+
+                if (false && marketpayWCConfig::DEBUG) {
+                    echo "<pre>Wallets debug:\n";
+                    var_dump($wallets);
+                    echo '</pre>';
+                }
+
+                echo '<p>' . $dashboard_user_link . sprintf(__('View the user (#%s) in the Marketpay Dashboard', 'marketpay'), $mp_user_id) . '</a></p>';
+                echo '<p>' . $dashboard_trans_link . __('View user&apos;s Marketpay transactions', 'marketpay') . '</a></p>';
+
                 ?>
-                            <option value="<?php echo $key ?>" <?php echo $selected; ?>><?php echo $value ?></option>
-                        <?php endforeach;?>
-                    </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="vendor_account_region"><?php _e('Account holder&apos;s region', 'marketpay');?><span class="description required"></span></label>
-                    </td>
-                    <td>
-                        <?php
-$field_value = '';
-            if (isset($_POST['vendor_account_region'])) {
-                $field_value = $_POST['vendor_account_region'];
-            } else {
-                $field_value = get_user_meta($wp_user_id, 'vendor_account_region', true);
-            }
-            ?>
-                        <input type="hidden" class="vendor_account_select js_field-state" name="vendor_account_region" id="vendor_account_region" value="<?php echo $field_value; ?>" />
-                    </td>
-                </tr>
-                <?php } else {
-            //if in front ?>
-                <tr>
-                    <td>
-                        <label for="vendor_account_country">
-                            <?php _e('Account holder&apos;s country', 'marketpay');?>
-                            <span class="description required">
-                                <?php _e('(required)', 'marketpay');?>
-                            </span>
-                        </label>
-                    <td>
-                        <?php
-$field_value = '';
-            if (isset($_POST['vendor_account_country'])) {
-                $field_value = $_POST['vendor_account_country'];
-            } else {
-                $field_value = get_user_meta($wp_user_id, 'vendor_account_country', true);
-            }
-            $vendor_account_country_options                 = array();
-            $vendor_account_country_options['type']         = 'country';
-            $vendor_account_country_options['class']        = array('form-row-wide', 'address-field', 'update_totals_on_change');
-            $vendor_account_country_options['required']     = 1;
-            $vendor_account_country_options['autocomplete'] = 'country';
-            $this->marketpay_form_field('vendor_account_country', $vendor_account_country_options, $field_value);
-            ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="vendor_account_region"><?php _e('Account holder&apos;s region', 'marketpay');?><span class="description required"></span></label>
-                    </td>
-                    <td>
-                        <?php
-$field_value = '';
-            if (isset($_POST['vendor_account_region'])) {
-                $field_value = $_POST['vendor_account_region'];
-            } else {
-                $field_value = get_user_meta($wp_user_id, 'vendor_account_region', true);
-            }
-            $vendor_account_region_options                 = array();
-            $vendor_account_region_options['type']         = 'state';
-            $vendor_account_region_options['required']     = 1;
-            $vendor_account_region_options['class']        = array('form-row-first', 'address-field');
-            $vendor_account_region_options['validate']     = array('state');
-            $vendor_account_region_options['countrykey']   = 'vendor_account_country';
-            $vendor_account_region_options['autocomplete'] = 'address-level1';
-            $vendor_account_region_options['userid']       = $wp_user_id;
-            $this->marketpay_form_field('vendor_account_region', $vendor_account_region_options, $field_value);
-            ?>
-                     </td>
-                </tr>
-                <?php } //end if admin ?>
-            </tbody>
+                <table class="table table-condensed table-vendor-mp_wallets form-table">
+                    <thead>
+                    <tr>
+                        <th class="mpw-id-header"><?php _e('Wallet #', 'marketpay');?></th>
+                        <th class="mpw-creation-header"><?php _e('Creation Date', 'marketpay');?></th>
+                        <th class="mpw-description-header"><?php _e('Description', 'marketpay');?></th>
+                        <th class="mpw-balance-header"><?php _e('Balance', 'marketpay');?></th>
+                        <th class="mpw-options-header"><?php _e('Wallet Options', 'marketpay');?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    if ($wallets && is_array($wallets)) {
+                        foreach ($wallets as $wallet) {
 
-            </table>
+                            $dashboard_wallet_url   = $dashboard_user_url . '/WalletTransactions/' . $wallet->Id;
+                            $dashboard_wallet_title = sprintf(__('See Marketpay transactions for wallet #%s', 'marketpay'), $wallet->Id);
+                            $dashboard_wallet_link  = '<a target="_mp_db" href="' . $dashboard_wallet_url . '" title="' . $dashboard_wallet_title . '">';
 
-            <script>
-            (function($) {
-                $(document).ready(function() {
-                    $('.vendor_account_fields').hide();
-                    if( $('#vendor_account_type').val() )
-                        $('.vendor_account_fields.' + $('#vendor_account_type').val() + '_fields').show();
-                    $('#vendor_account_type').on( 'change', function(e) {
-                        $('.vendor_account_fields').hide();
-                        $('.vendor_account_fields.' + $(this).val() + '_fields').show();
-                    });
-                });
-            })( jQuery );
-            </script>
-        </div>
-        <?php if (is_admin() && preg_match('/wcv-vendor-shopsettings/', $screen->id)): ?>
-            <p>&nbsp;</p>
-        <?php endif;?>
-        <?php
-}
+                            if ($this->is_vendor($wp_user_id)) {
+                                $dashboard_payout_url   = $this->mp->getDBPayoutUrl($wallet->Id);
+                                $dashboard_payout_title = sprintf(__('Do a Marketpay payout for wallet #%s', 'marketpay'), $wallet->Id);
+                                $dashboard_payout_link  = '<a target="_mp_db" href="' . $dashboard_payout_url . '" title="' . $dashboard_payout_title . '">';
+                            }
 
-    /**
-     * Save redacted bank account info hints in vendor's usermeta
-     * Registers or updates actual bank info with MP API
-     * @see: https://docs.marketpay.io/api-references/bank-accounts/
-     *
-     * Shared with marketpayWCAdmin. TODO: refactor
-     *
-     */
-    public function save_account_form($wp_user_id)
-    {
+                            echo '<tr>';
 
-        if (!isset($_POST['vendor_account_type']) || !$_POST['vendor_account_type']) {
-            return true;
-        }
+                            echo '<td>' . $wallet->Id . '</a></td>';
 
-        if (!isset($this->account_types[$_POST['vendor_account_type']])) {
-            return false;
-        }
+                            echo '<td>' . get_date_from_gmt(date('Y-m-d H:i:s', $wallet->CreationDate), 'F j, Y H:i:s') . '</td>';
+                            //@see: http://wordpress.stackexchange.com/questions/94755/converting-timestamps-to-local-time-with-date-l18n
 
-        $account_type = $this->account_types[$_POST['vendor_account_type']];
-        $needs_update = false;
-        $account_data = array();
+                            echo '<td>' . $wallet->Description . '</td>';
+                            echo '<td>' . number_format_i18n($wallet->Balance->Amount / 100, 2) . ' ' . $wallet->Currency . '</td>';
 
-        /** Record redacted bank account data in vendor's usermeta **/
-        foreach ($account_type as $field => $c) {
-            if (
-                isset($_POST[$field]) &&
-                $_POST[$field] &&
-                !preg_match('/\*\*/', $_POST[$field])
-            ) {
-                if (isset($c['redact']) && $c['redact']) {
-                    $needs_update              = true;
-                    list($obf_start, $obf_end) = explode(',', $c['redact']);
-                    $strlen                    = strlen($_POST[$field]);
+                            echo '<td>';
 
-                    /**
-                     * if its <=5 characters, lets just redact the whole thing
-                     * @see: https://github.com/marketpay/woocommerce-gateway-marketpay/issues/12
-                     */
-                    if ($strlen <= 5) {
-                        $to_be_stored = str_repeat('*', $strlen);
+                            echo $dashboard_wallet_link . __('View transactions', 'marketpay') . '</a><br>';
 
+                            if ($this->is_vendor($wp_user_id)) {
+                                echo $dashboard_payout_link . __('Do a PayOut', 'marketpay') . '</a> ';
+                            }
+
+                            echo '</td>';
+
+                            echo '</tr>';
+                        }
                     } else {
-                        $obf_center = $strlen - $obf_start - $obf_end;
-                        if ($obf_center < 2) {
-                            $obf_center = 2;
+                        if (marketpayWCConfig::DEBUG) {
+                            var_dump($wallets);
                         }
 
-                        $to_be_stored = substr($_POST[$field], 0, $obf_start) .
-                        str_repeat('*', $obf_center) .
-                        substr($_POST[$field], -$obf_end, $obf_end);
                     }
-                } else {
-                    if (get_user_meta($wp_user_id, $field, true) != $_POST[$field]) {
+                    ?>
+                    </tbody>
+                </table>
+                <?php
+            } else {
+                echo '<p>' .
+                    __('No Marketpay wallets. Please check that all required fields have been completed in the user profile.', 'marketpay') .
+                    '</p>';
+
+                return false;
+            }
+
+            if (is_admin()) {
+                echo '</td></tr>';
+            }
+            }
+
+            /**
+             * Displays bank account form for vendors
+             * on shop settings page of the front-end vendor dashboard
+             * This is a WV action hook
+             * @see: https://www.wcvendors.com/help/topic/how-to-add-custom-field-on-vendor-shop-setting/
+             * @see: https://docs.marketpay.io/api-references/bank-accounts/
+             *
+             * Shared with marketpayWCAdmin. TODO: refactor
+             *
+             */
+            public function bank_account_form($wp_user_id)
+            {
+
+                $screen = null;
+                if (is_admin() && function_exists('get_current_screen')) {
+                    $screen = get_current_screen();
+                }
+
+                if (!$wp_user_id && (
+                        !is_admin() ||
+                        preg_match('/wcv-vendor-shopsettings/', $screen->id)
+                    )) {
+                    $wp_user_id = get_current_user_id();
+                }
+
+                $suffix      = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+                $assets_path = str_replace(array('http:', 'https:'), '', WC()->plugin_url()) . '/assets/';
+
+                $countries_obj = new WC_Countries();
+                $countries     = $countries_obj->__get('countries');
+
+                ?>
+                <div class="mp_merchant_bank_account_container">
+
+                    <?php if (!is_admin()): ?>
+                        <p><b><?php _e('Bank account info', 'marketpay');?></b></p>
+                    <?php endif;?>
+
+                    <table>
+
+                        <thead>
+
+                        <?php if (is_admin() && preg_match('/wcv-vendor-shopsettings/', $screen->id)): ?>
+                            <tr><td><b><?php _e('Bank account info', 'marketpay');?></b></td><td>&nbsp;</td></tr>
+                        <?php endif;?>
+                        <tr>
+                            <td>
+                                <label for="vendor_account_type" class="required"><?php _e('Account type:', 'marketpay');?></label>
+                            </td><td>
+                                <select name="vendor_account_type" id="vendor_account_type">
+                                    <option value=""></option>
+                                    <?php foreach ($this->account_types as $type => $fields):
+                                        if (isset($_POST['vendor_account_type']) && $_POST['vendor_account_type'] == $type) {
+                                            $selected = 'selected="selected"';
+                                        } else {
+                                            $selected = (get_user_meta($wp_user_id, 'vendor_account_type', true) == $type) ? 'selected="selected"' : '';
+                                        }
+                                        ?>
+                                        <option <?php echo $selected; ?>><?php echo $type; ?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </td>
+                        </tr>
+                        </thead>
+
+                        <?php foreach ($this->account_types as $type => $fields): $hidden = (get_user_meta($wp_user_id, 'vendor_account_type', true) == $type) ? '' : 'style="display:none;"';?>
+                            <tbody class="vendor_account_fields <?php echo $type; ?>_fields" <?php echo $hidden; ?>>
+
+                            <?php foreach ($fields as $field => $c): list($ftype, $n) = explode(':', $c['format']);?>
+                                <tr>
+                                    <td>
+                                        <label for="<?php echo $field; ?>" class="<?php echo ($c['required'] ? 'required' : ''); ?>">
+                                            <?php _e($c['label'], 'marketpay');?>
+                                            <?php if ($c['required']): ?>
+                                                <span class="description required"><?php _e('(required)', 'marketpay');?></span>
+                                            <?php endif;?>
+                                        </label>
+                                    </td><td>
+                                        <?php if ('text' == $ftype || 'number' == $ftype): ?>
+                                            <?php
+                                            $field_value = '';
+                                            if (isset($_POST[$field])) {
+                                                $field_value = $_POST[$field];
+                                            } else {
+                                                $field_value = get_user_meta($wp_user_id, $field, true);
+                                            }
+                                            ?>
+                                            <input type="text" name="<?php echo $field; ?>" id="<?php echo $field; ?>" placeholder="<?php echo $c['placeholder']; ?>" value="<?php echo $field_value; ?>" class="regular-text" />
+                                        <?php elseif ('select' == $ftype): ?>
+                                            <select name="<?php echo $field; ?>" id="<?php echo $field; ?>">
+                                                <?php
+                                                foreach (explode(',', $n) as $option):
+                                                    if (isset($_POST[$field]) && $_POST[$field] == $option) {
+                                                        $selected = 'selected="selected"';
+                                                    } else {
+                                                        $selected = ($option == get_user_meta($wp_user_id, $field, true) ? 'selected="selected"' : '');
+                                                    }
+                                                    ?>
+                                                    <option <?php echo $selected; ?>><?php echo $option; ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        <?php elseif ('country' == $ftype): ?>
+                                            <select name="<?php echo $field; ?>" id="<?php echo $field; ?>">
+                                                <option value=""><?php _e('Select a country...', 'marketpay');?></option>
+                                                <?php foreach ($countries as $key => $value):
+                                                    if (isset($_POST[$field]) && $_POST[$field] == $key) {
+                                                        $selected = 'selected="selected"';
+                                                    } else {
+                                                        $selected = ($key == get_user_meta($wp_user_id, $field, true) ? 'selected="selected"' : '');
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $key ?>" <?php echo $selected; ?>><?php echo $value ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        <?php endif;?>
+                                    </td>
+                                </tr>
+                            <?php endforeach;?>
+
+                            </tbody>
+                        <?php endforeach;?>
+
+                        <tbody class="bank_account_address">
+                        <tr>
+                            <td>
+                                <label for="vendor_account_name"><?php _e('Account holder&apos;s name', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label>
+                            </td>
+                            <td>
+                                <?php
+                                $field_value = '';
+                                if (isset($_POST['vendor_account_name'])) {
+                                    $field_value = $_POST['vendor_account_name'];
+                                } else {
+                                    $field_value = get_user_meta($wp_user_id, 'vendor_account_name', true);
+                                }
+                                ?>
+                                <input type="text" name="vendor_account_name" id="vendor_account_name" value="<?php echo $field_value; ?>" class="regular-text" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="vendor_account_address1"><?php _e('Account holder&apos;s address', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label>
+                            </td>
+                            <td>
+                                <?php
+                                $field_value = '';
+                                if (isset($_POST['vendor_account_address1'])) {
+                                    $field_value = $_POST['vendor_account_address1'];
+                                } else {
+                                    $field_value = get_user_meta($wp_user_id, 'vendor_account_address1', true);
+                                }
+                                ?>
+                                <input type="text" name="vendor_account_address1" id="vendor_account_address1" value="<?php echo $field_value; ?>" class="regular-text" /><br/>
+                                <?php
+                                $field_value = '';
+                                if (isset($_POST['vendor_account_address2'])) {
+                                    $field_value = $_POST['vendor_account_address2'];
+                                } else {
+                                    $field_value = get_user_meta($wp_user_id, 'vendor_account_address2', true);
+                                }
+                                ?>
+                                <input type="text" name="vendor_account_address2" id="vendor_account_address2" value="<?php echo $field_value; ?>" class="regular-text" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="vendor_account_city"><?php _e('Account holder&apos;s city', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label>
+                            </td>
+                            <td>
+                                <?php
+                                $field_value = '';
+                                if (isset($_POST['vendor_account_city'])) {
+                                    $field_value = $_POST['vendor_account_city'];
+                                } else {
+                                    $field_value = get_user_meta($wp_user_id, 'vendor_account_city', true);
+                                }
+                                ?>
+                                <input type="text" name="vendor_account_city" id="vendor_account_city" value="<?php echo $field_value; ?>" class="regular-text" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="vendor_account_postcode"><?php _e('Account holder&apos;s postal code', 'marketpay');?> <span class="description required"><?php _e('(required)', 'marketpay');?></span></label>
+                            </td>
+                            <td>
+                                <?php
+                                $field_value = '';
+                                if (isset($_POST['vendor_account_postcode'])) {
+                                    $field_value = $_POST['vendor_account_postcode'];
+                                } else {
+                                    $field_value = get_user_meta($wp_user_id, 'vendor_account_postcode', true);
+                                }
+                                ?>
+                                <input type="text" name="vendor_account_postcode" id="vendor_account_postcode" value="<?php echo $field_value; ?>" class="regular-text" />
+                            </td>
+                        </tr>
+                        <?php if (is_admin()) {
+                            ?>
+                            <tr>
+                                <td>
+                                    <label for="vendor_account_country">
+                                        <?php _e('Account holder&apos;s country', 'marketpay');?>
+                                        <span class="description required">
+                                <?php _e('(required)', 'marketpay');?>
+                            </span>
+                                    </label>
+                                <td>
+                                    <select class="vendor_account_select js_field-country" name="vendor_account_country" id="vendor_account_country">
+                                        <option value=""><?php _e('Select a country...', 'marketpay');?></option>
+                                        <?php foreach ($countries as $key => $value):
+                                            if (isset($_POST['vendor_account_country']) && $_POST['vendor_account_country'] == $key) {
+                                                $selected = 'selected="selected"';
+                                            } else {
+                                                $selected = ($key == get_user_meta($wp_user_id, 'vendor_account_country', true) ? 'selected="selected"' : '');
+                                            }
+                                            ?>
+                                            <option value="<?php echo $key ?>" <?php echo $selected; ?>><?php echo $value ?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="vendor_account_region"><?php _e('Account holder&apos;s region', 'marketpay');?><span class="description required"></span></label>
+                                </td>
+                                <td>
+                                    <?php
+                                    $field_value = '';
+                                    if (isset($_POST['vendor_account_region'])) {
+                                        $field_value = $_POST['vendor_account_region'];
+                                    } else {
+                                        $field_value = get_user_meta($wp_user_id, 'vendor_account_region', true);
+                                    }
+                                    ?>
+                                    <input type="hidden" class="vendor_account_select js_field-state" name="vendor_account_region" id="vendor_account_region" value="<?php echo $field_value; ?>" />
+                                </td>
+                            </tr>
+                        <?php } else {
+                            //if in front ?>
+                            <tr>
+                                <td>
+                                    <label for="vendor_account_country">
+                                        <?php _e('Account holder&apos;s country', 'marketpay');?>
+                                        <span class="description required">
+                                <?php _e('(required)', 'marketpay');?>
+                            </span>
+                                    </label>
+                                <td>
+                                    <?php
+                                    $field_value = '';
+                                    if (isset($_POST['vendor_account_country'])) {
+                                        $field_value = $_POST['vendor_account_country'];
+                                    } else {
+                                        $field_value = get_user_meta($wp_user_id, 'vendor_account_country', true);
+                                    }
+                                    $vendor_account_country_options                 = array();
+                                    $vendor_account_country_options['type']         = 'country';
+                                    $vendor_account_country_options['class']        = array('form-row-wide', 'address-field', 'update_totals_on_change');
+                                    $vendor_account_country_options['required']     = 1;
+                                    $vendor_account_country_options['autocomplete'] = 'country';
+                                    $this->marketpay_form_field('vendor_account_country', $vendor_account_country_options, $field_value);
+                                    ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="vendor_account_region"><?php _e('Account holder&apos;s region', 'marketpay');?><span class="description required"></span></label>
+                                </td>
+                                <td>
+                                    <?php
+                                    $field_value = '';
+                                    if (isset($_POST['vendor_account_region'])) {
+                                        $field_value = $_POST['vendor_account_region'];
+                                    } else {
+                                        $field_value = get_user_meta($wp_user_id, 'vendor_account_region', true);
+                                    }
+                                    $vendor_account_region_options                 = array();
+                                    $vendor_account_region_options['type']         = 'state';
+                                    $vendor_account_region_options['required']     = 1;
+                                    $vendor_account_region_options['class']        = array('form-row-first', 'address-field');
+                                    $vendor_account_region_options['validate']     = array('state');
+                                    $vendor_account_region_options['countrykey']   = 'vendor_account_country';
+                                    $vendor_account_region_options['autocomplete'] = 'address-level1';
+                                    $vendor_account_region_options['userid']       = $wp_user_id;
+                                    $this->marketpay_form_field('vendor_account_region', $vendor_account_region_options, $field_value);
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php } //end if admin ?>
+                        </tbody>
+
+                    </table>
+
+                    <script>
+                        (function($) {
+                            $(document).ready(function() {
+                                $('.vendor_account_fields').hide();
+                                if( $('#vendor_account_type').val() )
+                                    $('.vendor_account_fields.' + $('#vendor_account_type').val() + '_fields').show();
+                                $('#vendor_account_type').on( 'change', function(e) {
+                                    $('.vendor_account_fields').hide();
+                                    $('.vendor_account_fields.' + $(this).val() + '_fields').show();
+                                });
+                            });
+                        })( jQuery );
+                    </script>
+                </div>
+                <?php if (is_admin() && preg_match('/wcv-vendor-shopsettings/', $screen->id)): ?>
+                <p>&nbsp;</p>
+            <?php endif;?>
+                <?php
+            }
+
+            /**
+             * Save redacted bank account info hints in vendor's usermeta
+             * Registers or updates actual bank info with MP API
+             * @see: https://docs.marketpay.io/api-references/bank-accounts/
+             *
+             * Shared with marketpayWCAdmin. TODO: refactor
+             *
+             */
+            public function save_account_form($wp_user_id)
+            {
+
+                if (!isset($_POST['vendor_account_type']) || !$_POST['vendor_account_type']) {
+                    return true;
+                }
+
+                if (!isset($this->account_types[$_POST['vendor_account_type']])) {
+                    return false;
+                }
+
+                $account_type = $this->account_types[$_POST['vendor_account_type']];
+                $needs_update = false;
+                $account_data = array();
+
+                /** Record redacted bank account data in vendor's usermeta **/
+                foreach ($account_type as $field => $c) {
+                    if (
+                        isset($_POST[$field]) &&
+                        $_POST[$field] &&
+                        !preg_match('/\*\*/', $_POST[$field])
+                    ) {
+                        if (isset($c['redact']) && $c['redact']) {
+                            $needs_update              = true;
+                            list($obf_start, $obf_end) = explode(',', $c['redact']);
+                            $strlen                    = strlen($_POST[$field]);
+
+                            /**
+                             * if its <=5 characters, lets just redact the whole thing
+                             * @see: https://github.com/marketpay/woocommerce-gateway-marketpay/issues/12
+                             */
+                            if ($strlen <= 5) {
+                                $to_be_stored = str_repeat('*', $strlen);
+
+                            } else {
+                                $obf_center = $strlen - $obf_start - $obf_end;
+                                if ($obf_center < 2) {
+                                    $obf_center = 2;
+                                }
+
+                                $to_be_stored = substr($_POST[$field], 0, $obf_start) .
+                                    str_repeat('*', $obf_center) .
+                                    substr($_POST[$field], -$obf_end, $obf_end);
+                            }
+                        } else {
+                            if (get_user_meta($wp_user_id, $field, true) != $_POST[$field]) {
+                                $needs_update = true;
+                            }
+
+                            $to_be_stored = $_POST[$field];
+                        }
+                        update_user_meta($wp_user_id, $field, $to_be_stored);
+                        $account_data[$field] = $_POST[$field];
+                    }
+                }
+
+                /** Record clear text bank account data in vendor's usermeta **/
+                $account_clear_data = array(
+                    'vendor_account_type',
+                    'vendor_account_name',
+                    'vendor_account_address1',
+                    'vendor_account_address2',
+                    'vendor_account_city',
+                    'vendor_account_postcode',
+                    'vendor_account_region',
+                    'vendor_account_country',
+                );
+                foreach ($account_clear_data as $field) {
+                    /** update_user_meta() returns "false" if the value is unchanged **/
+                    if (update_user_meta($wp_user_id, $field, $_POST[$field])) {
                         $needs_update = true;
                     }
 
-                    $to_be_stored = $_POST[$field];
                 }
-                update_user_meta($wp_user_id, $field, $to_be_stored);
-                $account_data[$field] = $_POST[$field];
-            }
-        }
 
-        /** Record clear text bank account data in vendor's usermeta **/
-        $account_clear_data = array(
-            'vendor_account_type',
-            'vendor_account_name',
-            'vendor_account_address1',
-            'vendor_account_address2',
-            'vendor_account_city',
-            'vendor_account_postcode',
-            'vendor_account_region',
-            'vendor_account_country',
-        );
-        foreach ($account_clear_data as $field) {
-            /** update_user_meta() returns "false" if the value is unchanged **/
-            if (update_user_meta($wp_user_id, $field, $_POST[$field])) {
-                $needs_update = true;
-            }
+                if ($needs_update) {
+                    $mp_user_id = $this->mp->set_mp_user($wp_user_id);
 
-        }
+                    /** We store a different mp_account_id for production and sandbox environments **/
+                    $umeta_key = 'mp_account_id';
+                    if (!$this->mp->is_production()) {
+                        $umeta_key .= '_sandbox';
+                    }
 
-        if ($needs_update) {
-            $mp_user_id = $this->mp->set_mp_user($wp_user_id);
+                    $existing_account_id = get_user_meta($wp_user_id, $umeta_key, true);
 
-            /** We store a different mp_account_id for production and sandbox environments **/
-            $umeta_key = 'mp_account_id';
-            if (!$this->mp->is_production()) {
-                $umeta_key .= '_sandbox';
-            }
-
-            $existing_account_id = get_user_meta($wp_user_id, $umeta_key, true);
-
-            $mp_account_id = $this->mp->save_bank_account(
-                $mp_user_id,
-                $wp_user_id,
-                $existing_account_id,
-                $_POST['vendor_account_type'],
-                $_POST['vendor_account_name'],
-                $_POST['vendor_account_address1'],
-                $_POST['vendor_account_address2'],
-                $_POST['vendor_account_city'],
-                $_POST['vendor_account_postcode'],
-                $_POST['vendor_account_region'],
-                $_POST['vendor_account_country'],
-                $account_data,
-                $this->account_types
-            );
-
-            update_user_meta($wp_user_id, $umeta_key, $mp_account_id);
-        }
-    }
-
-    public function shop_settings_saved($wp_user_id)
-    {
-        /** Update bank account data if set && valid **/
-        $errors = new WP_Error;
-
-        $this->validate_bank_account_data($errors, null, $wp_user_id);
-
-        if (empty($errors->get_error_code()))
-        {
-            $this->save_account_form($wp_user_id);
-
-            return true;
-        }
-
-        foreach ($errors->errors as $error)
-        {
-            wc_add_notice($error[0], 'error');
-        }
-    }
-
-    /**
-     * Specific procedure to validate and save bank account data when in the
-     * /wp-admin/admin.php?page=wcv-vendor-shopsettings back-office screen
-     * (WV specific)
-     *
-     * @param int $wp_user_id
-     */
-    public function shop_settings_admin_saved($wp_user_id)
-    {
-
-        /** Update bank account data if set && valid **/
-        $errors = new WP_Error;
-        $this->validate_bank_account_data($errors, null, $wp_user_id);
-        $e = $errors->get_error_code();
-        if (empty($e)) {
-            $this->save_account_form($wp_user_id);
-            return true;
-        }
-
-        foreach ($errors->errors as $error) {
-            echo '<div class="error"><p>';
-            echo $error[0];
-            echo '</p></div>';
-        }
-        return $errors;
-    }
-
-    /**
-     * Child method of user_edit_checks()
-     * Specifically checks data related to bank accounts
-     *
-     * @param object $errors
-     * @param unknown $update
-     * @param unknown $user
-     *
-     * Shared with marketpayWCAdmin. TODO: refactor
-     *
-     */
-    public function validate_bank_account_data(&$errors, $update, $user)
-    {
-        $required = array(
-            'vendor_account_name'     => __('Account holder&apos;s name', 'marketpay'),
-            'vendor_account_address1' => __('Account holder&apos;s address', 'marketpay'),
-            'vendor_account_city'     => __('Account holder&apos;s city', 'marketpay'),
-            'vendor_account_country'  => __('Account holder&apos;s country', 'marketpay'),
-        );
-
-        $mandatory_region_countries = array('MX', 'CA', 'US');
-
-        if (isset($_POST['vendor_account_country']) && in_array($_POST['vendor_account_country'], $mandatory_region_countries)) {
-            $required['vendor_account_region'] = __('Account holder&apos;s region', 'marketpay');
-        }
-
-        $no_postcode_countries = array(
-            "AO", "AG", "AW", "BS", "BZ", "BJ", "BW", "BF", "BI",
-            "CM", "CF", "KM", "CG", "CD", "CK", "CI", "DJ", "DM",
-            "GQ", "ER", "FJ", "TF", "GM", "GH", "GD", "GN", "GY",
-            "HK", "IE", "JM", "KE", "KI", "MO", "MW", "ML", "MR",
-            "MU", "MS", "NR", "AN", "NU", "KP", "PA", "QA", "RW",
-            "KN", "LC", "ST", "SA", "SC", "SL", "SB", "SO", "ZA",
-            "SR", "SY", "TZ", "TL", "TK", "TO", "TT", "TV", "UG",
-            "AE", "VU", "YE", "ZW",
-        );
-
-        if (isset($_POST['vendor_account_country']) && !in_array($_POST['vendor_account_country'], $no_postcode_countries)) {
-            $required['vendor_account_postcode'] = __('Account holder&apos;s postal code', 'marketpay');
-        }
-
-        $account_type = array();
-        if (isset($_POST['vendor_account_type'])) {
-            if (!isset($this->account_types[$_POST['vendor_account_type']])) {
-                $errors->add(
-                    'invalid_vendor_account_type',
-                    '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
-                    __('not a valid bank account type', 'marketpay'),
-                    array('form-field' => 'vendor_account_type')
-                );
-            } else {
-                $account_type = $this->account_types[$_POST['vendor_account_type']];
-            }
-        }
-
-        /** Check that required clear-text fields are present **/
-        foreach ($required as $field => $label) {
-            if (isset($_POST[$field]) && empty($_POST[$field])) {
-                $errors->add(
-                    $field . '_required_error',
-                    '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
-                    $label . ' ' .
-                    __('is required!', 'marketpay')
-                );
-            }
-        }
-
-        /** Validate postal code **/
-        if (!empty($_POST['vendor_account_postcode'])) {
-            if (!preg_match('/^[a-z0-9 \-]+$/i', $_POST['vendor_account_postcode'])) {
-                $errors->add(
-                    'vendor_account_postcode_invalid_error',
-                    '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
-                    __('Account holder&apos;s postal code', 'marketpay') . ' ' .
-                    __('is invalid!', 'marketpay')
-                );
-            }
-
-        }
-
-        /** Validate country **/
-        if (isset($_POST['vendor_account_country'])) {
-            $countries_obj = new WC_Countries();
-            $countries     = $countries_obj->__get('countries');
-            if (!isset($countries[$_POST['vendor_account_country']])) {
-                $errors->add(
-                    'vendor_account_country_invalid_error',
-                    '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
-                    __('Account holder&apos;s country', 'marketpay') .
-                    __('is invalid!', 'marketpay')
-                );
-            }
-
-        }
-
-        /** Check that required bank account fields are present and either redacted or valid **/
-        $allobfuscated = true;
-        foreach ($account_type as $field => $c) {
-
-            /** Check for required fields **/
-            if (
-                isset($c['required']) &&
-                $c['required'] &&
-                (!isset($_POST[$field]) || !$_POST[$field])
-            ) {
-                $errors->add(
-                    'missing_' . $field,
-                    '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
-                    __($c['label'], 'marketpay') . ' ' .
-                    __('is required!', 'marketpay'),
-                    array('form-field' => $field)
-                );
-            }
-
-            /** All of them or none of them can be redacted **/
-            if ($c['redact'] && !preg_match('/\*\*/', $_POST[$field])) {
-                $allobfuscated = false;
-            }
-
-            /** Validation rules (regexp based) **/
-            if (isset($_POST[$field]) && $_POST[$field]) {
-                if (
-                    (!$allobfuscated && preg_match('/\*\*/', $_POST[$field])) ||
-                    (
-                        !preg_match('/\*\*/', $_POST[$field]) &&
-                        !preg_match('/' . $c['validate'] . '/', $_POST[$field])
-                    )
-                ) {
-                    $errors->add(
-                        'invalid_' . $field,
-                        '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
-                        __($c['label'], 'marketpay') . ' ' .
-                        __('is invalid!', 'marketpay'),
-                        array('form-field' => $field)
+                    $mp_account_id = $this->mp->save_bank_account(
+                        $mp_user_id,
+                        $wp_user_id,
+                        $existing_account_id,
+                        $_POST['vendor_account_type'],
+                        $_POST['vendor_account_name'],
+                        $_POST['vendor_account_address1'],
+                        $_POST['vendor_account_address2'],
+                        $_POST['vendor_account_city'],
+                        $_POST['vendor_account_postcode'],
+                        $_POST['vendor_account_region'],
+                        $_POST['vendor_account_country'],
+                        $account_data,
+                        $this->account_types
                     );
+
+                    update_user_meta($wp_user_id, $umeta_key, $mp_account_id);
                 }
             }
 
-        }
-    }
+            public function shop_settings_saved($wp_user_id)
+            {
+                /** Update bank account data if set && valid **/
+                $errors = new WP_Error;
 
-    public function order_redirect()
-    {
-        global $wp;
+                $this->validate_bank_account_data($errors, null, $wp_user_id);
 
-        if (is_checkout() && !empty($wp->query_vars['order-received'])):
+                if (empty($errors->get_error_code()))
+                {
+                    $this->save_account_form($wp_user_id);
 
-            //get the order id
-            $order_id = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-            //get the order
-            $order = wc_get_order($order_id);
+                    return true;
+                }
 
-            //get the payement type
-            $payment_type = get_post_meta($order_id, 'marketpay_payment_type', 'card', true);
-            //if it's not card get out
-            if ($payment_type != "card"):
-                return;
-            endif;
+                foreach ($errors->errors as $error)
+                {
+                    wc_add_notice($error[0], 'error');
+                }
+            }
 
-            //get the ref for the transaction id
-            $payment_ref = get_post_meta($order_id, 'marketpay_payment_ref', true);
-            //if no ref get out
-            if (!$payment_ref):
-                return;
-            endif;
+            /**
+             * Specific procedure to validate and save bank account data when in the
+             * /wp-admin/admin.php?page=wcv-vendor-shopsettings back-office screen
+             * (WV specific)
+             *
+             * @param int $wp_user_id
+             */
+            public function shop_settings_admin_saved($wp_user_id)
+            {
 
-            //get the data from transaction
-            $mp_transaction = $this->mp->get_payin($payment_ref['transaction_id']);
-            //if no data get out
-            if (!$mp_transaction):
-                return;
-            endif;
+                /** Update bank account data if set && valid **/
+                $errors = new WP_Error;
+                $this->validate_bank_account_data($errors, null, $wp_user_id);
+                $e = $errors->get_error_code();
+                if (empty($e)) {
+                    $this->save_account_form($wp_user_id);
+                    return true;
+                }
 
-            //if status is failed, send to cancel order url
-            if ($mp_transaction->getStatus() == "FAILED"):
+                foreach ($errors->errors as $error) {
+                    echo '<div class="error"><p>';
+                    echo $error[0];
+                    echo '</p></div>';
+                }
+                return $errors;
+            }
 
-                //user message
-                //wc_add_notice(__( $mp_transaction->ResultMessage, 'marketpay') , "notice");//error, success or notice
-                /** spécial code to be intercepted, do NOT change it **/
-                wc_add_notice('<span class="cancelmessagealone">' . __($mp_transaction->ResultMessage, 'marketpay') . '</span>', "notice"); //error, success or notice
+            /**
+             * Child method of user_edit_checks()
+             * Specifically checks data related to bank accounts
+             *
+             * @param object $errors
+             * @param unknown $update
+             * @param unknown $user
+             *
+             * Shared with marketpayWCAdmin. TODO: refactor
+             *
+             */
+            public function validate_bank_account_data(&$errors, $update, $user)
+            {
+                $required = array(
+                    'vendor_account_name'     => __('Account holder&apos;s name', 'marketpay'),
+                    'vendor_account_address1' => __('Account holder&apos;s address', 'marketpay'),
+                    'vendor_account_city'     => __('Account holder&apos;s city', 'marketpay'),
+                    'vendor_account_country'  => __('Account holder&apos;s country', 'marketpay'),
+                );
 
-                //status to cancel + message admin
-                $order->update_status('failed', __($mp_transaction->ResultMessage, 'marketpay')); // message pour admin
+                $mandatory_region_countries = array('MX', 'CA', 'US');
 
-                //to get te cancel url
-                $redirect_url = $order->get_cancel_order_url_raw();
-                //and let's go
-                wp_redirect($redirect_url);
-                exit;
-            endif; //status is pending
+                if (isset($_POST['vendor_account_country']) && in_array($_POST['vendor_account_country'], $mandatory_region_countries)) {
+                    $required['vendor_account_region'] = __('Account holder&apos;s region', 'marketpay');
+                }
 
-        endif; //we are on chekout page and order recieved is empty
-    }
+                $no_postcode_countries = array(
+                    "AO", "AG", "AW", "BS", "BZ", "BJ", "BW", "BF", "BI",
+                    "CM", "CF", "KM", "CG", "CD", "CK", "CI", "DJ", "DM",
+                    "GQ", "ER", "FJ", "TF", "GM", "GH", "GD", "GN", "GY",
+                    "HK", "IE", "JM", "KE", "KI", "MO", "MW", "ML", "MR",
+                    "MU", "MS", "NR", "AN", "NU", "KP", "PA", "QA", "RW",
+                    "KN", "LC", "ST", "SA", "SC", "SL", "SB", "SO", "ZA",
+                    "SR", "SY", "TZ", "TL", "TK", "TO", "TT", "TV", "UG",
+                    "AE", "VU", "YE", "ZW",
+                );
 
-    /**
-     * Verify payment payin transaction and update order status appropriately
-     * Checks that payment status is SUCCEEDED
-     * Checks that order_total == payment total
-     * Checks that order_currency == payment currency
-     * Store MP transaction ID in order meta
-     *
-     * If Everything OK, order status is changed to processing
-     *
-     * This all takes place on the order-received/thank-you WC page on the front-office
-     *
-     */
-    public function order_received($order_id)
-    {
-        if (!$order_id) {
-            return false;
-        }
+                if (isset($_POST['vendor_account_country']) && !in_array($_POST['vendor_account_country'], $no_postcode_countries)) {
+                    $required['vendor_account_postcode'] = __('Account holder&apos;s postal code', 'marketpay');
+                }
 
-        if (!$order = new WC_Order($order_id)) {
-            return false;
-        }
+                $account_type = array();
+                if (isset($_POST['vendor_account_type'])) {
+                    if (!isset($this->account_types[$_POST['vendor_account_type']])) {
+                        $errors->add(
+                            'invalid_vendor_account_type',
+                            '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
+                            __('not a valid bank account type', 'marketpay'),
+                            array('form-field' => 'vendor_account_type')
+                        );
+                    } else {
+                        $account_type = $this->account_types[$_POST['vendor_account_type']];
+                    }
+                }
 
-        if ($order->get_status() == 'failed') {
-            return false;
-        }
+                /** Check that required clear-text fields are present **/
+                foreach ($required as $field => $label) {
+                    if (isset($_POST[$field]) && empty($_POST[$field])) {
+                        $errors->add(
+                            $field . '_required_error',
+                            '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
+                            $label . ' ' .
+                            __('is required!', 'marketpay')
+                        );
+                    }
+                }
 
-        if ( ! $transaction_id = $order->get_meta('mp_transaction_id')) {
-            return false;
-        }
+                /** Validate postal code **/
+                if (!empty($_POST['vendor_account_postcode'])) {
+                    if (!preg_match('/^[a-z0-9 \-]+$/i', $_POST['vendor_account_postcode'])) {
+                        $errors->add(
+                            'vendor_account_postcode_invalid_error',
+                            '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
+                            __('Account holder&apos;s postal code', 'marketpay') . ' ' .
+                            __('is invalid!', 'marketpay')
+                        );
+                    }
 
-        if ( ! $mp_payment_type = $order->get_meta('marketpay_payment_type')) {
-            return false;
-        }
+                }
 
-        if ( ! $mp_transaction = $this->mp->get_payin($transaction_id, $mp_payment_type)) {
-            return false;
-        }
+                /** Validate country **/
+                if (isset($_POST['vendor_account_country'])) {
+                    $countries_obj = new WC_Countries();
+                    $countries     = $countries_obj->__get('countries');
+                    if (!isset($countries[$_POST['vendor_account_country']])) {
+                        $errors->add(
+                            'vendor_account_country_invalid_error',
+                            '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
+                            __('Account holder&apos;s country', 'marketpay') .
+                            __('is invalid!', 'marketpay')
+                        );
+                    }
 
-        /**
-         * Save the MP transaction ID in the WC order metas
-         * this needs to be done before calling payment->complete()
-         * to handle auto-completed orders such as downloadables and virtual products & bookings
-         *
-         */
-        update_post_meta($order_id, 'mp_transaction_id', $transaction_id);
-        update_post_meta($order_id, 'mp_success_transaction_id', $transaction_id);
+                }
 
-        if ($mp_payment_type == "bank_wire")
-        {
-            $order->update_status('on-hold');
-        }
-        else
-        {
-            $order->payment_complete();
-        }
-    }
+                /** Check that required bank account fields are present and either redacted or valid **/
+                $allobfuscated = true;
+                foreach ($account_type as $field => $c) {
 
-    /**
-     * Display bankwire ref at top of thankyou page when new order received
-     * (only if payment was bankwire)
-     *
-     * @param int $order_id
-     */
-    public function display_bankwire_ref($order_id)
-    {
-        $order = new WC_Order($order_id);
+                    /** Check for required fields **/
+                    if (
+                        isset($c['required']) &&
+                        $c['required'] &&
+                        (!isset($_POST[$field]) || !$_POST[$field])
+                    ) {
+                        $errors->add(
+                            'missing_' . $field,
+                            '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
+                            __($c['label'], 'marketpay') . ' ' .
+                            __('is required!', 'marketpay'),
+                            array('form-field' => $field)
+                        );
+                    }
 
-        if (
-            get_post_meta($order_id, 'marketpay_payment_type', true) != 'bank_wire' ||
-            !$ref = json_decode(get_post_meta($order_id, 'marketpay_payment_ref', true))
-        ) {
-            return $order_id;
-        }
-        // Do nothing
+                    /** All of them or none of them can be redacted **/
+                    if ($c['redact'] && !preg_match('/\*\*/', $_POST[$field])) {
+                        $allobfuscated = false;
+                    }
 
-        echo '<h2>' . __('Information for your bank transfer', 'marketpay') . '</h2>';
-        echo '<p>' . __('To complete your order, please do a bank transfer with the following information, including the bank wire reference.', 'marketpay') . '<p>';
-        echo '<p>' . __('We will process your order once the transfer is received.', 'marketpay') . '<p>';
+                    /** Validation rules (regexp based) **/
+                    if (isset($_POST[$field]) && $_POST[$field]) {
+                        if (
+                            (!$allobfuscated && preg_match('/\*\*/', $_POST[$field])) ||
+                            (
+                                !preg_match('/\*\*/', $_POST[$field]) &&
+                                !preg_match('/' . $c['validate'] . '/', $_POST[$field])
+                            )
+                        ) {
+                            $errors->add(
+                                'invalid_' . $field,
+                                '<strong>' . __('Error:', 'marketpay') . '</strong> ' .
+                                __($c['label'], 'marketpay') . ' ' .
+                                __('is invalid!', 'marketpay'),
+                                array('form-field' => $field)
+                            );
+                        }
+                    }
 
-        ?>
-        <ul class="order_details">
-            <li class="mp_amount">
-                <?php _e('Amount:', 'marketpay');?>
-                <strong><?php echo wc_price($ref->DebitedFunds->Amount / 100); ?></strong>
-                <strong><?php echo $ref->DebitedFunds->Currency; ?></strong>
-            </li>
-            <li class="mp_owner">
-                <?php _e('Bank account owner:', 'marketpay');?>
-                <strong><?php echo $ref->BankAccount->OwnerName; ?></strong>
-            </li>
-            <?php if ($ref->BankAccount->Type == 'IBAN'): ?>
+                }
+            }
+
+            public function order_redirect()
+            {
+                global $wp;
+
+                if (is_checkout() && !empty($wp->query_vars['order-received'])):
+
+                    //get the order id
+                    $order_id = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+                    //get the order
+                    $order = wc_get_order($order_id);
+
+                    //get the payement type
+                    $payment_type = get_post_meta($order_id, 'marketpay_payment_type', 'card', true);
+                    //if it's not card get out
+                    if ($payment_type != "card"):
+                        return;
+                    endif;
+
+                    //get the ref for the transaction id
+                    $payment_ref = get_post_meta($order_id, 'marketpay_payment_ref', true);
+                    //if no ref get out
+                    if (!$payment_ref):
+                        return;
+                    endif;
+
+                    //get the data from transaction
+                    $mp_transaction = $this->mp->get_payin($payment_ref['transaction_id']);
+                    //if no data get out
+                    if (!$mp_transaction):
+                        return;
+                    endif;
+
+                    //if status is failed, send to cancel order url
+                    if ($mp_transaction->getStatus() == "FAILED"):
+
+                        //user message
+                        //wc_add_notice(__( $mp_transaction->ResultMessage, 'marketpay') , "notice");//error, success or notice
+                        /** spécial code to be intercepted, do NOT change it **/
+                        wc_add_notice('<span class="cancelmessagealone">' . __($mp_transaction->ResultMessage, 'marketpay') . '</span>', "notice"); //error, success or notice
+
+                        //status to cancel + message admin
+                        $order->update_status('failed', __($mp_transaction->ResultMessage, 'marketpay')); // message pour admin
+
+                        //to get te cancel url
+                        $redirect_url = $order->get_cancel_order_url_raw();
+                        //and let's go
+                        wp_redirect($redirect_url);
+                        exit;
+                    endif; //status is pending
+
+                endif; //we are on chekout page and order recieved is empty
+            }
+
+            /**
+             * Verify payment payin transaction and update order status appropriately
+             * Checks that payment status is SUCCEEDED
+             * Checks that order_total == payment total
+             * Checks that order_currency == payment currency
+             * Store MP transaction ID in order meta
+             *
+             * If Everything OK, order status is changed to processing
+             *
+             * This all takes place on the order-received/thank-you WC page on the front-office
+             *
+             */
+            public function order_received($order_id)
+            {
+                if (!$order_id) {
+                    return false;
+                }
+
+                if (!$order = new WC_Order($order_id)) {
+                    return false;
+                }
+
+                if ($order->get_status() == 'failed') {
+                    return false;
+                }
+
+                if ( ! $transaction_id = $order->get_meta('mp_transaction_id')) {
+                    return false;
+                }
+
+                if ( ! $mp_payment_type = $order->get_meta('marketpay_payment_type')) {
+                    return false;
+                }
+
+                if ( ! $mp_transaction = $this->mp->get_payin($transaction_id, $mp_payment_type)) {
+                    return false;
+                }
+
+                /**
+                 * Save the MP transaction ID in the WC order metas
+                 * this needs to be done before calling payment->complete()
+                 * to handle auto-completed orders such as downloadables and virtual products & bookings
+                 *
+                 */
+                update_post_meta($order_id, 'mp_transaction_id', $transaction_id);
+                update_post_meta($order_id, 'mp_success_transaction_id', $transaction_id);
+
+                if ($mp_payment_type == "bank_wire")
+                {
+                    $order->update_status('on-hold');
+                }
+                else
+                {
+                    $order->payment_complete();
+                }
+            }
+
+            /**
+             * Display bankwire ref at top of thankyou page when new order received
+             * (only if payment was bankwire)
+             *
+             * @param int $order_id
+             */
+            public function display_bankwire_ref($order_id)
+            {
+            $order = new WC_Order($order_id);
+
+            if (
+                get_post_meta($order_id, 'marketpay_payment_type', true) != 'bank_wire' ||
+                !$ref = json_decode(get_post_meta($order_id, 'marketpay_payment_ref', true))
+            ) {
+                return $order_id;
+            }
+            // Do nothing
+
+            echo '<h2>' . __('Information for your bank transfer', 'marketpay') . '</h2>';
+            echo '<p>' . __('To complete your order, please do a bank transfer with the following information, including the bank wire reference.', 'marketpay') . '<p>';
+            echo '<p>' . __('We will process your order once the transfer is received.', 'marketpay') . '<p>';
+
+            ?>
+            <ul class="order_details">
+                <li class="mp_amount">
+                    <?php _e('Amount:', 'marketpay');?>
+                    <strong><?php echo wc_price($ref->DebitedFunds->Amount / 100); ?></strong>
+                    <strong><?php echo $ref->DebitedFunds->Currency; ?></strong>
+                </li>
+                <li class="mp_owner">
+                    <?php _e('Bank account owner:', 'marketpay');?>
+                    <strong><?php echo $ref->BankAccount->OwnerName; ?></strong>
+                </li>
                 <li class="mp_iban">
                     <?php _e('IBAN:', 'marketpay');?>
                     <strong><?php echo $ref->BankAccount->IBAN; ?></strong>
@@ -1850,22 +1861,12 @@ $field_value = '';
                     <?php _e('BIC:', 'marketpay');?>
                     <strong><?php echo $ref->BankAccount->BIC; ?></strong>
                 </li>
-            <?php else: ?>
-                <li class="mp_account_number">
-                    <?php _e('Account Number:', 'marketpay');?>
-                    <strong><?php echo $ref->BankAccount->AccountNumber; ?></strong>
+                <li class="mp_wire_ref">
+                    <?php _e('Wire reference:', 'marketpay');?>
+                    <strong><?php echo $ref->WireReference; ?></strong>
                 </li>
-                <li class="mp_sort_code">
-                    <?php _e('Sort Code:', 'marketpay');?>
-                    <strong><?php echo $ref->BankAccount->SortCode; ?></strong>
-                </li>
-            <?php endif; ?>
-            <li class="mp_wire_ref">
-                <?php _e('Wire reference:', 'marketpay');?>
-                <strong><?php echo $ref->WireReference; ?></strong>
-            </li>
-        </ul>
-        <?php
+            </ul>
+    <?php
 }
 
     /**
@@ -2157,9 +2158,9 @@ $field_value = '';
             }
 
             return
-            1900 + $d['tm_year'] . '-' .
-            sprintf('%02d', $d['tm_mon'] + 1) . '-' .
-            sprintf('%02d', $d['tm_mday']);
+                1900 + $d['tm_year'] . '-' .
+                sprintf('%02d', $d['tm_mon'] + 1) . '-' .
+                sprintf('%02d', $d['tm_mday']);
         }
         else
         {

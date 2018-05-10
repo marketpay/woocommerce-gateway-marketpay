@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**debited_funds** | [**\Swagger\Client\Model\Money**](Money.md) | Information about the funds that are being debited | [optional] 
-**credited_funds** | [**\Swagger\Client\Model\Money**](Money.md) | Details about the funds that are being credited (DebitedFunds – Fees &#x3D; CreditedFunds) | [optional] 
-**fees** | [**\Swagger\Client\Model\Money**](Money.md) | Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client&#39;s platform wallet) | [optional] 
+**debited_funds** | [**\MarketPay\Model\Money**](Money.md) | Information about the funds that are being debited | [optional] 
+**credited_funds** | [**\MarketPay\Model\Money**](Money.md) | Details about the funds that are being credited (DebitedFunds – Fees &#x3D; CreditedFunds) | [optional] 
+**fees** | [**\MarketPay\Model\Money**](Money.md) | Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client&#39;s platform wallet) | [optional] 
 **debited_wallet_id** | **string** | The ID of the wallet that was debited | [optional] 
 **credited_wallet_id** | **string** | The ID of the wallet where money will be credited | [optional] 
 **author_id** | **string** | A user&#39;s ID | [optional] 

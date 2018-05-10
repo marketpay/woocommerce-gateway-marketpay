@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**headquarters_address** | [**\Swagger\Client\Model\Address**](Address.md) | The address of the company’s headquarters | [optional] 
+**headquarters_address** | [**\MarketPay\Model\Address**](Address.md) | The address of the company’s headquarters | [optional] 
 **legal_person_type** | **string** | The type of legal user | [optional] 
 **name** | **string** | The name of the legal user | [optional] 
-**legal_representative_address** | [**\Swagger\Client\Model\Address**](Address.md) | The address of the company’s Legal representative person | [optional] 
+**legal_representative_address** | [**\MarketPay\Model\Address**](Address.md) | The address of the company’s Legal representative person | [optional] 
 **legal_representative_birthday** | **int** | The date of birth of the company’s Legal representative person - be careful to set the right timezone (should be UTC) to avoid 00h becoming 23h (and hence interpreted as the day before) | [optional] 
 **legal_representative_country_of_residence** | **string** | The country of residence of the company’s Legal representative person | [optional] 
 **legal_representative_nationality** | **string** | The nationality of the company’s Legal representative person | [optional] 

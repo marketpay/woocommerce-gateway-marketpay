@@ -1,22 +1,20 @@
-# Swagger\Client\WalletsApi
+# MarketPay\WalletsApi
 
 All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**walletsGet**](WalletsApi.md#walletsGet) | **GET** /v2.01/Wallets/{WalletId} | View a Wallet
+[**walletsGet**](WalletsApi.md#walletsGet) | **GET** /v2.01/Wallets/{WalletId} | 
 [**walletsGetList**](WalletsApi.md#walletsGetList) | **GET** /v2.01/Wallets | 
-[**walletsGetTransactionList**](WalletsApi.md#walletsGetTransactionList) | **GET** /v2.01/Wallets/{WalletId}/transactions | List a Wallet&#39;s Transactions
-[**walletsPost**](WalletsApi.md#walletsPost) | **POST** /v2.01/Wallets | Create a Wallet
-[**walletsPut**](WalletsApi.md#walletsPut) | **PUT** /v2.01/Wallets/{WalletId} | Update a Wallet
+[**walletsGetTransactionList**](WalletsApi.md#walletsGetTransactionList) | **GET** /v2.01/Wallets/{WalletId}/transactions | 
+[**walletsPost**](WalletsApi.md#walletsPost) | **POST** /v2.01/Wallets | 
+[**walletsPut**](WalletsApi.md#walletsPut) | **PUT** /v2.01/Wallets/{WalletId} | 
 
 
 # **walletsGet**
-> \Swagger\Client\Model\WalletResponse walletsGet($wallet_id)
+> \MarketPay\Model\WalletResponse walletsGet($wallet_id)
 
-View a Wallet
 
-A Wallet is an object in which PayIns and Transfers from users are stored in order to collect money. You can pay into a Wallet, withdraw funds from a wallet or transfer funds from a Wallet to another Wallet.              Once a wallet is created, its Currency can not be changed
 
 ### Example
 ```php
@@ -24,13 +22,18 @@ A Wallet is an object in which PayIns and Transfers from users are stored in ord
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\WalletsApi();
-$wallet_id = 789; // int | The Id of a wallet
+$apiInstance = new MarketPay\Api\WalletsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 789; // int | 
 
 try {
-    $result = $api_instance->walletsGet($wallet_id);
+    $result = $apiInstance->walletsGet($wallet_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WalletsApi->walletsGet: ', $e->getMessage(), PHP_EOL;
@@ -42,11 +45,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **wallet_id** | **int**| The Id of a wallet |
+ **wallet_id** | **int**|  |
 
 ### Return type
 
-[**\Swagger\Client\Model\WalletResponse**](../Model/WalletResponse.md)
+[**\MarketPay\Model\WalletResponse**](../Model/WalletResponse.md)
 
 ### Authorization
 
@@ -60,7 +63,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **walletsGetList**
-> \Swagger\Client\Model\ResponseListWalletResponse walletsGetList($page, $per_page)
+> \MarketPay\Model\ResponseListWalletResponse walletsGetList($page, $per_page)
 
 
 
@@ -70,14 +73,19 @@ Name | Type | Description  | Notes
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\WalletsApi();
+$apiInstance = new MarketPay\Api\WalletsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
 $page = 56; // int | 
 $per_page = 56; // int | 
 
 try {
-    $result = $api_instance->walletsGetList($page, $per_page);
+    $result = $apiInstance->walletsGetList($page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WalletsApi->walletsGetList: ', $e->getMessage(), PHP_EOL;
@@ -94,7 +102,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ResponseListWalletResponse**](../Model/ResponseListWalletResponse.md)
+[**\MarketPay\Model\ResponseListWalletResponse**](../Model/ResponseListWalletResponse.md)
 
 ### Authorization
 
@@ -108,9 +116,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **walletsGetTransactionList**
-> \Swagger\Client\Model\TransactionResponse[] walletsGetTransactionList($wallet_id, $page, $per_page)
-
-List a Wallet's Transactions
+> \MarketPay\Model\TransactionResponse[] walletsGetTransactionList($wallet_id, $page, $per_page)
 
 
 
@@ -120,15 +126,20 @@ List a Wallet's Transactions
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\WalletsApi();
-$wallet_id = 789; // int | The Id of a wallet
-$page = 56; // int | The page number of results you wish to return
-$per_page = 56; // int | The number of results to return per page
+$apiInstance = new MarketPay\Api\WalletsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 789; // int | 
+$page = 56; // int | 
+$per_page = 56; // int | 
 
 try {
-    $result = $api_instance->walletsGetTransactionList($wallet_id, $page, $per_page);
+    $result = $apiInstance->walletsGetTransactionList($wallet_id, $page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WalletsApi->walletsGetTransactionList: ', $e->getMessage(), PHP_EOL;
@@ -140,13 +151,13 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **wallet_id** | **int**| The Id of a wallet |
- **page** | **int**| The page number of results you wish to return | [optional]
- **per_page** | **int**| The number of results to return per page | [optional]
+ **wallet_id** | **int**|  |
+ **page** | **int**|  | [optional]
+ **per_page** | **int**|  | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\TransactionResponse[]**](../Model/TransactionResponse.md)
+[**\MarketPay\Model\TransactionResponse[]**](../Model/TransactionResponse.md)
 
 ### Authorization
 
@@ -160,9 +171,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **walletsPost**
-> \Swagger\Client\Model\WalletResponse walletsPost($wallet)
-
-Create a Wallet
+> \MarketPay\Model\WalletResponse walletsPost($wallet)
 
 
 
@@ -172,13 +181,18 @@ Create a Wallet
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\WalletsApi();
-$wallet = new \Swagger\Client\Model\WalletPost(); // \Swagger\Client\Model\WalletPost | Wallet Object params
+$apiInstance = new MarketPay\Api\WalletsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet = new \MarketPay\Model\WalletPost(); // \MarketPay\Model\WalletPost | 
 
 try {
-    $result = $api_instance->walletsPost($wallet);
+    $result = $apiInstance->walletsPost($wallet);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WalletsApi->walletsPost: ', $e->getMessage(), PHP_EOL;
@@ -190,11 +204,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **wallet** | [**\Swagger\Client\Model\WalletPost**](../Model/WalletPost.md)| Wallet Object params | [optional]
+ **wallet** | [**\MarketPay\Model\WalletPost**](../Model/WalletPost.md)|  | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\WalletResponse**](../Model/WalletResponse.md)
+[**\MarketPay\Model\WalletResponse**](../Model/WalletResponse.md)
 
 ### Authorization
 
@@ -208,9 +222,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **walletsPut**
-> \Swagger\Client\Model\WalletResponse walletsPut($wallet_id, $wallet)
-
-Update a Wallet
+> \MarketPay\Model\WalletResponse walletsPut($wallet_id, $wallet)
 
 
 
@@ -220,14 +232,19 @@ Update a Wallet
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\WalletsApi();
-$wallet_id = 789; // int | The Id of a wallet
-$wallet = new \Swagger\Client\Model\WalletPut(); // \Swagger\Client\Model\WalletPut | Wallet Object params
+$apiInstance = new MarketPay\Api\WalletsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$wallet_id = 789; // int | 
+$wallet = new \MarketPay\Model\WalletPut(); // \MarketPay\Model\WalletPut | 
 
 try {
-    $result = $api_instance->walletsPut($wallet_id, $wallet);
+    $result = $apiInstance->walletsPut($wallet_id, $wallet);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WalletsApi->walletsPut: ', $e->getMessage(), PHP_EOL;
@@ -239,12 +256,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **wallet_id** | **int**| The Id of a wallet |
- **wallet** | [**\Swagger\Client\Model\WalletPut**](../Model/WalletPut.md)| Wallet Object params | [optional]
+ **wallet_id** | **int**|  |
+ **wallet** | [**\MarketPay\Model\WalletPut**](../Model/WalletPut.md)|  | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\WalletResponse**](../Model/WalletResponse.md)
+[**\MarketPay\Model\WalletResponse**](../Model/WalletResponse.md)
 
 ### Authorization
 

@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tag** | **string** | Custom data that you can add to this item | [optional] 
-**debited_funds** | [**\Swagger\Client\Model\Money**](Money.md) | Information about the funds that are being debited | 
-**fees** | [**\Swagger\Client\Model\Money**](Money.md) | Information about the fees that were taken by the client for this transaction (and were hence transferred to the Client&#39;s platform wallet) | [optional] 
-**statement_description** | **string** |  | [optional] 
+**tag** | **string** |  | [optional] 
+**debited_funds** | [**\MarketPay\Model\Money**](Money.md) |  | 
+**fees** | [**\MarketPay\Model\Money**](Money.md) |  | [optional] 
+**statement_descriptor** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

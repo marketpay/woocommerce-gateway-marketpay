@@ -1,19 +1,17 @@
-# Swagger\Client\PayOutsBankwireApi
+# MarketPay\PayOutsBankwireApi
 
 All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**payOutsBankwireGet**](PayOutsBankwireApi.md#payOutsBankwireGet) | **GET** /v2.01/PayOutsBankwire/payments/{PayOutId} | View a Bankwire PayOut
-[**payOutsBankwirePost**](PayOutsBankwireApi.md#payOutsBankwirePost) | **POST** /v2.01/PayOutsBankwire/payments/direct | Create a Bankwire PayOut
+[**payOutsBankwireGet**](PayOutsBankwireApi.md#payOutsBankwireGet) | **GET** /v2.01/PayOutsBankwire/payments/{PayOutId} | 
+[**payOutsBankwirePost**](PayOutsBankwireApi.md#payOutsBankwirePost) | **POST** /v2.01/PayOutsBankwire/payments/direct | 
 
 
 # **payOutsBankwireGet**
-> \Swagger\Client\Model\PayOutBankwireResponse payOutsBankwireGet($pay_out_id)
+> \MarketPay\Model\PayOutBankwireResponse payOutsBankwireGet($pay_out_id)
 
-View a Bankwire PayOut
 
-View a Bankwire PayOut
 
 ### Example
 ```php
@@ -21,13 +19,18 @@ View a Bankwire PayOut
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\PayOutsBankwireApi();
-$pay_out_id = 789; // int | The Id of a payment
+$apiInstance = new MarketPay\Api\PayOutsBankwireApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$pay_out_id = 789; // int | 
 
 try {
-    $result = $api_instance->payOutsBankwireGet($pay_out_id);
+    $result = $apiInstance->payOutsBankwireGet($pay_out_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PayOutsBankwireApi->payOutsBankwireGet: ', $e->getMessage(), PHP_EOL;
@@ -39,11 +42,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pay_out_id** | **int**| The Id of a payment |
+ **pay_out_id** | **int**|  |
 
 ### Return type
 
-[**\Swagger\Client\Model\PayOutBankwireResponse**](../Model/PayOutBankwireResponse.md)
+[**\MarketPay\Model\PayOutBankwireResponse**](../Model/PayOutBankwireResponse.md)
 
 ### Authorization
 
@@ -57,11 +60,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **payOutsBankwirePost**
-> \Swagger\Client\Model\PayOutBankwireResponse payOutsBankwirePost($bankwire_pay_out)
+> \MarketPay\Model\PayOutBankwireResponse payOutsBankwirePost($bankwire_pay_out)
 
-Create a Bankwire PayOut
 
-Create a Bankwire PayOut.
 
 ### Example
 ```php
@@ -69,13 +70,18 @@ Create a Bankwire PayOut.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\PayOutsBankwireApi();
-$bankwire_pay_out = new \Swagger\Client\Model\PayOutBankwirePost(); // \Swagger\Client\Model\PayOutBankwirePost | Redsys PayIn Request Object params
+$apiInstance = new MarketPay\Api\PayOutsBankwireApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$bankwire_pay_out = new \MarketPay\Model\PayOutBankwirePost(); // \MarketPay\Model\PayOutBankwirePost | 
 
 try {
-    $result = $api_instance->payOutsBankwirePost($bankwire_pay_out);
+    $result = $apiInstance->payOutsBankwirePost($bankwire_pay_out);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PayOutsBankwireApi->payOutsBankwirePost: ', $e->getMessage(), PHP_EOL;
@@ -87,11 +93,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bankwire_pay_out** | [**\Swagger\Client\Model\PayOutBankwirePost**](../Model/PayOutBankwirePost.md)| Redsys PayIn Request Object params | [optional]
+ **bankwire_pay_out** | [**\MarketPay\Model\PayOutBankwirePost**](../Model/PayOutBankwirePost.md)|  | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\PayOutBankwireResponse**](../Model/PayOutBankwireResponse.md)
+[**\MarketPay\Model\PayOutBankwireResponse**](../Model/PayOutBankwireResponse.md)
 
 ### Authorization
 

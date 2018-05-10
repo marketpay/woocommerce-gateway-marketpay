@@ -5,9 +5,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **author_id** | **string** |  | [optional] 
 **credited_user_id** | **string** |  | [optional] 
-**debited_funds** | [**\Swagger\Client\Model\Money**](Money.md) |  | [optional] 
-**credited_funds** | [**\Swagger\Client\Model\Money**](Money.md) |  | [optional] 
-**fees** | [**\Swagger\Client\Model\Money**](Money.md) |  | [optional] 
+**debited_funds** | [**\MarketPay\Model\Money**](Money.md) |  | [optional] 
+**credited_funds** | [**\MarketPay\Model\Money**](Money.md) |  | [optional] 
+**fees** | [**\MarketPay\Model\Money**](Money.md) |  | [optional] 
 **status** | **string** |  | [optional] 
 **result_code** | **string** |  | [optional] 
 **result_message** | **string** |  | [optional] 

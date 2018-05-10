@@ -3,11 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**owners** | **string[]** | An array of userIDs of who own&#39;s the wallet. For now, you only can set up a unique owner | [optional] 
-**balance** | [**\Swagger\Client\Model\Money**](Money.md) | The current balance of the wallet | [optional] 
-**funds_type** | **string** | The type of funds in the wallet | [optional] 
-**description** | **string** | A desciption of the wallet | [optional] 
-**currency** | **string** | The currency - should be ISO_4217 format | [optional] 
+**owners** | **string[]** |  | [optional] 
+**balance** | [**\MarketPay\Model\Money**](Money.md) |  | [optional] 
+**funds_type** | **string** |  | [optional] 
+**description** | **string** |  | [optional] 
+**currency** | **string** |  | [optional] 
 **id** | **string** | The item&#39;s ID | [optional] 
 **creation_date** | **int** | When the item was created | [optional] 
 **tag** | **string** | Custom data that you can add to this item | [optional] 

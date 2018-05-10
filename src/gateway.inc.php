@@ -546,15 +546,30 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
 
         $order      = new WC_Order($order_id);
         $wp_user_id = $order->customer_user;
+        $mp_payment_type = get_post_meta($order_id, 'marketpay_payment_type', true);
 
-        $result = mpAccess::getInstance()->card_refund(
-            $order_id, // Order_id
-            $mp_transaction_id, // transaction_id
-            $wp_user_id, // wp_user_id
-            ($amount * 100), // Amount
-            $order->order_currency, // Currency
-            $reason // Reason
-        );
+        if ($mp_payment_type && $mp_payment_type == 'bank_wire')
+        {
+            $result = mpAccess::getInstance()->bankwire_refund(
+                $order_id, // Order_id
+                $mp_transaction_id, // transaction_id
+                $wp_user_id, // wp_user_id
+                ($amount * 100), // Amount
+                $order->order_currency, // Currency
+                $reason // Reason
+            );
+        }
+        else
+        {
+            $result = mpAccess::getInstance()->card_refund(
+                $order_id, // Order_id
+                $mp_transaction_id, // transaction_id
+                $wp_user_id, // wp_user_id
+                ($amount * 100), // Amount
+                $order->order_currency, // Currency
+                $reason // Reason
+            );
+        }
 
         if (method_exists($result, 'getStatus') && 'SUCCEEDED' == $result->getStatus())
         {

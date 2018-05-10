@@ -1,17 +1,18 @@
 {
     "name": "marketpay/sdk-php",
     "description": "SDK PHP for MarketPay api V2",
-    "minimum-stability": "stable",
+    "minimum-stability": "alpha",
     "license": "MIT",
     "require": {
-        "php": ">=5.4",
+        "php": ">=5.5",
         "ext-curl": "*",
         "ext-json": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "autoload": {
         "psr-4": {
-            "Swagger\\Client\\" : "lib/"
+            "MarketPay\\" : "lib/"
         }
     }
 }

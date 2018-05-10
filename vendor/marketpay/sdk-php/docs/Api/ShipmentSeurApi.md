@@ -1,20 +1,18 @@
-# Swagger\Client\ShipmentSeurApi
+# MarketPay\ShipmentSeurApi
 
 All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**shipmentSeurSeurCancelShipment**](ShipmentSeurApi.md#shipmentSeurSeurCancelShipment) | **POST** /v2.01/ShipmentSeur/shipments/{ShipmentId}/cancellation | Cancels a shipment
-[**shipmentSeurSeurCreateShipment**](ShipmentSeurApi.md#shipmentSeurSeurCreateShipment) | **POST** /v2.01/ShipmentSeur/shipments | Creates a shipment
-[**shipmentSeurSeurGetShipment**](ShipmentSeurApi.md#shipmentSeurSeurGetShipment) | **GET** /v2.01/ShipmentSeur/shipments/{ShipmentId} | Cancels a shipment
+[**shipmentSeurSeurCancelShipment**](ShipmentSeurApi.md#shipmentSeurSeurCancelShipment) | **POST** /v2.01/ShipmentSeur/shipments/{ShipmentId}/cancellation | 
+[**shipmentSeurSeurCreateShipment**](ShipmentSeurApi.md#shipmentSeurSeurCreateShipment) | **POST** /v2.01/ShipmentSeur/shipments | 
+[**shipmentSeurSeurGetShipment**](ShipmentSeurApi.md#shipmentSeurSeurGetShipment) | **GET** /v2.01/ShipmentSeur/shipments/{ShipmentId} | 
 
 
 # **shipmentSeurSeurCancelShipment**
-> \Swagger\Client\Model\SeurShipmentCancellationResponse shipmentSeurSeurCancelShipment($shipment_id)
+> \MarketPay\Model\SeurShipmentCancellationResponse shipmentSeurSeurCancelShipment($shipment_id)
 
-Cancels a shipment
 
-Cancels a shipment
 
 ### Example
 ```php
@@ -22,13 +20,18 @@ Cancels a shipment
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\ShipmentSeurApi();
-$shipment_id = 789; // int | The Id of a Shipment
+$apiInstance = new MarketPay\Api\ShipmentSeurApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$shipment_id = 789; // int | 
 
 try {
-    $result = $api_instance->shipmentSeurSeurCancelShipment($shipment_id);
+    $result = $apiInstance->shipmentSeurSeurCancelShipment($shipment_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ShipmentSeurApi->shipmentSeurSeurCancelShipment: ', $e->getMessage(), PHP_EOL;
@@ -40,11 +43,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shipment_id** | **int**| The Id of a Shipment |
+ **shipment_id** | **int**|  |
 
 ### Return type
 
-[**\Swagger\Client\Model\SeurShipmentCancellationResponse**](../Model/SeurShipmentCancellationResponse.md)
+[**\MarketPay\Model\SeurShipmentCancellationResponse**](../Model/SeurShipmentCancellationResponse.md)
 
 ### Authorization
 
@@ -58,11 +61,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **shipmentSeurSeurCreateShipment**
-> \Swagger\Client\Model\SeurShipmentResponse shipmentSeurSeurCreateShipment($shipment)
+> \MarketPay\Model\SeurShipmentResponse shipmentSeurSeurCreateShipment($shipment)
 
-Creates a shipment
 
-Creates a shipment
 
 ### Example
 ```php
@@ -70,13 +71,18 @@ Creates a shipment
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\ShipmentSeurApi();
-$shipment = new \Swagger\Client\Model\SeurShipmentPost(); // \Swagger\Client\Model\SeurShipmentPost | Seur Shipment Object params
+$apiInstance = new MarketPay\Api\ShipmentSeurApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$shipment = new \MarketPay\Model\SeurShipmentPost(); // \MarketPay\Model\SeurShipmentPost | 
 
 try {
-    $result = $api_instance->shipmentSeurSeurCreateShipment($shipment);
+    $result = $apiInstance->shipmentSeurSeurCreateShipment($shipment);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ShipmentSeurApi->shipmentSeurSeurCreateShipment: ', $e->getMessage(), PHP_EOL;
@@ -88,11 +94,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shipment** | [**\Swagger\Client\Model\SeurShipmentPost**](../Model/SeurShipmentPost.md)| Seur Shipment Object params | [optional]
+ **shipment** | [**\MarketPay\Model\SeurShipmentPost**](../Model/SeurShipmentPost.md)|  | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\SeurShipmentResponse**](../Model/SeurShipmentResponse.md)
+[**\MarketPay\Model\SeurShipmentResponse**](../Model/SeurShipmentResponse.md)
 
 ### Authorization
 
@@ -106,11 +112,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **shipmentSeurSeurGetShipment**
-> \Swagger\Client\Model\SeurShipmentResponse shipmentSeurSeurGetShipment($shipment_id)
+> \MarketPay\Model\SeurShipmentResponse shipmentSeurSeurGetShipment($shipment_id)
 
-Cancels a shipment
 
-Cancels a shipment
 
 ### Example
 ```php
@@ -118,13 +122,18 @@ Cancels a shipment
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure OAuth2 access token for authorization: oauth2
-Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+$config = MarketPay\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
-$api_instance = new Swagger\Client\Api\ShipmentSeurApi();
-$shipment_id = 789; // int | The Id of a Shipment
+$apiInstance = new MarketPay\Api\ShipmentSeurApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$shipment_id = 789; // int | 
 
 try {
-    $result = $api_instance->shipmentSeurSeurGetShipment($shipment_id);
+    $result = $apiInstance->shipmentSeurSeurGetShipment($shipment_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ShipmentSeurApi->shipmentSeurSeurGetShipment: ', $e->getMessage(), PHP_EOL;
@@ -136,11 +145,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shipment_id** | **int**| The Id of a Shipment |
+ **shipment_id** | **int**|  |
 
 ### Return type
 
-[**\Swagger\Client\Model\SeurShipmentResponse**](../Model/SeurShipmentResponse.md)
+[**\MarketPay\Model\SeurShipmentResponse**](../Model/SeurShipmentResponse.md)
 
 ### Authorization
 

@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**locator_number** | **string** | NumRecogida. Utilizar el id de base de datos | [optional] 
-**quotation** | **int** | Tasacion | [optional] 
-**status** | **string** | The status of the transaction | [optional] 
+**locator_number** | **string** |  | [optional] 
+**quotation** | **int** |  | [optional] 
+**status** | **string** |  | [optional] 
 **status_pick_up** | **string** |  | [optional] 
 **status_pick_up_code** | **string** |  | [optional] 
 **status_delivery** | **string** |  | [optional] 

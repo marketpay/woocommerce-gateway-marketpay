@@ -13,7 +13,12 @@
  *
  */
 
-use Swagger\Client\ApiException;
+use GuzzleHttp\Client;
+use MarketPay\Api\KycApi;
+use MarketPay\Api\UsersApi;
+use MarketPay\ApiException;
+use MarketPay\Api\PayInsRedsysApi;
+use MarketPay\Api\PayInsBankwireApi;
 
 class mpAccess
 {
@@ -235,20 +240,18 @@ class mpAccess
         );
 
         /** MarketPay API configuration **/
-        $config = new Swagger\Client\Configuration;
+        $this->marketPayApi = new MarketPay\Configuration;
 
-        $config->setHost($mp_base_url);
-        $config->setApiKey($mp_client_id, $mp_passphrase);
-        $config->setDebug(self::DEBUG);
-        $config->setAccessToken($token->access_token);
-        $config->setDefaultConfiguration($config);
+        $this->marketPayApi->setHost($mp_base_url);
+        $this->marketPayApi->setApiKey($mp_client_id, $mp_passphrase);
+        $this->marketPayApi->setDebug(self::DEBUG);
+        $this->marketPayApi->setAccessToken($token->access_token);
+        $this->marketPayApi->setDefaultConfiguration($config);
 
-        $this->marketPayApi = new Swagger\Client\ApiClient($config);
-
-        $this->marketPayApi->RedsysPayIns   = new Swagger\Client\Api\PayInsRedsysApi($this->marketPayApi);
-        $this->marketPayApi->BankwirePayIns = new Swagger\Client\Api\PayInsBankwireApi($this->marketPayApi);
-        $this->marketPayApi->Kyc            = new Swagger\Client\Api\KycApi($this->marketPayApi);
-        $this->marketPayApi->Users          = new Swagger\Client\Api\UsersApi($this->marketPayApi);
+        $this->marketPayApi->RedsysPayIns   = new PayInsRedsysApi(new Client, $this->marketPayApi);
+        $this->marketPayApi->BankwirePayIns = new PayInsBankwireApi(new Client, $this->marketPayApi);
+        $this->marketPayApi->Kyc            = new KycApi(new Client, $this->marketPayApi);
+        $this->marketPayApi->Users          = new UsersApi(new Client, $this->marketPayApi);
 
         return $this->marketPayApi;
     }
@@ -771,7 +774,7 @@ class mpAccess
 
             if ('BUSINESS' == $p_type)
             {
-                $kycUser = new Swagger\Client\Model\KycUserLegalPut([
+                $kycUser = new MarketPay\Model\KycUserLegalPut([
                     'legal_person_type'                         => $legal_p_type,
                     'name'                                      => $vendor_name,
                     'legal_representative_birthday'             => $b_date,
@@ -794,7 +797,7 @@ class mpAccess
             }
             else
             {
-                $kycUser = new Swagger\Client\Model\KycUserNaturalPut([
+                $kycUser = new MarketPay\Model\KycUserNaturalPut([
                     'email'                => $email,
                     'first_name'           => $f_name,
                     'last_name'            => $l_name,
@@ -808,7 +811,7 @@ class mpAccess
                 try
                 {
                     $this->marketPayApi()->Kyc->kycPostNatural($mp_user_id, $kycUser);
-                    $this->marketPayApi()->Kyc->kycPutRequest($mp_user_id, new Swagger\Client\Model\KycIdentificationRequest);
+                    $this->marketPayApi()->Kyc->kycPutRequest($mp_user_id, new MarketPay\Model\KycIdentificationRequest);
                 }
                 catch (Exception $e)
                 {
@@ -894,7 +897,7 @@ class mpAccess
             {
                 $result = $this->marketPayApi()->Users->usersGetNatural($mp_user_id);
 
-                $kycUser = $this->marketPayApi()->Kyc->kycPostNatural($mp_user_id, new Swagger\Client\Model\KycUserNaturalPut([
+                $kycUser = $this->marketPayApi()->Kyc->kycPostNatural($mp_user_id, new MarketPay\Model\KycUserNaturalPut([
                     'email' => $result->getEmail(),
                     'first_name' => $result->getFirstName(),
                     'last_name' => $result->getLastName(),
@@ -908,8 +911,8 @@ class mpAccess
                 ]));
             }
 
-            if (is_null($kycUser->getAddress())) $kycUser->setAddress(new Swagger\Client\Model\Address());
-            if (is_null($kycUser->getTelephone())) $kycUser->setTelephone(new Swagger\Client\Model\Telephone());
+            if (is_null($kycUser->getAddress())) $kycUser->setAddress(new MarketPay\Model\Address());
+            if (is_null($kycUser->getTelephone())) $kycUser->setTelephone(new MarketPay\Model\Telephone());
 
             if (
                 isset($usermeta['first_name']) &&
@@ -949,7 +952,7 @@ class mpAccess
                     $kycUser->getAddress()->getCountry() != $usermeta['billing_country']
                 )
             ) {
-                $kycUser->setAddress(new Swagger\Client\Model\Address([
+                $kycUser->setAddress(new MarketPay\Model\Address([
                     'address_line1' => $usermeta['address_1'],
                     'city'          => $usermeta['city'],
                     'region'        => $usermeta['billing_state'],
@@ -1057,7 +1060,7 @@ class mpAccess
             if ($needs_updating)
             {
                 $this->marketPayApi()->Kyc->kycPostNatural($mp_user_id, $kycUser);
-                $this->marketPayApi()->Kyc->kycPutRequest($marketUser->Id, new Swagger\Client\Model\KycIdentificationRequest);
+                $this->marketPayApi()->Kyc->kycPutRequest($marketUser->Id, new MarketPay\Model\KycIdentificationRequest);
             }
         }
         else
@@ -1068,7 +1071,7 @@ class mpAccess
             }
             catch (ApiException $e)
             {
-                $kycUser = new Swagger\Client\Model\KycUserValidationLevelLegalResponse();
+                $kycUser = new MarketPay\Model\KycUserValidationLevelLegalResponse();
             }
 
             /** Business / legal user **/
@@ -1122,7 +1125,7 @@ class mpAccess
                     $kycUser->getLegalRepresentativeAddress()->getCountry() != $usermeta['billing_country']
                 )
             ) {
-                $kycUser->setLegalRepresentativeAddress(new Swagger\Client\Model\Address([
+                $kycUser->setLegalRepresentativeAddress(new MarketPay\Model\Address([
                     'address_line1' => $usermeta['address_1'],
                     'city'          => $usermeta['city'],
                     'region'        => $usermeta['billing_state'],
@@ -1299,16 +1302,16 @@ class mpAccess
         /** If no wallet abort **/
         if ( ! isset($mp_wallet_id) || !$mp_wallet_id) return false;
 
-        $reference = new Swagger\Client\Model\RedsysPayByWebPost([
+        $reference = new MarketPay\Model\RedsysPayByWebPost([
             'tag' => 'WC Order #' . $order_id,
             'credited_wallet_id' => $mp_wallet_id,
             'success_url' => $return_url,
             'cancel_url' => $return_url,
-            'debited_funds' => new Swagger\Client\Model\Money([
+            'debited_funds' => new MarketPay\Model\Money([
                 'currency' => $currency,
                 'amount' => $amount
             ]),
-            'fees' => new Swagger\Client\Model\Money([
+            'fees' => new MarketPay\Model\Money([
                 'currency' => $currency,
                 'amount' => $fees
             ]),
@@ -1377,14 +1380,14 @@ class mpAccess
 
         try
         {
-            $reference = new \Swagger\Client\Model\PayInBankwirePost([
+            $reference = new \MarketPay\Model\PayInBankwirePost([
                 'tag' => 'WC Order #' . $order_id,
                 'credited_wallet_id' => $mp_wallet_id,
-                'debited_funds' => new Swagger\Client\Model\Money([
+                'debited_funds' => new MarketPay\Model\Money([
                     'amount' => $amount,
                     'currency' => $currency
                 ]),
-                'fees' => new Swagger\Client\Model\Money([
+                'fees' => new MarketPay\Model\Money([
                     'amount' => $fees,
                     'currency' => $currency
                 ])
@@ -1409,19 +1412,46 @@ class mpAccess
     {
         try
         {
-            $reference = new Swagger\Client\Model\RedsysRefundPost([
+            $reference = new MarketPay\Model\RedsysRefundPost([
                 'tag' => 'WC Order #' . $order_id . ' - ' . $reason . ' - ValidatedBy:' . wp_get_current_user()->user_login,
-                'debited_funds' => new Swagger\Client\Model\Money([
+                'debited_funds' => new MarketPay\Model\Money([
                     'currency' => $currency,
                     'amount' => $amount
                 ]),
-                'fees' => new Swagger\Client\Model\Money([
+                'fees' => new MarketPay\Model\Money([
                     'currency' => $currency,
                     'amount' => 0
                 ])
             ]);
 
             return $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysPostRefund(
+                $mp_transaction_id,
+                $reference
+            );
+        }
+        catch (Exception $e)
+        {
+            return $e;
+        }
+    }
+
+    public function bankwire_refund($order_id, $mp_transaction_id, $wp_user_id, $amount, $currency, $reason)
+    {
+        try
+        {
+            $reference = new MarketPay\Model\PayInBankwireRefundPost([
+                'tag' => 'WC Order #' . $order_id . ' - ' . $reason . ' - ValidatedBy:' . wp_get_current_user()->user_login,
+                'debited_funds' => new MarketPay\Model\Money([
+                    'currency' => $currency,
+                    'amount' => $amount
+                ]),
+                'fees' => new MarketPay\Model\Money([
+                    'currency' => $currency,
+                    'amount' => 0
+                ])
+            ]);
+
+            return $this->marketPayApi()->PayInsBankwireApi->payInsBankwireBankwirePostRefund(
                 $mp_transaction_id,
                 $reference
             );

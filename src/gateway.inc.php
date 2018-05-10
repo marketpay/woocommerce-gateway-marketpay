@@ -556,26 +556,25 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
             $reason // Reason
         );
 
-        if ($result && 'SUCCEEDED' == $result->Status)
+        if (method_exists($result, 'getStatus') && 'SUCCEEDED' == $result->getStatus())
         {
             $this->log('Refund Result: ' . print_r($result, true));
 
             $order->add_order_note(sprintf(
                 __('Refunded %s - Refund ID: %s', 'woocommerce'),
-                ($result->CreditedFunds->Amount / 100),
-                $result->Id
+                ($result->getCreditedFunds()->getAmount() / 100),
+                $result->getId()
             ));
 
             return true;
         }
         else
         {
-            $this->log('Refund Failed: ' . $result->ResultCode . ' - ' . $result->ResultMessage);
+            $this->log('Refund Failed: ' . $result->getMessage());
 
             return new WP_Error('error', sprintf(
-                __('Refund failed: %s - %s', 'marketpay'),
-                $result->ResultCode,
-                $result->ResultMessage
+                __('Refund failed: %s', 'marketpay'),
+                $result->getMessage()
             ));
         }
     }

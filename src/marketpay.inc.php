@@ -1407,24 +1407,29 @@ class mpAccess
      */
     public function card_refund($order_id, $mp_transaction_id, $wp_user_id, $amount, $currency, $reason)
     {
-        $reference = new Swagger\Client\Model\RedsysRefundPost([
-            'tag' => 'WC Order #' . $order_id . ' - ' . $reason . ' - ValidatedBy:' . wp_get_current_user()->user_login,
-            'debited_funds' => new Swagger\Client\Model\Money([
-                'currency' => $currency,
-                'amount' => $amount
-            ]),
-            'fees' => new Swagger\Client\Model\Money([
-                'currency' => $currency,
-                'amount' => 0
-            ])
-        ]);
+        try
+        {
+            $reference = new Swagger\Client\Model\RedsysRefundPost([
+                'tag' => 'WC Order #' . $order_id . ' - ' . $reason . ' - ValidatedBy:' . wp_get_current_user()->user_login,
+                'debited_funds' => new Swagger\Client\Model\Money([
+                    'currency' => $currency,
+                    'amount' => $amount
+                ]),
+                'fees' => new Swagger\Client\Model\Money([
+                    'currency' => $currency,
+                    'amount' => 0
+                ])
+            ]);
 
-        $result = $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysPostRefund(
-            $mp_transaction_id,
-            $reference
-        );
-
-        return $result;
+            return $this->marketPayApi()->RedsysPayIns->payInsRedsysRedsysPostRefund(
+                $mp_transaction_id,
+                $reference
+            );
+        }
+        catch (Exception $e)
+        {
+            return $e;
+        }
     }
 
     /**

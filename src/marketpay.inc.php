@@ -246,7 +246,7 @@ class mpAccess
         $this->marketPayApi->setApiKey($mp_client_id, $mp_passphrase);
         $this->marketPayApi->setDebug(self::DEBUG);
         $this->marketPayApi->setAccessToken($token->access_token);
-        $this->marketPayApi->setDefaultConfiguration($config);
+        $this->marketPayApi->setDefaultConfiguration($this->marketPayApi);
 
         $this->marketPayApi->RedsysPayIns   = new PayInsRedsysApi(new Client, $this->marketPayApi);
         $this->marketPayApi->BankwirePayIns = new PayInsBankwireApi(new Client, $this->marketPayApi);
@@ -1429,7 +1429,7 @@ class mpAccess
                 $reference
             );
         }
-        catch (Exception $e)
+        catch (ApiException $e)
         {
             return $e;
         }
@@ -1451,12 +1451,12 @@ class mpAccess
                 ])
             ]);
 
-            return $this->marketPayApi()->PayInsBankwireApi->payInsBankwireBankwirePostRefund(
+            return $this->marketPayApi()->BankwirePayIns->payInsBankwireBankwirePostRefund(
                 $mp_transaction_id,
                 $reference
             );
         }
-        catch (Exception $e)
+        catch (ApiException $e)
         {
             return $e;
         }

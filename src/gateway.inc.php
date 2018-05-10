@@ -571,7 +571,7 @@ class WC_Gateway_Marketpay extends WC_Payment_Gateway
             );
         }
 
-        if (method_exists($result, 'getStatus') && 'SUCCEEDED' == $result->getStatus())
+        if ( ! method_exists($result, 'getMessage'))
         {
             $this->log('Refund Result: ' . print_r($result, true));
 

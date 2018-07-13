@@ -1789,6 +1789,8 @@ if (is_admin()) {
                     return false;
                 }
 
+                $transaction_id = get_post_meta($order_id,'mp_transaction_id', true);
+
                 if ( ! $transaction_id = $order->get_meta('mp_transaction_id')) {
                     return false;
                 }

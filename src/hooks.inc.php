@@ -91,7 +91,7 @@ class marketpayWCHooks
 
         /** Process order status after order payment completed **/
         add_action('template_redirect', array($marketpayWCMain, 'order_redirect'), 1, 1);
-        add_action('woocommerce_thankyou', array($marketpayWCMain, 'order_received'), 1, 1);
+        add_action('woocommerce_thankyou', array($marketpayWCMain, 'order_received'), 99, 1);
         add_filter('woocommerce_add_notice', array($marketpayWCMain, 'intercept_messages_cancel_order'), 1, 1);
 
         /** When billing address is changed by customer **/

@@ -2133,7 +2133,7 @@ if (is_admin()) {
      * Public because shared with marketpayWCAdmin. TODO: refactor
      *
      */
-    public function convertDate($date, $format = null)
+    public function convertDate($date, $format = 'Y-m-d')
     {
         if ( ! $format) $format = $this->supported_format(get_option('date_format'));
 
